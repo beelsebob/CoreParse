@@ -163,13 +163,29 @@
 			children = (
 				1F0E8937130463E900537D04 /* CPTokeniser.h */,
 				1F0E8938130463E900537D04 /* CPTokeniser.m */,
-				1F0E893D1304664E00537D04 /* CPTokenRecogniser.h */,
 				1F0E8941130466CF00537D04 /* CPTokenStream.h */,
 				1F0E8942130466D000537D04 /* CPTokenStream.m */,
+				1F4683791306A54900407491 /* Token Recognisers */,
+				1F46837A1306A56100407491 /* Token Types */,
+			);
+			path = Tokenisation;
+			sourceTree = "<group>";
+		};
+		1F4683791306A54900407491 /* Token Recognisers */ = {
+			isa = PBXGroup;
+			children = (
+				1F0E893D1304664E00537D04 /* CPTokenRecogniser.h */,
+			);
+			path = "Token Recognisers";
+			sourceTree = "<group>";
+		};
+		1F46837A1306A56100407491 /* Token Types */ = {
+			isa = PBXGroup;
+			children = (
 				1F0E894A1306795500537D04 /* CPToken.h */,
 				1F0E894B1306795600537D04 /* CPToken.m */,
 			);
-			path = Tokenisation;
+			path = "Token Types";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
