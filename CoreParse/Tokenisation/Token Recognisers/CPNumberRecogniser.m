@@ -41,10 +41,12 @@
 
 - (CPToken *)recogniseTokenInString:(NSString *)tokenString currentTokenPosition:(NSUInteger *)tokenPosition
 {
+    NSScanner *scanner = [NSScanner scannerWithString:tokenString];
+    [scanner setCharactersToBeSkipped:nil];
+    scanner.scanLocation = *tokenPosition;
+
     if (!self.recognisesFloats)
     {
-        NSScanner *scanner = [NSScanner scannerWithString:tokenString];
-        scanner.scanLocation = *tokenPosition;
         NSInteger i;
         BOOL success = [scanner scanInteger:&i];
         if (success)
@@ -55,14 +57,12 @@
     }
     else
     {
-        NSScanner *scanner = [NSScanner scannerWithString:tokenString];
-        scanner.scanLocation = *tokenPosition;
         double d;
         BOOL success = [scanner scanDouble:&d];
         if (success && !self.recognisesInts)
         {
             NSString *substring = [tokenString substringWithRange:NSMakeRange(*tokenPosition, scanner.scanLocation - *tokenPosition)];
-            if ([substring rangeOfString:@"."].location == NSNotFound)
+            if ([substring rangeOfString:@"."].location == NSNotFound && [substring rangeOfString:@"e"].location)
             {
                 success = NO;
             }

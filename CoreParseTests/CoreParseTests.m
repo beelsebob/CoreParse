@@ -111,4 +111,28 @@
     }
 }
 
+- (void)testWhiteSpaceTokeniser
+{
+    CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
+    [tokeniser addTokenRecogniser:[CPNumberRecogniser numberRecogniser]];
+    [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
+    CPTokenStream *tokenStream = [tokeniser tokenise:@"12.34 56.78\t90"];
+    CPToken *tok1 = [tokenStream popToken];
+    CPToken *tok2 = [tokenStream popToken];
+    CPToken *tok3 = [tokenStream popToken];
+    CPToken *tok4 = [tokenStream popToken];
+    CPToken *tok5 = [tokenStream popToken];
+    CPToken *tok6 = [tokenStream popToken];
+    
+    if (![tok1 isKindOfClass:[CPNumberToken     class]] || ((CPNumberToken *)tok1).number.doubleValue != 12.34 ||
+        ![tok2 isKindOfClass:[CPWhiteSpaceToken class]] || ![((CPWhiteSpaceToken *)tok2).whiteSpace isEqualToString:@" "] ||
+        ![tok3 isKindOfClass:[CPNumberToken     class]] || ((CPNumberToken *)tok3).number.doubleValue != 56.78 ||
+        ![tok4 isKindOfClass:[CPWhiteSpaceToken class]] || ![((CPWhiteSpaceToken *)tok4).whiteSpace isEqualToString:@"\t"] ||
+        ![tok5 isKindOfClass:[CPNumberToken     class]] || ((CPNumberToken *)tok5).number.doubleValue != 90 ||
+        ![tok6 isKindOfClass:[CPEOFToken        class]])
+    {
+        STFail(@"Failed to tokenise white space correctly");
+    }
+}
+
 @end

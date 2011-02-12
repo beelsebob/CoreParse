@@ -13,7 +13,7 @@
 @interface CPKeywordToken : CPToken
 {}
 
-@property (readwrite,retain) NSString *keyword;
+@property (readwrite,copy) NSString *keyword;
 
 + (id)tokenWithKeyword:(NSString *)keyword;
 - (id)initWithKeyword:(NSString *)keyword;

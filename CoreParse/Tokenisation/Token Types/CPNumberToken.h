@@ -13,7 +13,7 @@
 @interface CPNumberToken : CPToken
 {}
 
-@property (readwrite,retain) NSNumber *number;
+@property (readwrite,copy) NSNumber *number;
 
 + (id)tokenWithNumber:(NSNumber *)number;
 - (id)initWithNumber:(NSNumber *)number;

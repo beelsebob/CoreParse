@@ -13,8 +13,10 @@
 #import "CPTokenRecogniser.h"
 #import "CPKeywordRecogniser.h"
 #import "CPNumberRecogniser.h"
+#import "CPWhiteSpaceRecogniser.h"
 
 #import "CPToken.h"
 #import "CPKeywordToken.h"
 #import "CPNumberToken.h"
+#import "CPWhiteSpaceToken.h"
 #import "CPEOFToken.h"
