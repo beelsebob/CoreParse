@@ -1,5 +1,5 @@
 //
-//  CPToken.h
+//  CPEOFToken.h
 //  CoreParse
 //
 //  Created by Tom Davie on 12/02/2011.
@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+#import "CPToken.h"
 
-@interface CPToken : NSObject
+@interface CPEOFToken : CPToken
 {}
 
-@property (readwrite, retain) NSString *content;
++ (id)eof;
 
 @end

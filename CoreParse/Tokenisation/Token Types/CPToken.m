@@ -11,14 +11,14 @@
 @interface CPToken ()
 {
 @private
-    NSString *tokenContent;
+    NSString *content;
 }
 
 @end
 
 @implementation CPToken
 
-@synthesize tokenContent;
+@synthesize content;
 
 - (id)init
 {
@@ -26,7 +26,7 @@
     
     if (nil != self)
     {
-        // Initialization code here.
+        self.content = @"";
     }
     
     return self;
@@ -34,7 +34,7 @@
 
 - (void)dealloc
 {
-    [tokenContent release];
+    [content release];
     [super dealloc];
 }
 

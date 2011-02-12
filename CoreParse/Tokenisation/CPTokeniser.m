@@ -8,6 +8,8 @@
 
 #import "CPTokeniser.h"
 
+#import "CPEOFToken.h"
+
 @interface CPTokeniser ()
 {
     NSMutableArray *tokenRegexes;
@@ -65,17 +67,24 @@
     __block NSUInteger currentTokenOffset = 0;
     NSUInteger inputLength = [input length];
     
-    while (currentTokenOffset < inputLength)
+    __block BOOL recognised = YES;
+    while (currentTokenOffset < inputLength && recognised)
     {
+        recognised = NO;
         [self.tokenRegexes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
          {
              CPToken *tok = [(NSObject<CPTokenRecogniser> *)obj recogniseTokenInString:input currentTokenPosition:&currentTokenOffset];
              if (nil != tok)
              {
                  [stream addToken:tok];
+                 recognised = YES;
                  *stop = YES;
              }
          }];
+    }
+    if (inputLength <= currentTokenOffset)
+    {
+        [stream addToken:[CPEOFToken eof]];
     }
     
     return stream;

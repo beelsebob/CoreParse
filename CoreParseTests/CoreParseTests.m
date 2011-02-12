@@ -8,6 +8,7 @@
 
 #import "CoreParseTests.h"
 
+#import "CoreParse.h"
 
 @implementation CoreParseTests
 
@@ -27,6 +28,18 @@
 
 - (void)testExample
 {
+    CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"{"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"}"]];
+    CPTokenStream *tokenStream = [tokeniser tokenise:@"{}"];
+    CPToken *tok1 = [tokenStream popToken];
+    CPToken *tok2 = [tokenStream popToken];
+    CPToken *tok3 = [tokenStream popToken];
+    
+    if (![tok1.content isEqualToString:@"{"] || ![tok2.content isEqualToString:@"}"] || ![tok3 isKindOfClass:[CPEOFToken class]])
+    {
+        STFail(@"Incorrect tokenisation");
+    }
 }
 
 @end

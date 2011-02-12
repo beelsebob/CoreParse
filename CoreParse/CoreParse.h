@@ -7,3 +7,12 @@
 //
 
 #import "CPTokeniser.h"
+
+#import "CPTokenStream.h"
+
+#import "CPTokenRecogniser.h"
+#import "CPKeywordRecogniser.h"
+
+#import "CPToken.h"
+#import "CPKeywordToken.h"
+#import "CPEOFToken.h"

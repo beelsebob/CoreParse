@@ -17,11 +17,17 @@
 		1F0E8935130463D000537D04 /* CoreParse.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8934130463D000537D04 /* CoreParse.h */; };
 		1F0E8939130463E900537D04 /* CPTokeniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8937130463E900537D04 /* CPTokeniser.h */; };
 		1F0E893A130463E900537D04 /* CPTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0E8938130463E900537D04 /* CPTokeniser.m */; };
-		1F0E893F1304664F00537D04 /* CPTokenRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E893D1304664E00537D04 /* CPTokenRecogniser.h */; };
 		1F0E8943130466D000537D04 /* CPTokenStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8941130466CF00537D04 /* CPTokenStream.h */; };
 		1F0E8944130466D000537D04 /* CPTokenStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0E8942130466D000537D04 /* CPTokenStream.m */; };
 		1F0E894C1306795800537D04 /* CPToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E894A1306795500537D04 /* CPToken.h */; };
 		1F0E894D1306795800537D04 /* CPToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0E894B1306795600537D04 /* CPToken.m */; };
+		1F4683891306AA8500407491 /* CPKeywordRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683861306AA8500407491 /* CPKeywordRecogniser.h */; };
+		1F46838A1306AA8500407491 /* CPKeywordRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4683871306AA8500407491 /* CPKeywordRecogniser.m */; };
+		1F46838B1306AA8500407491 /* CPTokenRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683881306AA8500407491 /* CPTokenRecogniser.h */; };
+		1F46838E1306B45500407491 /* CPKeywordToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F46838C1306B45400407491 /* CPKeywordToken.h */; };
+		1F46838F1306B45500407491 /* CPKeywordToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F46838D1306B45500407491 /* CPKeywordToken.m */; };
+		1F4683921306B71E00407491 /* CPEOFToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683901306B71C00407491 /* CPEOFToken.h */; };
+		1F4683931306B71E00407491 /* CPEOFToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4683911306B71D00407491 /* CPEOFToken.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,11 +58,17 @@
 		1F0E8934130463D000537D04 /* CoreParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreParse.h; sourceTree = "<group>"; };
 		1F0E8937130463E900537D04 /* CPTokeniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTokeniser.h; sourceTree = "<group>"; };
 		1F0E8938130463E900537D04 /* CPTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTokeniser.m; sourceTree = "<group>"; };
-		1F0E893D1304664E00537D04 /* CPTokenRecogniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTokenRecogniser.h; sourceTree = "<group>"; };
 		1F0E8941130466CF00537D04 /* CPTokenStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTokenStream.h; sourceTree = "<group>"; };
 		1F0E8942130466D000537D04 /* CPTokenStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTokenStream.m; sourceTree = "<group>"; };
 		1F0E894A1306795500537D04 /* CPToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPToken.h; sourceTree = "<group>"; };
 		1F0E894B1306795600537D04 /* CPToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPToken.m; sourceTree = "<group>"; };
+		1F4683861306AA8500407491 /* CPKeywordRecogniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPKeywordRecogniser.h; sourceTree = "<group>"; };
+		1F4683871306AA8500407491 /* CPKeywordRecogniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPKeywordRecogniser.m; sourceTree = "<group>"; };
+		1F4683881306AA8500407491 /* CPTokenRecogniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTokenRecogniser.h; sourceTree = "<group>"; };
+		1F46838C1306B45400407491 /* CPKeywordToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPKeywordToken.h; sourceTree = "<group>"; };
+		1F46838D1306B45500407491 /* CPKeywordToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPKeywordToken.m; sourceTree = "<group>"; };
+		1F4683901306B71C00407491 /* CPEOFToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPEOFToken.h; sourceTree = "<group>"; };
+		1F4683911306B71D00407491 /* CPEOFToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPEOFToken.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,18 +177,10 @@
 				1F0E8938130463E900537D04 /* CPTokeniser.m */,
 				1F0E8941130466CF00537D04 /* CPTokenStream.h */,
 				1F0E8942130466D000537D04 /* CPTokenStream.m */,
-				1F4683791306A54900407491 /* Token Recognisers */,
+				1F4683851306AA8500407491 /* Token Recognisers */,
 				1F46837A1306A56100407491 /* Token Types */,
 			);
 			path = Tokenisation;
-			sourceTree = "<group>";
-		};
-		1F4683791306A54900407491 /* Token Recognisers */ = {
-			isa = PBXGroup;
-			children = (
-				1F0E893D1304664E00537D04 /* CPTokenRecogniser.h */,
-			);
-			path = "Token Recognisers";
 			sourceTree = "<group>";
 		};
 		1F46837A1306A56100407491 /* Token Types */ = {
@@ -184,8 +188,22 @@
 			children = (
 				1F0E894A1306795500537D04 /* CPToken.h */,
 				1F0E894B1306795600537D04 /* CPToken.m */,
+				1F46838C1306B45400407491 /* CPKeywordToken.h */,
+				1F46838D1306B45500407491 /* CPKeywordToken.m */,
+				1F4683901306B71C00407491 /* CPEOFToken.h */,
+				1F4683911306B71D00407491 /* CPEOFToken.m */,
 			);
 			path = "Token Types";
+			sourceTree = "<group>";
+		};
+		1F4683851306AA8500407491 /* Token Recognisers */ = {
+			isa = PBXGroup;
+			children = (
+				1F4683881306AA8500407491 /* CPTokenRecogniser.h */,
+				1F4683861306AA8500407491 /* CPKeywordRecogniser.h */,
+				1F4683871306AA8500407491 /* CPKeywordRecogniser.m */,
+			);
+			path = "Token Recognisers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,9 +215,12 @@
 			files = (
 				1F0E8935130463D000537D04 /* CoreParse.h in Headers */,
 				1F0E8939130463E900537D04 /* CPTokeniser.h in Headers */,
-				1F0E893F1304664F00537D04 /* CPTokenRecogniser.h in Headers */,
 				1F0E8943130466D000537D04 /* CPTokenStream.h in Headers */,
 				1F0E894C1306795800537D04 /* CPToken.h in Headers */,
+				1F4683891306AA8500407491 /* CPKeywordRecogniser.h in Headers */,
+				1F46838B1306AA8500407491 /* CPTokenRecogniser.h in Headers */,
+				1F46838E1306B45500407491 /* CPKeywordToken.h in Headers */,
+				1F4683921306B71E00407491 /* CPEOFToken.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +334,9 @@
 				1F0E893A130463E900537D04 /* CPTokeniser.m in Sources */,
 				1F0E8944130466D000537D04 /* CPTokenStream.m in Sources */,
 				1F0E894D1306795800537D04 /* CPToken.m in Sources */,
+				1F46838A1306AA8500407491 /* CPKeywordRecogniser.m in Sources */,
+				1F46838F1306B45500407491 /* CPKeywordToken.m in Sources */,
+				1F4683931306B71E00407491 /* CPEOFToken.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
