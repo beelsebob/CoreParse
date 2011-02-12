@@ -3,7 +3,7 @@
 //  CoreParse
 //
 //  Created by Tom Davie on 10/02/2011.
-//  Copyright 2011 Hunted Cow Studios Ltd. All rights reserved.
+//  Copyright 2011 In The Beginning... All rights reserved.
 //
 
 #import "CPTokenStream.h"
@@ -37,6 +37,11 @@
 {
     [tokens release];
     [super dealloc];
+}
+
+- (BOOL)hasToken
+{
+    return [tokens count] > 0;
 }
 
 - (CPToken *)peekToken

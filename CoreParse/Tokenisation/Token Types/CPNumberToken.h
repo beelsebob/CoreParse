@@ -1,5 +1,5 @@
 //
-//  CPEOFToken.h
+//  CPNumberToken.h
 //  CoreParse
 //
 //  Created by Tom Davie on 12/02/2011.
@@ -10,9 +10,12 @@
 
 #import "CPToken.h"
 
-@interface CPEOFToken : CPToken
+@interface CPNumberToken : CPToken
 {}
 
-+ (id)eof;
+@property (readwrite,retain) NSNumber *number;
+
++ (id)tokenWithNumber:(NSNumber *)number;
+- (id)initWithNumber:(NSNumber *)number;
 
 @end

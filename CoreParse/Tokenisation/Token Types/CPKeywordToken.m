@@ -3,12 +3,21 @@
 //  CoreParse
 //
 //  Created by Tom Davie on 12/02/2011.
-//  Copyright 2011 Hunted Cow Studios Ltd. All rights reserved.
+//  Copyright 2011 In The Beginning... All rights reserved.
 //
 
 #import "CPKeywordToken.h"
 
+@interface CPKeywordToken ()
+{
+    NSString *keyword;
+}
+
+@end
+
 @implementation CPKeywordToken
+
+@synthesize keyword;
 
 + (id)tokenWithKeyword:(NSString *)keyword
 {
@@ -34,17 +43,8 @@
 
 - (void)dealloc
 {
+    [keyword release];
     [super dealloc];
-}
-
-- (NSString *)keyword
-{
-    return self.content;
-}
-
-- (void)setKeyword:(NSString *)newKeyword
-{
-    [self setContent:newKeyword];
 }
 
 @end
