@@ -8,14 +8,11 @@
 
 #import "CPKeywordToken.h"
 
-@interface CPKeywordToken ()
+@implementation CPKeywordToken
 {
+@private
     NSString *keyword;
 }
-
-@end
-
-@implementation CPKeywordToken
 
 @synthesize keyword;
 

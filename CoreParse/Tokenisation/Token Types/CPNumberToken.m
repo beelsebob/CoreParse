@@ -8,14 +8,11 @@
 
 #import "CPNumberToken.h"
 
-@interface CPNumberToken ()
+@implementation CPNumberToken
 {
 @private
     NSNumber *number;
 }
-@end
-
-@implementation CPNumberToken
 
 @synthesize number;
 

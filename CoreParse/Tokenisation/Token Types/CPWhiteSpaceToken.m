@@ -8,14 +8,11 @@
 
 #import "CPWhiteSpaceToken.h"
 
-@interface CPWhiteSpaceToken ()
+@implementation CPWhiteSpaceToken
 {
 @private
     NSString *whiteSpace;
 }
-@end
-
-@implementation CPWhiteSpaceToken
 
 @synthesize whiteSpace;
 

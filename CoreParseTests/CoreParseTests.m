@@ -135,4 +135,37 @@
     }
 }
 
+- (void)testIdentifierTokeniser
+{
+    CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"long"]];
+    [tokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniser]];
+    [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
+    CPTokenStream *tokenStream = [tokeniser tokenise:@"long jam _ham long _spam59e_53"];
+    CPToken *tok1  = [tokenStream popToken];
+    CPToken *tok2  = [tokenStream popToken];
+    CPToken *tok3  = [tokenStream popToken];
+    CPToken *tok4  = [tokenStream popToken];
+    CPToken *tok5  = [tokenStream popToken];
+    CPToken *tok6  = [tokenStream popToken];
+    CPToken *tok7  = [tokenStream popToken];
+    CPToken *tok8  = [tokenStream popToken];
+    CPToken *tok9  = [tokenStream popToken];
+    CPToken *tok10 = [tokenStream popToken];
+    
+    if (![tok1  isKindOfClass:[CPKeywordToken    class]] || ![((CPKeywordToken *)tok1).keyword       isEqualToString:@"long"       ] ||
+        ![tok2  isKindOfClass:[CPWhiteSpaceToken class]] || ![((CPWhiteSpaceToken *)tok2).whiteSpace isEqualToString:@" "          ] ||
+        ![tok3  isKindOfClass:[CPIdentifierToken class]] || ![((CPIdentifierToken *)tok3).identifier isEqualToString:@"jam"        ] ||
+        ![tok4  isKindOfClass:[CPWhiteSpaceToken class]] || ![((CPWhiteSpaceToken *)tok4).whiteSpace isEqualToString:@" "          ] ||
+        ![tok5  isKindOfClass:[CPIdentifierToken class]] || ![((CPIdentifierToken *)tok5).identifier isEqualToString:@"_ham"       ] ||
+        ![tok6  isKindOfClass:[CPWhiteSpaceToken class]] || ![((CPWhiteSpaceToken *)tok6).whiteSpace isEqualToString:@" "          ] ||
+        ![tok7  isKindOfClass:[CPKeywordToken    class]] || ![((CPKeywordToken *)tok7).keyword       isEqualToString:@"long"       ] ||
+        ![tok8  isKindOfClass:[CPWhiteSpaceToken class]] || ![((CPWhiteSpaceToken *)tok8).whiteSpace isEqualToString:@" "          ] ||
+        ![tok9  isKindOfClass:[CPIdentifierToken class]] || ![((CPIdentifierToken *)tok9).identifier isEqualToString:@"_spam59e_53"] ||
+        ![tok10 isKindOfClass:[CPEOFToken        class]])
+    {
+        STFail(@"Failed to tokenise identifiers space correctly");
+    }
+}
+
 @end
