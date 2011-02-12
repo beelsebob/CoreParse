@@ -9,9 +9,7 @@
 #import <SenTestingKit/SenTestingKit.h>
 
 
-@interface CoreParseTests : SenTestCase {
-@private
-    
-}
+@interface CoreParseTests : SenTestCase
+{}
 
 @end

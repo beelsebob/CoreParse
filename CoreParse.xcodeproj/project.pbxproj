@@ -14,6 +14,14 @@
 		1F0E8915130462F300537D04 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F0E8913130462F300537D04 /* InfoPlist.strings */; };
 		1F0E8918130462F300537D04 /* CoreParseTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 1F0E8917130462F300537D04 /* CoreParseTests.h */; };
 		1F0E891A130462F300537D04 /* CoreParseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0E8919130462F300537D04 /* CoreParseTests.m */; };
+		1F0E8935130463D000537D04 /* CoreParse.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8934130463D000537D04 /* CoreParse.h */; };
+		1F0E8939130463E900537D04 /* CPTokeniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8937130463E900537D04 /* CPTokeniser.h */; };
+		1F0E893A130463E900537D04 /* CPTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0E8938130463E900537D04 /* CPTokeniser.m */; };
+		1F0E893F1304664F00537D04 /* CPTokenRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E893D1304664E00537D04 /* CPTokenRecogniser.h */; };
+		1F0E8943130466D000537D04 /* CPTokenStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8941130466CF00537D04 /* CPTokenStream.h */; };
+		1F0E8944130466D000537D04 /* CPTokenStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0E8942130466D000537D04 /* CPTokenStream.m */; };
+		1F0E894C1306795800537D04 /* CPToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E894A1306795500537D04 /* CPToken.h */; };
+		1F0E894D1306795800537D04 /* CPToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0E894B1306795600537D04 /* CPToken.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,15 +40,23 @@
 		1F0E88FC130462F300537D04 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		1F0E88FD130462F300537D04 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		1F0E88FE130462F300537D04 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1F0E8901130462F300537D04 /* CoreParse-Info.plist */ = {isa = PBXFileReference; path = "CoreParse-Info.plist"; sourceTree = "<group>"; };
+		1F0E8901130462F300537D04 /* CoreParse-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoreParse-Info.plist"; sourceTree = "<group>"; };
 		1F0E8903130462F300537D04 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		1F0E8905130462F300537D04 /* CoreParse-Prefix.pch */ = {isa = PBXFileReference; path = "CoreParse-Prefix.pch"; sourceTree = "<group>"; };
+		1F0E8905130462F300537D04 /* CoreParse-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreParse-Prefix.pch"; sourceTree = "<group>"; };
 		1F0E890B130462F300537D04 /* CoreParseTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreParseTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1F0E8912130462F300537D04 /* CoreParseTests-Info.plist */ = {isa = PBXFileReference; path = "CoreParseTests-Info.plist"; sourceTree = "<group>"; };
+		1F0E8912130462F300537D04 /* CoreParseTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoreParseTests-Info.plist"; sourceTree = "<group>"; };
 		1F0E8914130462F300537D04 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		1F0E8916130462F300537D04 /* CoreParseTests-Prefix.pch */ = {isa = PBXFileReference; path = "CoreParseTests-Prefix.pch"; sourceTree = "<group>"; };
+		1F0E8916130462F300537D04 /* CoreParseTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreParseTests-Prefix.pch"; sourceTree = "<group>"; };
 		1F0E8917130462F300537D04 /* CoreParseTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreParseTests.h; sourceTree = "<group>"; };
 		1F0E8919130462F300537D04 /* CoreParseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreParseTests.m; sourceTree = "<group>"; };
+		1F0E8934130463D000537D04 /* CoreParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreParse.h; sourceTree = "<group>"; };
+		1F0E8937130463E900537D04 /* CPTokeniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTokeniser.h; sourceTree = "<group>"; };
+		1F0E8938130463E900537D04 /* CPTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTokeniser.m; sourceTree = "<group>"; };
+		1F0E893D1304664E00537D04 /* CPTokenRecogniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTokenRecogniser.h; sourceTree = "<group>"; };
+		1F0E8941130466CF00537D04 /* CPTokenStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTokenStream.h; sourceTree = "<group>"; };
+		1F0E8942130466D000537D04 /* CPTokenStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTokenStream.m; sourceTree = "<group>"; };
+		1F0E894A1306795500537D04 /* CPToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPToken.h; sourceTree = "<group>"; };
+		1F0E894B1306795600537D04 /* CPToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPToken.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +121,8 @@
 		1F0E88FF130462F300537D04 /* CoreParse */ = {
 			isa = PBXGroup;
 			children = (
+				1F0E8934130463D000537D04 /* CoreParse.h */,
+				1F0E89451304670900537D04 /* Tokenisation */,
 				1F0E8900130462F300537D04 /* Supporting Files */,
 			);
 			path = CoreParse;
@@ -140,6 +158,20 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		1F0E89451304670900537D04 /* Tokenisation */ = {
+			isa = PBXGroup;
+			children = (
+				1F0E8937130463E900537D04 /* CPTokeniser.h */,
+				1F0E8938130463E900537D04 /* CPTokeniser.m */,
+				1F0E893D1304664E00537D04 /* CPTokenRecogniser.h */,
+				1F0E8941130466CF00537D04 /* CPTokenStream.h */,
+				1F0E8942130466D000537D04 /* CPTokenStream.m */,
+				1F0E894A1306795500537D04 /* CPToken.h */,
+				1F0E894B1306795600537D04 /* CPToken.m */,
+			);
+			path = Tokenisation;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -147,6 +179,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F0E8935130463D000537D04 /* CoreParse.h in Headers */,
+				1F0E8939130463E900537D04 /* CPTokeniser.h in Headers */,
+				1F0E893F1304664F00537D04 /* CPTokenRecogniser.h in Headers */,
+				1F0E8943130466D000537D04 /* CPTokenStream.h in Headers */,
+				1F0E894C1306795800537D04 /* CPToken.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +294,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F0E893A130463E900537D04 /* CPTokeniser.m in Sources */,
+				1F0E8944130466D000537D04 /* CPTokenStream.m in Sources */,
+				1F0E894D1306795800537D04 /* CPToken.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,12 +377,34 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_ENABLE_SSE41_EXTENSIONS = NO;
+				GCC_ENABLE_SSE42_EXTENSIONS = NO;
+				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreParse/CoreParse-Prefix.pch";
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "CoreParse/CoreParse-Info.plist";
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_AFTER_BUILD = YES;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -356,11 +418,33 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_ENABLE_SSE41_EXTENSIONS = NO;
+				GCC_ENABLE_SSE42_EXTENSIONS = NO;
+				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreParse/CoreParse-Prefix.pch";
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "CoreParse/CoreParse-Info.plist";
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_AFTER_BUILD = YES;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
@@ -426,6 +510,7 @@
 				1F0E891F130462F300537D04 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1F0E8920130462F300537D04 /* Build configuration list for PBXNativeTarget "CoreParseTests" */ = {
 			isa = XCConfigurationList;
@@ -434,6 +519,7 @@
 				1F0E8922130462F300537D04 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
