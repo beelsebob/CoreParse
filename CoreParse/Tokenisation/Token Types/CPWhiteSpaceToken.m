@@ -43,4 +43,9 @@
     [super dealloc];
 }
 
+- (NSString *)description
+{
+    return @"< >";
+}
+
 @end

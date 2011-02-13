@@ -61,4 +61,16 @@
     [tokens addObject:token];
 }
 
+- (NSString *)description
+{
+    NSMutableString *desc = [NSMutableString string];
+    
+    [tokens enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+     {
+         [desc appendFormat:@"%@ ", obj];
+     }];
+    
+    return desc;
+}
+
 @end

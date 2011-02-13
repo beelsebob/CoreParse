@@ -44,4 +44,9 @@
     [super dealloc];
 }
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<Keyword: %@>", self.keyword];
+}
+
 @end

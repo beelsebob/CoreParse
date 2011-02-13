@@ -15,10 +15,12 @@
 #import "CPNumberRecogniser.h"
 #import "CPWhiteSpaceRecogniser.h"
 #import "CPIdentifierRecogniser.h"
+#import "CPQuotedRecogniser.h"
 
 #import "CPToken.h"
 #import "CPEOFToken.h"
 #import "CPKeywordToken.h"
 #import "CPNumberToken.h"
 #import "CPWhiteSpaceToken.h"
+#import "CPQuotedToken.h"
 #import "CPIdentifierToken.h"

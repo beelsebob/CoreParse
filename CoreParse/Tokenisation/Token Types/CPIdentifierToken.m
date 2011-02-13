@@ -44,4 +44,9 @@
     [super dealloc];
 }
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<Identifier: %@>", self.identifier];
+}
+
 @end

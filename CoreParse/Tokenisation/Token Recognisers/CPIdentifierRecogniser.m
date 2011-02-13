@@ -22,11 +22,11 @@
     NSCharacterSet *identifierStartCharacters = [NSCharacterSet characterSetWithCharactersInString:
                                                  @"abcdefghijklmnopqrstuvwxyz"
                                                  @"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                                 @"_"];
+                                                 @"_-"];
     NSCharacterSet *identifierCharacters = [NSCharacterSet characterSetWithCharactersInString:
                                             @"abcdefghijklmnopqrstuvwxyz"
                                             @"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                            @"_1234567890"];
+                                            @"_-1234567890"];
     NSScanner *scanner = [NSScanner scannerWithString:tokenString];
     scanner.scanLocation = *tokenPosition;
     [scanner setCharactersToBeSkipped:nil];

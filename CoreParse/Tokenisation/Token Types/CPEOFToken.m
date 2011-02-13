@@ -16,4 +16,9 @@
     return [[[CPEOFToken alloc] init] autorelease];
 }
 
+- (NSString *)description
+{
+    return @"<EOF>";
+}
+
 @end

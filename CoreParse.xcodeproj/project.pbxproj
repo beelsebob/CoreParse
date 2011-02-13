@@ -25,6 +25,10 @@
 		1F1DFCE21306E3C300B22855 /* CPIdentifierRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1DFCE01306E3C300B22855 /* CPIdentifierRecogniser.m */; };
 		1F1DFCE51306E8E900B22855 /* CPIdentifierToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1DFCE31306E8E800B22855 /* CPIdentifierToken.h */; };
 		1F1DFCE61306E8E900B22855 /* CPIdentifierToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1DFCE41306E8E900B22855 /* CPIdentifierToken.m */; };
+		1F1DFCEF1307D18B00B22855 /* CPQuotedToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1DFCED1307D18900B22855 /* CPQuotedToken.h */; };
+		1F1DFCF01307D18B00B22855 /* CPQuotedToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1DFCEE1307D18900B22855 /* CPQuotedToken.m */; };
+		1F1DFCF31307D2C600B22855 /* CPQuotedRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1DFCF11307D2C500B22855 /* CPQuotedRecogniser.h */; };
+		1F1DFCF41307D2C600B22855 /* CPQuotedRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1DFCF21307D2C500B22855 /* CPQuotedRecogniser.m */; };
 		1F4683891306AA8500407491 /* CPKeywordRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683861306AA8500407491 /* CPKeywordRecogniser.h */; };
 		1F46838A1306AA8500407491 /* CPKeywordRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4683871306AA8500407491 /* CPKeywordRecogniser.m */; };
 		1F46838B1306AA8500407491 /* CPTokenRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683881306AA8500407491 /* CPTokenRecogniser.h */; };
@@ -78,6 +82,10 @@
 		1F1DFCE01306E3C300B22855 /* CPIdentifierRecogniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPIdentifierRecogniser.m; sourceTree = "<group>"; };
 		1F1DFCE31306E8E800B22855 /* CPIdentifierToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPIdentifierToken.h; sourceTree = "<group>"; };
 		1F1DFCE41306E8E900B22855 /* CPIdentifierToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPIdentifierToken.m; sourceTree = "<group>"; };
+		1F1DFCED1307D18900B22855 /* CPQuotedToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPQuotedToken.h; sourceTree = "<group>"; };
+		1F1DFCEE1307D18900B22855 /* CPQuotedToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPQuotedToken.m; sourceTree = "<group>"; };
+		1F1DFCF11307D2C500B22855 /* CPQuotedRecogniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPQuotedRecogniser.h; sourceTree = "<group>"; };
+		1F1DFCF21307D2C500B22855 /* CPQuotedRecogniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPQuotedRecogniser.m; sourceTree = "<group>"; };
 		1F4683861306AA8500407491 /* CPKeywordRecogniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CPKeywordRecogniser.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		1F4683871306AA8500407491 /* CPKeywordRecogniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPKeywordRecogniser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		1F4683881306AA8500407491 /* CPTokenRecogniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CPTokenRecogniser.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -222,6 +230,8 @@
 				1F4683A51306D7CF00407491 /* CPWhiteSpaceToken.m */,
 				1F1DFCE31306E8E800B22855 /* CPIdentifierToken.h */,
 				1F1DFCE41306E8E900B22855 /* CPIdentifierToken.m */,
+				1F1DFCED1307D18900B22855 /* CPQuotedToken.h */,
+				1F1DFCEE1307D18900B22855 /* CPQuotedToken.m */,
 			);
 			path = "Token Types";
 			sourceTree = "<group>";
@@ -238,6 +248,8 @@
 				1F4683A11306D66500407491 /* CPWhiteSpaceRecogniser.m */,
 				1F1DFCDF1306E3C300B22855 /* CPIdentifierRecogniser.h */,
 				1F1DFCE01306E3C300B22855 /* CPIdentifierRecogniser.m */,
+				1F1DFCF11307D2C500B22855 /* CPQuotedRecogniser.h */,
+				1F1DFCF21307D2C500B22855 /* CPQuotedRecogniser.m */,
 			);
 			path = "Token Recognisers";
 			sourceTree = "<group>";
@@ -263,6 +275,8 @@
 				1F4683A61306D7D900407491 /* CPWhiteSpaceToken.h in Headers */,
 				1F1DFCE11306E3C300B22855 /* CPIdentifierRecogniser.h in Headers */,
 				1F1DFCE51306E8E900B22855 /* CPIdentifierToken.h in Headers */,
+				1F1DFCEF1307D18B00B22855 /* CPQuotedToken.h in Headers */,
+				1F1DFCF31307D2C600B22855 /* CPQuotedRecogniser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +399,8 @@
 				1F4683A71306D7D900407491 /* CPWhiteSpaceToken.m in Sources */,
 				1F1DFCE21306E3C300B22855 /* CPIdentifierRecogniser.m in Sources */,
 				1F1DFCE61306E8E900B22855 /* CPIdentifierToken.m in Sources */,
+				1F1DFCF01307D18B00B22855 /* CPQuotedToken.m in Sources */,
+				1F1DFCF41307D2C600B22855 /* CPQuotedRecogniser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
