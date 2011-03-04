@@ -24,3 +24,7 @@
 #import "CPWhiteSpaceToken.h"
 #import "CPQuotedToken.h"
 #import "CPIdentifierToken.h"
+
+#import "CPGrammar.h"
+
+#import "CPParser.h"

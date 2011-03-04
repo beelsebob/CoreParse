@@ -44,12 +44,14 @@
 		1F4683A31306D66900407491 /* CPWhiteSpaceRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4683A11306D66500407491 /* CPWhiteSpaceRecogniser.m */; };
 		1F4683A61306D7D900407491 /* CPWhiteSpaceToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683A41306D7CB00407491 /* CPWhiteSpaceToken.h */; };
 		1F4683A71306D7D900407491 /* CPWhiteSpaceToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4683A51306D7CF00407491 /* CPWhiteSpaceToken.m */; };
-		1F50A93E1308604A00C50D7D /* Grammar.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F50A93C1308604A00C50D7D /* Grammar.h */; };
-		1F50A93F1308604A00C50D7D /* Grammar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F50A93D1308604A00C50D7D /* Grammar.m */; };
-		1F50A9421308609A00C50D7D /* NonTerminal.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F50A9401308609A00C50D7D /* NonTerminal.h */; };
-		1F50A9431308609A00C50D7D /* NonTerminal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F50A9411308609A00C50D7D /* NonTerminal.m */; };
-		1F50A9461308623000C50D7D /* Terminal.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F50A9441308623000C50D7D /* Terminal.h */; };
-		1F50A9471308623000C50D7D /* Terminal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F50A9451308623000C50D7D /* Terminal.m */; };
+		1F50A93E1308604A00C50D7D /* CPGrammar.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F50A93C1308604A00C50D7D /* CPGrammar.h */; };
+		1F50A93F1308604A00C50D7D /* CPGrammar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F50A93D1308604A00C50D7D /* CPGrammar.m */; };
+		1F50A9421308609A00C50D7D /* CPNonTerminal.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F50A9401308609A00C50D7D /* CPNonTerminal.h */; };
+		1F50A9431308609A00C50D7D /* CPNonTerminal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F50A9411308609A00C50D7D /* CPNonTerminal.m */; };
+		1F50A9461308623000C50D7D /* CPTerminal.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F50A9441308623000C50D7D /* CPTerminal.h */; };
+		1F50A9471308623000C50D7D /* CPTerminal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F50A9451308623000C50D7D /* CPTerminal.m */; };
+		1F530B7E13215A6F00F52EB5 /* CPParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F530B7C13215A6F00F52EB5 /* CPParser.h */; };
+		1F530B7F13215A6F00F52EB5 /* CPParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B7D13215A6F00F52EB5 /* CPParser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,12 +109,14 @@
 		1F4683A11306D66500407491 /* CPWhiteSpaceRecogniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPWhiteSpaceRecogniser.m; sourceTree = "<group>"; };
 		1F4683A41306D7CB00407491 /* CPWhiteSpaceToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPWhiteSpaceToken.h; sourceTree = "<group>"; };
 		1F4683A51306D7CF00407491 /* CPWhiteSpaceToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPWhiteSpaceToken.m; sourceTree = "<group>"; };
-		1F50A93C1308604A00C50D7D /* Grammar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grammar.h; sourceTree = "<group>"; };
-		1F50A93D1308604A00C50D7D /* Grammar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Grammar.m; sourceTree = "<group>"; };
-		1F50A9401308609A00C50D7D /* NonTerminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NonTerminal.h; sourceTree = "<group>"; };
-		1F50A9411308609A00C50D7D /* NonTerminal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NonTerminal.m; sourceTree = "<group>"; };
-		1F50A9441308623000C50D7D /* Terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terminal.h; sourceTree = "<group>"; };
-		1F50A9451308623000C50D7D /* Terminal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Terminal.m; sourceTree = "<group>"; };
+		1F50A93C1308604A00C50D7D /* CPGrammar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPGrammar.h; sourceTree = "<group>"; };
+		1F50A93D1308604A00C50D7D /* CPGrammar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPGrammar.m; sourceTree = "<group>"; };
+		1F50A9401308609A00C50D7D /* CPNonTerminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNonTerminal.h; sourceTree = "<group>"; };
+		1F50A9411308609A00C50D7D /* CPNonTerminal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPNonTerminal.m; sourceTree = "<group>"; };
+		1F50A9441308623000C50D7D /* CPTerminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTerminal.h; sourceTree = "<group>"; };
+		1F50A9451308623000C50D7D /* CPTerminal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTerminal.m; sourceTree = "<group>"; };
+		1F530B7C13215A6F00F52EB5 /* CPParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPParser.h; sourceTree = "<group>"; };
+		1F530B7D13215A6F00F52EB5 /* CPParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +184,7 @@
 				1F0E8934130463D000537D04 /* CoreParse.h */,
 				1F0E89451304670900537D04 /* Tokenisation */,
 				1F50A93B1308600800C50D7D /* Grammar */,
+				1F530B7B132155BB00F52EB5 /* Parsers */,
 				1F0E8900130462F300537D04 /* Supporting Files */,
 			);
 			path = CoreParse;
@@ -270,14 +275,23 @@
 		1F50A93B1308600800C50D7D /* Grammar */ = {
 			isa = PBXGroup;
 			children = (
-				1F50A93C1308604A00C50D7D /* Grammar.h */,
-				1F50A93D1308604A00C50D7D /* Grammar.m */,
-				1F50A9401308609A00C50D7D /* NonTerminal.h */,
-				1F50A9411308609A00C50D7D /* NonTerminal.m */,
-				1F50A9441308623000C50D7D /* Terminal.h */,
-				1F50A9451308623000C50D7D /* Terminal.m */,
+				1F50A93C1308604A00C50D7D /* CPGrammar.h */,
+				1F50A93D1308604A00C50D7D /* CPGrammar.m */,
+				1F50A9401308609A00C50D7D /* CPNonTerminal.h */,
+				1F50A9411308609A00C50D7D /* CPNonTerminal.m */,
+				1F50A9441308623000C50D7D /* CPTerminal.h */,
+				1F50A9451308623000C50D7D /* CPTerminal.m */,
 			);
 			path = Grammar;
+			sourceTree = "<group>";
+		};
+		1F530B7B132155BB00F52EB5 /* Parsers */ = {
+			isa = PBXGroup;
+			children = (
+				1F530B7C13215A6F00F52EB5 /* CPParser.h */,
+				1F530B7D13215A6F00F52EB5 /* CPParser.m */,
+			);
+			path = Parsers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,9 +317,10 @@
 				1F1DFCE51306E8E900B22855 /* CPIdentifierToken.h in Headers */,
 				1F1DFCEF1307D18B00B22855 /* CPQuotedToken.h in Headers */,
 				1F1DFCF31307D2C600B22855 /* CPQuotedRecogniser.h in Headers */,
-				1F50A93E1308604A00C50D7D /* Grammar.h in Headers */,
-				1F50A9421308609A00C50D7D /* NonTerminal.h in Headers */,
-				1F50A9461308623000C50D7D /* Terminal.h in Headers */,
+				1F50A93E1308604A00C50D7D /* CPGrammar.h in Headers */,
+				1F50A9421308609A00C50D7D /* CPNonTerminal.h in Headers */,
+				1F50A9461308623000C50D7D /* CPTerminal.h in Headers */,
+				1F530B7E13215A6F00F52EB5 /* CPParser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,9 +445,10 @@
 				1F1DFCE61306E8E900B22855 /* CPIdentifierToken.m in Sources */,
 				1F1DFCF01307D18B00B22855 /* CPQuotedToken.m in Sources */,
 				1F1DFCF41307D2C600B22855 /* CPQuotedRecogniser.m in Sources */,
-				1F50A93F1308604A00C50D7D /* Grammar.m in Sources */,
-				1F50A9431308609A00C50D7D /* NonTerminal.m in Sources */,
-				1F50A9471308623000C50D7D /* Terminal.m in Sources */,
+				1F50A93F1308604A00C50D7D /* CPGrammar.m in Sources */,
+				1F50A9431308609A00C50D7D /* CPNonTerminal.m in Sources */,
+				1F50A9471308623000C50D7D /* CPTerminal.m in Sources */,
+				1F530B7F13215A6F00F52EB5 /* CPParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
