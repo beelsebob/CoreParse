@@ -17,6 +17,7 @@
     NSString *endQuote;
     NSString *escapedEndQuote;
     NSString *escapedEscape;
+    NSString *name;
 }
 
 @synthesize startQuote;
@@ -24,23 +25,24 @@
 @synthesize escapedEndQuote;
 @synthesize escapedEscape;
 @synthesize maximumLength;
+@synthesize name;
 
-+ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote
++ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote tokenName:(NSString *)name
 {
-    return [CPQuotedRecogniser quotedRecogniserWithStartQuote:startQuote endQuote:endQuote escapedEndQuote:nil escapedEscape:nil];
+    return [CPQuotedRecogniser quotedRecogniserWithStartQuote:startQuote endQuote:endQuote escapedEndQuote:nil escapedEscape:nil tokenName:name];
 }
 
-+ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote escapedEndQuote:(NSString *)escapedEndQuote escapedEscape:(NSString *)escapedEscape
++ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote escapedEndQuote:(NSString *)escapedEndQuote escapedEscape:(NSString *)escapedEscape tokenName:(NSString *)name
 {
-    return [CPQuotedRecogniser quotedRecogniserWithStartQuote:startQuote endQuote:endQuote escapedEndQuote:escapedEndQuote escapedEscape:escapedEscape maximumLength:NSNotFound];
+    return [CPQuotedRecogniser quotedRecogniserWithStartQuote:startQuote endQuote:endQuote escapedEndQuote:escapedEndQuote escapedEscape:escapedEscape maximumLength:NSNotFound tokenName:name];
 }
 
-+ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote escapedEndQuote:(NSString *)escapedEndQuote escapedEscape:(NSString *)escapedEscape maximumLength:(NSUInteger)maximumLength
++ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote escapedEndQuote:(NSString *)escapedEndQuote escapedEscape:(NSString *)escapedEscape maximumLength:(NSUInteger)maximumLength tokenName:(NSString *)name
 {
-    return [[[CPQuotedRecogniser alloc] initWithStartQuote:startQuote endQuote:endQuote escapedEndQuote:escapedEndQuote escapedEscape:escapedEscape maximumLength:maximumLength] autorelease];
+    return [[[CPQuotedRecogniser alloc] initWithStartQuote:startQuote endQuote:endQuote escapedEndQuote:escapedEndQuote escapedEscape:escapedEscape maximumLength:maximumLength tokenName:name] autorelease];
 }
 
-- (id)initWithStartQuote:(NSString *)initStartQuote endQuote:(NSString *)initEndQuote escapedEndQuote:(NSString *)initEscapedEndQuote escapedEscape:(NSString *)initEscapedEscape maximumLength:(NSUInteger)initMaximumLength
+- (id)initWithStartQuote:(NSString *)initStartQuote endQuote:(NSString *)initEndQuote escapedEndQuote:(NSString *)initEscapedEndQuote escapedEscape:(NSString *)initEscapedEscape maximumLength:(NSUInteger)initMaximumLength tokenName:(NSString *)initName
 {
     self = [super init];
     
@@ -51,9 +53,21 @@
         self.escapedEndQuote = initEscapedEndQuote;
         self.escapedEscape   = initEscapedEscape;
         self.maximumLength   = initMaximumLength;
+        self.name            = initName;
     }
     
     return self;
+}
+
+- (void)dealloc
+{
+    [startQuote release];
+    [endQuote release];
+    [escapedEndQuote release];
+    [escapedEscape release];
+    [name release];
+    
+    [super dealloc];
 }
 
 - (CPToken *)recogniseTokenInString:(NSString *)tokenString currentTokenPosition:(NSUInteger *)tokenPosition
@@ -68,7 +82,7 @@
         searchRange.location = searchRange.location + range.length;
         searchRange.length   = searchRange.length   - range.length;
         
-        NSRange endRange          = [tokenString rangeOfString:self.endQuote        options:NSLiteralSearch range:searchRange];
+        NSRange endRange          = [tokenString rangeOfString:self.endQuote options:NSLiteralSearch range:searchRange];
         NSRange escapeEndRange    = nil == self.escapedEndQuote ? NSMakeRange(NSNotFound, 0) : [tokenString rangeOfString:self.escapedEndQuote options:NSLiteralSearch range:searchRange];
         NSRange escapeEscapeRange = nil == self.escapedEscape   ? NSMakeRange(NSNotFound, 0) : [tokenString rangeOfString:self.escapedEscape   options:NSLiteralSearch range:searchRange];
         
@@ -79,7 +93,7 @@
                 NSUInteger startLocation = *tokenPosition;
                 NSUInteger contentStart = startLocation + startQuoteLength;
                 *tokenPosition = endRange.location + endRange.length;
-                return [CPQuotedToken content:[tokenString substringWithRange:NSMakeRange(contentStart, *tokenPosition - contentStart - endQuoteLength)] quotedWith:self.startQuote];
+                return [CPQuotedToken content:[tokenString substringWithRange:NSMakeRange(contentStart, *tokenPosition - contentStart - endQuoteLength)] quotedWith:self.startQuote tokenName:self.name];
             }
             else
             {

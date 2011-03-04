@@ -49,4 +49,9 @@
     return [NSString stringWithFormat:@"Number: %@", self.number];
 }
 
+- (NSString *)name
+{
+    return @"Number";
+}
+
 @end

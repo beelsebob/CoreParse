@@ -49,4 +49,9 @@
     return [NSString stringWithFormat:@"<Identifier: %@>", self.identifier];
 }
 
+- (NSString *)name
+{
+    return @"Identifier";
+}
+
 @end

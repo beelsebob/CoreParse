@@ -48,4 +48,9 @@
     return @"< >";
 }
 
+- (NSString *)name
+{
+    return @"Whitespace";
+}
+
 @end

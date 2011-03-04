@@ -12,4 +12,6 @@
 @interface CPToken : NSObject
 {}
 
+- (NSString *)name;
+
 @end

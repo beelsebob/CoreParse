@@ -49,4 +49,9 @@
     return [NSString stringWithFormat:@"<Keyword: %@>", self.keyword];
 }
 
+- (NSString *)name
+{
+    return @"Keyword";
+}
+
 @end

@@ -21,4 +21,9 @@
     return @"<EOF>";
 }
 
+- (NSString *)name
+{
+    return @"EOF";
+}
+
 @end
