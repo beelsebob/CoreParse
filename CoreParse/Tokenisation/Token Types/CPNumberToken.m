@@ -46,7 +46,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"Number: %@", self.number];
+    return [NSString stringWithFormat:@"<Number: %@>", self.number];
 }
 
 - (NSString *)name

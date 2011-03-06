@@ -40,7 +40,7 @@
         ![tok2 isKindOfClass:[CPKeywordToken class]] || ![((CPKeywordToken *)tok2).keyword isEqualToString:@"}"] ||
         ![tok3 isKindOfClass:[CPEOFToken class]])
     {
-        STFail(@"Incorrect tokenisation of braces");
+        STFail(@"Incorrect tokenisation of braces",nil);
     }
 }
 
@@ -55,7 +55,7 @@
     if (![tok1 isKindOfClass:[CPNumberToken class]] || ((CPNumberToken *)tok1).number.integerValue != 1234 ||
         ![tok2 isKindOfClass:[CPEOFToken class]])
     {
-        STFail(@"Incorrect tokenisation of integers");
+        STFail(@"Incorrect tokenisation of integers",nil);
     }
 
     tokenStream = [tokeniser tokenise:@"1234abcd"];
@@ -63,7 +63,7 @@
     
     if (![tok1 isKindOfClass:[CPNumberToken class]] || ((CPNumberToken *)tok1).number.integerValue != 1234)
     {
-        STFail(@"Incorrect tokenisation of integers with additional cruft");
+        STFail(@"Incorrect tokenisation of integers with additional cruft",nil);
     }
 }
 
@@ -78,13 +78,13 @@
     if (![tok1 isKindOfClass:[CPNumberToken class]] || ((CPNumberToken *)tok1).number.doubleValue != 1234.5678 ||
         ![tok2 isKindOfClass:[CPEOFToken class]])
     {
-        STFail(@"Incorrect tokenisation of floats");
+        STFail(@"Incorrect tokenisation of floats",nil);
     }
     
     tokenStream = [tokeniser tokenise:@"1234"];
     if ([tokenStream hasToken])
     {
-        STFail(@"Tokenising floats recognises integers as well");
+        STFail(@"Tokenising floats recognises integers as well",nil);
     }
 }
 
@@ -99,7 +99,7 @@
     if (![tok1 isKindOfClass:[CPNumberToken class]] || ((CPNumberToken *)tok1).number.doubleValue != 1234.5678 ||
         ![tok2 isKindOfClass:[CPEOFToken class]])
     {
-        STFail(@"Incorrect tokenisation of numbers");
+        STFail(@"Incorrect tokenisation of numbers",nil);
     }
     
     tokenStream = [tokeniser tokenise:@"1234abcd"];
@@ -107,7 +107,7 @@
     
     if (![tok1 isKindOfClass:[CPNumberToken class]] || ((CPNumberToken *)tok1).number.integerValue != 1234)
     {
-        STFail(@"Incorrect tokenisation of numbers with additional cruft");
+        STFail(@"Incorrect tokenisation of numbers with additional cruft",nil);
     }
 }
 
@@ -131,7 +131,7 @@
         ![tok5 isKindOfClass:[CPNumberToken     class]] || ((CPNumberToken *)tok5).number.doubleValue != 90 ||
         ![tok6 isKindOfClass:[CPEOFToken        class]])
     {
-        STFail(@"Failed to tokenise white space correctly");
+        STFail(@"Failed to tokenise white space correctly",nil);
     }
 }
 
@@ -164,7 +164,7 @@
         ![tok9  isKindOfClass:[CPIdentifierToken class]] || ![((CPIdentifierToken *)tok9).identifier isEqualToString:@"_spam59e_53"] ||
         ![tok10 isKindOfClass:[CPEOFToken        class]])
     {
-        STFail(@"Failed to tokenise identifiers space correctly");
+        STFail(@"Failed to tokenise identifiers space correctly",nil);
     }
 }
 
@@ -179,7 +179,7 @@
     if (![tok1 isKindOfClass:[CPQuotedToken class]] || ![((CPQuotedToken *)tok1).quoteType isEqualToString:@"/*"] || ![((CPQuotedToken *)tok1).content isEqualToString:@" abcde ghi "] ||
         ![tok2 isKindOfClass:[CPEOFToken    class]])
     {
-        STFail(@"Failed to tokenise comment");
+        STFail(@"Failed to tokenise comment",nil);
     }
     
     [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapedEndQuote:@"\\\"" escapedEscape:@"\\\\" tokenName:@"String"]];
@@ -192,7 +192,7 @@
         ![tok2 isKindOfClass:[CPQuotedToken class]] || ![((CPQuotedToken *)tok2).quoteType isEqualToString:@"\""] || ![((CPQuotedToken *)tok2).content isEqualToString:@"def"  ] ||
         ![tok3 isKindOfClass:[CPEOFToken    class]])
     {
-        STFail(@"Failed to tokenise comment and string");
+        STFail(@"Failed to tokenise comment and string",nil);
     }
     
     tokenStream = [tokeniser tokenise:@"\"def\\\"\""];
@@ -201,7 +201,7 @@
     if (![tok1 isKindOfClass:[CPQuotedToken class]] || ![((CPQuotedToken *)tok1).quoteType isEqualToString:@"\""] || ![((CPQuotedToken *)tok1).content isEqualToString:@"def\\\""] ||
         ![tok2 isKindOfClass:[CPEOFToken    class]])
     {
-        STFail(@"Failed to tokenise string with quote in it");
+        STFail(@"Failed to tokenise string with quote in it",nil);
     }
     
     tokenStream = [tokeniser tokenise:@"\"def\\\\\""];
@@ -210,7 +210,7 @@
     if (![tok1 isKindOfClass:[CPQuotedToken class]] || ![((CPQuotedToken *)tok1).quoteType isEqualToString:@"\""] || ![((CPQuotedToken *)tok1).content isEqualToString:@"def\\\\"] ||
         ![tok2 isKindOfClass:[CPEOFToken    class]])
     {
-        STFail(@"Failed to tokenise string with backslash in it");
+        STFail(@"Failed to tokenise string with backslash in it",nil);
     }
     
     tokeniser = [[[CPTokeniser alloc] init] autorelease];
@@ -220,7 +220,7 @@
     if (![tok1 isKindOfClass:[CPQuotedToken class]] || ![((CPQuotedToken *)tok1).quoteType isEqualToString:@"'"] || ![((CPQuotedToken *)tok1).content isEqualToString:@"a"] ||
         [tokenStream hasToken])
     {
-        STFail(@"Failed to correctly tokenise characters");
+        STFail(@"Failed to correctly tokenise characters",nil);
     }
 }
 
@@ -260,6 +260,32 @@
     CPTokenStream *tokenStream = [tokeniser tokenise:@"node[highway=trunk] { line-width: 5.0; label: \"jam\"; } // Zomg boobs!\n /* Haha, fooled you */ relation[type=multipolygon] { line-width: 0.0; }"];
     
     NSLog(@"%@", tokenStream);
+}
+
+- (void)testRecursiveDescent
+{
+    CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
+    [tokeniser addTokenRecogniser:[CPNumberRecogniser integerRecogniser]];
+    [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"+"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"*"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"("]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@")"]];
+    CPTokenStream *tokenStream = [tokeniser tokenise:@"5 + 2"];
+    [tokenStream beginIgnoringTokenNamed:@"Whitespace"];
+    
+    CPRule *start = [CPRule ruleWithName:@"s" rightHandSideElements:[NSArray arrayWithObjects:[CPNonTerminal nonTerminalWithName:@"e"], [CPTerminal terminalWithTokenName:@"EOF"], nil]];
+    CPRule *tE = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObject:[CPNonTerminal nonTerminalWithName:@"t"]]];
+    CPRule *aE = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObjects:[CPNonTerminal nonTerminalWithName:@"t"], [CPTerminal terminalWithTokenName:@"+"], [CPNonTerminal nonTerminalWithName:@"e"], nil]];
+    CPRule *fT = [CPRule ruleWithName:@"t" rightHandSideElements:[NSArray arrayWithObject:[CPNonTerminal nonTerminalWithName:@"f"]]];
+    CPRule *mT = [CPRule ruleWithName:@"t" rightHandSideElements:[NSArray arrayWithObjects:[CPNonTerminal nonTerminalWithName:@"f"], [CPTerminal terminalWithTokenName:@"*"], [CPNonTerminal nonTerminalWithName:@"t"], nil]];
+    CPRule *iF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObject:[CPTerminal terminalWithTokenName:@"Number"]]];
+    CPRule *pF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObjects:[CPTerminal terminalWithTokenName:@"("], [CPNonTerminal nonTerminalWithName:@"e"], [CPTerminal terminalWithTokenName:@")"], nil]];
+    CPGrammar *grammar = [CPGrammar grammarWithStart:[CPNonTerminal nonTerminalWithName:@"s"] rules:[NSArray arrayWithObjects:start, tE, aE, fT, mT, iF, pF, nil]];
+    CPRecursiveDescentParser *parser = [CPRecursiveDescentParser parserWithGrammar:grammar];
+    CPSyntaxTree *tree = [parser parse:tokenStream];
+    
+    NSLog(@"%@", tree);
 }
 
 @end

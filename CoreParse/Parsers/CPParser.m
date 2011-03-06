@@ -17,10 +17,11 @@
 @implementation CPParser
 
 @synthesize grammar;
+@synthesize delegate;
 
 + (id)parserWithGrammar:(CPGrammar *)grammar
 {
-    return [[[CPParser alloc] initWithGrammar:grammar] autorelease];
+    return [[[self alloc] initWithGrammar:grammar] autorelease];
 }
 
 - (id)initWithGrammar:(CPGrammar *)initGrammar

@@ -9,42 +9,21 @@
 #import "CPNonTerminal.h"
 
 @implementation CPNonTerminal
-{
-    NSMutableArray *rightHandSide;
-}
 
 @synthesize name;
 
-- (NSArray *)rightHandSideElements
++ (id)nonTerminalWithName:(NSString *)name
 {
-    return [[rightHandSide retain] autorelease];
+    return [[[CPNonTerminal alloc] initWithName:name] autorelease];
 }
 
-- (void)setRightHandSideElements:(NSArray *)rightHandSideElements
-{
-    @synchronized(self)
-    {
-        if (rightHandSide != rightHandSideElements)
-        {
-            [rightHandSide release];
-            rightHandSide = [rightHandSideElements mutableCopy];
-        }
-    }
-}
-
-+ (id)nonTerminalWithName:(NSString *)name rightHandSideElements:(NSArray *)rightHandSideElements
-{
-    return [[[CPNonTerminal alloc] initWithName:name rightHandSideElements:rightHandSideElements] autorelease];
-}
-
-- (id)initWithName:(NSString *)initName rightHandSideElements:(NSArray *)rightHandSideElements
+- (id)initWithName:(NSString *)initName
 {
     self = [super init];
     
     if (nil != self)
     {
         self.name = initName;
-        self.rightHandSideElements = rightHandSideElements;
     }
     
     return self;
@@ -52,15 +31,7 @@
 
 - (id)init
 {
-    return [self initWithName:@"" rightHandSideElements:[NSArray array]];
-}
-
-- (void)dealloc
-{
-    [name release];
-    [rightHandSide release];
-    
-    [super dealloc];
+    return [self initWithName:@""];
 }
 
 @end

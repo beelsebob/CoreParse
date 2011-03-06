@@ -76,7 +76,7 @@
              CPToken *tok = [(NSObject<CPTokenRecogniser> *)obj recogniseTokenInString:input currentTokenPosition:&currentTokenOffset];
              if (nil != tok)
              {
-                 [stream addToken:tok];
+                 [stream pushToken:tok];
                  recognised = YES;
                  *stop = YES;
              }
@@ -84,7 +84,7 @@
     }
     if (inputLength <= currentTokenOffset)
     {
-        [stream addToken:[CPEOFToken eof]];
+        [stream pushToken:[CPEOFToken eof]];
     }
     
     return stream;

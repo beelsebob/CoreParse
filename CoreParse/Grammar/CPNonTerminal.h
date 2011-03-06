@@ -8,14 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface CPNonTerminal : NSObject
 {}
 
 @property (readwrite, copy) NSString *name;
-@property (readwrite, copy) NSArray *rightHandSideElements;
 
-+ (id)nonTerminalWithName:(NSString *)name rightHandSideElements:(NSArray *)rightHandSideElements;
-- (id)initWithName:(NSString *)name rightHandSideElements:(NSArray *)rightHandSideElements;
++ (id)nonTerminalWithName:(NSString *)name;
+- (id)initWithName:(NSString *)name;
 
 @end

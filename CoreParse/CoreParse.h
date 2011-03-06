@@ -25,6 +25,10 @@
 #import "CPQuotedToken.h"
 #import "CPIdentifierToken.h"
 
+#import "CPTerminal.h"
+#import "CPNonTerminal.h"
+#import "CPRule.h"
 #import "CPGrammar.h"
 
 #import "CPParser.h"
+#import "CPRecursiveDescentParser.h"

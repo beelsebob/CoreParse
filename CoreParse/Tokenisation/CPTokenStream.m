@@ -10,10 +10,13 @@
 
 @interface CPTokenStream ()
 {
+    NSMutableSet *tokensToIgnore;
     NSMutableArray *tokens;
 }
 
 @property (readwrite,retain) NSMutableArray *tokens;
+
+- (void)filterTokens;
 
 @end
 
@@ -28,6 +31,7 @@
     if (nil != self)
     {
         self.tokens = [NSMutableArray array];
+        tokensToIgnore = [[NSMutableSet alloc] init];
     }
     
     return self;
@@ -35,42 +39,79 @@
 
 - (void)dealloc
 {
+    [tokensToIgnore release];
     [tokens release];
     [super dealloc];
 }
 
+- (void)beginIgnoringTokenNamed:(NSString *)tokenName
+{
+    @synchronized(self)
+    {
+        [tokensToIgnore addObject:tokenName];
+    }
+}
+
 - (BOOL)hasToken
 {
-    return [tokens count] > 0;
+    BOOL has;
+    @synchronized(self)
+    {
+        [self filterTokens];
+        has = [tokens count] > 0;
+    }
+    
+    return has;
 }
 
 - (CPToken *)peekToken
 {
+    @synchronized(self)
+    {
+        [self filterTokens];
+    }
     return [[[tokens objectAtIndex:0] retain] autorelease];
 }
 
 - (CPToken *)popToken
 {
-    CPToken *first = [[[tokens objectAtIndex:0] retain] autorelease];
-    [tokens removeObjectAtIndex:0];
+    CPToken *first;
+    @synchronized(self)
+    {
+        [self filterTokens];
+        first = [[[tokens objectAtIndex:0] retain] autorelease];
+        [tokens removeObjectAtIndex:0];
+    }
     return first;
 }
 
-- (void)addToken:(CPToken *)token
+- (void)pushToken:(CPToken *)token
 {
-    [tokens addObject:token];
+    @synchronized(self)
+    {
+        [tokens addObject:token];
+    }
 }
 
 - (NSString *)description
 {
     NSMutableString *desc = [NSMutableString string];
     
-    [tokens enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-     {
-         [desc appendFormat:@"%@ ", obj];
-     }];
+    @synchronized(self)
+    {
+        [self filterTokens];
+        [tokens enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+         {
+             [desc appendFormat:@"%@ ", obj];
+         }];
+    }
     
     return desc;
+}
+
+- (void)filterTokens
+{
+    [tokens filterUsingPredicate:[NSPredicate predicateWithBlock:^ BOOL (id obj, NSDictionary *bindings) { return nil == [tokensToIgnore member:[(CPToken *)obj name]]; }]];
 }
 
 @end

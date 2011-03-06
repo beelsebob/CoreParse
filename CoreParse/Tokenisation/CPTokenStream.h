@@ -13,11 +13,13 @@
 @interface CPTokenStream : NSObject
 {}
 
+- (void)beginIgnoringTokenNamed:(NSString *)tokenName;
+
 - (BOOL)hasToken;
 
 - (CPToken *)peekToken;
 - (CPToken *)popToken;
 
-- (void)addToken:(CPToken *)token;
+- (void)pushToken:(CPToken *)token;
 
 @end

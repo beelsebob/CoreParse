@@ -9,10 +9,6 @@
 #import "CPKeywordToken.h"
 
 @implementation CPKeywordToken
-{
-@private
-    NSString *keyword;
-}
 
 @synthesize keyword;
 
@@ -51,7 +47,7 @@
 
 - (NSString *)name
 {
-    return @"Keyword";
+    return self.keyword;
 }
 
 @end

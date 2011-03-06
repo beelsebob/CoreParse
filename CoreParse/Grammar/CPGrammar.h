@@ -9,13 +9,17 @@
 #import <Foundation/Foundation.h>
 
 #import "CPNonTerminal.h"
+#import "CPRule.h"
 
 @interface CPGrammar : NSObject
 {}
 
 @property (readwrite,retain) CPNonTerminal *start;
 
-+ (id)grammarWithStart:(CPNonTerminal *)start;
-- (id)initWithStart:(CPNonTerminal *)start;
++ (id)grammarWithStart:(CPNonTerminal *)start rules:(NSArray *)rules;
+- (id)initWithStart:(CPNonTerminal *)start rules:(NSArray *)rules;
+
+- (void)addRule:(CPRule *)rule;
+- (NSArray *)rulesForNonTerminal:(CPNonTerminal *)nonTerminal;
 
 @end

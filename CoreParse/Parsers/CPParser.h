@@ -9,11 +9,23 @@
 #import <Foundation/Foundation.h>
 
 #import "CPGrammar.h"
+#import "CPSyntaxTree.h"
 
 #import "CPTokenStream.h"
 
+@class CPParser;
+
+@protocol CPParserDelegate <NSObject>
+
+- (id)parser:(CPParser *)parser didProduceSyntaxTree:(CPSyntaxTree *)syntaxTree;
+
+@end
+
 @interface CPParser : NSObject
 {}
+
+@property (readwrite,assign) id<CPParserDelegate> delegate;
+@property (readonly,retain) CPGrammar *grammar;
 
 + (id)parserWithGrammar:(CPGrammar *)grammar;
 - (id)initWithGrammar:(CPGrammar *)grammar;
