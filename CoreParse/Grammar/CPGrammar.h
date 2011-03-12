@@ -29,4 +29,7 @@
 
 - (NSUInteger)indexOfRule:(CPRule *)rule;
 
+- (NSSet *)follow:(NSString *)name;
+- (NSSet *)first:(NSObject *)obj;
+
 @end

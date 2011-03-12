@@ -153,4 +153,91 @@
     return s;
 }
 
+- (NSSet *)follow:(NSString *)name
+{
+    NSMutableSet *f = [NSMutableSet setWithObject:@"EOF"];
+    [[self allRules] enumerateObjectsUsingBlock:^(id obj, BOOL *stop)
+     {
+         CPRule *rule = (CPRule *)obj;
+         NSArray *rightHandSide = [rule rightHandSideElements];
+         NSUInteger numElements = [rightHandSide count];
+         [rightHandSide enumerateObjectsUsingBlock:^(id rhsE, NSUInteger idx, BOOL *s)
+          {
+              if ([rhsE isKindOfClass:[CPNonTerminal class]] && [[(CPNonTerminal *)rhsE name] isEqualToString:name])
+              {
+                  if (idx + 1 < numElements)
+                  {
+                      NSSet *first = [self first:[rightHandSide objectAtIndex:idx+1]];
+                      NSMutableSet *firstMinusEmpty = [[first mutableCopy] autorelease];
+                      [firstMinusEmpty minusSet:[NSSet setWithObject:@""]];
+                      [f unionSet:firstMinusEmpty];
+                      if ([first count] != [firstMinusEmpty count])
+                      {
+                          BOOL allEmpty = YES;
+                          for (NSUInteger newIdx = idx+2; newIdx < numElements && allEmpty; newIdx++)
+                          {
+                              if (nil == [[self first:[rightHandSide objectAtIndex:idx+1]] member:@""])
+                              {
+                                  allEmpty = NO;
+                              }
+                          }
+                          if (allEmpty && ![[rule name] isEqualToString:name])
+                          {
+                              [f unionSet:[self follow:[rule name]]];
+                          }
+                      }
+                  }
+                  else if (![[rule name] isEqualToString:name])
+                  {
+                      [f unionSet:[self follow:[rule name]]];
+                  }
+              }
+          }];
+     }];
+    
+    return f;
+}
+
+- (NSSet *)first:(NSObject *)obj
+{
+    if ([obj isKindOfClass:[CPTerminal class]])
+    {
+        return [NSSet setWithObject:[(CPTerminal *)obj tokenName]];
+    }
+    else
+    {
+        NSMutableSet *f = [NSMutableSet set];
+        CPNonTerminal *nt = (CPNonTerminal *)obj;
+        NSArray *rs = [self rulesForNonTerminal:nt];
+        BOOL containsEmptyRightHandSide = NO;
+        for (CPRule *rule in rs)
+        {
+            NSArray *rhs = [rule rightHandSideElements];
+            NSUInteger numElements = [rhs count];
+            if (numElements == 0)
+            {
+                containsEmptyRightHandSide = YES;
+            }
+            else
+            {
+                BOOL allCanBeEmpty = YES;
+                for (NSUInteger element = 0; element < numElements && allCanBeEmpty; element++)
+                {
+                    NSSet *f1 = [self first:[rhs objectAtIndex:element]];
+                    [f unionSet:f1];
+                    if (nil == [f1 member:@""])
+                    {
+                        allCanBeEmpty = NO;
+                    }
+                }
+            }
+        }
+        if (containsEmptyRightHandSide)
+        {
+            [f addObject:@""];
+        }
+        return f;
+    }
+}
+
 @end

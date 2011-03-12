@@ -20,8 +20,6 @@
 - (NSSet *)closure:(NSSet *)i underGrammar:(CPGrammar *)g;
 - (NSSet *)gotoWithItems:(NSSet *)i symbol:(NSObject *)symbol underGrammar:(CPGrammar *)g;
 - (NSArray *)itemsForGrammar:(CPGrammar *)aug;
-- (NSSet *)follow:(NSString *)name underGrammar:(CPGrammar *)g;
-- (NSSet *)first:(NSString *)name underGrammar:(CPGrammar *)g;
 
 @end
 
@@ -57,7 +55,7 @@
                 }
                 else
                 {
-                    NSSet *follow = [self follow:[[item rule] name] underGrammar:aug];
+                    NSSet *follow = [aug follow:[[item rule] name]];
                     [follow enumerateObjectsUsingBlock:^(id f, BOOL *fStop)
                      {
                          [self.actionTable setAction:[CPShiftReduceAction reduceAction:[item rule]] forState:idx tokenName:(NSString *)f];
@@ -152,93 +150,6 @@
     }
     
     return c;
-}
-
-- (NSSet *)follow:(NSString *)name underGrammar:(CPGrammar *)g
-{
-    NSMutableSet *f = [NSMutableSet setWithObject:@"EOF"];
-    [[g allRules] enumerateObjectsUsingBlock:^(id obj, BOOL *stop)
-     {
-         CPRule *rule = (CPRule *)obj;
-         NSArray *rightHandSide = [rule rightHandSideElements];
-         NSUInteger numElements = [rightHandSide count];
-         [rightHandSide enumerateObjectsUsingBlock:^(id rhsE, NSUInteger idx, BOOL *s)
-          {
-              if ([rhsE isKindOfClass:[CPNonTerminal class]] && [[(CPNonTerminal *)rhsE name] isEqualToString:name])
-              {
-                  if (idx + 1 < numElements)
-                  {
-                      NSSet *first = [self first:[rightHandSide objectAtIndex:idx+1] underGrammar:g];
-                      NSMutableSet *firstMinusEmpty = [[first mutableCopy] autorelease];
-                      [firstMinusEmpty minusSet:[NSSet setWithObject:@""]];
-                      [f unionSet:firstMinusEmpty];
-                      if ([first count] != [firstMinusEmpty count])
-                      {
-                          BOOL allEmpty = YES;
-                          for (NSUInteger newIdx = idx+2; newIdx < numElements && allEmpty; newIdx++)
-                          {
-                              if (nil == [[self first:[rightHandSide objectAtIndex:idx+1] underGrammar:g] member:@""])
-                              {
-                                  allEmpty = NO;
-                              }
-                          }
-                          if (allEmpty && ![[rule name] isEqualToString:name])
-                          {
-                              [f unionSet:[self follow:[rule name] underGrammar:g]];
-                          }
-                      }
-                  }
-                  else if (![[rule name] isEqualToString:name])
-                  {
-                      [f unionSet:[self follow:[rule name] underGrammar:g]];
-                  }
-              }
-          }];
-     }];
-    
-    return f;
-}
-
-- (NSSet *)first:(NSObject *)obj underGrammar:(CPGrammar *)g
-{
-    if ([obj isKindOfClass:[CPTerminal class]])
-    {
-        return [NSSet setWithObject:[(CPTerminal *)obj tokenName]];
-    }
-    else
-    {
-        NSMutableSet *f = [NSMutableSet set];
-        CPNonTerminal *nt = (CPNonTerminal *)obj;
-        NSArray *rules = [g rulesForNonTerminal:nt];
-        BOOL containsEmptyRightHandSide = NO;
-        for (CPRule *rule in rules)
-        {
-            NSArray *rhs = [rule rightHandSideElements];
-            NSUInteger numElements = [rhs count];
-            if (numElements == 0)
-            {
-                containsEmptyRightHandSide = YES;
-            }
-            else
-            {
-                BOOL allCanBeEmpty = YES;
-                for (NSUInteger element = 0; element < numElements && allCanBeEmpty; element++)
-                {
-                    NSSet *f1 = [self first:[rhs objectAtIndex:element] underGrammar:g];
-                    [f unionSet:f1];
-                    if (nil == [f1 member:@""])
-                    {
-                        allCanBeEmpty = NO;
-                    }
-                }
-            }
-        }
-        if (containsEmptyRightHandSide)
-        {
-            [f addObject:@""];
-        }
-        return f;
-    }
 }
 
 @end
