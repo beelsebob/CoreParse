@@ -111,7 +111,10 @@
 
 - (void)filterTokens
 {
-    [tokens filterUsingPredicate:[NSPredicate predicateWithBlock:^ BOOL (id obj, NSDictionary *bindings) { return nil == [tokensToIgnore member:[(CPToken *)obj name]]; }]];
+    [tokens filterUsingPredicate:[NSPredicate predicateWithBlock:^ BOOL (id obj, NSDictionary *bindings)
+                                  {
+                                      return nil == [tokensToIgnore member:[(CPToken *)obj name]];
+                                  }]];
 }
 
 @end

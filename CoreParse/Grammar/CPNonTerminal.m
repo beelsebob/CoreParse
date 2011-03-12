@@ -34,4 +34,19 @@
     return [self initWithName:@""];
 }
 
+- (BOOL)isEqual:(id)object
+{
+    return [object isKindOfClass:[CPNonTerminal class]] && [((CPNonTerminal *)object).name isEqualToString:self.name];
+}
+
+- (NSUInteger)hash
+{
+    return [self.name hash];
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@>", self.name];
+}
+
 @end

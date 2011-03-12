@@ -19,7 +19,14 @@
 + (id)grammarWithStart:(CPNonTerminal *)start rules:(NSArray *)rules;
 - (id)initWithStart:(CPNonTerminal *)start rules:(NSArray *)rules;
 
+- (NSSet *)allRules;
+- (NSArray *)allNonTerminalNames;
+
 - (void)addRule:(CPRule *)rule;
 - (NSArray *)rulesForNonTerminal:(CPNonTerminal *)nonTerminal;
+
+- (CPGrammar *)augmentedGrammar;
+
+- (NSUInteger)indexOfRule:(CPRule *)rule;
 
 @end

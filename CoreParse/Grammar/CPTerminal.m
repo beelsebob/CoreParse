@@ -41,4 +41,19 @@
     [super dealloc];
 }
 
+- (BOOL)isEqual:(id)object
+{
+    return [object isKindOfClass:[CPTerminal class]] && [((CPTerminal *)object).tokenName isEqualToString:self.tokenName];
+}
+
+- (NSUInteger)hash
+{
+    return [self.tokenName hash];
+}
+
+- (NSString *)description
+{
+    return self.tokenName;
+}
+
 @end

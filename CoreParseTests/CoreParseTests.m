@@ -10,6 +10,8 @@
 
 #import "CoreParse.h"
 
+#import "CPTestEvaluatorDelegate.h"
+
 @implementation CoreParseTests
 
 - (void)setUp
@@ -262,7 +264,7 @@
     NSLog(@"%@", tokenStream);
 }
 
-- (void)testRecursiveDescent
+- (void)testSLR
 {
     CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
     [tokeniser addTokenRecogniser:[CPNumberRecogniser integerRecogniser]];
@@ -271,21 +273,24 @@
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"*"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"("]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@")"]];
-    CPTokenStream *tokenStream = [tokeniser tokenise:@"5 + 2"];
+    CPTokenStream *tokenStream = [tokeniser tokenise:@"5 + (2 * 5 + 9) * 8"];
     [tokenStream beginIgnoringTokenNamed:@"Whitespace"];
     
-    CPRule *start = [CPRule ruleWithName:@"s" rightHandSideElements:[NSArray arrayWithObjects:[CPNonTerminal nonTerminalWithName:@"e"], [CPTerminal terminalWithTokenName:@"EOF"], nil]];
-    CPRule *tE = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObject:[CPNonTerminal nonTerminalWithName:@"t"]]];
-    CPRule *aE = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObjects:[CPNonTerminal nonTerminalWithName:@"t"], [CPTerminal terminalWithTokenName:@"+"], [CPNonTerminal nonTerminalWithName:@"e"], nil]];
-    CPRule *fT = [CPRule ruleWithName:@"t" rightHandSideElements:[NSArray arrayWithObject:[CPNonTerminal nonTerminalWithName:@"f"]]];
-    CPRule *mT = [CPRule ruleWithName:@"t" rightHandSideElements:[NSArray arrayWithObjects:[CPNonTerminal nonTerminalWithName:@"f"], [CPTerminal terminalWithTokenName:@"*"], [CPNonTerminal nonTerminalWithName:@"t"], nil]];
-    CPRule *iF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObject:[CPTerminal terminalWithTokenName:@"Number"]]];
-    CPRule *pF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObjects:[CPTerminal terminalWithTokenName:@"("], [CPNonTerminal nonTerminalWithName:@"e"], [CPTerminal terminalWithTokenName:@")"], nil]];
-    CPGrammar *grammar = [CPGrammar grammarWithStart:[CPNonTerminal nonTerminalWithName:@"s"] rules:[NSArray arrayWithObjects:start, tE, aE, fT, mT, iF, pF, nil]];
-    CPRecursiveDescentParser *parser = [CPRecursiveDescentParser parserWithGrammar:grammar];
-    CPSyntaxTree *tree = [parser parse:tokenStream];
+    CPRule *tE = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObject:[CPNonTerminal nonTerminalWithName:@"t"]] tag:0];
+    CPRule *aE = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObjects:[CPNonTerminal nonTerminalWithName:@"e"], [CPTerminal terminalWithTokenName:@"+"], [CPNonTerminal nonTerminalWithName:@"t"], nil] tag:1];
+    CPRule *fT = [CPRule ruleWithName:@"t" rightHandSideElements:[NSArray arrayWithObject:[CPNonTerminal nonTerminalWithName:@"f"]] tag:2];
+    CPRule *mT = [CPRule ruleWithName:@"t" rightHandSideElements:[NSArray arrayWithObjects:[CPNonTerminal nonTerminalWithName:@"t"], [CPTerminal terminalWithTokenName:@"*"], [CPNonTerminal nonTerminalWithName:@"f"], nil] tag:3];
+    CPRule *iF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObject:[CPTerminal terminalWithTokenName:@"Number"]] tag:4];
+    CPRule *pF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObjects:[CPTerminal terminalWithTokenName:@"("], [CPNonTerminal nonTerminalWithName:@"e"], [CPTerminal terminalWithTokenName:@")"], nil] tag:5];
+    CPGrammar *grammar = [CPGrammar grammarWithStart:[CPNonTerminal nonTerminalWithName:@"e"] rules:[NSArray arrayWithObjects:tE, aE, fT, mT, iF, pF, nil]];
+    CPSLRParser *parser = [CPSLRParser parserWithGrammar:grammar];
+    parser.delegate = [[[CPTestEvaluatorDelegate alloc] init] autorelease];
+    NSNumber *result = [parser parse:tokenStream];
     
-    NSLog(@"%@", tree);
+    if ([result intValue] != 157)
+    {
+        STFail(@"Parsed expression had incorrect value", nil);
+    }
 }
 
 @end

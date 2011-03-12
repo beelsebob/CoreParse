@@ -10,6 +10,8 @@
 
 #import "CPRule.h"
 
+#import "CPGrammar.h"
+
 @interface CPShiftReduceAction : NSObject
 {}
 
@@ -26,5 +28,7 @@
 
 - (NSUInteger)newState;
 - (CPRule *)reductionRule;
+
+- (NSString *)descriptionWithGrammar:(CPGrammar *)g;
 
 @end

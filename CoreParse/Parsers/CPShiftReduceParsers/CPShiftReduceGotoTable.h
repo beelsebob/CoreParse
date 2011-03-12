@@ -13,6 +13,10 @@
 @interface CPShiftReduceGotoTable : NSObject
 {}
 
+- (id)initWithCapacity:(NSUInteger)capacity;
+
+- (void)setGoto:(NSUInteger)gotoIndex forState:(NSUInteger)state nonTerminalNamed:(NSString *)nonTerminalName;
+
 - (NSUInteger)gotoForState:(NSUInteger)state rule:(CPRule *)rule;
 
 @end

@@ -15,6 +15,7 @@
 }
 
 @synthesize name;
+@synthesize tag;
 
 - (NSArray *)rightHandSideElements
 {
@@ -33,12 +34,12 @@
     }
 }
 
-+ (id)ruleWithName:(NSString *)name rightHandSideElements:(NSArray *)rightHandSideElements
++ (id)ruleWithName:(NSString *)name rightHandSideElements:(NSArray *)rightHandSideElements tag:(NSUInteger)tag
 {
-    return [[[CPRule alloc] initWithName:name rightHandSideElements:rightHandSideElements] autorelease];
+    return [[[self alloc] initWithName:name rightHandSideElements:rightHandSideElements tag:tag] autorelease];
 }
 
-- (id)initWithName:(NSString *)initName rightHandSideElements:(NSArray *)rightHandSideElements
+- (id)initWithName:(NSString *)initName rightHandSideElements:(NSArray *)rightHandSideElements tag:(NSUInteger)initTag
 {
     self = [super init];
     
@@ -46,9 +47,20 @@
     {
         self.name = initName;
         self.rightHandSideElements = rightHandSideElements;
+        self.tag = initTag;
     }
     
     return self;
+}
+
++ (id)ruleWithName:(NSString *)name rightHandSideElements:(NSArray *)rightHandSideElements
+{
+    return [[[CPRule alloc] initWithName:name rightHandSideElements:rightHandSideElements] autorelease];
+}
+
+- (id)initWithName:(NSString *)initName rightHandSideElements:(NSArray *)rightHandSideElements
+{
+    return [self initWithName:initName rightHandSideElements:rightHandSideElements tag:0];
 }
 
 - (id)init
@@ -63,4 +75,15 @@
     
     [super dealloc];
 }
+
+- (NSString *)description
+{
+    NSMutableString *desc = [NSMutableString stringWithFormat:@"%@ ::= ", self.name];
+    for (NSObject *obj in rightHandSide)
+    {
+        [desc appendFormat:@"%@ ", obj];
+    }
+    return desc;
+}
+
 @end

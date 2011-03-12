@@ -39,6 +39,13 @@
 		1F3881EE1322B66B000C8876 /* CPShiftReduceActionTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3881EC1322B669000C8876 /* CPShiftReduceActionTable.m */; };
 		1F3881F11322B6A3000C8876 /* CPShiftReduceGotoTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3881EF1322B69E000C8876 /* CPShiftReduceGotoTable.h */; };
 		1F3881F21322B6A3000C8876 /* CPShiftReduceGotoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3881F01322B6A0000C8876 /* CPShiftReduceGotoTable.m */; };
+		1F3882011323DB4A000C8876 /* CPSLRParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3881FF1323DB49000C8876 /* CPSLRParser.h */; };
+		1F3882021323DB4A000C8876 /* CPSLRParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3882001323DB49000C8876 /* CPSLRParser.m */; };
+		1F3882051323DDD8000C8876 /* CPShiftReduceParserProtectedMethods.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3882031323DDD6000C8876 /* CPShiftReduceParserProtectedMethods.h */; };
+		1F3882091323F760000C8876 /* CPItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3882071323F75E000C8876 /* CPItem.h */; };
+		1F38820A1323F760000C8876 /* CPItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3882081323F75F000C8876 /* CPItem.m */; };
+		1F38820D132432B2000C8876 /* NSSetFunctional.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F38820B132432A1000C8876 /* NSSetFunctional.h */; };
+		1F38820E132432B2000C8876 /* NSSetFunctional.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F38820C132432AA000C8876 /* NSSetFunctional.m */; };
 		1F4683891306AA8500407491 /* CPKeywordRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683861306AA8500407491 /* CPKeywordRecogniser.h */; };
 		1F46838A1306AA8500407491 /* CPKeywordRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4683871306AA8500407491 /* CPKeywordRecogniser.m */; };
 		1F46838B1306AA8500407491 /* CPTokenRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683881306AA8500407491 /* CPTokenRecogniser.h */; };
@@ -68,6 +75,8 @@
 		1F530B8813216A1A00F52EB5 /* CPSyntaxTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B8613216A1A00F52EB5 /* CPSyntaxTree.m */; };
 		1F530B911322814000F52EB5 /* CPRule.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F530B8F1322813E00F52EB5 /* CPRule.h */; };
 		1F530B921322814000F52EB5 /* CPRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B901322813F00F52EB5 /* CPRule.m */; };
+		1FB3EB24132BA02C00ACC453 /* CPTestEvaluatorDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB22132BA02C00ACC453 /* CPTestEvaluatorDelegate.h */; };
+		1FB3EB25132BA02C00ACC453 /* CPTestEvaluatorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB23132BA02C00ACC453 /* CPTestEvaluatorDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +129,13 @@
 		1F3881EC1322B669000C8876 /* CPShiftReduceActionTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPShiftReduceActionTable.m; sourceTree = "<group>"; };
 		1F3881EF1322B69E000C8876 /* CPShiftReduceGotoTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPShiftReduceGotoTable.h; sourceTree = "<group>"; };
 		1F3881F01322B6A0000C8876 /* CPShiftReduceGotoTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPShiftReduceGotoTable.m; sourceTree = "<group>"; };
+		1F3881FF1323DB49000C8876 /* CPSLRParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSLRParser.h; sourceTree = "<group>"; };
+		1F3882001323DB49000C8876 /* CPSLRParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSLRParser.m; sourceTree = "<group>"; };
+		1F3882031323DDD6000C8876 /* CPShiftReduceParserProtectedMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPShiftReduceParserProtectedMethods.h; sourceTree = "<group>"; };
+		1F3882071323F75E000C8876 /* CPItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPItem.h; sourceTree = "<group>"; };
+		1F3882081323F75F000C8876 /* CPItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPItem.m; sourceTree = "<group>"; };
+		1F38820B132432A1000C8876 /* NSSetFunctional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSSetFunctional.h; sourceTree = "<group>"; };
+		1F38820C132432AA000C8876 /* NSSetFunctional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSSetFunctional.m; sourceTree = "<group>"; };
 		1F4683861306AA8500407491 /* CPKeywordRecogniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CPKeywordRecogniser.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		1F4683871306AA8500407491 /* CPKeywordRecogniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPKeywordRecogniser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		1F4683881306AA8500407491 /* CPTokenRecogniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CPTokenRecogniser.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -149,6 +165,8 @@
 		1F530B8613216A1A00F52EB5 /* CPSyntaxTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSyntaxTree.m; sourceTree = "<group>"; };
 		1F530B8F1322813E00F52EB5 /* CPRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRule.h; sourceTree = "<group>"; };
 		1F530B901322813F00F52EB5 /* CPRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRule.m; sourceTree = "<group>"; };
+		1FB3EB22132BA02C00ACC453 /* CPTestEvaluatorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTestEvaluatorDelegate.h; sourceTree = "<group>"; };
+		1FB3EB23132BA02C00ACC453 /* CPTestEvaluatorDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTestEvaluatorDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +237,8 @@
 				1F530B841321690C00F52EB5 /* Syntax Tree */,
 				1F530B7B132155BB00F52EB5 /* Parsers */,
 				1F0E8900130462F300537D04 /* Supporting Files */,
+				1F38820B132432A1000C8876 /* NSSetFunctional.h */,
+				1F38820C132432AA000C8876 /* NSSetFunctional.m */,
 			);
 			path = CoreParse;
 			sourceTree = "<group>";
@@ -239,6 +259,8 @@
 				1F0E8917130462F300537D04 /* CoreParseTests.h */,
 				1F0E8919130462F300537D04 /* CoreParseTests.m */,
 				1F0E8911130462F300537D04 /* Supporting Files */,
+				1FB3EB22132BA02C00ACC453 /* CPTestEvaluatorDelegate.h */,
+				1FB3EB23132BA02C00ACC453 /* CPTestEvaluatorDelegate.m */,
 			);
 			path = CoreParseTests;
 			sourceTree = "<group>";
@@ -278,7 +300,12 @@
 				1F3881EF1322B69E000C8876 /* CPShiftReduceGotoTable.h */,
 				1F3881F01322B6A0000C8876 /* CPShiftReduceGotoTable.m */,
 				1F3881DA1322ACE7000C8876 /* CPShiftReduceParser.h */,
+				1F3882031323DDD6000C8876 /* CPShiftReduceParserProtectedMethods.h */,
 				1F3881DB1322ACE7000C8876 /* CPShiftReduceParser.m */,
+				1F3881FF1323DB49000C8876 /* CPSLRParser.h */,
+				1F3882001323DB49000C8876 /* CPSLRParser.m */,
+				1F3882071323F75E000C8876 /* CPItem.h */,
+				1F3882081323F75F000C8876 /* CPItem.m */,
 			);
 			path = CPShiftReduceParsers;
 			sourceTree = "<group>";
@@ -393,6 +420,11 @@
 				1F3881E51322AEE8000C8876 /* CPShiftReduceState.h in Headers */,
 				1F3881ED1322B66B000C8876 /* CPShiftReduceActionTable.h in Headers */,
 				1F3881F11322B6A3000C8876 /* CPShiftReduceGotoTable.h in Headers */,
+				1F3882011323DB4A000C8876 /* CPSLRParser.h in Headers */,
+				1F3882051323DDD8000C8876 /* CPShiftReduceParserProtectedMethods.h in Headers */,
+				1F3882091323F760000C8876 /* CPItem.h in Headers */,
+				1F38820D132432B2000C8876 /* NSSetFunctional.h in Headers */,
+				1FB3EB24132BA02C00ACC453 /* CPTestEvaluatorDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,6 +561,10 @@
 				1F3881E61322AEE8000C8876 /* CPShiftReduceState.m in Sources */,
 				1F3881EE1322B66B000C8876 /* CPShiftReduceActionTable.m in Sources */,
 				1F3881F21322B6A3000C8876 /* CPShiftReduceGotoTable.m in Sources */,
+				1F3882021323DB4A000C8876 /* CPSLRParser.m in Sources */,
+				1F38820A1323F760000C8876 /* CPItem.m in Sources */,
+				1F38820E132432B2000C8876 /* NSSetFunctional.m in Sources */,
+				1FB3EB25132BA02C00ACC453 /* CPTestEvaluatorDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

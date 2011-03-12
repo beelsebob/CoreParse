@@ -32,3 +32,4 @@
 
 #import "CPParser.h"
 #import "CPRecursiveDescentParser.h"
+#import "CPSLRParser.h"

@@ -13,7 +13,11 @@
 {}
 
 @property (readwrite, retain) NSString *name;
-@property (readwrite, copy) NSArray *rightHandSideElements;
+@property (readwrite, copy  ) NSArray *rightHandSideElements;
+@property (readwrite, assign) NSUInteger tag;
+
++ (id)ruleWithName:(NSString *)name rightHandSideElements:(NSArray *)rightHandSideElements tag:(NSUInteger)tag;
+- (id)initWithName:(NSString *)name rightHandSideElements:(NSArray *)rightHandSideElements tag:(NSUInteger)tag;
 
 + (id)ruleWithName:(NSString *)name rightHandSideElements:(NSArray *)rightHandSideElements;
 - (id)initWithName:(NSString *)name rightHandSideElements:(NSArray *)rightHandSideElements;

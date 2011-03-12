@@ -116,4 +116,31 @@ ActionDetails;
     return details.reductionRule;
 }
 
+- (NSString *)description
+{
+    switch (type)
+    {
+        case kActionTypeShift:
+            return [NSString stringWithFormat:@"s%d", details.shift];
+        case kActionTypeReduce:
+            return [NSString stringWithFormat:@"r%@", [details.reductionRule name]];
+        case kActionTypeAccept:
+            return @"acc";
+    }
+}
+
+- (NSString *)descriptionWithGrammar:(CPGrammar *)g
+{
+    switch (type)
+    {
+        case kActionTypeShift:
+            return [NSString stringWithFormat:@"s%d", details.shift];
+        case kActionTypeReduce:
+            return [NSString stringWithFormat:@"r%d", [g indexOfRule:details.reductionRule]];
+        case kActionTypeAccept:
+            return @"acc";
+    }
+}
+
+
 @end

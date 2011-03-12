@@ -6,10 +6,7 @@
 //  Copyright 2011 In The Beginning... All rights reserved.
 //
 
-#import "CPShiftReduceParser.h"
-
-#import "CPShiftReduceActionTable.h"
-#import "CPShiftReduceGotoTable.h"
+#import "CPShiftReduceParserProtectedMethods.h"
 
 #import "CPShiftReduceAction.h"
 #import "CPShiftReduceState.h"
@@ -22,15 +19,12 @@
 - (CPShiftReduceAction *)actionForState:(NSUInteger)state token:(CPToken *)token;
 - (NSUInteger)gotoForState:(NSUInteger)state rule:(CPRule *)rule;
 
-- (BOOL)constructShiftReduceTables;
-
 @end
 
 @implementation CPShiftReduceParser
-{
-    CPShiftReduceActionTable *actionTable;
-    CPShiftReduceGotoTable *gotoTable;
-}
+
+@synthesize actionTable;
+@synthesize gotoTable;
 
 - (id)initWithGrammar:(CPGrammar *)grammar
 {
@@ -66,10 +60,11 @@
 - (id)parse:(CPTokenStream *)tokenStream
 {
     NSMutableArray *stateStack = [NSMutableArray arrayWithObject:[CPShiftReduceState shiftReduceStateWithObject:nil state:0]];
-    CPToken *nextToken = [tokenStream peekToken];
-    CPShiftReduceAction *action = [self actionForState:[(CPShiftReduceState *)[stateStack lastObject] state] token:nextToken];
     while (1)
     {
+        CPToken *nextToken = [tokenStream peekToken];
+        CPShiftReduceAction *action = [self actionForState:[(CPShiftReduceState *)[stateStack lastObject] state] token:nextToken];
+        
         if ([action isShiftAction])
         {
             [stateStack addObject:[CPShiftReduceState shiftReduceStateWithObject:nextToken state:[action newState]]];
@@ -110,12 +105,12 @@
 
 - (CPShiftReduceAction *)actionForState:(NSUInteger)state token:(CPToken *)token
 {
-    return [actionTable actionForState:state token:token];
+    return [self.actionTable actionForState:state token:token];
 }
 
 - (NSUInteger)gotoForState:(NSUInteger)state rule:(CPRule *)rule
 {
-    return [gotoTable gotoForState:state rule:rule];
+    return [self.gotoTable gotoForState:state rule:rule];
 }
 
 @end
