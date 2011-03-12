@@ -69,8 +69,6 @@
 		1F50A9471308623000C50D7D /* CPTerminal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F50A9451308623000C50D7D /* CPTerminal.m */; };
 		1F530B7E13215A6F00F52EB5 /* CPParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F530B7C13215A6F00F52EB5 /* CPParser.h */; };
 		1F530B7F13215A6F00F52EB5 /* CPParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B7D13215A6F00F52EB5 /* CPParser.m */; };
-		1F530B821321685100F52EB5 /* CPRecursiveDescentParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F530B801321685100F52EB5 /* CPRecursiveDescentParser.h */; };
-		1F530B831321685100F52EB5 /* CPRecursiveDescentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B811321685100F52EB5 /* CPRecursiveDescentParser.m */; };
 		1F530B8713216A1A00F52EB5 /* CPSyntaxTree.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F530B8513216A1A00F52EB5 /* CPSyntaxTree.h */; };
 		1F530B8813216A1A00F52EB5 /* CPSyntaxTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B8613216A1A00F52EB5 /* CPSyntaxTree.m */; };
 		1F530B911322814000F52EB5 /* CPRule.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F530B8F1322813E00F52EB5 /* CPRule.h */; };
@@ -163,8 +161,6 @@
 		1F50A9451308623000C50D7D /* CPTerminal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTerminal.m; sourceTree = "<group>"; };
 		1F530B7C13215A6F00F52EB5 /* CPParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPParser.h; sourceTree = "<group>"; };
 		1F530B7D13215A6F00F52EB5 /* CPParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPParser.m; sourceTree = "<group>"; };
-		1F530B801321685100F52EB5 /* CPRecursiveDescentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRecursiveDescentParser.h; sourceTree = "<group>"; };
-		1F530B811321685100F52EB5 /* CPRecursiveDescentParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRecursiveDescentParser.m; sourceTree = "<group>"; };
 		1F530B8513216A1A00F52EB5 /* CPSyntaxTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSyntaxTree.h; sourceTree = "<group>"; };
 		1F530B8613216A1A00F52EB5 /* CPSyntaxTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSyntaxTree.m; sourceTree = "<group>"; };
 		1F530B8F1322813E00F52EB5 /* CPRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRule.h; sourceTree = "<group>"; };
@@ -381,8 +377,6 @@
 			children = (
 				1F530B7C13215A6F00F52EB5 /* CPParser.h */,
 				1F530B7D13215A6F00F52EB5 /* CPParser.m */,
-				1F530B801321685100F52EB5 /* CPRecursiveDescentParser.h */,
-				1F530B811321685100F52EB5 /* CPRecursiveDescentParser.m */,
 				1F3881DE1322AD8E000C8876 /* CPShiftReduceParsers */,
 			);
 			path = Parsers;
@@ -424,7 +418,6 @@
 				1F50A9421308609A00C50D7D /* CPNonTerminal.h in Headers */,
 				1F50A9461308623000C50D7D /* CPTerminal.h in Headers */,
 				1F530B7E13215A6F00F52EB5 /* CPParser.h in Headers */,
-				1F530B821321685100F52EB5 /* CPRecursiveDescentParser.h in Headers */,
 				1F530B8713216A1A00F52EB5 /* CPSyntaxTree.h in Headers */,
 				1F530B911322814000F52EB5 /* CPRule.h in Headers */,
 				1F3881DC1322ACE7000C8876 /* CPShiftReduceParser.h in Headers */,
@@ -567,7 +560,6 @@
 				1F50A9431308609A00C50D7D /* CPNonTerminal.m in Sources */,
 				1F50A9471308623000C50D7D /* CPTerminal.m in Sources */,
 				1F530B7F13215A6F00F52EB5 /* CPParser.m in Sources */,
-				1F530B831321685100F52EB5 /* CPRecursiveDescentParser.m in Sources */,
 				1F530B8813216A1A00F52EB5 /* CPSyntaxTree.m in Sources */,
 				1F530B921322814000F52EB5 /* CPRule.m in Sources */,
 				1F3881DD1322ACE7000C8876 /* CPShiftReduceParser.m in Sources */,
