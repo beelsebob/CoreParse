@@ -22,4 +22,6 @@
 
 - (void)pushToken:(CPToken *)token;
 
+- (NSArray *)peekAllRemainingTokens;
+
 @end

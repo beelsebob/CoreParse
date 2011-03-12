@@ -54,4 +54,9 @@
     return @"Number";
 }
 
+- (BOOL)isEqual:(id)object
+{
+    return [object isKindOfClass:[CPNumberToken class]] && [((CPNumberToken *)object).number isEqualToNumber:self.number];
+}
+
 @end

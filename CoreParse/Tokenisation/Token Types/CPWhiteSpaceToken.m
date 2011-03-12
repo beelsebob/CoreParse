@@ -53,4 +53,9 @@
     return @"Whitespace";
 }
 
+- (BOOL)isEqual:(id)object
+{
+    return [object isKindOfClass:[CPWhiteSpaceToken class]];
+}
+
 @end

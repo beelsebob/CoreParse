@@ -117,4 +117,13 @@
                                   }]];
 }
 
+- (NSArray *)peekAllRemainingTokens
+{
+    @synchronized(self)
+    {
+        [self filterTokens];
+        return [[tokens copy] autorelease];
+    }
+}
+
 @end

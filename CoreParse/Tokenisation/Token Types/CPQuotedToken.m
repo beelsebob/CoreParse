@@ -63,4 +63,9 @@
     return name;
 }
 
+- (BOOL)isEqual:(id)object
+{
+    return [object isKindOfClass:[CPQuotedToken class]] && [((CPQuotedToken *)object).content isEqualToString:self.content] && [((CPQuotedToken *)object).name isEqualToString:self.name] && [((CPQuotedToken *)object).quoteType isEqualToString:self.quoteType];
+}
+
 @end

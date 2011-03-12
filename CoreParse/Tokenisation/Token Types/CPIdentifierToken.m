@@ -54,4 +54,9 @@
     return @"Identifier";
 }
 
+- (BOOL)isEqual:(id)object
+{
+    return [object isKindOfClass:[CPIdentifierToken class]] && [((CPIdentifierToken *)object).identifier isEqualToString:self.identifier];
+}
+
 @end

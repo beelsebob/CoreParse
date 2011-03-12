@@ -260,8 +260,45 @@
     [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapedEndQuote:@"\\\"" escapedEscape:@"\\\\" tokenName:@"String"]];
     [tokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniser]];
     CPTokenStream *tokenStream = [tokeniser tokenise:@"node[highway=trunk] { line-width: 5.0; label: \"jam\"; } // Zomg boobs!\n /* Haha, fooled you */ relation[type=multipolygon] { line-width: 0.0; }"];
+    [tokenStream beginIgnoringTokenNamed:@"Whitespace"];
     
-    NSLog(@"%@", tokenStream);
+    if (![[tokenStream peekAllRemainingTokens] isEqualToArray:
+          [NSArray arrayWithObjects:
+           [CPKeywordToken tokenWithKeyword:@"node"],
+           [CPKeywordToken tokenWithKeyword:@"["],
+           [CPIdentifierToken tokenWithIdentifier:@"highway"],
+           [CPKeywordToken tokenWithKeyword:@"="],
+           [CPIdentifierToken tokenWithIdentifier:@"trunk"],
+           [CPKeywordToken tokenWithKeyword:@"]"],
+           [CPKeywordToken tokenWithKeyword:@"{"],
+           [CPIdentifierToken tokenWithIdentifier:@"line-width"],
+           [CPKeywordToken tokenWithKeyword:@":"],
+           [CPNumberToken tokenWithNumber:[NSNumber numberWithFloat:5.0f]],
+           [CPKeywordToken tokenWithKeyword:@";"],
+           [CPIdentifierToken tokenWithIdentifier:@"label"],
+           [CPKeywordToken tokenWithKeyword:@":"],
+           [CPQuotedToken content:@"jam" quotedWith:@"\"" tokenName:@"String"],
+           [CPKeywordToken tokenWithKeyword:@";"],
+           [CPKeywordToken tokenWithKeyword:@"}"],
+           [CPQuotedToken content:@" Zomg boobs!" quotedWith:@"//" tokenName:@"Comment"],
+           [CPQuotedToken content:@" Haha, fooled you " quotedWith:@"/*" tokenName:@"Comment"],
+           [CPKeywordToken tokenWithKeyword:@"relation"],
+           [CPKeywordToken tokenWithKeyword:@"["],
+           [CPIdentifierToken tokenWithIdentifier:@"type"],
+           [CPKeywordToken tokenWithKeyword:@"="],
+           [CPIdentifierToken tokenWithIdentifier:@"multipolygon"],
+           [CPKeywordToken tokenWithKeyword:@"]"],
+           [CPKeywordToken tokenWithKeyword:@"{"],
+           [CPIdentifierToken tokenWithIdentifier:@"line-width"],
+           [CPKeywordToken tokenWithKeyword:@":"],
+           [CPNumberToken tokenWithNumber:[NSNumber numberWithFloat:0.0f]],
+           [CPKeywordToken tokenWithKeyword:@";"],
+           [CPKeywordToken tokenWithKeyword:@"}"],
+           [CPEOFToken eof],
+           nil]])
+    {
+        STFail(@"Tokenisation of MapCSS failed", nil);
+    }
 }
 
 - (void)testSLR

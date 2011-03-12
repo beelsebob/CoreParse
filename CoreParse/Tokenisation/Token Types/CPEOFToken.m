@@ -26,4 +26,9 @@
     return @"EOF";
 }
 
+- (BOOL)isEqual:(id)object
+{
+    return [object isKindOfClass:[CPEOFToken class]];
+}
+
 @end

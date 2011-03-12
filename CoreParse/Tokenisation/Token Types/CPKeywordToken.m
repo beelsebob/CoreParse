@@ -50,4 +50,9 @@
     return self.keyword;
 }
 
+- (BOOL)isEqual:(id)object
+{
+    return [object isKindOfClass:[CPKeywordToken class]] && [((CPKeywordToken *)object).keyword isEqualToString:self.keyword];
+}
+
 @end
