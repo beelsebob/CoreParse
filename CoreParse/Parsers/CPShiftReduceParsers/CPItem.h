@@ -10,7 +10,7 @@
 
 #import "CPRule.h"
 
-@interface CPItem : NSObject
+@interface CPItem : NSObject <NSCopying>
 {}
 
 @property (readonly,retain) CPRule *rule;

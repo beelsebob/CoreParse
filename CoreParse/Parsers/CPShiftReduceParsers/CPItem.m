@@ -38,6 +38,11 @@
     return self;
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    return [[CPItem allocWithZone:zone] initWithRule:self.rule position:self.position];
+}
+
 - (void)dealloc
 {
     [rule release];
@@ -60,7 +65,9 @@
 
 - (id)itemByMovingDotRight
 {
-    return [[[CPItem alloc] initWithRule:self.rule position:self.position + 1] autorelease];
+    CPItem *c = [self copy];
+    c.position = self.position + 1;
+    return [c autorelease];
 }
 
 - (BOOL)isEqual:(id)object

@@ -77,6 +77,10 @@
 		1F530B921322814000F52EB5 /* CPRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B901322813F00F52EB5 /* CPRule.m */; };
 		1FB3EB24132BA02C00ACC453 /* CPTestEvaluatorDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB22132BA02C00ACC453 /* CPTestEvaluatorDelegate.h */; };
 		1FB3EB25132BA02C00ACC453 /* CPTestEvaluatorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB23132BA02C00ACC453 /* CPTestEvaluatorDelegate.m */; };
+		1FB3EB2C132BB2F200ACC453 /* CPLR1Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB2A132BB2E600ACC453 /* CPLR1Parser.h */; };
+		1FB3EB2D132BB2F200ACC453 /* CPLR1Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB2B132BB2ED00ACC453 /* CPLR1Parser.m */; };
+		1FB3EB30132BB31700ACC453 /* CPLR1Item.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB2E132BB30300ACC453 /* CPLR1Item.h */; };
+		1FB3EB31132BB31700ACC453 /* CPLR1Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB2F132BB30A00ACC453 /* CPLR1Item.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +171,10 @@
 		1F530B901322813F00F52EB5 /* CPRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRule.m; sourceTree = "<group>"; };
 		1FB3EB22132BA02C00ACC453 /* CPTestEvaluatorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTestEvaluatorDelegate.h; sourceTree = "<group>"; };
 		1FB3EB23132BA02C00ACC453 /* CPTestEvaluatorDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTestEvaluatorDelegate.m; sourceTree = "<group>"; };
+		1FB3EB2A132BB2E600ACC453 /* CPLR1Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLR1Parser.h; sourceTree = "<group>"; };
+		1FB3EB2B132BB2ED00ACC453 /* CPLR1Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLR1Parser.m; sourceTree = "<group>"; };
+		1FB3EB2E132BB30300ACC453 /* CPLR1Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLR1Item.h; sourceTree = "<group>"; };
+		1FB3EB2F132BB30A00ACC453 /* CPLR1Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLR1Item.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,6 +314,10 @@
 				1F3882001323DB49000C8876 /* CPSLRParser.m */,
 				1F3882071323F75E000C8876 /* CPItem.h */,
 				1F3882081323F75F000C8876 /* CPItem.m */,
+				1FB3EB2A132BB2E600ACC453 /* CPLR1Parser.h */,
+				1FB3EB2B132BB2ED00ACC453 /* CPLR1Parser.m */,
+				1FB3EB2E132BB30300ACC453 /* CPLR1Item.h */,
+				1FB3EB2F132BB30A00ACC453 /* CPLR1Item.m */,
 			);
 			path = CPShiftReduceParsers;
 			sourceTree = "<group>";
@@ -425,6 +437,8 @@
 				1F3882091323F760000C8876 /* CPItem.h in Headers */,
 				1F38820D132432B2000C8876 /* NSSetFunctional.h in Headers */,
 				1FB3EB24132BA02C00ACC453 /* CPTestEvaluatorDelegate.h in Headers */,
+				1FB3EB2C132BB2F200ACC453 /* CPLR1Parser.h in Headers */,
+				1FB3EB30132BB31700ACC453 /* CPLR1Item.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,6 +579,8 @@
 				1F38820A1323F760000C8876 /* CPItem.m in Sources */,
 				1F38820E132432B2000C8876 /* NSSetFunctional.m in Sources */,
 				1FB3EB25132BA02C00ACC453 /* CPTestEvaluatorDelegate.m in Sources */,
+				1FB3EB2D132BB2F200ACC453 /* CPLR1Parser.m in Sources */,
+				1FB3EB31132BB31700ACC453 /* CPLR1Item.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
