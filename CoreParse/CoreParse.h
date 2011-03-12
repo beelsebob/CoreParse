@@ -31,5 +31,5 @@
 #import "CPGrammar.h"
 
 #import "CPParser.h"
-#import "CPRecursiveDescentParser.h"
 #import "CPSLRParser.h"
+#import "CPLR1Parser.h"
