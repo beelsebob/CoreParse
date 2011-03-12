@@ -40,9 +40,15 @@
     [super dealloc];
 }
 
-- (void)setAction:(CPShiftReduceAction *)action forState:(NSUInteger)state tokenName:(NSString *)token
+- (BOOL)setAction:(CPShiftReduceAction *)action forState:(NSUInteger)state tokenName:(NSString *)token
 {
-    [(NSMutableDictionary *)[table objectAtIndex:state] setObject:action forKey:token];
+    NSMutableDictionary *row = [table objectAtIndex:state];
+    if (nil != [row objectForKey:token] && ![[row objectForKey:token] isEqual:action])
+    {
+        return NO;
+    }
+    [row setObject:action forKey:token];
+    return YES;
 }
 
 - (CPShiftReduceAction *)actionForState:(NSUInteger)state token:(CPToken *)token

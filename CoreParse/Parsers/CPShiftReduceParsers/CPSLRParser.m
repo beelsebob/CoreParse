@@ -45,21 +45,33 @@
                 CPTerminal *nextTerminal = (CPTerminal *)next;
                 NSSet *g = [self gotoWithItems:itemsSet symbol:next underGrammar:aug];
                 NSUInteger ix = [items indexOfObject:g];
-                [self.actionTable setAction:[CPShiftReduceAction shiftAction:ix] forState:idx tokenName:[nextTerminal tokenName]];
+                BOOL success = [self.actionTable setAction:[CPShiftReduceAction shiftAction:ix] forState:idx tokenName:[nextTerminal tokenName]];
+                if (!success)
+                {
+                    return NO;
+                }
             }
             else if (nil == next)
             {
                 if ([[[item rule] name] isEqualToString:@"s'"])
                 {
-                    [self.actionTable setAction:[CPShiftReduceAction acceptAction] forState:idx tokenName:@"EOF"];
+                    BOOL success = [self.actionTable setAction:[CPShiftReduceAction acceptAction] forState:idx tokenName:@"EOF"];
+                    if (!success)
+                    {
+                        return NO;
+                    }
                 }
                 else
                 {
                     NSSet *follow = [aug follow:[[item rule] name]];
-                    [follow enumerateObjectsUsingBlock:^(id f, BOOL *fStop)
-                     {
-                         [self.actionTable setAction:[CPShiftReduceAction reduceAction:[item rule]] forState:idx tokenName:(NSString *)f];
-                     }];
+                    for (NSString *f in follow)
+                    {
+                        BOOL success = [self.actionTable setAction:[CPShiftReduceAction reduceAction:[item rule]] forState:idx tokenName:f];
+                        if (!success)
+                        {
+                            return NO;
+                        }
+                    }
                 }
             }
         }
@@ -74,7 +86,11 @@
         {
             NSSet *g = [self gotoWithItems:itemsSet symbol:[CPNonTerminal nonTerminalWithName:nonTerminalName] underGrammar:aug];
             NSUInteger gotoIndex = [items indexOfObject:g];
-            [self.gotoTable setGoto:gotoIndex forState:idx nonTerminalNamed:nonTerminalName];
+            BOOL success = [self.gotoTable setGoto:gotoIndex forState:idx nonTerminalNamed:nonTerminalName];
+            if (!success)
+            {
+                return NO;
+            }
         }
         idx++;
     }

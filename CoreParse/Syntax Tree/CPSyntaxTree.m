@@ -51,6 +51,16 @@
     [super dealloc];
 }
 
+- (BOOL)isEqual:(id)object
+{
+    if ([object isKindOfClass:[CPSyntaxTree class]])
+    {
+        CPSyntaxTree *other = (CPSyntaxTree *)object;
+        return other.rule == self.rule && [other.children isEqual:self.children];
+    }
+    return NO;
+}
+
 - (NSString *)description
 {
     NSMutableString *desc = [NSMutableString stringWithString:@"("];

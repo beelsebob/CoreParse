@@ -10,7 +10,7 @@
 
 @interface CPLR1Item ()
 
-@property (readwrite,copy) NSString *terminal;
+@property (readwrite,retain) NSString *terminal;
 
 @end
 

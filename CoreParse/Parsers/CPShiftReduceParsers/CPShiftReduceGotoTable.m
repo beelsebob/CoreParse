@@ -38,9 +38,15 @@
     [super dealloc];
 }
 
-- (void)setGoto:(NSUInteger)gotoIndex forState:(NSUInteger)state nonTerminalNamed:(NSString *)nonTerminalName
+- (BOOL)setGoto:(NSUInteger)gotoIndex forState:(NSUInteger)state nonTerminalNamed:(NSString *)nonTerminalName
 {
-    [(NSMutableDictionary *)[table objectAtIndex:state] setObject:[NSNumber numberWithUnsignedInteger:gotoIndex] forKey:nonTerminalName];
+    NSMutableDictionary *row = [table objectAtIndex:state];
+    if (nil != [row objectForKey:nonTerminalName] && [[row objectForKey:nonTerminalName] unsignedIntegerValue] != gotoIndex)
+    {
+        return NO;
+    }
+    [row setObject:[NSNumber numberWithUnsignedInteger:gotoIndex] forKey:nonTerminalName];
+    return YES;
 }
 
 - (NSUInteger)gotoForState:(NSUInteger)state rule:(CPRule *)rule

@@ -14,7 +14,7 @@
 @interface CPLR1Item : CPItem
 {}
 
-@property (readonly,copy) CPTerminal *terminal;
+@property (readonly,retain) CPTerminal *terminal;
 
 + (id)lr1ItemWithRule:(CPRule *)rule position:(NSUInteger)position terminal:(CPTerminal *)terminal;
 - (id)initWithRule:(CPRule *)rule position:(NSUInteger)position terminal:(CPTerminal *)terminal;

@@ -116,6 +116,25 @@ ActionDetails;
     return details.reductionRule;
 }
 
+- (BOOL)isEqual:(id)object
+{
+    if ([object isKindOfClass:[CPShiftReduceAction class]] && ((CPShiftReduceAction *)object)->type == type)
+    {
+        CPShiftReduceAction *other = (CPShiftReduceAction *)object;
+        switch (type)
+        {
+            case kActionTypeShift:
+                return [other newState] == details.shift;
+            case kActionTypeReduce:
+                return [other reductionRule] == details.reductionRule;
+            case kActionTypeAccept:
+                return YES;
+        }
+    }
+    
+    return NO;
+}
+
 - (NSString *)description
 {
     switch (type)

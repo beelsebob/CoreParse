@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import "CoreParse.h"
+#import "CPShiftReduceParser.h"
+#import "CPShiftReduceParserProtectedMethods.h"
 
-@interface CPLR1Parser : CPParser
+@interface CPLR1Parser : CPShiftReduceParser
 {}
 
 @end
