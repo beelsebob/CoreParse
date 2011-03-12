@@ -20,6 +20,7 @@
 - (id)initWithRule:(CPRule *)rule position:(NSUInteger)position;
 
 - (id)nextSymbol;
+- (NSArray *)followingSymbols;
 
 - (id)itemByMovingDotRight;
 

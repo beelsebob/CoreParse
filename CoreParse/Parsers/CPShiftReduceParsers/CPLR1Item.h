@@ -9,13 +9,14 @@
 #import <Foundation/Foundation.h>
 
 #import "CPItem.h"
+#import "CPTerminal.h"
 
 @interface CPLR1Item : CPItem
 {}
 
-@property (readonly,copy) NSString *terminalName;
+@property (readonly,copy) CPTerminal *terminal;
 
-+ (id)lr1ItemWithRule:(CPRule *)rule position:(NSUInteger)position terminalName:(NSString *)terminalName;
-- (id)initWithRule:(CPRule *)rule position:(NSUInteger)position terminalName:(NSString *)terminalName;
++ (id)lr1ItemWithRule:(CPRule *)rule position:(NSUInteger)position terminal:(CPTerminal *)terminal;
+- (id)initWithRule:(CPRule *)rule position:(NSUInteger)position terminal:(CPTerminal *)terminal;
 
 @end

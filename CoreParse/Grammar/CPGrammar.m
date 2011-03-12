@@ -13,6 +13,8 @@
 
 @property (readwrite,copy) NSArray *rules;
 
+- (NSSet *)firstSymbol:(NSObject *)obj;
+
 @end
 
 @implementation CPGrammar
@@ -167,25 +169,12 @@
               {
                   if (idx + 1 < numElements)
                   {
-                      NSSet *first = [self first:[rightHandSide objectAtIndex:idx+1]];
-                      NSMutableSet *firstMinusEmpty = [[first mutableCopy] autorelease];
-                      [firstMinusEmpty minusSet:[NSSet setWithObject:@""]];
+                      NSSet *first = [self first:[rightHandSide subarrayWithRange:NSMakeRange(idx+1, [rightHandSide count] - idx - 1)]];
+                      NSSet *firstMinusEmpty = [first objectsPassingTest:^ BOOL (id fobj, BOOL *fstop)
+                                                {
+                                                    return ![obj isEqual:@""];
+                                                }];
                       [f unionSet:firstMinusEmpty];
-                      if ([first count] != [firstMinusEmpty count])
-                      {
-                          BOOL allEmpty = YES;
-                          for (NSUInteger newIdx = idx+2; newIdx < numElements && allEmpty; newIdx++)
-                          {
-                              if (nil == [[self first:[rightHandSide objectAtIndex:idx+1]] member:@""])
-                              {
-                                  allEmpty = NO;
-                              }
-                          }
-                          if (allEmpty && ![[rule name] isEqualToString:name])
-                          {
-                              [f unionSet:[self follow:[rule name]]];
-                          }
-                      }
                   }
                   else if (![[rule name] isEqualToString:name])
                   {
@@ -198,7 +187,24 @@
     return f;
 }
 
-- (NSSet *)first:(NSObject *)obj
+- (NSSet *)first:(NSArray *)symbols
+{
+    NSMutableSet *f = [NSMutableSet set];
+    
+    for (NSObject *symbol in symbols)
+    {
+        NSSet *f1 = [self firstSymbol:symbol];
+        [f unionSet:f1];
+        if (nil == [f1 member:@""])
+        {
+            break;
+        }
+    }
+    
+    return f;
+}
+
+- (NSSet *)firstSymbol:(NSObject *)obj
 {
     if ([obj isKindOfClass:[CPTerminal class]])
     {
@@ -223,7 +229,7 @@
                 BOOL allCanBeEmpty = YES;
                 for (NSUInteger element = 0; element < numElements && allCanBeEmpty; element++)
                 {
-                    NSSet *f1 = [self first:[rhs objectAtIndex:element]];
+                    NSSet *f1 = [self firstSymbol:[rhs objectAtIndex:element]];
                     [f unionSet:f1];
                     if (nil == [f1 member:@""])
                     {

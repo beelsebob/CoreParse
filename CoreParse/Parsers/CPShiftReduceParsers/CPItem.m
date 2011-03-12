@@ -63,6 +63,12 @@
     }
 }
 
+- (NSArray *)followingSymbols
+{
+    NSArray *rse = rule.rightHandSideElements;
+    return [rse subarrayWithRange:NSMakeRange(position, [rse count] - position)];
+}
+
 - (id)itemByMovingDotRight
 {
     CPItem *c = [self copy];

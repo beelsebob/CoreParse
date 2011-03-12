@@ -10,26 +10,26 @@
 
 @interface CPLR1Item ()
 
-@property (readwrite,copy) NSString *terminalName;
+@property (readwrite,copy) NSString *terminal;
 
 @end
 
 @implementation CPLR1Item
 
-@synthesize terminalName;
+@synthesize terminal;
 
-+ (id)lr1ItemWithRule:(CPRule *)rule position:(NSUInteger)position terminalName:(NSString *)terminalName
++ (id)lr1ItemWithRule:(CPRule *)rule position:(NSUInteger)position terminal:(CPTerminal *)terminal
 {
-    return [[[self alloc] initWithRule:rule position:position terminalName:terminalName] autorelease];
+    return [[[self alloc] initWithRule:rule position:position terminal:terminal] autorelease];
 }
 
-- (id)initWithRule:(CPRule *)rule position:(NSUInteger)position terminalName:(NSString *)initTerminalName
+- (id)initWithRule:(CPRule *)rule position:(NSUInteger)position terminal:(CPTerminal *)initTerminal
 {
     self = [super initWithRule:rule position:position];
     
     if (nil != self)
     {
-        self.terminalName = initTerminalName;
+        self.terminal = initTerminal;
     }
     
     return self;
@@ -37,24 +37,24 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    return [[CPLR1Item allocWithZone:zone] initWithRule:self.rule position:self.position terminalName:self.terminalName];
+    return [[CPLR1Item allocWithZone:zone] initWithRule:self.rule position:self.position terminal:self.terminal];
 }
 
 - (void)dealloc
 {
-    [terminalName release];
+    [terminal release];
     
     [super dealloc];
 }
 
 - (BOOL)isEqual:(id)object
 {
-    return [object isKindOfClass:[CPLR1Item class]] && [super isEqual:object] && [((CPLR1Item *)object).terminalName isEqualToString:self.terminalName];
+    return [object isKindOfClass:[CPLR1Item class]] && [super isEqual:object] && [((CPLR1Item *)object).terminal isEqual:self.terminal];
 }
 
 - (NSUInteger)hash
 {
-    return [self.rule hash] << 16 + [self.terminalName hash] + self.position;
+    return [self.rule hash] << 16 + [self.terminal hash] + self.position;
 }
 
 - (NSString *)description
@@ -75,7 +75,7 @@
         [desc appendFormat:@"• "];
     }
     
-    [desc appendFormat:@", %@", self.terminalName];
+    [desc appendFormat:@", %@", [self.terminal tokenName]];
     
     return desc;
 }

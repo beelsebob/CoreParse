@@ -114,10 +114,10 @@
 
 - (NSSet *)gotoWithItems:(NSSet *)i symbol:(NSObject *)symbol underGrammar:(CPGrammar *)g
 {
-    return [self closure:[[i filteredSetUsingPredicate:[NSPredicate predicateWithBlock:^ BOOL (id obj, NSDictionary *substitutions)
-                                                        {
-                                                            return [symbol isEqual:[obj nextSymbol]];
-                                                        }]]
+    return [self closure:[[i objectsPassingTest:^ BOOL (id obj, BOOL *stop)
+                           {
+                               return [symbol isEqual:[obj nextSymbol]];
+                           }]
                           map:^ id (id obj)
                           {
                               return [(CPItem *)obj itemByMovingDotRight];
