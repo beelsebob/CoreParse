@@ -138,7 +138,8 @@
                           map:^ id (CPItem *item)
                           {
                               return [item itemByMovingDotRight];
-                          }] underGrammar:g];
+                          }]
+            underGrammar:g];
 }
 
 - (NSArray *)itemsForGrammar:(CPGrammar *)aug

@@ -40,17 +40,7 @@
         for (CPItem *item in itemsSet)
         {
             CPGrammarSymbol *next = [item nextSymbol];
-            if ([next isTerminal])
-            {
-                NSSet *g = [self gotoWithItems:itemsSet symbol:next underGrammar:aug];
-                NSUInteger ix = [items indexOfObject:g];
-                BOOL success = [[self actionTable] setAction:[CPShiftReduceAction shiftAction:ix] forState:idx name:[next name]];
-                if (!success)
-                {
-                    return NO;
-                }
-            }
-            else if (nil == next)
+            if (nil == next)
             {
                 if ([[[item rule] name] isEqualToString:@"s'"])
                 {
@@ -71,6 +61,16 @@
                             return NO;
                         }
                     }
+                }
+            }
+            else if ([next isTerminal])
+            {
+                NSSet *g = [self gotoWithItems:itemsSet symbol:next underGrammar:aug];
+                NSUInteger ix = [items indexOfObject:g];
+                BOOL success = [[self actionTable] setAction:[CPShiftReduceAction shiftAction:ix] forState:idx name:[next name]];
+                if (!success)
+                {
+                    return NO;
                 }
             }
         }
@@ -136,7 +136,8 @@
                           map:^ id (CPItem *item)
                           {
                               return [item itemByMovingDotRight];
-                          }] underGrammar:g];
+                          }]
+            underGrammar:g];
 }
 
 - (NSArray *)itemsForGrammar:(CPGrammar *)aug
@@ -151,15 +152,15 @@
         NSSet *itemSet = [processingQueue objectAtIndex:0];
         NSSet *validNexts = [itemSet map:^ id (CPItem *item) { return [item nextSymbol]; }];
         
-        [validNexts enumerateObjectsUsingBlock:^(CPGrammarSymbol *s, BOOL *st)
-         {
-             NSSet *g = [self gotoWithItems:itemSet symbol:s underGrammar:aug];
-             if (![c containsObject:g])
-             {
-                 [processingQueue addObject:g];
-                 [c addObject:g];
-             }
-         }];
+        for (CPGrammarSymbol *s in validNexts)
+        {
+            NSSet *g = [self gotoWithItems:itemSet symbol:s underGrammar:aug];
+            if (![c containsObject:g])
+            {
+                [processingQueue addObject:g];
+                [c addObject:g];
+            }
+        }
         
         [processingQueue removeObjectAtIndex:0];
     }
