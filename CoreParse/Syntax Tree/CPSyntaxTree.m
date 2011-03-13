@@ -51,6 +51,11 @@
     [super dealloc];
 }
 
+- (NSUInteger)hash
+{
+    return [[self rule] hash];
+}
+
 - (BOOL)isEqual:(id)object
 {
     if ([object isKindOfClass:[CPSyntaxTree class]])
@@ -64,10 +69,10 @@
 - (NSString *)description
 {
     NSMutableString *desc = [NSMutableString stringWithString:@"("];
-    [children enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-     {
-         [desc appendFormat:@"%@ ", obj];
-     }];
+    for (id obj in children)
+    {
+        [desc appendFormat:@"%@ ", obj];
+    }
     [desc replaceCharactersInRange:NSMakeRange([desc length] - 1, 1) withString:@")"];
     return desc;
 }

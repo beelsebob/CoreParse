@@ -129,6 +129,20 @@
     {
         STFail(@"Failed to tokenise identifiers space correctly",nil);
     }
+    
+    tokeniser = [[[CPTokeniser alloc] init] autorelease];
+    [tokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniserWithInitialCharacters:[NSCharacterSet characterSetWithCharactersInString:@"abc"]
+                                                                               identifierCharacters:[NSCharacterSet characterSetWithCharactersInString:@"def"]]];
+    [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
+    tokenStream = [tokeniser tokenise:@"adef abdef"];
+    
+    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:
+                                                                    [CPIdentifierToken tokenWithIdentifier:@"adef"], [CPWhiteSpaceToken whiteSpace:@" "],
+                                                                    [CPIdentifierToken tokenWithIdentifier:@"a"], [CPIdentifierToken tokenWithIdentifier:@"bdef"],
+                                                                    [CPEOFToken eof], nil]]])
+    {
+        STFail(@"Incorrectly tokenised identifiers", nil);
+    }
 }
 
 - (void)testQuotedTokeniser

@@ -10,7 +10,6 @@
 
 @interface CPKeywordRecogniser ()
 {
-@private
     NSString *keyword;
 }
 

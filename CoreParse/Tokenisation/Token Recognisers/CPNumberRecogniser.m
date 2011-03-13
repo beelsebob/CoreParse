@@ -61,8 +61,9 @@
         BOOL success = [scanner scanDouble:&d];
         if (success && ![self recognisesInts])
         {
-            NSString *substring = [tokenString substringWithRange:NSMakeRange(*tokenPosition, [scanner scanLocation] - *tokenPosition)];
-            if ([substring rangeOfString:@"."].location == NSNotFound && [substring rangeOfString:@"e"].location)
+            NSRange numberRange = NSMakeRange(*tokenPosition, [scanner scanLocation] - *tokenPosition);
+            if ([tokenString rangeOfString:@"." options:0x0 range:numberRange].location == NSNotFound &&
+                [tokenString rangeOfString:@"e" options:0x0 range:numberRange].location == NSNotFound)
             {
                 success = NO;
             }

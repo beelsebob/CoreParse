@@ -56,20 +56,25 @@
                                                                          @"abcdefghijklmnopqrstuvwxyz"
                                                                          @"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                                                                          @"_-1234567890"] : [self identifierCharacters];
-    NSScanner *scanner = [NSScanner scannerWithString:tokenString];
-    [scanner setScanLocation:*tokenPosition];
-    [scanner setCharactersToBeSkipped:nil];
-    NSString *identifierString;
-    NSString *identifierEndString;
-    BOOL success = [scanner scanCharactersFromSet:identifierStartCharacters intoString:&identifierString];
-    if (success)
+    
+    unichar firstChar = [tokenString characterAtIndex:*tokenPosition];
+    if ([identifierStartCharacters characterIsMember:firstChar])
     {
-        success = [scanner scanCharactersFromSet:idCharacters intoString:&identifierEndString];
+        NSString *identifierString;
+        NSScanner *scanner = [NSScanner scannerWithString:tokenString];
+        [scanner setScanLocation:*tokenPosition + 1];
+        [scanner setCharactersToBeSkipped:nil];
+        BOOL success = [scanner scanUpToCharactersFromSet:[idCharacters invertedSet] intoString:&identifierString];
         if (success)
         {
-            identifierString = [identifierString stringByAppendingString:identifierEndString];
+            identifierString = [[[[NSString alloc] initWithCharacters:&firstChar length:1] autorelease] stringByAppendingString:identifierString];
+            *tokenPosition = [scanner scanLocation];
         }
-        *tokenPosition = [scanner scanLocation];
+        else
+        {
+            identifierString = [[[NSString alloc] initWithCharacters:&firstChar length:1] autorelease];
+            *tokenPosition += 1;
+        }
         return [CPIdentifierToken tokenWithIdentifier:identifierString];
     }
     
