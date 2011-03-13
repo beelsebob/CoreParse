@@ -16,6 +16,11 @@
     return @"";
 }
 
+- (NSUInteger)hash
+{
+    return [[self name] hash];
+}
+
 - (BOOL)isEqual:(id)object
 {
     if ([object isKindOfClass:[CPToken class]])

@@ -12,7 +12,7 @@
 #import "CPTokenStream.h"
 #import "CPKeywordRecogniser.h"
 #import "CPNumberRecogniser.h"
-#import "CPWhiteSpaceRecogniser.h"
+#import "CPWhitespaceRecogniser.h"
 #import "CPQuotedRecogniser.h"
 #import "CPIdentifierRecogniser.h"
 #import "CPSLRParser.h"

@@ -63,6 +63,11 @@
     return name;
 }
 
+- (NSUInteger)hash
+{
+    return [[self content] hash];
+}
+
 - (BOOL)isEqual:(id)object
 {
     if ([object isKindOfClass:[CPQuotedToken class]])

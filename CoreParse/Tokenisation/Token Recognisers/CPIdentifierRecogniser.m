@@ -64,7 +64,7 @@
         NSScanner *scanner = [NSScanner scannerWithString:tokenString];
         [scanner setScanLocation:*tokenPosition + 1];
         [scanner setCharactersToBeSkipped:nil];
-        BOOL success = [scanner scanUpToCharactersFromSet:[idCharacters invertedSet] intoString:&identifierString];
+        BOOL success = [scanner scanCharactersFromSet:idCharacters intoString:&identifierString];
         if (success)
         {
             identifierString = [[[[NSString alloc] initWithCharacters:&firstChar length:1] autorelease] stringByAppendingString:identifierString];

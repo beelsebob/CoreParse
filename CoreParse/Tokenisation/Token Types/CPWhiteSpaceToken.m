@@ -53,6 +53,11 @@
     return @"Whitespace";
 }
 
+- (NSUInteger)hash
+{
+    return 1;
+}
+
 - (BOOL)isEqual:(id)object
 {
     return [object isKindOfClass:[CPWhiteSpaceToken class]];

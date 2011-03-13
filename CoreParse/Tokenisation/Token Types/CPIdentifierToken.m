@@ -54,6 +54,11 @@
     return @"Identifier";
 }
 
+- (NSUInteger)hash
+{
+    return [[self identifier] hash];
+}
+
 - (BOOL)isEqual:(id)object
 {
     if ([object isKindOfClass:[CPIdentifierToken class]])

@@ -50,6 +50,11 @@
     return [self keyword];
 }
 
+- (NSUInteger)hash
+{
+    return [[self keyword] hash];
+}
+
 - (BOOL)isEqual:(id)object
 {
     if ([object isKindOfClass:[CPKeywordToken class]])

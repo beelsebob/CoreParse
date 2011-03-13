@@ -26,6 +26,11 @@
     return @"EOF";
 }
 
+- (NSUInteger)hash
+{
+    return 0;
+}
+
 - (BOOL)isEqual:(id)object
 {
     return [object isKindOfClass:[CPEOFToken class]];

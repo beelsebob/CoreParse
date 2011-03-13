@@ -54,6 +54,11 @@
     return @"Number";
 }
 
+- (NSUInteger)hash
+{
+    return [[self number] hash];
+}
+
 - (BOOL)isEqual:(id)object
 {
     if ([object isKindOfClass:[CPNumberToken class]])
