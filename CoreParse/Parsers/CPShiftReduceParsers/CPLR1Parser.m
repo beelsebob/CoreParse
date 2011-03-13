@@ -156,15 +156,15 @@
                                  return [item nextSymbol];
                              }];
         
-        [validNexts enumerateObjectsUsingBlock:^(CPGrammarSymbol *s, BOOL *st)
-         {
-             NSSet *g = [self gotoWithItems:itemSet symbol:s underGrammar:aug];
-             if (![c containsObject:g])
-             {
-                 [processingQueue addObject:g];
-                 [c addObject:g];
-             }
-         }];
+        for (CPGrammarSymbol *s in validNexts)
+        {
+            NSSet *g = [self gotoWithItems:itemSet symbol:s underGrammar:aug];
+            if (![c containsObject:g])
+            {
+                [processingQueue addObject:g];
+                [c addObject:g];
+            }
+        }
         
         [processingQueue removeObjectAtIndex:0];
     }
