@@ -38,17 +38,7 @@
         for (CPLR1Item *item in itemsSet)
         {
             CPGrammarSymbol *next = [item nextSymbol];
-            if ([next isTerminal])
-            {
-                NSSet *g = [self gotoWithItems:itemsSet symbol:next underGrammar:aug];
-                NSUInteger ix = [items indexOfObject:g];
-                BOOL success = [[self actionTable] setAction:[CPShiftReduceAction shiftAction:ix] forState:idx name:[next name]];
-                if (!success)
-                {
-                    return NO;
-                }
-            }
-            else if (nil == next)
+            if (nil == next)
             {
                 if ([[[item rule] name] isEqualToString:@"s'"])
                 {
@@ -65,6 +55,16 @@
                     {
                         return NO;
                     }
+                }
+            }
+            else if ([next isTerminal])
+            {
+                NSSet *g = [self gotoWithItems:itemsSet symbol:next underGrammar:aug];
+                NSUInteger ix = [items indexOfObject:g];
+                BOOL success = [[self actionTable] setAction:[CPShiftReduceAction shiftAction:ix] forState:idx name:[next name]];
+                if (!success)
+                {
+                    return NO;
                 }
             }
         }
