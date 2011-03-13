@@ -17,6 +17,9 @@ typedef NSArray *(^TokenRewriter)(CPToken *token);
 
 @property (readwrite,copy) TokenRewriter tokenRewriter;
 
++ (id)tokenStreamWithTokens:(NSArray *)tokens;
+- (id)initWithTokens:(NSArray *)tokens;
+
 - (BOOL)hasToken;
 
 - (CPToken *)peekToken;

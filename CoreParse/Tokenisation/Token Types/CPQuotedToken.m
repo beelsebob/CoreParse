@@ -65,7 +65,12 @@
 
 - (BOOL)isEqual:(id)object
 {
-    return [object isKindOfClass:[CPQuotedToken class]] && [((CPQuotedToken *)object).content isEqualToString:self.content] && [((CPQuotedToken *)object).name isEqualToString:self.name] && [((CPQuotedToken *)object).quoteType isEqualToString:self.quoteType];
+    if ([object isKindOfClass:[CPQuotedToken class]])
+    {
+        CPQuotedToken *other = (CPQuotedToken *)object;
+        return [[other content] isEqualToString:[self content]] && [[other name] isEqualToString:[self name]] && [[other quoteType] isEqualToString:[self quoteType]];
+    }
+    return NO;
 }
 
 @end

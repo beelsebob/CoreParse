@@ -52,7 +52,13 @@
 
 - (BOOL)isEqual:(id)object
 {
-    return [object isKindOfClass:[CPKeywordToken class]] && [((CPKeywordToken *)object).keyword isEqualToString:self.keyword];
+    if ([object isKindOfClass:[CPKeywordToken class]])
+    {
+        CPKeywordToken *other = (CPKeywordToken *)object;
+        return [[other keyword] isEqualToString:[self keyword]];
+    }
+    
+    return NO;
 }
 
 @end

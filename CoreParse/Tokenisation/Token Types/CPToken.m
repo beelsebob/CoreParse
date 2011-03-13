@@ -16,4 +16,14 @@
     return @"";
 }
 
+- (BOOL)isEqual:(id)object
+{
+    if ([object isKindOfClass:[CPToken class]])
+    {
+        CPToken *other = (CPToken *)object;
+        return [[self name] isEqualToString:[other name]];
+    }
+    return NO;
+}
+
 @end

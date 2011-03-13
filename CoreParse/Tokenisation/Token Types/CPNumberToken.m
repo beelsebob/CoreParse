@@ -56,7 +56,13 @@
 
 - (BOOL)isEqual:(id)object
 {
-    return [object isKindOfClass:[CPNumberToken class]] && [((CPNumberToken *)object).number isEqualToNumber:self.number];
+    if ([object isKindOfClass:[CPNumberToken class]])
+    {
+        CPNumberToken *other = (CPNumberToken *)object;
+        return [[other number] isEqualToNumber:[self number]];
+    }
+    
+    return NO;
 }
 
 @end

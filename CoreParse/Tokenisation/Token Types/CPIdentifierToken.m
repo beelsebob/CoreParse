@@ -56,7 +56,12 @@
 
 - (BOOL)isEqual:(id)object
 {
-    return [object isKindOfClass:[CPIdentifierToken class]] && [((CPIdentifierToken *)object).identifier isEqualToString:self.identifier];
+    if ([object isKindOfClass:[CPIdentifierToken class]])
+    {
+        CPIdentifierToken *other = (CPIdentifierToken *)object;
+        return [[other identifier] isEqualToString:[self identifier]];
+    }
+    return NO;
 }
 
 @end

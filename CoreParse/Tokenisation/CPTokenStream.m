@@ -42,6 +42,23 @@
     }
 }
 
++ (id)tokenStreamWithTokens:(NSArray *)tokens
+{
+    return [[[self alloc] initWithTokens:tokens] autorelease];
+}
+
+- (id)initWithTokens:(NSArray *)initTokens
+{
+    self = [self init];
+    
+    if (nil != self)
+    {
+        self.tokens = [[initTokens mutableCopy] autorelease];
+    }
+    
+    return self;
+}
+
 - (id)init
 {
     self = [super init];
@@ -140,6 +157,16 @@
         [self filterTokens];
         return [[rewrittenTokens copy] autorelease];
     }
+}
+
+- (BOOL)isEqual:(id)object
+{
+    if ([object isKindOfClass:[CPTokenStream class]])
+    {
+        CPTokenStream *other = (CPTokenStream *)object;
+        return [[other peekAllRemainingTokens] isEqualToArray:[self peekAllRemainingTokens]];
+    }
+    return NO;
 }
 
 @end
