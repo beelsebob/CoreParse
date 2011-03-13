@@ -111,7 +111,7 @@
             [[g rulesForNonTerminalWithName:[nextSymbol name]] enumerateObjectsUsingBlock:^(CPRule *rule, NSUInteger ix, BOOL *s)
              {
                  CPItem *newItem = [CPItem itemWithRule:rule position:0];
-                 if (nil == [j member:newItem])
+                 if (![j containsObject:newItem])
                  {
                      [processingQueue addObject:newItem];
                      [j addObject:newItem];

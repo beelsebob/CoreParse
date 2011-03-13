@@ -19,8 +19,8 @@
 + (id)grammarWithStart:(NSString *)start rules:(NSArray *)rules;
 - (id)initWithStart:(NSString *)start rules:(NSArray *)rules;
 
-+ (id)grammarWithStart:(NSString *)start bnf:(NSString *)bnf;
-- (id)initWithStart:(NSString *)start bnf:(NSString *)bnf;
++ (id)grammarWithStart:(NSString *)start backusNaurForm:(NSString *)bnf;
+- (id)initWithStart:(NSString *)start backusNaurForm:(NSString *)bnf;
 
 - (NSSet *)allRules;
 - (NSArray *)allNonTerminalNames;

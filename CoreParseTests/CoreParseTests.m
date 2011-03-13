@@ -401,7 +401,7 @@
         @"3 t ::= <t> \"*\" <f>;"
         @"4 f ::= \"Number\";"
         @"5 f ::= \"(\" <e> \")\";";
-    CPGrammar *grammar1 = [CPGrammar grammarWithStart:@"e" bnf:testGrammar];
+    CPGrammar *grammar1 = [CPGrammar grammarWithStart:@"e" backusNaurForm:testGrammar];
     
     if (![grammar isEqual:grammar1])
     {
@@ -466,7 +466,7 @@
     [tokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniserWithInitialCharacters:initialIdCharacters identifierCharacters:identifierCharacters]];
     
     CPGrammar *grammar = [CPGrammar grammarWithStart:@"ruleset"
-                                                 bnf:
+                                      backusNaurForm:
                           @"ruleset      ::= <rule> | <ruleset> <rule>;"
                           @"rule         ::= <selectors> <declarations> | <import>;"
                           @"import       ::= \"@import\" \"url\" \"(\" \"String\" \")\" \"Identifier\";"

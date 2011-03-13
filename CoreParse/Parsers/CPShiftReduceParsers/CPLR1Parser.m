@@ -112,7 +112,7 @@
                 for (NSString *o in firstAfterNext)
                 {
                     CPLR1Item *newItem = [CPLR1Item lr1ItemWithRule:r position:0 terminal:[CPGrammarSymbol terminalWithName:o]];
-                    if (nil == [j member:newItem])
+                    if (![j containsObject:newItem])
                     {
                         [processingQueue addObject:newItem];
                         [j addObject:newItem];

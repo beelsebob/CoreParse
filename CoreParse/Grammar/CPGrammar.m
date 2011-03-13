@@ -113,12 +113,12 @@
 
 - (NSArray *)rules
 {
-    __block NSMutableArray *rs = [NSMutableArray arrayWithCapacity:[rules count]];
+    NSMutableArray *rs = [NSMutableArray arrayWithCapacity:[rules count]];
     
-    [[rules allValues] enumerateObjectsUsingBlock:^(NSArray *arr, NSUInteger idx, BOOL *stop)
-     {
+    for (NSArray *arr in [rules allValues])
+    {
          [rs addObjectsFromArray:arr];
-     }];
+    }
     
     return rs;
 }
@@ -155,12 +155,12 @@
     return self;
 }
 
-+ (id)grammarWithStart:(NSString *)start bnf:(NSString *)bnf
++ (id)grammarWithStart:(NSString *)start backusNaurForm:(NSString *)bnf
 {
-    return [[[self alloc] initWithStart:start bnf:bnf] autorelease];
+    return [[[self alloc] initWithStart:start backusNaurForm:bnf] autorelease];
 }
 
-- (id)initWithStart:(NSString *)initStart bnf:(NSString *)bnf
+- (id)initWithStart:(NSString *)initStart backusNaurForm:(NSString *)bnf
 {
     CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"::="]];
@@ -212,9 +212,6 @@
     [parser setDelegate:[[[CPBNFParserDelegate alloc] init] autorelease]];
     
     NSArray *initRules = [parser parse:tokenStream];
-    
-    NSLog(@"%@", initRules);
-    
     return [self initWithStart:initStart rules:initRules];
 }
 
@@ -254,12 +251,7 @@
 
 - (NSArray *)allNonTerminalNames
 {
-    NSMutableArray *nonTerminals = [NSMutableArray arrayWithCapacity:[rules count]];
-    [rules enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop)
-     {
-         [nonTerminals addObject:key];
-     }];
-    return nonTerminals;
+    return [rules allKeys];
 }
 
 - (void)addRule:(CPRule *)rule
@@ -307,30 +299,30 @@
 - (NSSet *)follow:(NSString *)name
 {
     NSMutableSet *f = [NSMutableSet setWithObject:@"EOF"];
-    [[self allRules] enumerateObjectsUsingBlock:^(CPRule *rule, BOOL *stop)
-     {
-         NSArray *rightHandSide = [rule rightHandSideElements];
-         NSUInteger numElements = [rightHandSide count];
-         [rightHandSide enumerateObjectsUsingBlock:^(CPGrammarSymbol *rhsE, NSUInteger idx, BOOL *s)
-          {
-              if (![rhsE isTerminal] && [[rhsE name] isEqualToString:name])
-              {
-                  if (idx + 1 < numElements)
-                  {
-                      NSSet *first = [self first:[rightHandSide subarrayWithRange:NSMakeRange(idx+1, [rightHandSide count] - idx - 1)]];
-                      NSSet *firstMinusEmpty = [first objectsPassingTest:^ BOOL (NSString *symbolName, BOOL *fstop)
-                                                {
-                                                    return ![symbolName isEqualToString:@""];
-                                                }];
-                      [f unionSet:firstMinusEmpty];
-                  }
-                  else if (![[rule name] isEqualToString:name])
-                  {
-                      [f unionSet:[self follow:[rule name]]];
-                  }
-              }
-          }];
-     }];
+    for (CPRule *rule in [self allRules])
+    {
+        NSArray *rightHandSide = [rule rightHandSideElements];
+        NSUInteger numElements = [rightHandSide count];
+        [rightHandSide enumerateObjectsUsingBlock:^(CPGrammarSymbol *rhsE, NSUInteger idx, BOOL *s)
+         {
+             if (![rhsE isTerminal] && [[rhsE name] isEqualToString:name])
+             {
+                 if (idx + 1 < numElements)
+                 {
+                     NSSet *first = [self first:[rightHandSide subarrayWithRange:NSMakeRange(idx+1, [rightHandSide count] - idx - 1)]];
+                     NSSet *firstMinusEmpty = [first objectsPassingTest:^ BOOL (NSString *symbolName, BOOL *fstop)
+                                               {
+                                                   return ![symbolName isEqualToString:@""];
+                                               }];
+                     [f unionSet:firstMinusEmpty];
+                 }
+                 else if (![[rule name] isEqualToString:name])
+                 {
+                     [f unionSet:[self follow:[rule name]]];
+                 }
+             }
+         }];
+    }
     
     return f;
 }
@@ -343,7 +335,7 @@
     {
         NSSet *f1 = [self firstSymbol:symbol];
         [f unionSet:f1];
-        if (nil == [f1 member:@""])
+        if (![f1 containsObject:@""])
         {
             break;
         }
@@ -381,7 +373,7 @@
                     {
                         NSSet *f1 = [self firstSymbol:symbol];
                         [f unionSet:f1];
-                        if (nil == [f1 member:@""])
+                        if (![f1 containsObject:@""])
                         {
                             allCanBeEmpty = NO;
                         }
