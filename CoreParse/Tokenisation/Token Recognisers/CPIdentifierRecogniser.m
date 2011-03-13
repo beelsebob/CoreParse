@@ -12,21 +12,50 @@
 
 @implementation CPIdentifierRecogniser
 
+@synthesize initialCharacters;
+@synthesize identifierCharacters;
+
 + (id)identifierRecogniser
 {
-    return [[[CPIdentifierRecogniser alloc] init] autorelease];
+    return [[[CPIdentifierRecogniser alloc] initWithInitialCharacters:nil identifierCharacters:nil] autorelease];
+}
+
++ (id)identifierRecogniserWithInitialCharacters:(NSCharacterSet *)initialCharacters identifierCharacters:(NSCharacterSet *)identifierCharacters
+{
+    return [[[CPIdentifierRecogniser alloc] initWithInitialCharacters:initialCharacters identifierCharacters:identifierCharacters] autorelease];
+}
+
+- (id)initWithInitialCharacters:(NSCharacterSet *)initInitialCharacters identifierCharacters:(NSCharacterSet *)initIdentifierCharacters
+{
+    self = [super init];
+    
+    if (nil != self)
+    {
+        self.initialCharacters = initInitialCharacters;
+        self.identifierCharacters = initIdentifierCharacters;
+    }
+    
+    return self;
+}
+
+- (void)dealloc
+{
+    [initialCharacters release];
+    [identifierCharacters release];
+    
+    [super dealloc];
 }
 
 - (CPToken *)recogniseTokenInString:(NSString *)tokenString currentTokenPosition:(NSUInteger *)tokenPosition
 {
-    NSCharacterSet *identifierStartCharacters = [NSCharacterSet characterSetWithCharactersInString:
-                                                 @"abcdefghijklmnopqrstuvwxyz"
-                                                 @"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                                 @"_-"];
-    NSCharacterSet *identifierCharacters = [NSCharacterSet characterSetWithCharactersInString:
-                                            @"abcdefghijklmnopqrstuvwxyz"
-                                            @"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                            @"_-1234567890"];
+    NSCharacterSet *identifierStartCharacters = nil == self.initialCharacters ? [NSCharacterSet characterSetWithCharactersInString:
+                                                                                 @"abcdefghijklmnopqrstuvwxyz"
+                                                                                 @"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                                                                 @"_"] : self.initialCharacters;
+    NSCharacterSet *idCharacters = nil == self.identifierCharacters ? [NSCharacterSet characterSetWithCharactersInString:
+                                                                       @"abcdefghijklmnopqrstuvwxyz"
+                                                                       @"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                                                       @"_-1234567890"] : self.identifierCharacters;
     NSScanner *scanner = [NSScanner scannerWithString:tokenString];
     scanner.scanLocation = *tokenPosition;
     [scanner setCharactersToBeSkipped:nil];
@@ -35,7 +64,7 @@
     BOOL success = [scanner scanCharactersFromSet:identifierStartCharacters intoString:&identifierString];
     if (success)
     {
-        success = [scanner scanCharactersFromSet:identifierCharacters intoString:&identifierEndString];
+        success = [scanner scanCharactersFromSet:idCharacters intoString:&identifierEndString];
         if (success)
         {
             identifierString = [identifierString stringByAppendingString:identifierEndString];

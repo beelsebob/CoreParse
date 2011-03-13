@@ -464,6 +464,10 @@
                                             @"abcdefghijklmnopqrstuvwxyz"
                                             @"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                                             @"0123456789-_"];
+    NSCharacterSet *initialIdCharacters = [NSCharacterSet characterSetWithCharactersInString:
+                                           @"abcdefghijklmnopqrstuvwxyz"
+                                           @"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                           @"_-"];
     CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"node"     invalidFollowingCharacters:identifierCharacters]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"way"      invalidFollowingCharacters:identifierCharacters]];
@@ -499,7 +503,7 @@
     [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"//" endQuote:@"\n" tokenName:@"Comment"]];
     [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapedEndQuote:@"\\'" escapedEscape:@"\\\\" tokenName:@"String"]];
     [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapedEndQuote:@"\\\"" escapedEscape:@"\\\\" tokenName:@"String"]];
-    [tokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniser]];
+    [tokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniserWithInitialCharacters:initialIdCharacters identifierCharacters:identifierCharacters]];
     
     CPGrammar *grammar = [CPGrammar grammarWithStart:@"ruleset"
                                                  bnf:

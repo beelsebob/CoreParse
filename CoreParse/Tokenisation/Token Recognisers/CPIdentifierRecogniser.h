@@ -13,6 +13,11 @@
 @interface CPIdentifierRecogniser : NSObject <CPTokenRecogniser>
 {}
 
+@property (readwrite,retain) NSCharacterSet *initialCharacters;
+@property (readwrite,retain) NSCharacterSet *identifierCharacters;
+
 + (id)identifierRecogniser;
++ (id)identifierRecogniserWithInitialCharacters:(NSCharacterSet *)initialCharacters identifierCharacters:(NSCharacterSet *)identifierCharacters;
+- (id)initWithInitialCharacters:(NSCharacterSet *)initInitialCharacters identifierCharacters:(NSCharacterSet *)initIdentifierCharacters;
 
 @end
