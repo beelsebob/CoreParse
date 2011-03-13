@@ -16,35 +16,22 @@
 
 + (id)nonTerminalWithName:(NSString *)name
 {
-    return [[[self alloc] initWithNonTerminalName:name] autorelease];
-}
-
-- (id)initWithNonTerminalName:(NSString *)initName
-{
-    self = [super init];
-    
-    if (nil != self)
-    {
-        [self setName:initName];
-        [self setTerminal:NO];
-    }
-    
-    return self;
+    return [[[self alloc] initWithName:name isTerminal:NO] autorelease];
 }
 
 + (id)terminalWithName:(NSString *)name
 {
-    return [[[self alloc] initWithTerminalName:name] autorelease];
+    return [[[self alloc] initWithName:name isTerminal:YES] autorelease];
 }
 
-- (id)initWithTerminalName:(NSString *)initName
+- (id)initWithName:(NSString *)initName isTerminal:(BOOL)isTerminal;
 {
     self = [super init];
     
     if (nil != self)
     {
         [self setName:initName];
-        [self setTerminal:YES];
+        [self setTerminal:isTerminal];
     }
     
     return self;
@@ -52,7 +39,7 @@
 
 - (id)init
 {
-    return [self initWithNonTerminalName:@""];
+    return [self initWithName:@"" isTerminal:NO];
 }
 
 - (BOOL)isEqual:(id)object
@@ -60,9 +47,7 @@
     if ([object isKindOfClass:[CPGrammarSymbol class]])
     {
         CPGrammarSymbol *other = (CPGrammarSymbol *)object;
-        BOOL namesEqual    = [[other name] isEqualToString:[self name]];
-        BOOL terminalEqual = [other isTerminal] == [self isTerminal];
-        return namesEqual && terminalEqual;
+        return [other isTerminal] == [self isTerminal] && [[other name] isEqualToString:[self name]];
     }
     return NO;
 }

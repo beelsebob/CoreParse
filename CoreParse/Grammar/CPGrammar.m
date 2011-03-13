@@ -387,14 +387,17 @@
     }
 }
 
+- (NSUInteger)hash
+{
+    return [[self start] hash] << 16 + [[self rules] hash];
+}
+
 - (BOOL)isEqual:(id)object
 {
     if ([object isKindOfClass:[CPGrammar class]])
     {
         CPGrammar *other = (CPGrammar *)object;
-        BOOL startsEqual = [[other start] isEqualToString:[self start]];
-        BOOL rulesEqual  = [[other rules] isEqualToArray:[self rules]];
-        return startsEqual && rulesEqual;
+        return [[other start] isEqualToString:[self start]] && [[other rules] isEqualToArray:[self rules]];
     }
     
     return NO;

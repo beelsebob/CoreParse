@@ -16,9 +16,7 @@
 @property (readwrite, assign, getter=isTerminal) BOOL terminal;
 
 + (id)nonTerminalWithName:(NSString *)name;
-- (id)initWithNonTerminalName:(NSString *)name;
-
 + (id)terminalWithName:(NSString *)name;
-- (id)initWithTerminalName:(NSString *)name;
+- (id)initWithName:(NSString *)name isTerminal:(BOOL)terminal;
 
 @end
