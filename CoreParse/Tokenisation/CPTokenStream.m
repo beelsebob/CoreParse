@@ -9,20 +9,38 @@
 #import "CPTokenStream.h"
 
 @interface CPTokenStream ()
-{
-    NSMutableSet *tokensToIgnore;
-    NSMutableArray *tokens;
-}
 
 @property (readwrite,retain) NSMutableArray *tokens;
+@property (readwrite,retain) NSMutableArray *rewrittenTokens;
 
 - (void)filterTokens;
 
 @end
 
 @implementation CPTokenStream
+{
+    TokenRewriter tokenRewriter;
+}
 
 @synthesize tokens;
+@synthesize rewrittenTokens;
+
+- (TokenRewriter)tokenRewriter
+{
+    return tokenRewriter;
+}
+
+- (void)setTokenRewriter:(TokenRewriter)newTokenRewriter
+{
+    @synchronized(self)
+    {
+        if (tokenRewriter != newTokenRewriter)
+        {
+            Block_release(tokenRewriter);
+            tokenRewriter = Block_copy(newTokenRewriter);
+        }
+    }
+}
 
 - (id)init
 {
@@ -31,7 +49,8 @@
     if (nil != self)
     {
         self.tokens = [NSMutableArray array];
-        tokensToIgnore = [[NSMutableSet alloc] init];
+        self.rewrittenTokens = [NSMutableArray array];
+        self.tokenRewriter = ^ NSArray * (CPToken *t) { return [NSArray arrayWithObject:t]; };
     }
     
     return self;
@@ -39,17 +58,11 @@
 
 - (void)dealloc
 {
-    [tokensToIgnore release];
+    Block_release(tokenRewriter);
     [tokens release];
+    [rewrittenTokens release];
+    
     [super dealloc];
-}
-
-- (void)beginIgnoringTokenNamed:(NSString *)tokenName
-{
-    @synchronized(self)
-    {
-        [tokensToIgnore addObject:tokenName];
-    }
 }
 
 - (BOOL)hasToken
@@ -58,7 +71,7 @@
     @synchronized(self)
     {
         [self filterTokens];
-        has = [tokens count] > 0;
+        has = [rewrittenTokens count] > 0;
     }
     
     return has;
@@ -70,7 +83,7 @@
     {
         [self filterTokens];
     }
-    return [[[tokens objectAtIndex:0] retain] autorelease];
+    return [[[rewrittenTokens objectAtIndex:0] retain] autorelease];
 }
 
 - (CPToken *)popToken
@@ -79,8 +92,8 @@
     @synchronized(self)
     {
         [self filterTokens];
-        first = [[[tokens objectAtIndex:0] retain] autorelease];
-        [tokens removeObjectAtIndex:0];
+        first = [[[rewrittenTokens objectAtIndex:0] retain] autorelease];
+        [rewrittenTokens removeObjectAtIndex:0];
     }
     return first;
 }
@@ -100,7 +113,7 @@
     @synchronized(self)
     {
         [self filterTokens];
-        [tokens enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+        [rewrittenTokens enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
          {
              [desc appendFormat:@"%@ ", obj];
          }];
@@ -111,10 +124,13 @@
 
 - (void)filterTokens
 {
-    [tokens filterUsingPredicate:[NSPredicate predicateWithBlock:^ BOOL (id obj, NSDictionary *bindings)
-                                  {
-                                      return nil == [tokensToIgnore member:[(CPToken *)obj name]];
-                                  }]];
+    NSUInteger tCount = [tokens count];
+    while (tCount > 0)
+    {
+        [rewrittenTokens addObjectsFromArray:tokenRewriter([tokens objectAtIndex:0])];
+        [tokens removeObjectAtIndex:0];
+        tCount--;
+    }
 }
 
 - (NSArray *)peekAllRemainingTokens
@@ -122,7 +138,7 @@
     @synchronized(self)
     {
         [self filterTokens];
-        return [[tokens copy] autorelease];
+        return [[rewrittenTokens copy] autorelease];
     }
 }
 

@@ -16,8 +16,11 @@
 
 @property (readwrite,retain) CPNonTerminal *start;
 
-+ (id)grammarWithStart:(CPNonTerminal *)start rules:(NSArray *)rules;
-- (id)initWithStart:(CPNonTerminal *)start rules:(NSArray *)rules;
++ (id)grammarWithStart:(NSString *)start rules:(NSArray *)rules;
+- (id)initWithStart:(NSString *)start rules:(NSArray *)rules;
+
++ (id)grammarWithStart:(NSString *)start bnf:(NSString *)bnf;
+- (id)initWithStart:(NSString *)start bnf:(NSString *)bnf;
 
 - (NSSet *)allRules;
 - (NSArray *)allNonTerminalNames;

@@ -228,10 +228,17 @@
 
 - (void)testMapCSSTokenisation
 {
+    NSCharacterSet *identifierCharacters = [NSCharacterSet characterSetWithCharactersInString:
+                                            @"abcdefghijklmnopqrstuvwxyz"
+                                            @"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                            @"0123456789-_"];
     CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"node"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"way"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"relation"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"node"     invalidFollowingCharacters:identifierCharacters]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"way"      invalidFollowingCharacters:identifierCharacters]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"relation" invalidFollowingCharacters:identifierCharacters]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"area"     invalidFollowingCharacters:identifierCharacters]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"line"     invalidFollowingCharacters:identifierCharacters]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"*"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"["]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"]"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"{"]];
@@ -259,8 +266,18 @@
     [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapedEndQuote:@"\\'" escapedEscape:@"\\\\" tokenName:@"String"]];
     [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapedEndQuote:@"\\\"" escapedEscape:@"\\\\" tokenName:@"String"]];
     [tokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniser]];
-    CPTokenStream *tokenStream = [tokeniser tokenise:@"node[highway=trunk] { line-width: 5.0; label: \"jam\"; } // Zomg boobs!\n /* Haha, fooled you */ relation[type=multipolygon] { line-width: 0.0; }"];
-    [tokenStream beginIgnoringTokenNamed:@"Whitespace"];
+    CPTokenStream *tokenStream = [tokeniser tokenise:@"node[highway=\"trunk\"] { line-width: 5.0; label: jam; } // Zomg boobs!\n /* Haha, fooled you */ relation[type=\"multipolygon\"] { line-width: 0.0; }"];
+    [tokenStream setTokenRewriter:^ NSArray * (CPToken *token)
+     {
+         if ([token.name isEqualToString:@"Whitespace"])
+         {
+             return [NSArray array];
+         }
+         else
+         {
+             return [NSArray arrayWithObject:token];
+         }
+     }];
     
     if (![[tokenStream peekAllRemainingTokens] isEqualToArray:
           [NSArray arrayWithObjects:
@@ -268,7 +285,7 @@
            [CPKeywordToken tokenWithKeyword:@"["],
            [CPIdentifierToken tokenWithIdentifier:@"highway"],
            [CPKeywordToken tokenWithKeyword:@"="],
-           [CPIdentifierToken tokenWithIdentifier:@"trunk"],
+           [CPQuotedToken content:@"trunk" quotedWith:@"\"" tokenName:@"String"],
            [CPKeywordToken tokenWithKeyword:@"]"],
            [CPKeywordToken tokenWithKeyword:@"{"],
            [CPIdentifierToken tokenWithIdentifier:@"line-width"],
@@ -277,7 +294,7 @@
            [CPKeywordToken tokenWithKeyword:@";"],
            [CPIdentifierToken tokenWithIdentifier:@"label"],
            [CPKeywordToken tokenWithKeyword:@":"],
-           [CPQuotedToken content:@"jam" quotedWith:@"\"" tokenName:@"String"],
+           [CPIdentifierToken tokenWithIdentifier:@"jam"],
            [CPKeywordToken tokenWithKeyword:@";"],
            [CPKeywordToken tokenWithKeyword:@"}"],
            [CPQuotedToken content:@" Zomg boobs!" quotedWith:@"//" tokenName:@"Comment"],
@@ -286,7 +303,7 @@
            [CPKeywordToken tokenWithKeyword:@"["],
            [CPIdentifierToken tokenWithIdentifier:@"type"],
            [CPKeywordToken tokenWithKeyword:@"="],
-           [CPIdentifierToken tokenWithIdentifier:@"multipolygon"],
+           [CPQuotedToken content:@"multipolygon" quotedWith:@"\"" tokenName:@"String"],
            [CPKeywordToken tokenWithKeyword:@"]"],
            [CPKeywordToken tokenWithKeyword:@"{"],
            [CPIdentifierToken tokenWithIdentifier:@"line-width"],
@@ -311,7 +328,17 @@
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"("]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@")"]];
     CPTokenStream *tokenStream = [tokeniser tokenise:@"5 + (2 * 5 + 9) * 8"];
-    [tokenStream beginIgnoringTokenNamed:@"Whitespace"];
+    [tokenStream setTokenRewriter:^ NSArray * (CPToken *token)
+     {
+         if ([token.name isEqualToString:@"Whitespace"])
+         {
+             return [NSArray array];
+         }
+         else
+         {
+             return [NSArray arrayWithObject:token];
+         }
+     }];
     
     CPRule *tE = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObject:[CPNonTerminal nonTerminalWithName:@"t"]] tag:0];
     CPRule *aE = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObjects:[CPNonTerminal nonTerminalWithName:@"e"], [CPTerminal terminalWithTokenName:@"+"], [CPNonTerminal nonTerminalWithName:@"t"], nil] tag:1];
@@ -319,7 +346,7 @@
     CPRule *mT = [CPRule ruleWithName:@"t" rightHandSideElements:[NSArray arrayWithObjects:[CPNonTerminal nonTerminalWithName:@"t"], [CPTerminal terminalWithTokenName:@"*"], [CPNonTerminal nonTerminalWithName:@"f"], nil] tag:3];
     CPRule *iF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObject:[CPTerminal terminalWithTokenName:@"Number"]] tag:4];
     CPRule *pF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObjects:[CPTerminal terminalWithTokenName:@"("], [CPNonTerminal nonTerminalWithName:@"e"], [CPTerminal terminalWithTokenName:@")"], nil] tag:5];
-    CPGrammar *grammar = [CPGrammar grammarWithStart:[CPNonTerminal nonTerminalWithName:@"e"] rules:[NSArray arrayWithObjects:tE, aE, fT, mT, iF, pF, nil]];
+    CPGrammar *grammar = [CPGrammar grammarWithStart:@"e" rules:[NSArray arrayWithObjects:tE, aE, fT, mT, iF, pF, nil]];
     CPSLRParser *parser = [CPSLRParser parserWithGrammar:grammar];
     parser.delegate = [[[CPTestEvaluatorDelegate alloc] init] autorelease];
     NSNumber *result = [parser parse:tokenStream];
@@ -340,7 +367,17 @@
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"("]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@")"]];
     CPTokenStream *tokenStream = [tokeniser tokenise:@"5 + (2 * 5 + 9) * 8"];
-    [tokenStream beginIgnoringTokenNamed:@"Whitespace"];
+    [tokenStream setTokenRewriter:^ NSArray * (CPToken *token)
+     {
+         if ([token.name isEqualToString:@"Whitespace"])
+         {
+             return [NSArray array];
+         }
+         else
+         {
+             return [NSArray arrayWithObject:token];
+         }
+     }];
     
     CPRule *tE = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObject:[CPNonTerminal nonTerminalWithName:@"t"]] tag:0];
     CPRule *aE = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObjects:[CPNonTerminal nonTerminalWithName:@"e"], [CPTerminal terminalWithTokenName:@"+"], [CPNonTerminal nonTerminalWithName:@"t"], nil] tag:1];
@@ -348,7 +385,7 @@
     CPRule *mT = [CPRule ruleWithName:@"t" rightHandSideElements:[NSArray arrayWithObjects:[CPNonTerminal nonTerminalWithName:@"t"], [CPTerminal terminalWithTokenName:@"*"], [CPNonTerminal nonTerminalWithName:@"f"], nil] tag:3];
     CPRule *iF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObject:[CPTerminal terminalWithTokenName:@"Number"]] tag:4];
     CPRule *pF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObjects:[CPTerminal terminalWithTokenName:@"("], [CPNonTerminal nonTerminalWithName:@"e"], [CPTerminal terminalWithTokenName:@")"], nil] tag:5];
-    CPGrammar *grammar = [CPGrammar grammarWithStart:[CPNonTerminal nonTerminalWithName:@"e"] rules:[NSArray arrayWithObjects:tE, aE, fT, mT, iF, pF, nil]];
+    CPGrammar *grammar = [CPGrammar grammarWithStart:@"e" rules:[NSArray arrayWithObjects:tE, aE, fT, mT, iF, pF, nil]];
     CPLR1Parser *parser = [CPLR1Parser parserWithGrammar:grammar];
     parser.delegate = [[[CPTestEvaluatorDelegate alloc] init] autorelease];
     NSNumber *result = [parser parse:tokenStream];
@@ -365,7 +402,7 @@
     CPRule *s  = [CPRule ruleWithName:@"s" rightHandSideElements:[NSArray arrayWithObjects:[CPNonTerminal nonTerminalWithName:@"b"], [CPNonTerminal nonTerminalWithName:@"b"], nil]];
     CPRule *b1 = [CPRule ruleWithName:@"b" rightHandSideElements:[NSArray arrayWithObjects:[CPTerminal terminalWithTokenName:@"a"], [CPNonTerminal nonTerminalWithName:@"b"], nil]];
     CPRule *b2 = [CPRule ruleWithName:@"b" rightHandSideElements:[NSArray arrayWithObject:[CPTerminal terminalWithTokenName:@"b"]]];
-    grammar = [CPGrammar grammarWithStart:[CPNonTerminal nonTerminalWithName:@"s"] rules:[NSArray arrayWithObjects:s, b1, b2, nil]];
+    grammar = [CPGrammar grammarWithStart:@"s" rules:[NSArray arrayWithObjects:s, b1, b2, nil]];
     parser = [CPLR1Parser parserWithGrammar:grammar];
     CPSyntaxTree *tree = [parser parse:tokenStream];
     
@@ -379,6 +416,148 @@
     {
         STFail(@"Parsing LR1 grammar failed", nil);
     }
+}
+
+- (void)testBNFGrammarGeneration
+{
+    CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
+    [tokeniser addTokenRecogniser:[CPNumberRecogniser integerRecogniser]];
+    [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"+"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"*"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"("]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@")"]];
+    CPTokenStream *tokenStream = [tokeniser tokenise:@"5 + (2 * 5 + 9) * 8"];
+    [tokenStream setTokenRewriter:^ NSArray * (CPToken *token)
+     {
+         if ([token.name isEqualToString:@"Whitespace"])
+         {
+             return [NSArray array];
+         }
+         else
+         {
+             return [NSArray arrayWithObject:token];
+         }
+     }];
+    
+    NSString *testGrammar =
+        @"0 e ::= <t>;"
+        @"1 e ::= <e> \"+\" <t>;"
+        @"2 t ::= <f>;"
+        @"3 t ::= <t> \"*\" <f>;"
+        @"4 f ::= \"Number\";"
+        @"5 f ::= \"(\" <e> \")\";";
+    CPGrammar *grammar = [CPGrammar grammarWithStart:@"e" bnf:testGrammar];
+    CPParser *parser = [CPSLRParser parserWithGrammar:grammar];
+    parser.delegate = [[[CPTestEvaluatorDelegate alloc] init] autorelease];
+    NSNumber *result = [parser parse:tokenStream];
+    
+    if ([result intValue] != 157)
+    {
+        STFail(@"Parsed expression had incorrect value", nil);
+    }
+}
+
+- (void)testMapCSSParsing
+{
+    NSCharacterSet *identifierCharacters = [NSCharacterSet characterSetWithCharactersInString:
+                                            @"abcdefghijklmnopqrstuvwxyz"
+                                            @"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                            @"0123456789-_"];
+    CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"node"     invalidFollowingCharacters:identifierCharacters]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"way"      invalidFollowingCharacters:identifierCharacters]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"relation" invalidFollowingCharacters:identifierCharacters]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"area"     invalidFollowingCharacters:identifierCharacters]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"line"     invalidFollowingCharacters:identifierCharacters]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"*"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"["]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"]"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"{"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"}"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"("]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@")"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"."]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@","]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@";"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"@import"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"url"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"|z"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"-"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"!="]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"=~"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"<"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@">"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"<="]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@">="]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"="]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@":"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"eval"]];
+    [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
+    [tokeniser addTokenRecogniser:[CPNumberRecogniser numberRecogniser]];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" tokenName:@"Comment"]];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"//" endQuote:@"\n" tokenName:@"Comment"]];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapedEndQuote:@"\\'" escapedEscape:@"\\\\" tokenName:@"String"]];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapedEndQuote:@"\\\"" escapedEscape:@"\\\\" tokenName:@"String"]];
+    [tokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniser]];
+    
+    CPGrammar *grammar = [CPGrammar grammarWithStart:@"ruleset"
+                                                 bnf:
+                          @"ruleset      ::= <rule> | <ruleset> <rule>;"
+                          @"rule         ::= <selectors> <declarations> | <import>;"
+                          @"import       ::= \"@import\" \"url\" \"(\" \"String\" \")\" \"Identifier\";"
+                          @"selectors    ::= <selector> | <selectors> \",\" <selector>;"
+                          @"selector     ::= <subselector> | <selector> <subselector>;"
+                          @"subselector  ::= <object> <zoom> | <object> <zoom> <tests> | <class>;"
+                          @"zoom         ::= \"|z\" <range> | ;"
+                          @"range        ::= \"Number\" | \"Number\" \"-\" \"Number\";"
+                          @"tests        ::= <test> | <tests> <test>;"
+                          @"test         ::= \"[\" <condition> \"]\";"
+                          @"condition    ::= <key> <binary> <value> | <unary> <key> | <key>;"
+                          @"key          ::= \"Identifier\";"
+                          @"value        ::= \"String\";"
+                          @"binary       ::= \"=\" | \"!=\" | \"=~\" | \"<\" | \">\" | \"<=\" | \">=\";"
+                          @"unary        ::= \"-\" | \"!\";"
+                          @"class        ::= \".\" \"Identifier\";"
+                          @"object       ::= \"node\" | \"way\" | \"relation\" | \"area\" | \"line\" | \"*\";"
+                          @"declarations ::= <declaration> | <declarations> <declaration>;"
+                          @"declaration  ::= \"{\" <styleset> \"}\" | \"{\" \"}\";"
+                          @"styleset     ::= <style> | <styleset> <style>;"
+                          @"style        ::= <styledef> \";\";"
+                          @"styledef     ::= <key> \":\" <unquoted>;"
+                          @"unquoted     ::= \"Number\" | \"Identifier\";"];
+    CPParser *parser = [CPSLRParser parserWithGrammar:grammar];
+    
+    
+    CPTokenStream *tokenStream = [tokeniser tokenise:
+                                  @"node[highway=\"trunk\"]"
+                                  @"{"
+                                  @"  line-width: 5.0;"
+                                  @"  label: jam;"
+                                  @"} // Zomg boobs!\n"
+                                  @"/* Haha, fooled you */"
+                                  @"relation[type=\"multipolygon\"]"
+                                  @"{"
+                                  @"  line-width: 0.0;"
+                                  @"}"];
+    [tokenStream setTokenRewriter:^ NSArray * (CPToken *token)
+     {
+         if ([token.name isEqualToString:@"Whitespace"] || [token.name isEqualToString:@"Comment"])
+         {
+             return [NSArray array];
+         }
+         else
+         {
+             return [NSArray arrayWithObject:token];
+         }
+     }];
+    CPSyntaxTree *tree = [parser parse:tokenStream];
+    
+    if (nil == tree)
+    {
+        STFail(@"Failed to parse MapCSS", nil);
+    }
+    NSLog(@"%@", tree);
 }
 
 @end

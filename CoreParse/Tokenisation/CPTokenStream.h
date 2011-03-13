@@ -10,10 +10,12 @@
 
 #import "CPToken.h"
 
+typedef NSArray *(^TokenRewriter)(CPToken *token);
+
 @interface CPTokenStream : NSObject
 {}
 
-- (void)beginIgnoringTokenNamed:(NSString *)tokenName;
+@property (readwrite,copy) TokenRewriter tokenRewriter;
 
 - (BOOL)hasToken;
 

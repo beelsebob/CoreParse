@@ -17,6 +17,10 @@
 + (id)recogniserForKeyword:(NSString *)keyword;
 - (id)initWithKeyword:(NSString *)keyword;
 
++ (id)recogniserForKeyword:(NSString *)keyword invalidFollowingCharacters:(NSCharacterSet *)invalidFollowingCharacters;
+- (id)initWithKeyword:(NSString *)keyword invalidFollowingCharacters:(NSCharacterSet *)invalidFollowingCharacters;
+
 @property (readwrite,retain) NSString *keyword;
+@property (readwrite,retain) NSCharacterSet *invalidFollowingCharacters;
 
 @end

@@ -19,19 +19,31 @@
 @implementation CPKeywordRecogniser
 
 @synthesize keyword;
+@synthesize invalidFollowingCharacters;
 
 + (id)recogniserForKeyword:(NSString *)keyword
 {
-    return [[[CPKeywordRecogniser alloc] initWithKeyword:keyword] autorelease];
+    return [[[self alloc] initWithKeyword:keyword] autorelease];
 }
 
 - (id)initWithKeyword:(NSString *)initKeyword
+{
+    return [self initWithKeyword:initKeyword invalidFollowingCharacters:nil];
+}
+
++ (id)recogniserForKeyword:(NSString *)keyword invalidFollowingCharacters:(NSCharacterSet *)invalidFollowingCharacters
+{
+    return [[[self alloc] initWithKeyword:keyword invalidFollowingCharacters:invalidFollowingCharacters] autorelease];
+}
+
+- (id)initWithKeyword:(NSString *)initKeyword invalidFollowingCharacters:(NSCharacterSet *)initInvalidFollowingCharacters
 {
     self = [super init];
     
     if (nil != self)
     {
         self.keyword = initKeyword;
+        self.invalidFollowingCharacters = initInvalidFollowingCharacters;
     }
     
     return self;
@@ -44,6 +56,9 @@
 
 - (void)dealloc
 {
+    [keyword release];
+    [invalidFollowingCharacters release];
+    
     [super dealloc];
 }
 
@@ -51,12 +66,16 @@
 {
     NSString *kw = self.keyword;
     NSUInteger kwLength = [kw length];
-    if ([tokenString length] - *tokenPosition >= kwLength)
+    NSUInteger remainingChars = [tokenString length] - *tokenPosition;
+    if (remainingChars >= kwLength)
     {
         if ([[tokenString substringWithRange:NSMakeRange(*tokenPosition, kwLength)] isEqualToString:kw])
         {
-            *tokenPosition = *tokenPosition + kwLength;
-            return [CPKeywordToken tokenWithKeyword:kw];
+            if (remainingChars == kwLength || nil == invalidFollowingCharacters || [tokenString rangeOfCharacterFromSet:invalidFollowingCharacters options:0x0 range:NSMakeRange(*tokenPosition + kwLength, 1)].location == NSNotFound)
+            {
+                *tokenPosition = *tokenPosition + kwLength;
+                return [CPKeywordToken tokenWithKeyword:kw];
+            }
         }
     }
     
