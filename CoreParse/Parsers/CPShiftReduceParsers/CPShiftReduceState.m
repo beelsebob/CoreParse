@@ -31,8 +31,8 @@
     
     if (nil != self)
     {
-        self.object = initObject;
-        self.state = initState;
+        [self setObject:initObject];
+        [self setState:initState];
     }
     
     return self;

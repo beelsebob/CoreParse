@@ -214,7 +214,7 @@
     CPTokenStream *tokenStream = [tokeniser tokenise:@"node[highway=\"trunk\"] { line-width: 5.0; label: jam; } // Zomg boobs!\n /* Haha, fooled you */ relation[type=\"multipolygon\"] { line-width: 0.0; }"];
     [tokenStream setTokenRewriter:^ NSArray * (CPToken *token)
      {
-         if ([token.name isEqualToString:@"Whitespace"])
+         if ([[token name] isEqualToString:@"Whitespace"])
          {
              return [NSArray array];
          }
@@ -274,7 +274,7 @@
     CPTokenStream *tokenStream = [tokeniser tokenise:@"5 + (2 * 5 + 9) * 8"];
     [tokenStream setTokenRewriter:^ NSArray * (CPToken *token)
      {
-         if ([token.name isEqualToString:@"Whitespace"])
+         if ([[token name] isEqualToString:@"Whitespace"])
          {
              return [NSArray array];
          }
@@ -292,7 +292,7 @@
     CPRule *pF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"("], [CPGrammarSymbol nonTerminalWithName:@"e"], [CPGrammarSymbol terminalWithName:@")"], nil] tag:5];
     CPGrammar *grammar = [CPGrammar grammarWithStart:@"e" rules:[NSArray arrayWithObjects:tE, aE, fT, mT, iF, pF, nil]];
     CPSLRParser *parser = [CPSLRParser parserWithGrammar:grammar];
-    parser.delegate = [[[CPTestEvaluatorDelegate alloc] init] autorelease];
+    [parser setDelegate:[[[CPTestEvaluatorDelegate alloc] init] autorelease]];
     NSNumber *result = [parser parse:tokenStream];
     
     if ([result intValue] != 157)
@@ -313,7 +313,7 @@
     CPTokenStream *tokenStream = [tokeniser tokenise:@"5 + (2 * 5 + 9) * 8"];
     [tokenStream setTokenRewriter:^ NSArray * (CPToken *token)
      {
-         if ([token.name isEqualToString:@"Whitespace"])
+         if ([[token name] isEqualToString:@"Whitespace"])
          {
              return [NSArray array];
          }
@@ -331,7 +331,7 @@
     CPRule *pF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"("], [CPGrammarSymbol nonTerminalWithName:@"e"], [CPGrammarSymbol terminalWithName:@")"], nil] tag:5];
     CPGrammar *grammar = [CPGrammar grammarWithStart:@"e" rules:[NSArray arrayWithObjects:tE, aE, fT, mT, iF, pF, nil]];
     CPLR1Parser *parser = [CPLR1Parser parserWithGrammar:grammar];
-    parser.delegate = [[[CPTestEvaluatorDelegate alloc] init] autorelease];
+    [parser setDelegate:[[[CPTestEvaluatorDelegate alloc] init] autorelease]];
     NSNumber *result = [parser parse:tokenStream];
     
     if ([result intValue] != 157)
@@ -374,7 +374,7 @@
     CPTokenStream *tokenStream = [tokeniser tokenise:@"5 + (2 * 5 + 9) * 8"];
     [tokenStream setTokenRewriter:^ NSArray * (CPToken *token)
      {
-         if ([token.name isEqualToString:@"Whitespace"])
+         if ([[token name] isEqualToString:@"Whitespace"])
          {
              return [NSArray array];
          }
@@ -409,7 +409,7 @@
     }
     
     CPParser *parser = [CPSLRParser parserWithGrammar:grammar];
-    parser.delegate = [[[CPTestEvaluatorDelegate alloc] init] autorelease];
+    [parser setDelegate:[[[CPTestEvaluatorDelegate alloc] init] autorelease]];
     NSNumber *result = [parser parse:tokenStream];
     
     if ([result intValue] != 157)
@@ -506,7 +506,7 @@
                                   @"}"];
     [tokenStream setTokenRewriter:^ NSArray * (CPToken *token)
      {
-         if ([token.name isEqualToString:@"Whitespace"] || [token.name isEqualToString:@"Comment"])
+         if ([[token name] isEqualToString:@"Whitespace"] || [[token name] isEqualToString:@"Comment"])
          {
              return [NSArray array];
          }

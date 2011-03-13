@@ -27,7 +27,7 @@
     
     if (nil != self)
     {
-        self.identifier = initIdentifier;
+        [self setIdentifier:initIdentifier];
     }
     
     return self;
@@ -46,7 +46,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<Identifier: %@>", self.identifier];
+    return [NSString stringWithFormat:@"<Identifier: %@>", [self identifier]];
 }
 
 - (NSString *)name

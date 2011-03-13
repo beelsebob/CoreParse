@@ -48,12 +48,12 @@
     
     if (nil != self)
     {
-        self.startQuote      = initStartQuote;
-        self.endQuote        = initEndQuote;
-        self.escapedEndQuote = initEscapedEndQuote;
-        self.escapedEscape   = initEscapedEscape;
-        self.maximumLength   = initMaximumLength;
-        self.name            = initName;
+        [self setStartQuote:initStartQuote];
+        [self setEndQuote:initEndQuote];
+        [self setEscapedEndQuote:initEscapedEndQuote];
+        [self setEscapedEscape:initEscapedEscape];
+        [self setMaximumLength:initMaximumLength];
+        [self setName:initName];
     }
     
     return self;
@@ -73,18 +73,18 @@
 - (CPToken *)recogniseTokenInString:(NSString *)tokenString currentTokenPosition:(NSUInteger *)tokenPosition
 {
     NSUInteger inputLength = [tokenString length];
-    NSUInteger startQuoteLength = [self.startQuote length];
-    NSUInteger endQuoteLength = [self.endQuote length];
+    NSUInteger startQuoteLength = [[self startQuote] length];
+    NSUInteger endQuoteLength = [[self endQuote] length];
     NSRange searchRange = NSMakeRange(*tokenPosition, MIN(inputLength - *tokenPosition,startQuoteLength + endQuoteLength + maximumLength));
-    NSRange range = [tokenString rangeOfString:self.startQuote options:NSLiteralSearch | NSAnchoredSearch range:searchRange];
+    NSRange range = [tokenString rangeOfString:[self startQuote] options:NSLiteralSearch | NSAnchoredSearch range:searchRange];
     if (NSNotFound != range.location)
     {
         searchRange.location = searchRange.location + range.length;
         searchRange.length   = searchRange.length   - range.length;
         
-        NSRange endRange          = [tokenString rangeOfString:self.endQuote options:NSLiteralSearch range:searchRange];
-        NSRange escapeEndRange    = nil == self.escapedEndQuote ? NSMakeRange(NSNotFound, 0) : [tokenString rangeOfString:self.escapedEndQuote options:NSLiteralSearch range:searchRange];
-        NSRange escapeEscapeRange = nil == self.escapedEscape   ? NSMakeRange(NSNotFound, 0) : [tokenString rangeOfString:self.escapedEscape   options:NSLiteralSearch range:searchRange];
+        NSRange endRange          = [tokenString rangeOfString:[self endQuote] options:NSLiteralSearch range:searchRange];
+        NSRange escapeEndRange    = nil == [self escapedEndQuote] ? NSMakeRange(NSNotFound, 0) : [tokenString rangeOfString:[self escapedEndQuote] options:NSLiteralSearch range:searchRange];
+        NSRange escapeEscapeRange = nil == [self escapedEscape]   ? NSMakeRange(NSNotFound, 0) : [tokenString rangeOfString:[self escapedEscape]   options:NSLiteralSearch range:searchRange];
         
         while (NSNotFound != endRange.location && searchRange.location < inputLength)
         {
@@ -93,7 +93,7 @@
                 NSUInteger startLocation = *tokenPosition;
                 NSUInteger contentStart = startLocation + startQuoteLength;
                 *tokenPosition = endRange.location + endRange.length;
-                return [CPQuotedToken content:[tokenString substringWithRange:NSMakeRange(contentStart, *tokenPosition - contentStart - endQuoteLength)] quotedWith:self.startQuote name:self.name];
+                return [CPQuotedToken content:[tokenString substringWithRange:NSMakeRange(contentStart, *tokenPosition - contentStart - endQuoteLength)] quotedWith:[self startQuote] name:[self name]];
             }
             else
             {
@@ -112,15 +112,15 @@
                 
                 if (endRange.location < searchRange.location)
                 {
-                    endRange = [tokenString rangeOfString:self.endQuote options:NSLiteralSearch range:searchRange];
+                    endRange = [tokenString rangeOfString:[self endQuote] options:NSLiteralSearch range:searchRange];
                 }
                 if (escapeEndRange.location < searchRange.location)
                 {
-                    escapeEndRange = [tokenString rangeOfString:self.escapedEndQuote options:NSLiteralSearch range:searchRange];
+                    escapeEndRange = [tokenString rangeOfString:[self escapedEndQuote] options:NSLiteralSearch range:searchRange];
                 }
                 if (escapeEscapeRange.location < searchRange.location)
                 {
-                    escapeEscapeRange = [tokenString rangeOfString:self.escapedEscape options:NSLiteralSearch range:searchRange];
+                    escapeEscapeRange = [tokenString rangeOfString:[self escapedEscape] options:NSLiteralSearch range:searchRange];
                 }
             }
         }

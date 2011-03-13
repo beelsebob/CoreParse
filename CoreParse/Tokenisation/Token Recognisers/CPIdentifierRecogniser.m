@@ -31,8 +31,8 @@
     
     if (nil != self)
     {
-        self.initialCharacters = initInitialCharacters;
-        self.identifierCharacters = initIdentifierCharacters;
+        [self setInitialCharacters:initInitialCharacters];
+        [self setIdentifierCharacters:initIdentifierCharacters];
     }
     
     return self;
@@ -48,16 +48,16 @@
 
 - (CPToken *)recogniseTokenInString:(NSString *)tokenString currentTokenPosition:(NSUInteger *)tokenPosition
 {
-    NSCharacterSet *identifierStartCharacters = nil == self.initialCharacters ? [NSCharacterSet characterSetWithCharactersInString:
-                                                                                 @"abcdefghijklmnopqrstuvwxyz"
-                                                                                 @"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                                                                 @"_"] : self.initialCharacters;
-    NSCharacterSet *idCharacters = nil == self.identifierCharacters ? [NSCharacterSet characterSetWithCharactersInString:
-                                                                       @"abcdefghijklmnopqrstuvwxyz"
-                                                                       @"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                                                       @"_-1234567890"] : self.identifierCharacters;
+    NSCharacterSet *identifierStartCharacters = nil == [self initialCharacters] ? [NSCharacterSet characterSetWithCharactersInString:
+                                                                                   @"abcdefghijklmnopqrstuvwxyz"
+                                                                                   @"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                                                                   @"_"] : [self initialCharacters];
+    NSCharacterSet *idCharacters = nil == [self identifierCharacters] ? [NSCharacterSet characterSetWithCharactersInString:
+                                                                         @"abcdefghijklmnopqrstuvwxyz"
+                                                                         @"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                                                         @"_-1234567890"] : [self identifierCharacters];
     NSScanner *scanner = [NSScanner scannerWithString:tokenString];
-    scanner.scanLocation = *tokenPosition;
+    [scanner setScanLocation:*tokenPosition];
     [scanner setCharactersToBeSkipped:nil];
     NSString *identifierString;
     NSString *identifierEndString;
@@ -69,7 +69,7 @@
         {
             identifierString = [identifierString stringByAppendingString:identifierEndString];
         }
-        *tokenPosition = scanner.scanLocation;
+        *tokenPosition = [scanner scanLocation];
         return [CPIdentifierToken tokenWithIdentifier:identifierString];
     }
     

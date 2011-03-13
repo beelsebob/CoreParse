@@ -21,12 +21,12 @@
 {
     NSScanner *scanner = [NSScanner scannerWithString:tokenString];
     [scanner setCharactersToBeSkipped:nil];
-    scanner.scanLocation = *tokenPosition;
+    [scanner setScanLocation:*tokenPosition];
     NSString *scannedString;
     BOOL success = [scanner scanCharactersFromSet:[NSCharacterSet whitespaceAndNewlineCharacterSet] intoString:&scannedString];
     if (success)
     {
-        *tokenPosition = scanner.scanLocation;
+        *tokenPosition = [scanner scanLocation];
         return [CPWhiteSpaceToken whiteSpace:scannedString];
     }
     

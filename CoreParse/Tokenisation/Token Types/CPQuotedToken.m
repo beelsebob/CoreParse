@@ -31,8 +31,8 @@
     
     if (nil != self)
     {
-        self.content = initContent;
-        self.quoteType = initQuoteType;
+        [self setContent:initContent];
+        [self setQuoteType:initQuoteType];
         name = [initName copy];
     }
     
@@ -55,7 +55,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %@>", self.name, self.content];
+    return [NSString stringWithFormat:@"<%@: %@>", [self name], [self content]];
 }
 
 - (NSString *)name

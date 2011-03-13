@@ -23,7 +23,7 @@
     
     if (nil != self)
     {
-        self.keyword = initKeyword;
+        [self setKeyword:initKeyword];
     }
     
     return self;
@@ -42,12 +42,12 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<Keyword: %@>", self.keyword];
+    return [NSString stringWithFormat:@"<Keyword: %@>", [self keyword]];
 }
 
 - (NSString *)name
 {
-    return self.keyword;
+    return [self keyword];
 }
 
 - (BOOL)isEqual:(id)object

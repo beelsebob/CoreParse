@@ -29,7 +29,7 @@
     
     if (nil != self)
     {
-        self.terminal = initTerminal;
+        [self setTerminal:initTerminal];
     }
     
     return self;
@@ -37,7 +37,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    return [[CPLR1Item allocWithZone:zone] initWithRule:self.rule position:self.position terminal:self.terminal];
+    return [[CPLR1Item allocWithZone:zone] initWithRule:[self rule] position:[self position] terminal:[self terminal]];
 }
 
 - (void)dealloc
@@ -49,35 +49,22 @@
 
 - (BOOL)isEqual:(id)object
 {
-    return [object isKindOfClass:[CPLR1Item class]] && [super isEqual:object] && [((CPLR1Item *)object).terminal isEqual:self.terminal];
+    if ([object isKindOfClass:[CPLR1Item class]])
+    {
+        CPLR1Item *other = (CPLR1Item *)object;
+        return [super isEqual:object] && [[other terminal] isEqual:[self terminal]];
+    }
+    return NO;
 }
 
 - (NSUInteger)hash
 {
-    return [self.rule hash] << 16 + [self.terminal hash] + self.position;
+    return [[self rule] hash] << 16 + [[self terminal] hash] + [self position];
 }
 
 - (NSString *)description
 {
-    NSMutableString *desc = [NSMutableString stringWithFormat:@"%@ ::= ", self.rule.name];
-    NSUInteger pos = 0;
-    for (NSObject *obj in self.rule.rightHandSideElements)
-    {
-        if (pos == self.position)
-        {
-            [desc appendFormat:@"• "];
-        }
-        [desc appendFormat:@"%@ ", obj];
-        pos++;
-    }
-    if (pos == self.position)
-    {
-        [desc appendFormat:@"• "];
-    }
-    
-    [desc appendFormat:@", %@", [self.terminal name]];
-    
-    return desc;
+    return [[super description] stringByAppendingFormat:@", %@", [[self terminal] name]];
 }
 
 @end

@@ -25,12 +25,12 @@
 
 - (BOOL)constructShiftReduceTables
 {
-    CPGrammar *aug = [self.grammar augmentedGrammar];
+    CPGrammar *aug = [[self grammar] augmentedGrammar];
     NSArray *items = [self itemsForGrammar:aug];
     NSUInteger itemCount = [items count];
     
-    self.actionTable = [[[CPShiftReduceActionTable alloc] initWithCapacity:itemCount] autorelease];
-    self.gotoTable   = [[[CPShiftReduceGotoTable   alloc] initWithCapacity:itemCount] autorelease];
+    [self setActionTable:[[[CPShiftReduceActionTable alloc] initWithCapacity:itemCount] autorelease]];
+    [self setGotoTable:[[[CPShiftReduceGotoTable   alloc] initWithCapacity:itemCount] autorelease]];
     
     NSUInteger idx = 0;
     for (NSSet *itemsSet in items)
@@ -42,7 +42,7 @@
             {
                 NSSet *g = [self gotoWithItems:itemsSet symbol:next underGrammar:aug];
                 NSUInteger ix = [items indexOfObject:g];
-                BOOL success = [self.actionTable setAction:[CPShiftReduceAction shiftAction:ix] forState:idx name:[next name]];
+                BOOL success = [[self actionTable] setAction:[CPShiftReduceAction shiftAction:ix] forState:idx name:[next name]];
                 if (!success)
                 {
                     return NO;
@@ -52,7 +52,7 @@
             {
                 if ([[[item rule] name] isEqualToString:@"s'"])
                 {
-                    BOOL success = [self.actionTable setAction:[CPShiftReduceAction acceptAction] forState:idx name:@"EOF"];
+                    BOOL success = [[self actionTable] setAction:[CPShiftReduceAction acceptAction] forState:idx name:@"EOF"];
                     if (!success)
                     {
                         return NO;
@@ -60,7 +60,7 @@
                 }
                 else
                 {
-                    BOOL success = [self.actionTable setAction:[CPShiftReduceAction reduceAction:[item rule]] forState:idx name:[[item terminal] name]];
+                    BOOL success = [[self actionTable] setAction:[CPShiftReduceAction reduceAction:[item rule]] forState:idx name:[[item terminal] name]];
                     if (!success)
                     {
                         return NO;
@@ -71,7 +71,7 @@
         idx++;
     }
     
-    NSArray *allNonTerminalNames = [self.grammar allNonTerminalNames];
+    NSArray *allNonTerminalNames = [[self grammar] allNonTerminalNames];
     idx = 0;
     for (NSSet *itemsSet in items)
     {
@@ -79,7 +79,7 @@
         {
             NSSet *g = [self gotoWithItems:itemsSet symbol:[CPGrammarSymbol nonTerminalWithName:nonTerminalName] underGrammar:aug];
             NSUInteger gotoIndex = [items indexOfObject:g];
-            BOOL success = [self.gotoTable setGoto:gotoIndex forState:idx nonTerminalNamed:nonTerminalName];
+            BOOL success = [[self gotoTable] setGoto:gotoIndex forState:idx nonTerminalNamed:nonTerminalName];
             if (!success)
             {
                 return NO;

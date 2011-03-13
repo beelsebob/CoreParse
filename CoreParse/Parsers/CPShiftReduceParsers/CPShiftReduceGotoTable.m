@@ -51,7 +51,7 @@
 
 - (NSUInteger)gotoForState:(NSUInteger)state rule:(CPRule *)rule
 {
-    return [(NSNumber *)[(NSDictionary *)[table objectAtIndex:state] objectForKey:rule.name] unsignedIntegerValue];
+    return [(NSNumber *)[(NSDictionary *)[table objectAtIndex:state] objectForKey:[rule name]] unsignedIntegerValue];
 }
 
 @end

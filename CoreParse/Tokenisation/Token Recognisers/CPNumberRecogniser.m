@@ -18,24 +18,24 @@
 + (id)integerRecogniser
 {
     CPNumberRecogniser *rec = [[[CPNumberRecogniser alloc] init] autorelease];
-    rec.recognisesInts = YES;
-    rec.recognisesFloats = NO;
+    [rec setRecognisesInts:YES];
+    [rec setRecognisesFloats:NO];
     return rec;
 }
 
 + (id)floatRecogniser
 {
     CPNumberRecogniser *rec = [[[CPNumberRecogniser alloc] init] autorelease];
-    rec.recognisesInts = NO;
-    rec.recognisesFloats = YES;
+    [rec setRecognisesInts:NO];
+    [rec setRecognisesFloats:YES];
     return rec;
 }
 
 + (id)numberRecogniser
 {
     CPNumberRecogniser *rec = [[[CPNumberRecogniser alloc] init] autorelease];
-    rec.recognisesInts = YES;
-    rec.recognisesFloats = YES;
+    [rec setRecognisesInts:YES];
+    [rec setRecognisesFloats:YES];
     return rec;
 }
 
@@ -43,15 +43,15 @@
 {
     NSScanner *scanner = [NSScanner scannerWithString:tokenString];
     [scanner setCharactersToBeSkipped:nil];
-    scanner.scanLocation = *tokenPosition;
+    [scanner setScanLocation:*tokenPosition];
 
-    if (!self.recognisesFloats)
+    if (![self recognisesFloats])
     {
         NSInteger i;
         BOOL success = [scanner scanInteger:&i];
         if (success)
         {
-            *tokenPosition = scanner.scanLocation;
+            *tokenPosition = [scanner scanLocation];
             return [CPNumberToken tokenWithNumber:[NSNumber numberWithInteger:i]];
         }
     }
@@ -59,9 +59,9 @@
     {
         double d;
         BOOL success = [scanner scanDouble:&d];
-        if (success && !self.recognisesInts)
+        if (success && ![self recognisesInts])
         {
-            NSString *substring = [tokenString substringWithRange:NSMakeRange(*tokenPosition, scanner.scanLocation - *tokenPosition)];
+            NSString *substring = [tokenString substringWithRange:NSMakeRange(*tokenPosition, [scanner scanLocation] - *tokenPosition)];
             if ([substring rangeOfString:@"."].location == NSNotFound && [substring rangeOfString:@"e"].location)
             {
                 success = NO;
@@ -69,7 +69,7 @@
         }
         if (success)
         {
-            *tokenPosition = scanner.scanLocation;
+            *tokenPosition = [scanner scanLocation];
             return [CPNumberToken tokenWithNumber:[NSNumber numberWithDouble:d]];
         }
     }

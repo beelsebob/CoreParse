@@ -42,8 +42,8 @@
     
     if (nil != self)
     {
-        self.keyword = initKeyword;
-        self.invalidFollowingCharacters = initInvalidFollowingCharacters;
+        [self setKeyword:initKeyword];
+        [self setInvalidFollowingCharacters:initInvalidFollowingCharacters];
     }
     
     return self;
@@ -64,7 +64,7 @@
 
 - (CPToken *)recogniseTokenInString:(NSString *)tokenString currentTokenPosition:(NSUInteger *)tokenPosition
 {
-    NSString *kw = self.keyword;
+    NSString *kw = [self keyword];
     NSUInteger kwLength = [kw length];
     NSUInteger remainingChars = [tokenString length] - *tokenPosition;
     if (remainingChars >= kwLength)

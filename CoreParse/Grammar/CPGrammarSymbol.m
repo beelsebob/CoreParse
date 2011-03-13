@@ -25,8 +25,8 @@
     
     if (nil != self)
     {
-        self.name = initName;
-        self.isTerminal = NO;
+        [self setName:initName];
+        [self setIsTerminal:NO];
     }
     
     return self;
@@ -37,14 +37,14 @@
     return [[[self alloc] initWithTerminalName:name] autorelease];
 }
 
-- (id)initWithTerminalName:(NSString *)initname
+- (id)initWithTerminalName:(NSString *)initName
 {
     self = [super init];
     
     if (nil != self)
     {
-        self.name = initname;
-        self.isTerminal = YES;
+        [self setName:initName];
+        [self setIsTerminal:YES];
     }
     
     return self;
@@ -60,8 +60,8 @@
     if ([object isKindOfClass:[CPGrammarSymbol class]])
     {
         CPGrammarSymbol *other = (CPGrammarSymbol *)object;
-        BOOL namesEqual = [other.name isEqualToString:self.name];
-        BOOL terminalEqual = other.isTerminal == self.isTerminal;
+        BOOL namesEqual    = [[other name] isEqualToString:[self name]];
+        BOOL terminalEqual = [other isTerminal] == [self isTerminal];
         return namesEqual && terminalEqual;
     }
     return NO;
@@ -69,18 +69,18 @@
 
 - (NSUInteger)hash
 {
-    return [self.name hash];
+    return [[self name] hash];
 }
 
 - (NSString *)description
 {
-    if (self.isTerminal)
+    if ([self isTerminal])
     {
-        return self.name;
+        return [NSString stringWithFormat:@"\"%@\"", [self name]];
     }
     else
     {
-        return [NSString stringWithFormat:@"<%@>", self.name];
+        return [NSString stringWithFormat:@"<%@>", [self name]];
     }
 }
 

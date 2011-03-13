@@ -31,8 +31,8 @@
     
     if (nil != self)
     {
-        self.rule = initRule;
-        self.children = initChildren;
+        [self setRule:initRule];
+        [self setChildren:initChildren];
     }
     
     return self;
@@ -56,7 +56,7 @@
     if ([object isKindOfClass:[CPSyntaxTree class]])
     {
         CPSyntaxTree *other = (CPSyntaxTree *)object;
-        return other.rule == self.rule && [other.children isEqual:self.children];
+        return [other rule] == [self rule] && [[other children] isEqualToArray:[self children]];
     }
     return NO;
 }

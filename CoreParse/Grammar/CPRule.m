@@ -46,9 +46,9 @@
     
     if (nil != self)
     {
-        self.name = initName;
-        self.rightHandSideElements = rightHandSideElements;
-        self.tag = initTag;
+        [self setName:initName];
+        [self setRightHandSideElements:rightHandSideElements];
+        [self setTag:initTag];
     }
     
     return self;
@@ -79,7 +79,7 @@
 
 - (NSString *)description
 {
-    NSMutableString *desc = [NSMutableString stringWithFormat:@"%@ ::= ", self.name];
+    NSMutableString *desc = [NSMutableString stringWithFormat:@"%@ ::= ", [self name]];
     for (CPGrammarSymbol *s in rightHandSide)
     {
         [desc appendFormat:@"%@ ", s];
@@ -92,9 +92,9 @@
     if ([object isKindOfClass:[CPRule class]])
     {
         CPRule *other = (CPRule *)object;
-        BOOL tagsEqual = other.tag == self.tag;
-        BOOL namesEqual = [other.name isEqualToString:self.name];
-        BOOL rightHandSideElementsEqual = [other.rightHandSideElements isEqualToArray:self.rightHandSideElements];
+        BOOL tagsEqual  = [other tag] == [self tag];
+        BOOL namesEqual = [[other name] isEqualToString:[self name]];
+        BOOL rightHandSideElementsEqual = [[other rightHandSideElements] isEqualToArray:[self rightHandSideElements]];
         return tagsEqual && namesEqual && rightHandSideElementsEqual;
     }
     

@@ -30,7 +30,7 @@
     
     if (nil != self)
     {
-        self.grammar = initGrammar;
+        [self setGrammar:initGrammar];
     }
     
     return self;

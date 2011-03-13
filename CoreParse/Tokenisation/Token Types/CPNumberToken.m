@@ -27,7 +27,7 @@
     
     if (nil != self)
     {
-        self.number = initNumber;
+        [self setNumber:initNumber];
     }
     
     return self;    
@@ -46,7 +46,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<Number: %@>", self.number];
+    return [NSString stringWithFormat:@"<Number: %@>", [self number]];
 }
 
 - (NSString *)name

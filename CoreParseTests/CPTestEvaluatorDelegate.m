@@ -14,10 +14,10 @@
 
 - (id)parser:(CPParser *)parser didProduceSyntaxTree:(CPSyntaxTree *)syntaxTree
 {
-    CPRule *r = syntaxTree.rule;
-    NSArray *c = syntaxTree.children;
+    CPRule *r = [syntaxTree rule];
+    NSArray *c = [syntaxTree children];
     
-    switch (r.tag)
+    switch ([r tag])
     {
         case 0:
         case 2:
@@ -27,7 +27,7 @@
         case 3:
             return [NSNumber numberWithInt:[[c objectAtIndex:0] intValue] * [[c objectAtIndex:2] intValue]];
         case 4:
-            return ((CPNumberToken *)[c objectAtIndex:0]).number;
+            return [(CPNumberToken *)[c objectAtIndex:0] number];
         case 5:
             return [c objectAtIndex:1];
         default:

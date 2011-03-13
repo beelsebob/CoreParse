@@ -53,7 +53,7 @@
     
     if (nil != self)
     {
-        self.tokens = [[initTokens mutableCopy] autorelease];
+        [self setTokens:[[initTokens mutableCopy] autorelease]];
     }
     
     return self;
@@ -65,9 +65,9 @@
     
     if (nil != self)
     {
-        self.tokens = [NSMutableArray array];
-        self.rewrittenTokens = [NSMutableArray array];
-        self.tokenRewriter = ^ NSArray * (CPToken *t) { return [NSArray arrayWithObject:t]; };
+        [self setTokens:[NSMutableArray array]];
+        [self setRewrittenTokens:[NSMutableArray array]];
+        [self setTokenRewriter:^ NSArray * (CPToken *t) { return [NSArray arrayWithObject:t]; }];
     }
     
     return self;

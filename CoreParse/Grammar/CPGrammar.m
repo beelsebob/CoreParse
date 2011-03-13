@@ -28,8 +28,8 @@
 
 - (id)parser:(CPParser *)parser didProduceSyntaxTree:(CPSyntaxTree *)syntaxTree
 {
-    NSArray *children = syntaxTree.children;
-    switch (syntaxTree.rule.tag)
+    NSArray *children = [syntaxTree children];
+    switch ([[syntaxTree rule] tag])
     {
         case 0:
         {
@@ -44,7 +44,7 @@
             NSArray *rules = [children objectAtIndex:1];
             for (CPRule *r in rules)
             {
-                r.tag = [[(CPNumberToken *)[children objectAtIndex:0] number] intValue];
+                [r setTag:[[(CPNumberToken *)[children objectAtIndex:0] number] intValue]];
             }
             return rules;
         }
@@ -148,8 +148,8 @@
     
     if (nil != self)
     {
-        self.start = initStart;
-        self.rules = initRules;
+        [self setStart:initStart];
+        [self setRules:initRules];
     }
     
     return self;
@@ -175,7 +175,7 @@
     CPTokenStream *tokenStream = [tokeniser tokenise:bnf];
     [tokenStream setTokenRewriter:^ NSArray * (CPToken *token)
      {
-         if ([token.name isEqualToString:@"Whitespace"])
+         if ([[token name] isEqualToString:@"Whitespace"])
          {
              return [NSArray array];
          }
@@ -209,7 +209,7 @@
     
     CPGrammar *bnfGrammar = [CPGrammar grammarWithStart:@"ruleset" rules:[NSArray arrayWithObjects:ruleset1, ruleset2, rule1, rule2, unNumbered, rightHandSide1, rightHandSide2, rightHandSide3, sumset1, sumset2, grammarSymbol1, grammarSymbol2, nonterminal, terminal, nil]];
     CPParser *parser = [CPSLRParser parserWithGrammar:bnfGrammar];
-    parser.delegate = [[[CPBNFParserDelegate alloc] init] autorelease];
+    [parser setDelegate:[[[CPBNFParserDelegate alloc] init] autorelease]];
     
     NSArray *initRules = [parser parse:tokenStream];
     
@@ -243,11 +243,9 @@
 
 - (NSArray *)orderedRules
 {
-    return [[[self allRules] allObjects] sortedArrayUsingComparator:^ NSComparisonResult (id obj1, id obj2)
+    return [[[self allRules] allObjects] sortedArrayUsingComparator:^ NSComparisonResult (CPRule *r1, CPRule *r2)
             {
-                CPRule *r1 = (CPRule *)obj1;
-                CPRule *r2 = (CPRule *)obj2;
-                NSComparisonResult t = r1.tag < r2.tag ? NSOrderedDescending : r1.tag > r2.tag ? NSOrderedAscending: NSOrderedSame;
+                NSComparisonResult t = [r1 tag] < [r2 tag] ? NSOrderedDescending : [r1 tag] > [r2 tag] ? NSOrderedAscending: NSOrderedSame;
                 NSComparisonResult r = NSOrderedSame != t ? t : [[r1 name] compare:[r2 name]];
                 return NSOrderedSame != r ? r : ([[r1 rightHandSideElements] count] < [[r2 rightHandSideElements] count] ? NSOrderedAscending : ([[r1 rightHandSideElements] count] > [[r2 rightHandSideElements] count] ? NSOrderedDescending : NSOrderedSame));
             }];
@@ -257,7 +255,7 @@
 - (NSArray *)allNonTerminalNames
 {
     NSMutableArray *nonTerminals = [NSMutableArray arrayWithCapacity:[rules count]];
-    [rules enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+    [rules enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop)
      {
          [nonTerminals addObject:key];
      }];
@@ -266,11 +264,11 @@
 
 - (void)addRule:(CPRule *)rule
 {
-    NSMutableArray *arr = [rules objectForKey:rule.name];
+    NSMutableArray *arr = [rules objectForKey:[rule name]];
     if (nil == arr)
     {
         arr = [NSMutableArray array];
-        [rules setObject:arr forKey:rule.name];
+        [rules setObject:arr forKey:[rule name]];
     }
     [arr addObject:rule];
 }
@@ -283,7 +281,7 @@
 - (CPGrammar *)augmentedGrammar
 {
     return [[[CPGrammar alloc] initWithStart:@"s'"
-                                       rules:[self.rules arrayByAddingObject:[CPRule ruleWithName:@"s'" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol nonTerminalWithName:self.start]]]]]
+                                       rules:[[self rules] arrayByAddingObject:[CPRule ruleWithName:@"s'" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol nonTerminalWithName:[self start]]]]]]
             autorelease];
 }
 
@@ -363,7 +361,7 @@
     else
     {
         NSMutableSet *f = [NSMutableSet set];
-        NSArray *rs = [self rulesForNonTerminalWithName:sym.name];
+        NSArray *rs = [self rulesForNonTerminalWithName:[sym name]];
         BOOL containsEmptyRightHandSide = NO;
         for (CPRule *rule in rs)
         {
@@ -404,8 +402,8 @@
     if ([object isKindOfClass:[CPGrammar class]])
     {
         CPGrammar *other = (CPGrammar *)object;
-        BOOL startsEqual = [other.start isEqualToString:self.start];
-        BOOL rulesEqual = [other.rules isEqual:self.rules];
+        BOOL startsEqual = [[other start] isEqualToString:[self start]];
+        BOOL rulesEqual  = [[other rules] isEqualToArray:[self rules]];
         return startsEqual && rulesEqual;
     }
     

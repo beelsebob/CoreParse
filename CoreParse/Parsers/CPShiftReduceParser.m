@@ -72,7 +72,7 @@
         else if ([action isReduceAction])
         {
             CPRule *reductionRule = [action reductionRule];
-            NSUInteger numElements = [reductionRule.rightHandSideElements count];
+            NSUInteger numElements = [[reductionRule rightHandSideElements] count];
             NSMutableArray *components = [NSMutableArray arrayWithCapacity:numElements];
             for (NSUInteger element = 0; element < numElements; element++)
             {
@@ -82,9 +82,9 @@
             
             CPSyntaxTree *tree = [CPSyntaxTree syntaxTreeWithRule:reductionRule children:components];
             id result = tree;
-            if ([self.delegate respondsToSelector:@selector(parser:didProduceSyntaxTree:)])
+            if ([[self delegate] respondsToSelector:@selector(parser:didProduceSyntaxTree:)])
             {
-                result = [self.delegate parser:self didProduceSyntaxTree:tree];
+                result = [[self delegate] parser:self didProduceSyntaxTree:tree];
             }
             
             NSUInteger newState = [self gotoForState:[(CPShiftReduceState *)[stateStack lastObject] state] rule:reductionRule];
@@ -104,12 +104,12 @@
 
 - (CPShiftReduceAction *)actionForState:(NSUInteger)state token:(CPToken *)token
 {
-    return [self.actionTable actionForState:state token:token];
+    return [[self actionTable] actionForState:state token:token];
 }
 
 - (NSUInteger)gotoForState:(NSUInteger)state rule:(CPRule *)rule
 {
-    return [self.gotoTable gotoForState:state rule:rule];
+    return [[self gotoTable] gotoForState:state rule:rule];
 }
 
 @end

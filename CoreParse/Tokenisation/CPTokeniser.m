@@ -12,16 +12,16 @@
 
 @interface CPTokeniser ()
 {
-    NSMutableArray *tokenRegexes;
+    NSMutableArray *tokenRecognisers;
 }
 
-@property (readwrite, retain) NSMutableArray *tokenRegexes;
+@property (readwrite, retain) NSMutableArray *tokenRecognisers;
 
 @end
 
 @implementation CPTokeniser
 
-@synthesize tokenRegexes;
+@synthesize tokenRecognisers;
 
 - (id)init
 {
@@ -29,7 +29,7 @@
     
     if (nil != self)
     {
-        self.tokenRegexes = [NSMutableArray array];
+        [self setTokenRecognisers:[NSMutableArray array]];
     }
     
     return self;
@@ -37,28 +37,28 @@
 
 - (void)dealloc
 {
-    [tokenRegexes release];
+    [tokenRecognisers release];
     [super dealloc];
 }
 
 - (void)addTokenRecogniser:(id<CPTokenRecogniser>)recogniser
 {
-    [self.tokenRegexes addObject:recogniser];
+    [[self tokenRecognisers] addObject:recogniser];
 }
 
 - (void)insertTokenRecogniser:(id<CPTokenRecogniser>)recogniser atPriority:(NSInteger)pri
 {
-    [self.tokenRegexes insertObject:recogniser atIndex:pri];
+    [[self tokenRecognisers] insertObject:recogniser atIndex:pri];
 }
 
 - (void)insertTokenRecogniser:(id<CPTokenRecogniser>)recogniser before:(id<CPTokenRecogniser>)other
 {
-    [self insertTokenRecogniser:recogniser atPriority:[self.tokenRegexes indexOfObject:other]];
+    [self insertTokenRecogniser:recogniser atPriority:[[self tokenRecognisers] indexOfObject:other]];
 }
 
 - (void)removeTokenRecogniser:(id<CPTokenRecogniser>)recogniser
 {
-    [self.tokenRegexes removeObject:recogniser];
+    [[self tokenRecognisers] removeObject:recogniser];
 }
 
 - (CPTokenStream *)tokenise:(NSString *)input
@@ -71,7 +71,7 @@
     while (currentTokenOffset < inputLength && recognised)
     {
         recognised = NO;
-        [self.tokenRegexes enumerateObjectsUsingBlock:^(id<CPTokenRecogniser> recogniser, NSUInteger idx, BOOL *stop)
+        [[self tokenRecognisers] enumerateObjectsUsingBlock:^(id<CPTokenRecogniser> recogniser, NSUInteger idx, BOOL *stop)
          {
              CPToken *tok = [recogniser recogniseTokenInString:input currentTokenPosition:&currentTokenOffset];
              if (nil != tok)

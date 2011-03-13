@@ -31,8 +31,8 @@
     
     if (nil != self)
     {
-        self.rule = initRule;
-        self.position = initPosition;
+        [self setRule:initRule];
+        [self setPosition:initPosition];
     }
     
     return self;
@@ -40,7 +40,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    return [[CPItem allocWithZone:zone] initWithRule:self.rule position:self.position];
+    return [[CPItem allocWithZone:zone] initWithRule:[self rule] position:[self position]];
 }
 
 - (void)dealloc
@@ -52,7 +52,7 @@
 
 - (CPGrammarSymbol *)nextSymbol
 {
-    NSArray *rse = rule.rightHandSideElements;
+    NSArray *rse = [rule rightHandSideElements];
     if (position >= [rse count])
     {
         return nil;
@@ -65,41 +65,47 @@
 
 - (NSArray *)followingSymbols
 {
-    NSArray *rse = rule.rightHandSideElements;
+    NSArray *rse = [rule rightHandSideElements];
     return [rse subarrayWithRange:NSMakeRange(position, [rse count] - position)];
 }
 
 - (id)itemByMovingDotRight
 {
     CPItem *c = [self copy];
-    c.position = self.position + 1;
+    [c setPosition:[self position] + 1];
     return [c autorelease];
 }
 
 - (BOOL)isEqual:(id)object
 {
-    return [object isKindOfClass:[CPItem class]] && ((CPItem *)object).rule == self.rule && ((CPItem *)object).position == self.position;
+    if ([object isKindOfClass:[CPItem class]])
+    {
+        CPItem *other = (CPItem *)object;
+        return [other rule] == [self rule] && [other position] == [self position];
+    }
+    return NO;
 }
 
 - (NSUInteger)hash
 {
-    return [self.rule hash] + position;
+    return [[self rule] hash] + position;
 }
 
 - (NSString *)description
 {
-    NSMutableString *desc = [NSMutableString stringWithFormat:@"%@ ::= ", self.rule.name];
+    NSMutableString *desc = [NSMutableString stringWithFormat:@"%@ ::= ", [[self rule] name]];
     NSUInteger pos = 0;
-    for (NSObject *obj in self.rule.rightHandSideElements)
+    NSArray *rse = [[self rule] rightHandSideElements];
+    for (NSObject *obj in rse)
     {
-        if (pos == self.position)
+        if (pos == [self position])
         {
             [desc appendFormat:@"• "];
         }
         [desc appendFormat:@"%@ ", obj];
         pos++;
     }
-    if (pos == self.position)
+    if (pos == [self position])
     {
         [desc appendFormat:@"•"];
     }

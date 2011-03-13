@@ -27,7 +27,7 @@
     
     if (nil != self)
     {
-        self.whiteSpace = initWhiteSpace;
+        [self setWhiteSpace:initWhiteSpace];
     }
     
     return self;
