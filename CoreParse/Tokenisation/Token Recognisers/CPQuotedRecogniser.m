@@ -11,14 +11,6 @@
 #import "CPQuotedToken.h"
 
 @implementation CPQuotedRecogniser
-{
-@private
-    NSString *startQuote;
-    NSString *endQuote;
-    NSString *escapedEndQuote;
-    NSString *escapedEscape;
-    NSString *name;
-}
 
 @synthesize startQuote;
 @synthesize endQuote;
