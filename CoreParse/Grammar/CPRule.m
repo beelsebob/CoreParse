@@ -79,12 +79,12 @@
 
 - (NSString *)description
 {
-    NSMutableString *desc = [NSMutableString stringWithFormat:@"%@ ::= ", [self name]];
-    for (CPGrammarSymbol *s in rightHandSide)
-    {
-        [desc appendFormat:@"%@ ", s];
-    }
-    return desc;
+    return [NSString stringWithFormat:@"%@ ::= %@", [self name], [[rightHandSide valueForKey:@"description"] componentsJoinedByString:@" "]];
+}
+
+- (NSUInteger)hash
+{
+    return [self tag] << 16 + [[self name] hash];
 }
 
 - (BOOL)isEqual:(id)object
@@ -92,10 +92,7 @@
     if ([object isKindOfClass:[CPRule class]])
     {
         CPRule *other = (CPRule *)object;
-        BOOL tagsEqual  = [other tag] == [self tag];
-        BOOL namesEqual = [[other name] isEqualToString:[self name]];
-        BOOL rightHandSideElementsEqual = [[other rightHandSideElements] isEqualToArray:[self rightHandSideElements]];
-        return tagsEqual && namesEqual && rightHandSideElementsEqual;
+        return [other tag] == [self tag] && [[other name] isEqualToString:[self name]] && [[other rightHandSideElements] isEqualToArray:[self rightHandSideElements]];
     }
     
     return NO;
