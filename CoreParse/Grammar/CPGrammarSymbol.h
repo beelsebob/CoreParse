@@ -13,7 +13,7 @@
 {}
 
 @property (readwrite, copy  ) NSString *name;
-@property (readwrite, assign) BOOL isTerminal;
+@property (readwrite, assign, getter=isTerminal) BOOL terminal;
 
 + (id)nonTerminalWithName:(NSString *)name;
 - (id)initWithNonTerminalName:(NSString *)name;

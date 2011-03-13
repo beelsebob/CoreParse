@@ -12,7 +12,7 @@
 @implementation CPGrammarSymbol
 
 @synthesize name;
-@synthesize isTerminal;
+@synthesize terminal;
 
 + (id)nonTerminalWithName:(NSString *)name
 {
@@ -26,7 +26,7 @@
     if (nil != self)
     {
         [self setName:initName];
-        [self setIsTerminal:NO];
+        [self setTerminal:NO];
     }
     
     return self;
@@ -44,7 +44,7 @@
     if (nil != self)
     {
         [self setName:initName];
-        [self setIsTerminal:YES];
+        [self setTerminal:YES];
     }
     
     return self;
