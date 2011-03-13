@@ -43,6 +43,8 @@
 
 - (void)dealloc
 {
+    [grammar release];
+    
     [super dealloc];
 }
 

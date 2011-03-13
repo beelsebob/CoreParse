@@ -74,11 +74,13 @@
             CPRule *reductionRule = [action reductionRule];
             NSUInteger numElements = [[reductionRule rightHandSideElements] count];
             NSMutableArray *components = [NSMutableArray arrayWithCapacity:numElements];
-            for (NSUInteger element = 0; element < numElements; element++)
-            {
-                [components insertObject:[(CPShiftReduceState *)[stateStack lastObject] object] atIndex:0];
-                [stateStack removeLastObject];
-            }
+            [stateStack enumerateObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange([stateStack count] - numElements, numElements)]
+                                          options:NSEnumerationConcurrent | NSEnumerationReverse
+                                       usingBlock:^(CPShiftReduceState *state, NSUInteger idx, BOOL *stop)
+             {
+                 [components insertObject:[state object] atIndex:0];
+                 [stateStack removeLastObject];
+             }];
             
             CPSyntaxTree *tree = [CPSyntaxTree syntaxTreeWithRule:reductionRule children:components];
             id result = tree;

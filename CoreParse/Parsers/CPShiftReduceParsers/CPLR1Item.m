@@ -35,6 +35,11 @@
     return self;
 }
 
+- (id)initWithRule:(CPRule *)initRule position:(NSUInteger)initPosition
+{
+    return [self initWithRule:initRule position:initPosition terminal:nil];
+}
+
 - (id)copyWithZone:(NSZone *)zone
 {
     return [[CPLR1Item allocWithZone:zone] initWithRule:[self rule] position:[self position] terminal:[self terminal]];

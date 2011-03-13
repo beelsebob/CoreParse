@@ -100,14 +100,14 @@
     {
         if (pos == [self position])
         {
-            [desc appendFormat:@"• "];
+            [desc appendString:@"• "];
         }
         [desc appendFormat:@"%@ ", obj];
         pos++;
     }
     if (pos == [self position])
     {
-        [desc appendFormat:@"•"];
+        [desc appendString:@"•"];
     }
     return desc;
 }

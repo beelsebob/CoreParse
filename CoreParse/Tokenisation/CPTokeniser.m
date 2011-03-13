@@ -38,6 +38,7 @@
 - (void)dealloc
 {
     [tokenRecognisers release];
+    
     [super dealloc];
 }
 
