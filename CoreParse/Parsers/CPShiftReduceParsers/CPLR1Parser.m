@@ -131,13 +131,13 @@
 
 - (NSSet *)gotoWithItems:(NSSet *)i symbol:(NSObject *)symbol underGrammar:(CPGrammar *)g
 {
-    return [self closure:[[i objectsPassingTest:^ BOOL (id obj, BOOL *stop)
+    return [self closure:[[i objectsPassingTest:^ BOOL (CPItem *item, BOOL *stop)
                            {
-                               return [symbol isEqual:[obj nextSymbol]];
+                               return [symbol isEqual:[item nextSymbol]];
                            }]
-                          map:^ id (id obj)
+                          map:^ id (CPItem *item)
                           {
-                              return [(CPItem *)obj itemByMovingDotRight];
+                              return [item itemByMovingDotRight];
                           }] underGrammar:g];
 }
 
@@ -151,14 +151,14 @@
     while ([processingQueue count] > 0)
     {
         NSSet *itemSet = [processingQueue objectAtIndex:0];
-        NSSet *validNexts = [itemSet map:^ id (id obj)
+        NSSet *validNexts = [itemSet map:^ id (CPItem *item)
                              {
-                                 return [(CPItem *)obj nextSymbol];
+                                 return [item nextSymbol];
                              }];
         
-        [validNexts enumerateObjectsUsingBlock:^(id o, BOOL *s)
+        [validNexts enumerateObjectsUsingBlock:^(CPGrammarSymbol *s, BOOL *st)
          {
-             NSSet *g = [self gotoWithItems:itemSet symbol:o underGrammar:aug];
+             NSSet *g = [self gotoWithItems:itemSet symbol:s underGrammar:aug];
              if (![c containsObject:g])
              {
                  [processingQueue addObject:g];

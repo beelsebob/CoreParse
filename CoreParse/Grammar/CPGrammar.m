@@ -234,9 +234,9 @@
 - (NSSet *)allRules
 {
     NSMutableSet *rs = [NSMutableSet setWithCapacity:[rules count]];
-    [rules enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+    [rules enumerateKeysAndObjectsUsingBlock:^(id key, NSArray *arr, BOOL *stop)
      {
-         [rs addObjectsFromArray:obj];
+         [rs addObjectsFromArray:arr];
      }];
     return rs;
 }
@@ -318,9 +318,9 @@
                   if (idx + 1 < numElements)
                   {
                       NSSet *first = [self first:[rightHandSide subarrayWithRange:NSMakeRange(idx+1, [rightHandSide count] - idx - 1)]];
-                      NSSet *firstMinusEmpty = [first objectsPassingTest:^ BOOL (id fobj, BOOL *fstop)
+                      NSSet *firstMinusEmpty = [first objectsPassingTest:^ BOOL (NSString *symbolName, BOOL *fstop)
                                                 {
-                                                    return ![fobj isEqual:@""];
+                                                    return ![symbolName isEqualToString:@""];
                                                 }];
                       [f unionSet:firstMinusEmpty];
                   }

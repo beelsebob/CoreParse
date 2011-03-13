@@ -149,11 +149,11 @@
     while ([processingQueue count] > 0)
     {
         NSSet *itemSet = [processingQueue objectAtIndex:0];
-        NSSet *validNexts = [itemSet map:^ id (id obj) { return [(CPItem *)obj nextSymbol]; }];
+        NSSet *validNexts = [itemSet map:^ id (CPItem *item) { return [item nextSymbol]; }];
         
-        [validNexts enumerateObjectsUsingBlock:^(id o, BOOL *s)
+        [validNexts enumerateObjectsUsingBlock:^(CPGrammarSymbol *s, BOOL *st)
          {
-             NSSet *g = [self gotoWithItems:itemSet symbol:o underGrammar:aug];
+             NSSet *g = [self gotoWithItems:itemSet symbol:s underGrammar:aug];
              if (![c containsObject:g])
              {
                  [processingQueue addObject:g];
