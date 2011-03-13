@@ -8,8 +8,12 @@
 
 #import "CPLR1Parser.h"
 
+#import "CPShiftReduceParserProtectedMethods.h"
+
 #import "CPLR1Item.h"
 #import "NSSetFunctional.h"
+
+#import "CPShiftReduceAction.h"
 
 @interface CPLR1Parser ()
 

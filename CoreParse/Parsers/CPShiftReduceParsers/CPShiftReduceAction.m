@@ -116,6 +116,11 @@ ActionDetails;
     return details.reductionRule;
 }
 
+- (NSUInteger)hash
+{
+    return type;
+}
+
 - (BOOL)isEqual:(id)object
 {
     if ([object isKindOfClass:[CPShiftReduceAction class]] && ((CPShiftReduceAction *)object)->type == type)

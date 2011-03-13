@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "CPShiftReduceAction.h"
+@class CPShiftReduceAction;
+
 #import "CPToken.h"
 #import "CPGrammar.h"
 

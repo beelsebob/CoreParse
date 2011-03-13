@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "CPRule.h"
+@class CPRule;
 
 @interface CPShiftReduceGotoTable : NSObject
 {}

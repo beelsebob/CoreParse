@@ -10,6 +10,8 @@
 
 #import "CPItem.h"
 #import "CPGrammarSymbol.h"
+#import "CPShiftReduceAction.h"
+#import "CPShiftReduceParserProtectedMethods.h"
 
 #import "NSSetFunctional.h"
 
