@@ -365,17 +365,15 @@
             }
             else
             {
-                BOOL allCanBeEmpty = YES;
-                for (NSUInteger element = 0; element < numElements && allCanBeEmpty; element++)
+                for (CPGrammarSymbol *symbol in rhs)
                 {
-                    NSObject *symbol = [rhs objectAtIndex:element];
                     if (![symbol isEqual:sym])
                     {
                         NSSet *f1 = [self firstSymbol:symbol];
                         [f unionSet:f1];
                         if (![f1 containsObject:@""])
                         {
-                            allCanBeEmpty = NO;
+                            break;
                         }
                     }
                 }
