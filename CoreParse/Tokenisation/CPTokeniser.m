@@ -41,22 +41,22 @@
     [super dealloc];
 }
 
-- (void)addTokenRecogniser:(NSObject<CPTokenRecogniser> *)recogniser
+- (void)addTokenRecogniser:(id<CPTokenRecogniser>)recogniser
 {
     [self.tokenRegexes addObject:recogniser];
 }
 
-- (void)insertTokenRecogniser:(NSObject<CPTokenRecogniser> *)recogniser atPriority:(NSInteger)pri
+- (void)insertTokenRecogniser:(id<CPTokenRecogniser>)recogniser atPriority:(NSInteger)pri
 {
     [self.tokenRegexes insertObject:recogniser atIndex:pri];
 }
 
-- (void)insertTokenRecogniser:(NSObject<CPTokenRecogniser> *)recogniser before:(NSObject<CPTokenRecogniser> *)other
+- (void)insertTokenRecogniser:(id<CPTokenRecogniser>)recogniser before:(id<CPTokenRecogniser>)other
 {
     [self insertTokenRecogniser:recogniser atPriority:[self.tokenRegexes indexOfObject:other]];
 }
 
-- (void)removeTokenRecogniser:(NSObject<CPTokenRecogniser> *)recogniser
+- (void)removeTokenRecogniser:(id<CPTokenRecogniser>)recogniser
 {
     [self.tokenRegexes removeObject:recogniser];
 }
@@ -71,9 +71,9 @@
     while (currentTokenOffset < inputLength && recognised)
     {
         recognised = NO;
-        [self.tokenRegexes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+        [self.tokenRegexes enumerateObjectsUsingBlock:^(id<CPTokenRecogniser> recogniser, NSUInteger idx, BOOL *stop)
          {
-             CPToken *tok = [(NSObject<CPTokenRecogniser> *)obj recogniseTokenInString:input currentTokenPosition:&currentTokenOffset];
+             CPToken *tok = [recogniser recogniseTokenInString:input currentTokenPosition:&currentTokenOffset];
              if (nil != tok)
              {
                  [stream pushToken:tok];

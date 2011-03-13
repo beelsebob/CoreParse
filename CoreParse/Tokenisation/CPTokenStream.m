@@ -113,9 +113,9 @@
     @synchronized(self)
     {
         [self filterTokens];
-        [rewrittenTokens enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+        [rewrittenTokens enumerateObjectsUsingBlock:^(CPToken *tok, NSUInteger idx, BOOL *stop)
          {
-             [desc appendFormat:@"%@ ", obj];
+             [desc appendFormat:@"%@ ", tok];
          }];
     }
     

@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-#import "CPNonTerminal.h"
+#import "CPGrammarSymbol.h"
 #import "CPRule.h"
 
 @interface CPGrammar : NSObject
 {}
 
-@property (readwrite,retain) CPNonTerminal *start;
+@property (readwrite,retain) NSString *start;
 
 + (id)grammarWithStart:(NSString *)start rules:(NSArray *)rules;
 - (id)initWithStart:(NSString *)start rules:(NSArray *)rules;
@@ -26,7 +26,7 @@
 - (NSArray *)allNonTerminalNames;
 
 - (void)addRule:(CPRule *)rule;
-- (NSArray *)rulesForNonTerminal:(CPNonTerminal *)nonTerminal;
+- (NSArray *)rulesForNonTerminalWithName:(NSString *)nonTerminalName;
 
 - (CPGrammar *)augmentedGrammar;
 

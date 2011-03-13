@@ -14,11 +14,11 @@
 @interface CPTokeniser : NSObject
 {}
 
-- (void)addTokenRecogniser:(NSObject<CPTokenRecogniser> *)recogniser;
-- (void)insertTokenRecogniser:(NSObject<CPTokenRecogniser> *)recogniser atPriority:(NSInteger)pri;
-- (void)insertTokenRecogniser:(NSObject<CPTokenRecogniser> *)recogniser before:(NSObject<CPTokenRecogniser> *)other;
+- (void)addTokenRecogniser:(id<CPTokenRecogniser>)recogniser;
+- (void)insertTokenRecogniser:(id<CPTokenRecogniser>)recogniser atPriority:(NSInteger)pri;
+- (void)insertTokenRecogniser:(id<CPTokenRecogniser>)recogniser before:(id<CPTokenRecogniser>)other;
 
-- (void)removeTokenRecogniser:(NSObject<CPTokenRecogniser> *)recogniser;
+- (void)removeTokenRecogniser:(id<CPTokenRecogniser>)recogniser;
 
 - (CPTokenStream *)tokenise:(NSString *)input;
 

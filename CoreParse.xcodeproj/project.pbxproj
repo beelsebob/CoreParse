@@ -63,10 +63,6 @@
 		1F4683A71306D7D900407491 /* CPWhiteSpaceToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4683A51306D7CF00407491 /* CPWhiteSpaceToken.m */; };
 		1F50A93E1308604A00C50D7D /* CPGrammar.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F50A93C1308604A00C50D7D /* CPGrammar.h */; };
 		1F50A93F1308604A00C50D7D /* CPGrammar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F50A93D1308604A00C50D7D /* CPGrammar.m */; };
-		1F50A9421308609A00C50D7D /* CPNonTerminal.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F50A9401308609A00C50D7D /* CPNonTerminal.h */; };
-		1F50A9431308609A00C50D7D /* CPNonTerminal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F50A9411308609A00C50D7D /* CPNonTerminal.m */; };
-		1F50A9461308623000C50D7D /* CPTerminal.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F50A9441308623000C50D7D /* CPTerminal.h */; };
-		1F50A9471308623000C50D7D /* CPTerminal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F50A9451308623000C50D7D /* CPTerminal.m */; };
 		1F530B7E13215A6F00F52EB5 /* CPParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F530B7C13215A6F00F52EB5 /* CPParser.h */; };
 		1F530B7F13215A6F00F52EB5 /* CPParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B7D13215A6F00F52EB5 /* CPParser.m */; };
 		1F530B8713216A1A00F52EB5 /* CPSyntaxTree.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F530B8513216A1A00F52EB5 /* CPSyntaxTree.h */; };
@@ -79,6 +75,8 @@
 		1FB3EB2D132BB2F200ACC453 /* CPLR1Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB2B132BB2ED00ACC453 /* CPLR1Parser.m */; };
 		1FB3EB30132BB31700ACC453 /* CPLR1Item.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB2E132BB30300ACC453 /* CPLR1Item.h */; };
 		1FB3EB31132BB31700ACC453 /* CPLR1Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB2F132BB30A00ACC453 /* CPLR1Item.m */; };
+		1FB3EB3A132D096900ACC453 /* CPGrammarSymbol.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB38132D096700ACC453 /* CPGrammarSymbol.h */; };
+		1FB3EB3B132D096900ACC453 /* CPGrammarSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB39132D096800ACC453 /* CPGrammarSymbol.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,10 +153,6 @@
 		1F4683A51306D7CF00407491 /* CPWhiteSpaceToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPWhiteSpaceToken.m; sourceTree = "<group>"; };
 		1F50A93C1308604A00C50D7D /* CPGrammar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPGrammar.h; sourceTree = "<group>"; };
 		1F50A93D1308604A00C50D7D /* CPGrammar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPGrammar.m; sourceTree = "<group>"; };
-		1F50A9401308609A00C50D7D /* CPNonTerminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNonTerminal.h; sourceTree = "<group>"; };
-		1F50A9411308609A00C50D7D /* CPNonTerminal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPNonTerminal.m; sourceTree = "<group>"; };
-		1F50A9441308623000C50D7D /* CPTerminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTerminal.h; sourceTree = "<group>"; };
-		1F50A9451308623000C50D7D /* CPTerminal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTerminal.m; sourceTree = "<group>"; };
 		1F530B7C13215A6F00F52EB5 /* CPParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPParser.h; sourceTree = "<group>"; };
 		1F530B7D13215A6F00F52EB5 /* CPParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPParser.m; sourceTree = "<group>"; };
 		1F530B8513216A1A00F52EB5 /* CPSyntaxTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSyntaxTree.h; sourceTree = "<group>"; };
@@ -171,6 +165,8 @@
 		1FB3EB2B132BB2ED00ACC453 /* CPLR1Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLR1Parser.m; sourceTree = "<group>"; };
 		1FB3EB2E132BB30300ACC453 /* CPLR1Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLR1Item.h; sourceTree = "<group>"; };
 		1FB3EB2F132BB30A00ACC453 /* CPLR1Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLR1Item.m; sourceTree = "<group>"; };
+		1FB3EB38132D096700ACC453 /* CPGrammarSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPGrammarSymbol.h; sourceTree = "<group>"; };
+		1FB3EB39132D096800ACC453 /* CPGrammarSymbol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPGrammarSymbol.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -364,10 +360,8 @@
 				1F50A93D1308604A00C50D7D /* CPGrammar.m */,
 				1F530B8F1322813E00F52EB5 /* CPRule.h */,
 				1F530B901322813F00F52EB5 /* CPRule.m */,
-				1F50A9401308609A00C50D7D /* CPNonTerminal.h */,
-				1F50A9411308609A00C50D7D /* CPNonTerminal.m */,
-				1F50A9441308623000C50D7D /* CPTerminal.h */,
-				1F50A9451308623000C50D7D /* CPTerminal.m */,
+				1FB3EB38132D096700ACC453 /* CPGrammarSymbol.h */,
+				1FB3EB39132D096800ACC453 /* CPGrammarSymbol.m */,
 			);
 			path = Grammar;
 			sourceTree = "<group>";
@@ -415,8 +409,6 @@
 				1F1DFCEF1307D18B00B22855 /* CPQuotedToken.h in Headers */,
 				1F1DFCF31307D2C600B22855 /* CPQuotedRecogniser.h in Headers */,
 				1F50A93E1308604A00C50D7D /* CPGrammar.h in Headers */,
-				1F50A9421308609A00C50D7D /* CPNonTerminal.h in Headers */,
-				1F50A9461308623000C50D7D /* CPTerminal.h in Headers */,
 				1F530B7E13215A6F00F52EB5 /* CPParser.h in Headers */,
 				1F530B8713216A1A00F52EB5 /* CPSyntaxTree.h in Headers */,
 				1F530B911322814000F52EB5 /* CPRule.h in Headers */,
@@ -432,6 +424,7 @@
 				1FB3EB24132BA02C00ACC453 /* CPTestEvaluatorDelegate.h in Headers */,
 				1FB3EB2C132BB2F200ACC453 /* CPLR1Parser.h in Headers */,
 				1FB3EB30132BB31700ACC453 /* CPLR1Item.h in Headers */,
+				1FB3EB3A132D096900ACC453 /* CPGrammarSymbol.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,8 +550,6 @@
 				1F1DFCF01307D18B00B22855 /* CPQuotedToken.m in Sources */,
 				1F1DFCF41307D2C600B22855 /* CPQuotedRecogniser.m in Sources */,
 				1F50A93F1308604A00C50D7D /* CPGrammar.m in Sources */,
-				1F50A9431308609A00C50D7D /* CPNonTerminal.m in Sources */,
-				1F50A9471308623000C50D7D /* CPTerminal.m in Sources */,
 				1F530B7F13215A6F00F52EB5 /* CPParser.m in Sources */,
 				1F530B8813216A1A00F52EB5 /* CPSyntaxTree.m in Sources */,
 				1F530B921322814000F52EB5 /* CPRule.m in Sources */,
@@ -573,6 +564,7 @@
 				1FB3EB25132BA02C00ACC453 /* CPTestEvaluatorDelegate.m in Sources */,
 				1FB3EB2D132BB2F200ACC453 /* CPLR1Parser.m in Sources */,
 				1FB3EB31132BB31700ACC453 /* CPLR1Item.m in Sources */,
+				1FB3EB3B132D096900ACC453 /* CPGrammarSymbol.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

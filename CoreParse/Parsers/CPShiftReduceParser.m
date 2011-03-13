@@ -11,8 +11,7 @@
 #import "CPShiftReduceAction.h"
 #import "CPShiftReduceState.h"
 
-#import "CPNonTerminal.h"
-#import "CPTerminal.h"
+#import "CPGrammarSymbol.h"
 
 @interface CPShiftReduceParser ()
 

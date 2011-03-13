@@ -25,8 +25,8 @@
 #import "CPQuotedToken.h"
 #import "CPIdentifierToken.h"
 
-#import "CPTerminal.h"
-#import "CPNonTerminal.h"
+#import "CPGrammarSymbol.h"
+#import "CPGrammarSymbol.h"
 #import "CPRule.h"
 #import "CPGrammar.h"
 

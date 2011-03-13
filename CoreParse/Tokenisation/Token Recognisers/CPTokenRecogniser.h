@@ -10,7 +10,7 @@
 
 #import "CPToken.h"
 
-@protocol CPTokenRecogniser
+@protocol CPTokenRecogniser <NSObject>
 
 - (CPToken *)recogniseTokenInString:(NSString *)tokenString currentTokenPosition:(NSUInteger *)tokenPosition;
 

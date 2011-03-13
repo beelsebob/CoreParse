@@ -17,7 +17,7 @@
 @property (readwrite,copy) NSString *content;
 @property (readwrite,copy) NSString *quoteType;
 
-+ (id)content:(NSString *)content quotedWith:(NSString *)startQuote tokenName:(NSString *)name;
-- (id)initWithContent:(NSString *)content quoteType:(NSString *)startQuote tokenName:(NSString *)name;
++ (id)content:(NSString *)content quotedWith:(NSString *)startQuote name:(NSString *)name;
+- (id)initWithContent:(NSString *)content quoteType:(NSString *)startQuote name:(NSString *)name;
 
 @end

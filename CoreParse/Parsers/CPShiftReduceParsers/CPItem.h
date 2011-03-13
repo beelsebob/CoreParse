@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "CPRule.h"
+#import "CPGrammarSymbol.h"
 
 @interface CPItem : NSObject <NSCopying>
 {}
@@ -19,7 +20,7 @@
 + (id)itemWithRule:(CPRule *)rule position:(NSUInteger)position;
 - (id)initWithRule:(CPRule *)rule position:(NSUInteger)position;
 
-- (id)nextSymbol;
+- (CPGrammarSymbol *)nextSymbol;
 - (NSArray *)followingSymbols;
 
 - (id)itemByMovingDotRight;

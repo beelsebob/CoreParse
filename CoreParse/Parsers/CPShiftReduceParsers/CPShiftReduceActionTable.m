@@ -9,7 +9,7 @@
 #import "CPShiftReduceActionTable.h"
 
 #import "CPItem.h"
-#import "CPTerminal.h"
+#import "CPGrammarSymbol.h"
 
 @implementation CPShiftReduceActionTable
 {
@@ -40,7 +40,7 @@
     [super dealloc];
 }
 
-- (BOOL)setAction:(CPShiftReduceAction *)action forState:(NSUInteger)state tokenName:(NSString *)token
+- (BOOL)setAction:(CPShiftReduceAction *)action forState:(NSUInteger)state name:(NSString *)token
 {
     NSMutableDictionary *row = [table objectAtIndex:state];
     if (nil != [row objectForKey:token] && ![[row objectForKey:token] isEqual:action])

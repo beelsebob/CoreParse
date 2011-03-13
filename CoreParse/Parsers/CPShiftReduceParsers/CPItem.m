@@ -50,7 +50,7 @@
     [super dealloc];
 }
 
-- (id)nextSymbol
+- (CPGrammarSymbol *)nextSymbol
 {
     NSArray *rse = rule.rightHandSideElements;
     if (position >= [rse count])

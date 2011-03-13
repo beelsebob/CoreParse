@@ -8,6 +8,7 @@
 
 #import "CPRule.h"
 
+#import "CPGrammarSymbol.h"
 
 @implementation CPRule
 {
@@ -79,11 +80,25 @@
 - (NSString *)description
 {
     NSMutableString *desc = [NSMutableString stringWithFormat:@"%@ ::= ", self.name];
-    for (NSObject *obj in rightHandSide)
+    for (CPGrammarSymbol *s in rightHandSide)
     {
-        [desc appendFormat:@"%@ ", obj];
+        [desc appendFormat:@"%@ ", s];
     }
     return desc;
+}
+
+- (BOOL)isEqual:(id)object
+{
+    if ([object isKindOfClass:[CPRule class]])
+    {
+        CPRule *other = (CPRule *)object;
+        BOOL tagsEqual = other.tag == self.tag;
+        BOOL namesEqual = [other.name isEqualToString:self.name];
+        BOOL rightHandSideElementsEqual = [other.rightHandSideElements isEqualToArray:self.rightHandSideElements];
+        return tagsEqual && namesEqual && rightHandSideElementsEqual;
+    }
+    
+    return NO;
 }
 
 @end

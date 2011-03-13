@@ -18,12 +18,12 @@
 
 @synthesize terminal;
 
-+ (id)lr1ItemWithRule:(CPRule *)rule position:(NSUInteger)position terminal:(CPTerminal *)terminal
++ (id)lr1ItemWithRule:(CPRule *)rule position:(NSUInteger)position terminal:(CPGrammarSymbol *)terminal
 {
     return [[[self alloc] initWithRule:rule position:position terminal:terminal] autorelease];
 }
 
-- (id)initWithRule:(CPRule *)rule position:(NSUInteger)position terminal:(CPTerminal *)initTerminal
+- (id)initWithRule:(CPRule *)rule position:(NSUInteger)position terminal:(CPGrammarSymbol *)initTerminal
 {
     self = [super initWithRule:rule position:position];
     
@@ -75,7 +75,7 @@
         [desc appendFormat:@"• "];
     }
     
-    [desc appendFormat:@", %@", [self.terminal tokenName]];
+    [desc appendFormat:@", %@", [self.terminal name]];
     
     return desc;
 }

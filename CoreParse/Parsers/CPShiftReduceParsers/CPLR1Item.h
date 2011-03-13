@@ -9,14 +9,14 @@
 #import <Foundation/Foundation.h>
 
 #import "CPItem.h"
-#import "CPTerminal.h"
+#import "CPGrammarSymbol.h"
 
 @interface CPLR1Item : CPItem
 {}
 
-@property (readonly,retain) CPTerminal *terminal;
+@property (readonly,retain) CPGrammarSymbol *terminal;
 
-+ (id)lr1ItemWithRule:(CPRule *)rule position:(NSUInteger)position terminal:(CPTerminal *)terminal;
-- (id)initWithRule:(CPRule *)rule position:(NSUInteger)position terminal:(CPTerminal *)terminal;
++ (id)lr1ItemWithRule:(CPRule *)rule position:(NSUInteger)position terminal:(CPGrammarSymbol *)terminal;
+- (id)initWithRule:(CPRule *)rule position:(NSUInteger)position terminal:(CPGrammarSymbol *)terminal;
 
 @end

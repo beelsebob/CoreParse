@@ -20,12 +20,12 @@
 @synthesize content;
 @synthesize quoteType;
 
-+ (id)content:(NSString *)content quotedWith:(NSString *)quoteType tokenName:(NSString *)name
++ (id)content:(NSString *)content quotedWith:(NSString *)quoteType name:(NSString *)name
 {
-    return [[[CPQuotedToken alloc] initWithContent:content quoteType:quoteType tokenName:name] autorelease];
+    return [[[CPQuotedToken alloc] initWithContent:content quoteType:quoteType name:name] autorelease];
 }
 
-- (id)initWithContent:(NSString *)initContent quoteType:(NSString *)initQuoteType tokenName:(NSString *)initName
+- (id)initWithContent:(NSString *)initContent quoteType:(NSString *)initQuoteType name:(NSString *)initName
 {
     self = [super init];
     
@@ -41,7 +41,7 @@
 
 - (id)init
 {
-    return [self initWithContent:@"" quoteType:@"" tokenName:@""];
+    return [self initWithContent:@"" quoteType:@"" name:@""];
 }
 
 - (void)dealloc

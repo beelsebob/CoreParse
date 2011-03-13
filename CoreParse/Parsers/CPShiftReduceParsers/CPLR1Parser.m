@@ -37,13 +37,12 @@
     {
         for (CPLR1Item *item in itemsSet)
         {
-            id next = [item nextSymbol];
-            if ([next isKindOfClass:[CPTerminal class]])
+            CPGrammarSymbol *next = [item nextSymbol];
+            if ([next isTerminal])
             {
-                CPTerminal *nextTerminal = (CPTerminal *)next;
                 NSSet *g = [self gotoWithItems:itemsSet symbol:next underGrammar:aug];
                 NSUInteger ix = [items indexOfObject:g];
-                BOOL success = [self.actionTable setAction:[CPShiftReduceAction shiftAction:ix] forState:idx tokenName:[nextTerminal tokenName]];
+                BOOL success = [self.actionTable setAction:[CPShiftReduceAction shiftAction:ix] forState:idx name:[next name]];
                 if (!success)
                 {
                     return NO;
@@ -53,7 +52,7 @@
             {
                 if ([[[item rule] name] isEqualToString:@"s'"])
                 {
-                    BOOL success = [self.actionTable setAction:[CPShiftReduceAction acceptAction] forState:idx tokenName:@"EOF"];
+                    BOOL success = [self.actionTable setAction:[CPShiftReduceAction acceptAction] forState:idx name:@"EOF"];
                     if (!success)
                     {
                         return NO;
@@ -61,7 +60,7 @@
                 }
                 else
                 {
-                    BOOL success = [self.actionTable setAction:[CPShiftReduceAction reduceAction:[item rule]] forState:idx tokenName:[[item terminal] tokenName]];
+                    BOOL success = [self.actionTable setAction:[CPShiftReduceAction reduceAction:[item rule]] forState:idx name:[[item terminal] name]];
                     if (!success)
                     {
                         return NO;
@@ -78,7 +77,7 @@
     {
         for (NSString *nonTerminalName in allNonTerminalNames)
         {
-            NSSet *g = [self gotoWithItems:itemsSet symbol:[CPNonTerminal nonTerminalWithName:nonTerminalName] underGrammar:aug];
+            NSSet *g = [self gotoWithItems:itemsSet symbol:[CPGrammarSymbol nonTerminalWithName:nonTerminalName] underGrammar:aug];
             NSUInteger gotoIndex = [items indexOfObject:g];
             BOOL success = [self.gotoTable setGoto:gotoIndex forState:idx nonTerminalNamed:nonTerminalName];
             if (!success)
@@ -101,10 +100,10 @@
     {
         CPLR1Item *item = (CPLR1Item *)[processingQueue objectAtIndex:0];
         NSArray *followingSymbols = [item followingSymbols];
-        NSObject *nextSymbol = [followingSymbols count] > 0 ? [followingSymbols objectAtIndex:0] : nil;
-        if ([nextSymbol isKindOfClass:[CPNonTerminal class]])
+        CPGrammarSymbol *nextSymbol = [followingSymbols count] > 0 ? [followingSymbols objectAtIndex:0] : nil;
+        if (![nextSymbol isTerminal])
         {
-            NSArray *rules = [g rulesForNonTerminal:(CPNonTerminal *)nextSymbol];
+            NSArray *rules = [g rulesForNonTerminalWithName:[(CPGrammarSymbol *)nextSymbol name]];
             for (CPRule *r in rules)
             {
                 NSArray *afterNext = [followingSymbols subarrayWithRange:NSMakeRange(1, [followingSymbols count] - 1)];
@@ -112,7 +111,7 @@
                 NSSet *firstAfterNext = [g first:afterNextWithTerminal];
                 for (NSString *o in firstAfterNext)
                 {
-                    CPLR1Item *newItem = [CPLR1Item lr1ItemWithRule:r position:0 terminal:[CPTerminal terminalWithTokenName:o]];
+                    CPLR1Item *newItem = [CPLR1Item lr1ItemWithRule:r position:0 terminal:[CPGrammarSymbol terminalWithName:o]];
                     if (nil == [j member:newItem])
                     {
                         [processingQueue addObject:newItem];
@@ -144,8 +143,8 @@
 
 - (NSArray *)itemsForGrammar:(CPGrammar *)aug
 {
-    CPRule *startRule = [[aug rulesForNonTerminal:[CPNonTerminal nonTerminalWithName:@"s'"]] objectAtIndex:0];
-    NSSet *initialItemSet = [self closure:[NSSet setWithObject:[CPLR1Item lr1ItemWithRule:startRule position:0 terminal:[CPTerminal terminalWithTokenName:@"EOF"]]] underGrammar:aug];
+    CPRule *startRule = [[aug rulesForNonTerminalWithName:@"s'"] objectAtIndex:0];
+    NSSet *initialItemSet = [self closure:[NSSet setWithObject:[CPLR1Item lr1ItemWithRule:startRule position:0 terminal:[CPGrammarSymbol terminalWithName:@"EOF"]]] underGrammar:aug];
     NSMutableArray *c = [NSMutableArray arrayWithObject:initialItemSet];
     NSMutableArray *processingQueue = [NSMutableArray arrayWithObject:initialItemSet];
     

@@ -9,7 +9,7 @@
 #import "CPSLRParser.h"
 
 #import "CPItem.h"
-#import "CPTerminal.h"
+#import "CPGrammarSymbol.h"
 
 #import "NSSetFunctional.h"
 
@@ -39,13 +39,12 @@
     {
         for (CPItem *item in itemsSet)
         {
-            id next = [item nextSymbol];
-            if ([next isKindOfClass:[CPTerminal class]])
+            CPGrammarSymbol *next = [item nextSymbol];
+            if ([next isTerminal])
             {
-                CPTerminal *nextTerminal = (CPTerminal *)next;
                 NSSet *g = [self gotoWithItems:itemsSet symbol:next underGrammar:aug];
                 NSUInteger ix = [items indexOfObject:g];
-                BOOL success = [self.actionTable setAction:[CPShiftReduceAction shiftAction:ix] forState:idx tokenName:[nextTerminal tokenName]];
+                BOOL success = [self.actionTable setAction:[CPShiftReduceAction shiftAction:ix] forState:idx name:[next name]];
                 if (!success)
                 {
                     return NO;
@@ -55,7 +54,7 @@
             {
                 if ([[[item rule] name] isEqualToString:@"s'"])
                 {
-                    BOOL success = [self.actionTable setAction:[CPShiftReduceAction acceptAction] forState:idx tokenName:@"EOF"];
+                    BOOL success = [self.actionTable setAction:[CPShiftReduceAction acceptAction] forState:idx name:@"EOF"];
                     if (!success)
                     {
                         return NO;
@@ -66,7 +65,7 @@
                     NSSet *follow = [aug follow:[[item rule] name]];
                     for (NSString *f in follow)
                     {
-                        BOOL success = [self.actionTable setAction:[CPShiftReduceAction reduceAction:[item rule]] forState:idx tokenName:f];
+                        BOOL success = [self.actionTable setAction:[CPShiftReduceAction reduceAction:[item rule]] forState:idx name:f];
                         if (!success)
                         {
                             return NO;
@@ -84,7 +83,7 @@
     {
         for (NSString *nonTerminalName in allNonTerminalNames)
         {
-            NSSet *g = [self gotoWithItems:itemsSet symbol:[CPNonTerminal nonTerminalWithName:nonTerminalName] underGrammar:aug];
+            NSSet *g = [self gotoWithItems:itemsSet symbol:[CPGrammarSymbol nonTerminalWithName:nonTerminalName] underGrammar:aug];
             NSUInteger gotoIndex = [items indexOfObject:g];
             BOOL success = [self.gotoTable setGoto:gotoIndex forState:idx nonTerminalNamed:nonTerminalName];
             if (!success)
@@ -105,18 +104,18 @@
     
     while ([processingQueue count] > 0)
     {
-        CPItem *item = (CPItem *)[processingQueue objectAtIndex:0];
-        NSObject *nextSymbol = [item nextSymbol];
-        if ([nextSymbol isKindOfClass:[CPNonTerminal class]])
+        CPItem *item = [processingQueue objectAtIndex:0];
+        CPGrammarSymbol *nextSymbol = [item nextSymbol];
+        if (![nextSymbol isTerminal])
         {
-            [[g rulesForNonTerminal:(CPNonTerminal *)nextSymbol] enumerateObjectsUsingBlock:^(id o, NSUInteger ix, BOOL *s)
+            [[g rulesForNonTerminalWithName:[nextSymbol name]] enumerateObjectsUsingBlock:^(CPRule *rule, NSUInteger ix, BOOL *s)
              {
-                 CPItem *newItem = [CPItem itemWithRule:(CPRule *)o position:0];
+                 CPItem *newItem = [CPItem itemWithRule:rule position:0];
                  if (nil == [j member:newItem])
                  {
                      [processingQueue addObject:newItem];
+                     [j addObject:newItem];
                  }
-                 [j addObject:newItem];
              }];
         }
         
@@ -130,19 +129,19 @@
 
 - (NSSet *)gotoWithItems:(NSSet *)i symbol:(NSObject *)symbol underGrammar:(CPGrammar *)g
 {
-    return [self closure:[[i objectsPassingTest:^ BOOL (id obj, BOOL *stop)
+    return [self closure:[[i objectsPassingTest:^ BOOL (CPItem *item, BOOL *stop)
                            {
-                               return [symbol isEqual:[obj nextSymbol]];
+                               return [symbol isEqual:[item nextSymbol]];
                            }]
-                          map:^ id (id obj)
+                          map:^ id (CPItem *item)
                           {
-                              return [(CPItem *)obj itemByMovingDotRight];
+                              return [item itemByMovingDotRight];
                           }] underGrammar:g];
 }
 
 - (NSArray *)itemsForGrammar:(CPGrammar *)aug
 {
-    CPRule *startRule = [[aug rulesForNonTerminal:[CPNonTerminal nonTerminalWithName:@"s'"]] objectAtIndex:0];
+    CPRule *startRule = [[aug rulesForNonTerminalWithName:@"s'"] objectAtIndex:0];
     NSSet *initialItemSet = [self closure:[NSSet setWithObject:[CPItem itemWithRule:startRule position:0]] underGrammar:aug];
     NSMutableArray *c = [NSMutableArray arrayWithObject:initialItemSet];
     NSMutableArray *processingQueue = [NSMutableArray arrayWithObject:initialItemSet];

@@ -27,22 +27,22 @@
 @synthesize maximumLength;
 @synthesize name;
 
-+ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote tokenName:(NSString *)name
++ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote name:(NSString *)name
 {
-    return [CPQuotedRecogniser quotedRecogniserWithStartQuote:startQuote endQuote:endQuote escapedEndQuote:nil escapedEscape:nil tokenName:name];
+    return [CPQuotedRecogniser quotedRecogniserWithStartQuote:startQuote endQuote:endQuote escapedEndQuote:nil escapedEscape:nil name:name];
 }
 
-+ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote escapedEndQuote:(NSString *)escapedEndQuote escapedEscape:(NSString *)escapedEscape tokenName:(NSString *)name
++ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote escapedEndQuote:(NSString *)escapedEndQuote escapedEscape:(NSString *)escapedEscape name:(NSString *)name
 {
-    return [CPQuotedRecogniser quotedRecogniserWithStartQuote:startQuote endQuote:endQuote escapedEndQuote:escapedEndQuote escapedEscape:escapedEscape maximumLength:NSNotFound tokenName:name];
+    return [CPQuotedRecogniser quotedRecogniserWithStartQuote:startQuote endQuote:endQuote escapedEndQuote:escapedEndQuote escapedEscape:escapedEscape maximumLength:NSNotFound name:name];
 }
 
-+ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote escapedEndQuote:(NSString *)escapedEndQuote escapedEscape:(NSString *)escapedEscape maximumLength:(NSUInteger)maximumLength tokenName:(NSString *)name
++ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote escapedEndQuote:(NSString *)escapedEndQuote escapedEscape:(NSString *)escapedEscape maximumLength:(NSUInteger)maximumLength name:(NSString *)name
 {
-    return [[[CPQuotedRecogniser alloc] initWithStartQuote:startQuote endQuote:endQuote escapedEndQuote:escapedEndQuote escapedEscape:escapedEscape maximumLength:maximumLength tokenName:name] autorelease];
+    return [[[CPQuotedRecogniser alloc] initWithStartQuote:startQuote endQuote:endQuote escapedEndQuote:escapedEndQuote escapedEscape:escapedEscape maximumLength:maximumLength name:name] autorelease];
 }
 
-- (id)initWithStartQuote:(NSString *)initStartQuote endQuote:(NSString *)initEndQuote escapedEndQuote:(NSString *)initEscapedEndQuote escapedEscape:(NSString *)initEscapedEscape maximumLength:(NSUInteger)initMaximumLength tokenName:(NSString *)initName
+- (id)initWithStartQuote:(NSString *)initStartQuote endQuote:(NSString *)initEndQuote escapedEndQuote:(NSString *)initEscapedEndQuote escapedEscape:(NSString *)initEscapedEscape maximumLength:(NSUInteger)initMaximumLength name:(NSString *)initName
 {
     self = [super init];
     
@@ -93,7 +93,7 @@
                 NSUInteger startLocation = *tokenPosition;
                 NSUInteger contentStart = startLocation + startQuoteLength;
                 *tokenPosition = endRange.location + endRange.length;
-                return [CPQuotedToken content:[tokenString substringWithRange:NSMakeRange(contentStart, *tokenPosition - contentStart - endQuoteLength)] quotedWith:self.startQuote tokenName:self.name];
+                return [CPQuotedToken content:[tokenString substringWithRange:NSMakeRange(contentStart, *tokenPosition - contentStart - endQuoteLength)] quotedWith:self.startQuote name:self.name];
             }
             else
             {

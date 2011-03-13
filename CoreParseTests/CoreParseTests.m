@@ -173,7 +173,7 @@
 - (void)testQuotedTokeniser
 {
     CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" tokenName:@"Comment"]];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" name:@"Comment"]];
     CPTokenStream *tokenStream = [tokeniser tokenise:@"/* abcde ghi */"];
     CPToken *tok1 = [tokenStream popToken];
     CPToken *tok2 = [tokenStream popToken];
@@ -184,7 +184,7 @@
         STFail(@"Failed to tokenise comment",nil);
     }
     
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapedEndQuote:@"\\\"" escapedEscape:@"\\\\" tokenName:@"String"]];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapedEndQuote:@"\\\"" escapedEscape:@"\\\\" name:@"String"]];
     tokenStream = [tokeniser tokenise:@"/* abc */\"def\""];
     tok1 = [tokenStream popToken];
     tok2 = [tokenStream popToken];
@@ -216,7 +216,7 @@
     }
     
     tokeniser = [[[CPTokeniser alloc] init] autorelease];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapedEndQuote:nil escapedEscape:nil maximumLength:1 tokenName:@"Character"]];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapedEndQuote:nil escapedEscape:nil maximumLength:1 name:@"Character"]];
     tokenStream = [tokeniser tokenise:@"'a''bc'"];
     tok1 = [tokenStream popToken];
     if (![tok1 isKindOfClass:[CPQuotedToken class]] || ![((CPQuotedToken *)tok1).quoteType isEqualToString:@"'"] || ![((CPQuotedToken *)tok1).content isEqualToString:@"a"] ||
@@ -261,10 +261,10 @@
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"eval"]];
     [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
     [tokeniser addTokenRecogniser:[CPNumberRecogniser numberRecogniser]];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" tokenName:@"Comment"]];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"//" endQuote:@"\n" tokenName:@"Comment"]];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapedEndQuote:@"\\'" escapedEscape:@"\\\\" tokenName:@"String"]];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapedEndQuote:@"\\\"" escapedEscape:@"\\\\" tokenName:@"String"]];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" name:@"Comment"]];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"//" endQuote:@"\n" name:@"Comment"]];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapedEndQuote:@"\\'" escapedEscape:@"\\\\" name:@"String"]];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapedEndQuote:@"\\\"" escapedEscape:@"\\\\" name:@"String"]];
     [tokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniser]];
     CPTokenStream *tokenStream = [tokeniser tokenise:@"node[highway=\"trunk\"] { line-width: 5.0; label: jam; } // Zomg boobs!\n /* Haha, fooled you */ relation[type=\"multipolygon\"] { line-width: 0.0; }"];
     [tokenStream setTokenRewriter:^ NSArray * (CPToken *token)
@@ -285,7 +285,7 @@
            [CPKeywordToken tokenWithKeyword:@"["],
            [CPIdentifierToken tokenWithIdentifier:@"highway"],
            [CPKeywordToken tokenWithKeyword:@"="],
-           [CPQuotedToken content:@"trunk" quotedWith:@"\"" tokenName:@"String"],
+           [CPQuotedToken content:@"trunk" quotedWith:@"\"" name:@"String"],
            [CPKeywordToken tokenWithKeyword:@"]"],
            [CPKeywordToken tokenWithKeyword:@"{"],
            [CPIdentifierToken tokenWithIdentifier:@"line-width"],
@@ -297,13 +297,13 @@
            [CPIdentifierToken tokenWithIdentifier:@"jam"],
            [CPKeywordToken tokenWithKeyword:@";"],
            [CPKeywordToken tokenWithKeyword:@"}"],
-           [CPQuotedToken content:@" Zomg boobs!" quotedWith:@"//" tokenName:@"Comment"],
-           [CPQuotedToken content:@" Haha, fooled you " quotedWith:@"/*" tokenName:@"Comment"],
+           [CPQuotedToken content:@" Zomg boobs!" quotedWith:@"//" name:@"Comment"],
+           [CPQuotedToken content:@" Haha, fooled you " quotedWith:@"/*" name:@"Comment"],
            [CPKeywordToken tokenWithKeyword:@"relation"],
            [CPKeywordToken tokenWithKeyword:@"["],
            [CPIdentifierToken tokenWithIdentifier:@"type"],
            [CPKeywordToken tokenWithKeyword:@"="],
-           [CPQuotedToken content:@"multipolygon" quotedWith:@"\"" tokenName:@"String"],
+           [CPQuotedToken content:@"multipolygon" quotedWith:@"\"" name:@"String"],
            [CPKeywordToken tokenWithKeyword:@"]"],
            [CPKeywordToken tokenWithKeyword:@"{"],
            [CPIdentifierToken tokenWithIdentifier:@"line-width"],
@@ -340,12 +340,12 @@
          }
      }];
     
-    CPRule *tE = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObject:[CPNonTerminal nonTerminalWithName:@"t"]] tag:0];
-    CPRule *aE = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObjects:[CPNonTerminal nonTerminalWithName:@"e"], [CPTerminal terminalWithTokenName:@"+"], [CPNonTerminal nonTerminalWithName:@"t"], nil] tag:1];
-    CPRule *fT = [CPRule ruleWithName:@"t" rightHandSideElements:[NSArray arrayWithObject:[CPNonTerminal nonTerminalWithName:@"f"]] tag:2];
-    CPRule *mT = [CPRule ruleWithName:@"t" rightHandSideElements:[NSArray arrayWithObjects:[CPNonTerminal nonTerminalWithName:@"t"], [CPTerminal terminalWithTokenName:@"*"], [CPNonTerminal nonTerminalWithName:@"f"], nil] tag:3];
-    CPRule *iF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObject:[CPTerminal terminalWithTokenName:@"Number"]] tag:4];
-    CPRule *pF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObjects:[CPTerminal terminalWithTokenName:@"("], [CPNonTerminal nonTerminalWithName:@"e"], [CPTerminal terminalWithTokenName:@")"], nil] tag:5];
+    CPRule *tE = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol nonTerminalWithName:@"t"]] tag:0];
+    CPRule *aE = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"e"], [CPGrammarSymbol terminalWithName:@"+"], [CPGrammarSymbol nonTerminalWithName:@"t"], nil] tag:1];
+    CPRule *fT = [CPRule ruleWithName:@"t" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol nonTerminalWithName:@"f"]] tag:2];
+    CPRule *mT = [CPRule ruleWithName:@"t" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"t"], [CPGrammarSymbol terminalWithName:@"*"], [CPGrammarSymbol nonTerminalWithName:@"f"], nil] tag:3];
+    CPRule *iF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol terminalWithName:@"Number"]] tag:4];
+    CPRule *pF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"("], [CPGrammarSymbol nonTerminalWithName:@"e"], [CPGrammarSymbol terminalWithName:@")"], nil] tag:5];
     CPGrammar *grammar = [CPGrammar grammarWithStart:@"e" rules:[NSArray arrayWithObjects:tE, aE, fT, mT, iF, pF, nil]];
     CPSLRParser *parser = [CPSLRParser parserWithGrammar:grammar];
     parser.delegate = [[[CPTestEvaluatorDelegate alloc] init] autorelease];
@@ -379,12 +379,12 @@
          }
      }];
     
-    CPRule *tE = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObject:[CPNonTerminal nonTerminalWithName:@"t"]] tag:0];
-    CPRule *aE = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObjects:[CPNonTerminal nonTerminalWithName:@"e"], [CPTerminal terminalWithTokenName:@"+"], [CPNonTerminal nonTerminalWithName:@"t"], nil] tag:1];
-    CPRule *fT = [CPRule ruleWithName:@"t" rightHandSideElements:[NSArray arrayWithObject:[CPNonTerminal nonTerminalWithName:@"f"]] tag:2];
-    CPRule *mT = [CPRule ruleWithName:@"t" rightHandSideElements:[NSArray arrayWithObjects:[CPNonTerminal nonTerminalWithName:@"t"], [CPTerminal terminalWithTokenName:@"*"], [CPNonTerminal nonTerminalWithName:@"f"], nil] tag:3];
-    CPRule *iF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObject:[CPTerminal terminalWithTokenName:@"Number"]] tag:4];
-    CPRule *pF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObjects:[CPTerminal terminalWithTokenName:@"("], [CPNonTerminal nonTerminalWithName:@"e"], [CPTerminal terminalWithTokenName:@")"], nil] tag:5];
+    CPRule *tE = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol nonTerminalWithName:@"t"]] tag:0];
+    CPRule *aE = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"e"], [CPGrammarSymbol terminalWithName:@"+"], [CPGrammarSymbol nonTerminalWithName:@"t"], nil] tag:1];
+    CPRule *fT = [CPRule ruleWithName:@"t" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol nonTerminalWithName:@"f"]] tag:2];
+    CPRule *mT = [CPRule ruleWithName:@"t" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"t"], [CPGrammarSymbol terminalWithName:@"*"], [CPGrammarSymbol nonTerminalWithName:@"f"], nil] tag:3];
+    CPRule *iF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol terminalWithName:@"Number"]] tag:4];
+    CPRule *pF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"("], [CPGrammarSymbol nonTerminalWithName:@"e"], [CPGrammarSymbol terminalWithName:@")"], nil] tag:5];
     CPGrammar *grammar = [CPGrammar grammarWithStart:@"e" rules:[NSArray arrayWithObjects:tE, aE, fT, mT, iF, pF, nil]];
     CPLR1Parser *parser = [CPLR1Parser parserWithGrammar:grammar];
     parser.delegate = [[[CPTestEvaluatorDelegate alloc] init] autorelease];
@@ -399,9 +399,9 @@
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"a"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"b"]];
     tokenStream = [tokeniser tokenise:@"aaabab"];
-    CPRule *s  = [CPRule ruleWithName:@"s" rightHandSideElements:[NSArray arrayWithObjects:[CPNonTerminal nonTerminalWithName:@"b"], [CPNonTerminal nonTerminalWithName:@"b"], nil]];
-    CPRule *b1 = [CPRule ruleWithName:@"b" rightHandSideElements:[NSArray arrayWithObjects:[CPTerminal terminalWithTokenName:@"a"], [CPNonTerminal nonTerminalWithName:@"b"], nil]];
-    CPRule *b2 = [CPRule ruleWithName:@"b" rightHandSideElements:[NSArray arrayWithObject:[CPTerminal terminalWithTokenName:@"b"]]];
+    CPRule *s  = [CPRule ruleWithName:@"s" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"b"], [CPGrammarSymbol nonTerminalWithName:@"b"], nil]];
+    CPRule *b1 = [CPRule ruleWithName:@"b" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"a"], [CPGrammarSymbol nonTerminalWithName:@"b"], nil]];
+    CPRule *b2 = [CPRule ruleWithName:@"b" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol terminalWithName:@"b"]]];
     grammar = [CPGrammar grammarWithStart:@"s" rules:[NSArray arrayWithObjects:s, b1, b2, nil]];
     parser = [CPLR1Parser parserWithGrammar:grammar];
     CPSyntaxTree *tree = [parser parse:tokenStream];
@@ -440,6 +440,16 @@
          }
      }];
     
+    CPRule *e1 = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"t"], nil] tag:0];
+    CPRule *e2 = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"e"], [CPGrammarSymbol terminalWithName:@"+"], [CPGrammarSymbol nonTerminalWithName:@"t"], nil] tag:1];
+    
+    CPRule *t1 = [CPRule ruleWithName:@"t" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"f"], nil] tag:2];
+    CPRule *t2 = [CPRule ruleWithName:@"t" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"t"], [CPGrammarSymbol terminalWithName:@"*"], [CPGrammarSymbol nonTerminalWithName:@"f"], nil] tag:3];
+    
+    CPRule *f1 = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"Number"], nil] tag:4];
+    CPRule *f2 = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"("], [CPGrammarSymbol nonTerminalWithName:@"e"], [CPGrammarSymbol terminalWithName:@")"], nil] tag:5];
+    
+    CPGrammar *grammar = [CPGrammar grammarWithStart:@"e" rules:[NSArray arrayWithObjects:e1,e2,t1,t2,f1,f2, nil]];
     NSString *testGrammar =
         @"0 e ::= <t>;"
         @"1 e ::= <e> \"+\" <t>;"
@@ -447,7 +457,13 @@
         @"3 t ::= <t> \"*\" <f>;"
         @"4 f ::= \"Number\";"
         @"5 f ::= \"(\" <e> \")\";";
-    CPGrammar *grammar = [CPGrammar grammarWithStart:@"e" bnf:testGrammar];
+    CPGrammar *grammar1 = [CPGrammar grammarWithStart:@"e" bnf:testGrammar];
+    
+    if (![grammar isEqual:grammar1])
+    {
+        STFail(@"Crating grammar from BNF failed", nil);
+    }
+    
     CPParser *parser = [CPSLRParser parserWithGrammar:grammar];
     parser.delegate = [[[CPTestEvaluatorDelegate alloc] init] autorelease];
     NSNumber *result = [parser parse:tokenStream];
@@ -499,10 +515,10 @@
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"eval"]];
     [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
     [tokeniser addTokenRecogniser:[CPNumberRecogniser numberRecogniser]];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" tokenName:@"Comment"]];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"//" endQuote:@"\n" tokenName:@"Comment"]];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapedEndQuote:@"\\'" escapedEscape:@"\\\\" tokenName:@"String"]];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapedEndQuote:@"\\\"" escapedEscape:@"\\\\" tokenName:@"String"]];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" name:@"Comment"]];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"//" endQuote:@"\n" name:@"Comment"]];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapedEndQuote:@"\\'" escapedEscape:@"\\\\" name:@"String"]];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapedEndQuote:@"\\\"" escapedEscape:@"\\\\" name:@"String"]];
     [tokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniserWithInitialCharacters:initialIdCharacters identifierCharacters:identifierCharacters]];
     
     CPGrammar *grammar = [CPGrammar grammarWithStart:@"ruleset"
