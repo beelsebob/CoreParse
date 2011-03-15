@@ -485,7 +485,6 @@
     {
         STFail(@"Failed to parse MapCSS", nil);
     }
-    NSLog(@"%@", tree);
 }
 
 @end
