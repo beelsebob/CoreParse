@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "CPParser.h"
+#import "CoreParse.h"
 
 @interface CPTestEvaluatorDelegate : NSObject <CPParserDelegate>
 {}

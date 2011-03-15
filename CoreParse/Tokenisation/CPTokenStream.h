@@ -10,12 +10,8 @@
 
 #import "CPToken.h"
 
-typedef NSArray *(^TokenRewriter)(CPToken *token);
-
 @interface CPTokenStream : NSObject
 {}
-
-@property (readwrite,copy) TokenRewriter tokenRewriter;
 
 + (id)tokenStreamWithTokens:(NSArray *)tokens;
 - (id)initWithTokens:(NSArray *)tokens;
@@ -26,6 +22,7 @@ typedef NSArray *(^TokenRewriter)(CPToken *token);
 - (CPToken *)popToken;
 
 - (void)pushToken:(CPToken *)token;
+- (void)pushTokens:(NSArray *)tokens;
 
 - (NSArray *)peekAllRemainingTokens;
 

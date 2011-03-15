@@ -17,11 +17,14 @@
 
 @property (readwrite, retain) NSMutableArray *tokenRecognisers;
 
+- (void)addToken:(CPToken *)tok toStream:(CPTokenStream *)stream;
+
 @end
 
 @implementation CPTokeniser
 
 @synthesize tokenRecognisers;
+@synthesize delegate;
 
 - (id)init
 {
@@ -65,23 +68,41 @@
 - (CPTokenStream *)tokenise:(NSString *)input
 {
     CPTokenStream *stream = [[[CPTokenStream alloc] init] autorelease];
-    __block NSUInteger currentTokenOffset = 0;
+    NSUInteger currentTokenOffset = 0;
     NSUInteger inputLength = [input length];
+    NSArray *recs = [self tokenRecognisers];
     
-    __block BOOL recognised = YES;
+    BOOL recognised = YES;
     while (currentTokenOffset < inputLength && recognised)
     {
         recognised = NO;
-        [[self tokenRecognisers] enumerateObjectsUsingBlock:^(id<CPTokenRecogniser> recogniser, NSUInteger idx, BOOL *stop)
-         {
-             CPToken *tok = [recogniser recogniseTokenInString:input currentTokenPosition:&currentTokenOffset];
-             if (nil != tok)
-             {
-                 [stream pushToken:tok];
-                 recognised = YES;
-                 *stop = YES;
-             }
-         }];
+        for (id<CPTokenRecogniser> recogniser in recs)
+        {
+            NSUInteger lastTokenOffset = currentTokenOffset;
+            CPToken *tok = [recogniser recogniseTokenInString:input currentTokenPosition:&currentTokenOffset];
+            if (nil != tok)
+            {
+                if ([delegate respondsToSelector:@selector(tokeniser:shouldConsumeToken:)])
+                {
+                    if ([delegate tokeniser:self shouldConsumeToken:tok])
+                    {
+                        [self addToken:tok toStream:stream];
+                        recognised = YES;
+                        break;
+                    }
+                    else
+                    {
+                        currentTokenOffset = lastTokenOffset;
+                    }
+                }
+                else
+                {
+                    [self addToken:tok toStream:stream];
+                    recognised = YES;
+                    break;
+                }
+            }
+        }
     }
     if (inputLength <= currentTokenOffset)
     {
@@ -89,6 +110,20 @@
     }
     
     return stream;
+}
+
+- (void)addToken:(CPToken *)tok toStream:(CPTokenStream *)stream
+{
+    NSArray *toks;
+    if ([delegate respondsToSelector:@selector(tokeniser:willProduceToken:)])
+    {
+        toks = [delegate tokeniser:self willProduceToken:tok];
+    }
+    else
+    {
+        toks = [NSArray arrayWithObject:tok];
+    }
+    [stream pushTokens:toks];
 }
 
 @end

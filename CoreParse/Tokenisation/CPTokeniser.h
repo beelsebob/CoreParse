@@ -11,8 +11,19 @@
 #import "CPTokenRecogniser.h"
 #import "CPTokenStream.h"
 
+@class CPTokeniser;
+
+@protocol CPTokeniserDelegate <NSObject>
+
+- (BOOL)tokeniser:(CPTokeniser *)tokeniser shouldConsumeToken:(CPToken *)token;
+- (NSArray *)tokeniser:(CPTokeniser *)tokeniser willProduceToken:(CPToken *)token;
+
+@end
+
 @interface CPTokeniser : NSObject
 {}
+
+@property (readwrite, assign) id<CPTokeniserDelegate> delegate;
 
 - (void)addTokenRecogniser:(id<CPTokenRecogniser>)recogniser;
 - (void)insertTokenRecogniser:(id<CPTokenRecogniser>)recogniser atPriority:(NSInteger)pri;

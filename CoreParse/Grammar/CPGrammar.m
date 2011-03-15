@@ -13,6 +13,7 @@
 #import "CPKeywordRecogniser.h"
 #import "CPNumberRecogniser.h"
 #import "CPWhitespaceRecogniser.h"
+#import "CPWhiteSpaceToken.h"
 #import "CPQuotedRecogniser.h"
 #import "CPIdentifierRecogniser.h"
 #import "CPSLRParser.h"
@@ -20,7 +21,7 @@
 #import "CPQuotedToken.h"
 #import "CPNumberToken.h"
 
-@interface CPBNFParserDelegate : NSObject <CPParserDelegate>
+@interface CPBNFParserDelegate : NSObject <CPTokeniserDelegate,CPParserDelegate>
 {}
 @end
 
@@ -94,6 +95,20 @@
     }
 }
 
+- (BOOL)tokeniser:(CPTokeniser *)tokeniser shouldConsumeToken:(CPToken *)token
+{
+    return YES;
+}
+
+- (NSArray *)tokeniser:(CPTokeniser *)tokeniser willProduceToken:(CPToken *)token
+{
+    if ([token isKindOfClass:[CPWhiteSpaceToken class]])
+    {
+        return [NSArray array];
+    }
+    return [NSArray arrayWithObject:token];
+}
+
 @end
 
 @interface CPGrammar ()
@@ -162,6 +177,7 @@
 
 - (id)initWithStart:(NSString *)initStart backusNaurForm:(NSString *)bnf
 {
+    CPBNFParserDelegate *del = [[[CPBNFParserDelegate alloc] init] autorelease];
     CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"::="]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"<"]];
@@ -172,18 +188,8 @@
     [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapedEndQuote:@"\\\"" escapedEscape:@"\\\\" name:@"String"]];
     [tokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniser]];
     [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
+    [tokeniser setDelegate:del];
     CPTokenStream *tokenStream = [tokeniser tokenise:bnf];
-    [tokenStream setTokenRewriter:^ NSArray * (CPToken *token)
-     {
-         if ([[token name] isEqualToString:@"Whitespace"])
-         {
-             return [NSArray array];
-         }
-         else
-         {
-             return [NSArray arrayWithObject:token];
-         }
-     }];
     
     CPRule *ruleset1 = [CPRule ruleWithName:@"ruleset" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"ruleset"], [CPGrammarSymbol nonTerminalWithName:@"rule"], nil] tag:0];
     CPRule *ruleset2 = [CPRule ruleWithName:@"ruleset" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"rule"], nil] tag:1];
@@ -209,7 +215,7 @@
     
     CPGrammar *bnfGrammar = [CPGrammar grammarWithStart:@"ruleset" rules:[NSArray arrayWithObjects:ruleset1, ruleset2, rule1, rule2, unNumbered, rightHandSide1, rightHandSide2, rightHandSide3, sumset1, sumset2, grammarSymbol1, grammarSymbol2, nonterminal, terminal, nil]];
     CPParser *parser = [CPSLRParser parserWithGrammar:bnfGrammar];
-    [parser setDelegate:[[[CPBNFParserDelegate alloc] init] autorelease]];
+    [parser setDelegate:del];
     
     NSArray *initRules = [parser parse:tokenStream];
     return [self initWithStart:initStart rules:initRules];
