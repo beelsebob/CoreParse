@@ -15,17 +15,45 @@
 #import "CPTestMapCSSTokenisingDelegate.h"
 
 @implementation CoreParseTests
+{
+    CPParser *mapCssParser;
+}
 
 - (void)setUp
 {
     [super setUp];
     
-    // Set-up code here.
+    CPGrammar *grammar = [CPGrammar grammarWithStart:@"ruleset"
+                                      backusNaurForm:
+                          @"ruleset      ::= <rule> | <ruleset> <rule>;"
+                          @"rule         ::= <selectors> <declarations> | <import>;"
+                          @"import       ::= \"@import\" \"url\" \"(\" \"String\" \")\" \"Identifier\";"
+                          @"selectors    ::= <selector> | <selectors> \",\" <selector>;"
+                          @"selector     ::= <subselector> | <selector> <subselector>;"
+                          @"subselector  ::= <object> \"Whitespace\" | <object> <zoom> | <object> <zoom> <tests> | <class>;"
+                          @"zoom         ::= \"|z\" <range> | ;"
+                          @"range        ::= \"Number\" | \"Number\" \"-\" \"Number\";"
+                          @"tests        ::= <test> | <tests> <test>;"
+                          @"test         ::= \"[\" <condition> \"]\";"
+                          @"condition    ::= <key> <binary> <value> | <unary> <key> | <key>;"
+                          @"key          ::= \"Identifier\";"
+                          @"value        ::= \"String\";"
+                          @"binary       ::= \"=\" | \"!=\" | \"=~\" | \"<\" | \">\" | \"<=\" | \">=\";"
+                          @"unary        ::= \"-\" | \"!\";"
+                          @"class        ::= \".\" \"Identifier\";"
+                          @"object       ::= \"node\" | \"way\" | \"relation\" | \"area\" | \"line\" | \"*\";"
+                          @"declarations ::= <declaration> | <declarations> <declaration>;"
+                          @"declaration  ::= \"{\" <styleset> \"}\" | \"{\" \"}\";"
+                          @"styleset     ::= <style> | <styleset> <style>;"
+                          @"style        ::= <styledef> \";\";"
+                          @"styledef     ::= <key> \":\" <unquoted>;"
+                          @"unquoted     ::= \"Number\" | \"Identifier\";"];
+    mapCssParser = [[CPSLRParser alloc] initWithGrammar:grammar];
 }
 
 - (void)tearDown
 {
-    // Tear-down code here.
+    [mapCssParser release];
     
     [super tearDown];
 }
@@ -440,34 +468,6 @@
     [tokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniserWithInitialCharacters:initialIdCharacters identifierCharacters:identifierCharacters]];
     [tokeniser setDelegate:[[[CPTestMapCSSTokenisingDelegate alloc] init] autorelease]];
     
-    CPGrammar *grammar = [CPGrammar grammarWithStart:@"ruleset"
-                                      backusNaurForm:
-                          @"ruleset      ::= <rule> | <ruleset> <rule>;"
-                          @"rule         ::= <selectors> <declarations> | <import>;"
-                          @"import       ::= \"@import\" \"url\" \"(\" \"String\" \")\" \"Identifier\";"
-                          @"selectors    ::= <selector> | <selectors> \",\" <selector>;"
-                          @"selector     ::= <subselector> \"Whitespace\" | <subselector> | <selector> <subselector>;"
-                          @"subselector  ::= <object> <zoom> | <object> <zoom> <tests> | <class>;"
-                          @"zoom         ::= \"|z\" <range> | ;"
-                          @"range        ::= \"Number\" | \"Number\" \"-\" \"Number\";"
-                          @"tests        ::= <test> | <tests> <test>;"
-                          @"test         ::= \"[\" <condition> \"]\";"
-                          @"condition    ::= <key> <binary> <value> | <unary> <key> | <key>;"
-                          @"key          ::= \"Identifier\";"
-                          @"value        ::= \"String\";"
-                          @"binary       ::= \"=\" | \"!=\" | \"=~\" | \"<\" | \">\" | \"<=\" | \">=\";"
-                          @"unary        ::= \"-\" | \"!\";"
-                          @"class        ::= \".\" \"Identifier\";"
-                          @"object       ::= \"node\" | \"way\" | \"relation\" | \"area\" | \"line\" | \"*\";"
-                          @"declarations ::= <declaration> | <declarations> <declaration>;"
-                          @"declaration  ::= \"{\" <styleset> \"}\" | \"{\" \"}\";"
-                          @"styleset     ::= <style> | <styleset> <style>;"
-                          @"style        ::= <styledef> \";\";"
-                          @"styledef     ::= <key> \":\" <unquoted>;"
-                          @"unquoted     ::= \"Number\" | \"Identifier\";"];
-    CPParser *parser = [CPLR1Parser parserWithGrammar:grammar];
-    
-    
     CPTokenStream *tokenStream = [tokeniser tokenise:
                                   @"node[highway=\"trunk\"]"
                                   @"{"
@@ -479,7 +479,7 @@
                                   @"{"
                                   @"  line-width: 0.0;"
                                   @"}"];
-    CPSyntaxTree *tree = [parser parse:tokenStream];
+    CPSyntaxTree *tree = [mapCssParser parse:tokenStream];
     
     if (nil == tree)
     {
