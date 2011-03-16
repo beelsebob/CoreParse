@@ -37,7 +37,7 @@
                           @"test         ::= \"[\" <condition> \"]\";"
                           @"condition    ::= <key> <binary> <value> | <unary> <key> | <key>;"
                           @"key          ::= \"Identifier\";"
-                          @"value        ::= \"String\";"
+                          @"value        ::= \"String\" | \"Regex\";"
                           @"binary       ::= \"=\" | \"!=\" | \"=~\" | \"<\" | \">\" | \"<=\" | \">=\";"
                           @"unary        ::= \"-\" | \"!\";"
                           @"class        ::= \".\" \"Identifier\";"
@@ -463,6 +463,7 @@
     [tokeniser addTokenRecogniser:[CPNumberRecogniser numberRecogniser]];
     [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" name:@"Comment"]];
     [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"//" endQuote:@"\n" name:@"Comment"]];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/" endQuote:@"/" escapedEndQuote:@"\\/" escapedEscape:@"\\\\" name:@"Regex"]];
     [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapedEndQuote:@"\\'" escapedEscape:@"\\\\" name:@"String"]];
     [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapedEndQuote:@"\\\"" escapedEscape:@"\\\\" name:@"String"]];
     [tokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniserWithInitialCharacters:initialIdCharacters identifierCharacters:identifierCharacters]];
