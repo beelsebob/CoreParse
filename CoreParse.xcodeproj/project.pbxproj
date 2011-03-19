@@ -14,22 +14,22 @@
 		1F0E8915130462F300537D04 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F0E8913130462F300537D04 /* InfoPlist.strings */; };
 		1F0E8918130462F300537D04 /* CoreParseTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 1F0E8917130462F300537D04 /* CoreParseTests.h */; };
 		1F0E891A130462F300537D04 /* CoreParseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0E8919130462F300537D04 /* CoreParseTests.m */; };
-		1F0E8935130463D000537D04 /* CoreParse.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8934130463D000537D04 /* CoreParse.h */; };
-		1F0E8939130463E900537D04 /* CPTokeniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8937130463E900537D04 /* CPTokeniser.h */; };
+		1F0E8935130463D000537D04 /* CoreParse.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8934130463D000537D04 /* CoreParse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F0E8939130463E900537D04 /* CPTokeniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8937130463E900537D04 /* CPTokeniser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F0E893A130463E900537D04 /* CPTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0E8938130463E900537D04 /* CPTokeniser.m */; };
-		1F0E8943130466D000537D04 /* CPTokenStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8941130466CF00537D04 /* CPTokenStream.h */; };
+		1F0E8943130466D000537D04 /* CPTokenStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8941130466CF00537D04 /* CPTokenStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F0E8944130466D000537D04 /* CPTokenStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0E8942130466D000537D04 /* CPTokenStream.m */; };
-		1F0E894C1306795800537D04 /* CPToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E894A1306795500537D04 /* CPToken.h */; };
+		1F0E894C1306795800537D04 /* CPToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E894A1306795500537D04 /* CPToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F0E894D1306795800537D04 /* CPToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0E894B1306795600537D04 /* CPToken.m */; };
-		1F1DFCE11306E3C300B22855 /* CPIdentifierRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1DFCDF1306E3C300B22855 /* CPIdentifierRecogniser.h */; };
+		1F1DFCE11306E3C300B22855 /* CPIdentifierRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1DFCDF1306E3C300B22855 /* CPIdentifierRecogniser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F1DFCE21306E3C300B22855 /* CPIdentifierRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1DFCE01306E3C300B22855 /* CPIdentifierRecogniser.m */; };
-		1F1DFCE51306E8E900B22855 /* CPIdentifierToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1DFCE31306E8E800B22855 /* CPIdentifierToken.h */; };
+		1F1DFCE51306E8E900B22855 /* CPIdentifierToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1DFCE31306E8E800B22855 /* CPIdentifierToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F1DFCE61306E8E900B22855 /* CPIdentifierToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1DFCE41306E8E900B22855 /* CPIdentifierToken.m */; };
-		1F1DFCEF1307D18B00B22855 /* CPQuotedToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1DFCED1307D18900B22855 /* CPQuotedToken.h */; };
+		1F1DFCEF1307D18B00B22855 /* CPQuotedToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1DFCED1307D18900B22855 /* CPQuotedToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F1DFCF01307D18B00B22855 /* CPQuotedToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1DFCEE1307D18900B22855 /* CPQuotedToken.m */; };
-		1F1DFCF31307D2C600B22855 /* CPQuotedRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1DFCF11307D2C500B22855 /* CPQuotedRecogniser.h */; };
+		1F1DFCF31307D2C600B22855 /* CPQuotedRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1DFCF11307D2C500B22855 /* CPQuotedRecogniser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F1DFCF41307D2C600B22855 /* CPQuotedRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1DFCF21307D2C500B22855 /* CPQuotedRecogniser.m */; };
-		1F3881DC1322ACE7000C8876 /* CPShiftReduceParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3881DA1322ACE7000C8876 /* CPShiftReduceParser.h */; };
+		1F3881DC1322ACE7000C8876 /* CPShiftReduceParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3881DA1322ACE7000C8876 /* CPShiftReduceParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F3881DD1322ACE7000C8876 /* CPShiftReduceParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3881DB1322ACE7000C8876 /* CPShiftReduceParser.m */; };
 		1F3881E11322ADC9000C8876 /* CPShiftReduceAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3881DF1322ADC9000C8876 /* CPShiftReduceAction.h */; };
 		1F3881E21322ADC9000C8876 /* CPShiftReduceAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3881E01322ADC9000C8876 /* CPShiftReduceAction.m */; };
@@ -39,43 +39,43 @@
 		1F3881EE1322B66B000C8876 /* CPShiftReduceActionTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3881EC1322B669000C8876 /* CPShiftReduceActionTable.m */; };
 		1F3881F11322B6A3000C8876 /* CPShiftReduceGotoTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3881EF1322B69E000C8876 /* CPShiftReduceGotoTable.h */; };
 		1F3881F21322B6A3000C8876 /* CPShiftReduceGotoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3881F01322B6A0000C8876 /* CPShiftReduceGotoTable.m */; };
-		1F3882011323DB4A000C8876 /* CPSLRParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3881FF1323DB49000C8876 /* CPSLRParser.h */; };
+		1F3882011323DB4A000C8876 /* CPSLRParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3881FF1323DB49000C8876 /* CPSLRParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F3882021323DB4A000C8876 /* CPSLRParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3882001323DB49000C8876 /* CPSLRParser.m */; };
 		1F3882051323DDD8000C8876 /* CPShiftReduceParserProtectedMethods.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3882031323DDD6000C8876 /* CPShiftReduceParserProtectedMethods.h */; };
 		1F3882091323F760000C8876 /* CPItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3882071323F75E000C8876 /* CPItem.h */; };
 		1F38820A1323F760000C8876 /* CPItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3882081323F75F000C8876 /* CPItem.m */; };
 		1F38820D132432B2000C8876 /* NSSetFunctional.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F38820B132432A1000C8876 /* NSSetFunctional.h */; };
 		1F38820E132432B2000C8876 /* NSSetFunctional.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F38820C132432AA000C8876 /* NSSetFunctional.m */; };
-		1F4683891306AA8500407491 /* CPKeywordRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683861306AA8500407491 /* CPKeywordRecogniser.h */; };
+		1F4683891306AA8500407491 /* CPKeywordRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683861306AA8500407491 /* CPKeywordRecogniser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F46838A1306AA8500407491 /* CPKeywordRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4683871306AA8500407491 /* CPKeywordRecogniser.m */; };
-		1F46838B1306AA8500407491 /* CPTokenRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683881306AA8500407491 /* CPTokenRecogniser.h */; };
-		1F46838E1306B45500407491 /* CPKeywordToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F46838C1306B45400407491 /* CPKeywordToken.h */; };
+		1F46838B1306AA8500407491 /* CPTokenRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683881306AA8500407491 /* CPTokenRecogniser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F46838E1306B45500407491 /* CPKeywordToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F46838C1306B45400407491 /* CPKeywordToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F46838F1306B45500407491 /* CPKeywordToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F46838D1306B45500407491 /* CPKeywordToken.m */; };
-		1F4683921306B71E00407491 /* CPEOFToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683901306B71C00407491 /* CPEOFToken.h */; };
+		1F4683921306B71E00407491 /* CPEOFToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683901306B71C00407491 /* CPEOFToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F4683931306B71E00407491 /* CPEOFToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4683911306B71D00407491 /* CPEOFToken.m */; };
-		1F4683961306BF6300407491 /* CPNumberRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683941306BF6200407491 /* CPNumberRecogniser.h */; };
+		1F4683961306BF6300407491 /* CPNumberRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683941306BF6200407491 /* CPNumberRecogniser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F4683971306BF6300407491 /* CPNumberRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4683951306BF6300407491 /* CPNumberRecogniser.m */; };
-		1F46839A1306C22A00407491 /* CPNumberToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683981306C22800407491 /* CPNumberToken.h */; };
+		1F46839A1306C22A00407491 /* CPNumberToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683981306C22800407491 /* CPNumberToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F46839B1306C22A00407491 /* CPNumberToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4683991306C22900407491 /* CPNumberToken.m */; };
-		1F4683A21306D66900407491 /* CPWhiteSpaceRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683A01306D66300407491 /* CPWhiteSpaceRecogniser.h */; };
+		1F4683A21306D66900407491 /* CPWhiteSpaceRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683A01306D66300407491 /* CPWhiteSpaceRecogniser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F4683A31306D66900407491 /* CPWhiteSpaceRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4683A11306D66500407491 /* CPWhiteSpaceRecogniser.m */; };
-		1F4683A61306D7D900407491 /* CPWhiteSpaceToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683A41306D7CB00407491 /* CPWhiteSpaceToken.h */; };
+		1F4683A61306D7D900407491 /* CPWhiteSpaceToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683A41306D7CB00407491 /* CPWhiteSpaceToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F4683A71306D7D900407491 /* CPWhiteSpaceToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4683A51306D7CF00407491 /* CPWhiteSpaceToken.m */; };
-		1F50A93E1308604A00C50D7D /* CPGrammar.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F50A93C1308604A00C50D7D /* CPGrammar.h */; };
+		1F50A93E1308604A00C50D7D /* CPGrammar.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F50A93C1308604A00C50D7D /* CPGrammar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F50A93F1308604A00C50D7D /* CPGrammar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F50A93D1308604A00C50D7D /* CPGrammar.m */; };
-		1F530B7E13215A6F00F52EB5 /* CPParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F530B7C13215A6F00F52EB5 /* CPParser.h */; };
+		1F530B7E13215A6F00F52EB5 /* CPParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F530B7C13215A6F00F52EB5 /* CPParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F530B7F13215A6F00F52EB5 /* CPParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B7D13215A6F00F52EB5 /* CPParser.m */; };
-		1F530B8713216A1A00F52EB5 /* CPSyntaxTree.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F530B8513216A1A00F52EB5 /* CPSyntaxTree.h */; };
+		1F530B8713216A1A00F52EB5 /* CPSyntaxTree.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F530B8513216A1A00F52EB5 /* CPSyntaxTree.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F530B8813216A1A00F52EB5 /* CPSyntaxTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B8613216A1A00F52EB5 /* CPSyntaxTree.m */; };
-		1F530B911322814000F52EB5 /* CPRule.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F530B8F1322813E00F52EB5 /* CPRule.h */; };
+		1F530B911322814000F52EB5 /* CPRule.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F530B8F1322813E00F52EB5 /* CPRule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F530B921322814000F52EB5 /* CPRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B901322813F00F52EB5 /* CPRule.m */; };
 		1FB3EB24132BA02C00ACC453 /* CPTestEvaluatorDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB22132BA02C00ACC453 /* CPTestEvaluatorDelegate.h */; };
 		1FB3EB25132BA02C00ACC453 /* CPTestEvaluatorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB23132BA02C00ACC453 /* CPTestEvaluatorDelegate.m */; };
-		1FB3EB2C132BB2F200ACC453 /* CPLR1Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB2A132BB2E600ACC453 /* CPLR1Parser.h */; };
+		1FB3EB2C132BB2F200ACC453 /* CPLR1Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB2A132BB2E600ACC453 /* CPLR1Parser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FB3EB2D132BB2F200ACC453 /* CPLR1Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB2B132BB2ED00ACC453 /* CPLR1Parser.m */; };
 		1FB3EB30132BB31700ACC453 /* CPLR1Item.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB2E132BB30300ACC453 /* CPLR1Item.h */; };
 		1FB3EB31132BB31700ACC453 /* CPLR1Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB2F132BB30A00ACC453 /* CPLR1Item.m */; };
-		1FB3EB3A132D096900ACC453 /* CPGrammarSymbol.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB38132D096700ACC453 /* CPGrammarSymbol.h */; };
+		1FB3EB3A132D096900ACC453 /* CPGrammarSymbol.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB38132D096700ACC453 /* CPGrammarSymbol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FB3EB3B132D096900ACC453 /* CPGrammarSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB39132D096800ACC453 /* CPGrammarSymbol.m */; };
 		1FB81322132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB81320132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.h */; };
 		1FB81323132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB81321132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.m */; };
@@ -424,19 +424,19 @@
 				1F530B7E13215A6F00F52EB5 /* CPParser.h in Headers */,
 				1F530B8713216A1A00F52EB5 /* CPSyntaxTree.h in Headers */,
 				1F530B911322814000F52EB5 /* CPRule.h in Headers */,
+				1F3882011323DB4A000C8876 /* CPSLRParser.h in Headers */,
+				1FB3EB2C132BB2F200ACC453 /* CPLR1Parser.h in Headers */,
+				1FB3EB3A132D096900ACC453 /* CPGrammarSymbol.h in Headers */,
 				1F3881DC1322ACE7000C8876 /* CPShiftReduceParser.h in Headers */,
 				1F3881E11322ADC9000C8876 /* CPShiftReduceAction.h in Headers */,
 				1F3881E51322AEE8000C8876 /* CPShiftReduceState.h in Headers */,
 				1F3881ED1322B66B000C8876 /* CPShiftReduceActionTable.h in Headers */,
 				1F3881F11322B6A3000C8876 /* CPShiftReduceGotoTable.h in Headers */,
-				1F3882011323DB4A000C8876 /* CPSLRParser.h in Headers */,
 				1F3882051323DDD8000C8876 /* CPShiftReduceParserProtectedMethods.h in Headers */,
 				1F3882091323F760000C8876 /* CPItem.h in Headers */,
 				1F38820D132432B2000C8876 /* NSSetFunctional.h in Headers */,
 				1FB3EB24132BA02C00ACC453 /* CPTestEvaluatorDelegate.h in Headers */,
-				1FB3EB2C132BB2F200ACC453 /* CPLR1Parser.h in Headers */,
 				1FB3EB30132BB31700ACC453 /* CPLR1Item.h in Headers */,
-				1FB3EB3A132D096900ACC453 /* CPGrammarSymbol.h in Headers */,
 				1FB81322132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.h in Headers */,
 				1FB81326132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.h in Headers */,
 			);

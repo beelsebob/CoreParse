@@ -487,5 +487,5 @@
         STFail(@"Failed to parse MapCSS", nil);
     }
 }
-
+    
 @end
