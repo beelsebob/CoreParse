@@ -8,7 +8,7 @@
 
 #import "CPTestMapCSSTokenisingDelegate.h"
 
-#import "CoreParse.h"
+#import <CoreParse/CoreParse.h>
 
 @implementation CPTestMapCSSTokenisingDelegate
 {

@@ -17,12 +17,73 @@
 @implementation CoreParseTests
 {
     CPParser *mapCssParser;
+    CPTokenStream *mapCSSTokenStream;
+    CPTokeniser *mapCssTokeniser;
 }
 
 - (void)setUp
 {
     [super setUp];
     
+    NSCharacterSet *identifierCharacters = [NSCharacterSet characterSetWithCharactersInString:
+                                            @"abcdefghijklmnopqrstuvwxyz"
+                                            @"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                            @"0123456789-_"];
+    NSCharacterSet *initialIdCharacters = [NSCharacterSet characterSetWithCharactersInString:
+                                           @"abcdefghijklmnopqrstuvwxyz"
+                                           @"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                           @"_-"];
+    mapCssTokeniser = [[CPTokeniser alloc] init];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"node"     invalidFollowingCharacters:identifierCharacters]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"way"      invalidFollowingCharacters:identifierCharacters]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"relation" invalidFollowingCharacters:identifierCharacters]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"area"     invalidFollowingCharacters:identifierCharacters]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"line"     invalidFollowingCharacters:identifierCharacters]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"*"]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"["]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"]"]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"{"]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"}"]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"("]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@")"]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"."]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@","]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@";"]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"@import"]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"url"]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"|z"]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"-"]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"!="]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"=~"]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"<"]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@">"]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"<="]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@">="]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"="]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@":"]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"eval"]];
+    [mapCssTokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
+    [mapCssTokeniser addTokenRecogniser:[CPNumberRecogniser numberRecogniser]];
+    [mapCssTokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" name:@"Comment"]];
+    [mapCssTokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"//" endQuote:@"\n" name:@"Comment"]];
+    [mapCssTokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/" endQuote:@"/" escapedEndQuote:@"\\/" escapedEscape:@"\\\\" name:@"Regex"]];
+    [mapCssTokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapedEndQuote:@"\\'" escapedEscape:@"\\\\" name:@"String"]];
+    [mapCssTokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapedEndQuote:@"\\\"" escapedEscape:@"\\\\" name:@"String"]];
+    [mapCssTokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniserWithInitialCharacters:initialIdCharacters identifierCharacters:identifierCharacters]];
+    [mapCssTokeniser setDelegate:[[[CPTestMapCSSTokenisingDelegate alloc] init] autorelease]];
+    
+    mapCSSTokenStream = [[mapCssTokeniser tokenise:
+                          @"node[highway=\"trunk\"]"
+                          @"{"
+                          @"  line-width: 5.0;"
+                          @"  label: jam;"
+                          @"} // Zomg boobs!\n"
+                          @"/* Haha, fooled you */"
+                          @"way relation[type=\"multipolygon\"]"
+                          @"{"
+                          @"  line-width: 0.0;"
+                          @"}"] retain];
+
     CPGrammar *grammar = [CPGrammar grammarWithStart:@"ruleset"
                                       backusNaurForm:
                           @"ruleset      ::= <rule> | <ruleset> <rule>;"
@@ -54,6 +115,8 @@
 - (void)tearDown
 {
     [mapCssParser release];
+    [mapCSSTokenStream release];
+    [mapCssTokeniser release];
     
     [super tearDown];
 }
@@ -217,48 +280,7 @@
 
 - (void)testMapCSSTokenisation
 {
-    NSCharacterSet *identifierCharacters = [NSCharacterSet characterSetWithCharactersInString:
-                                            @"abcdefghijklmnopqrstuvwxyz"
-                                            @"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                            @"0123456789-_"];
-    CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"node"     invalidFollowingCharacters:identifierCharacters]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"way"      invalidFollowingCharacters:identifierCharacters]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"relation" invalidFollowingCharacters:identifierCharacters]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"area"     invalidFollowingCharacters:identifierCharacters]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"line"     invalidFollowingCharacters:identifierCharacters]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"*"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"["]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"]"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"{"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"}"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"("]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@")"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"."]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@";"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"@import"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"|z"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"-"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"!="]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"=~"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"<"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@">"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"<="]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@">="]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"="]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@":"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"eval"]];
-    [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
-    [tokeniser addTokenRecogniser:[CPNumberRecogniser numberRecogniser]];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" name:@"Comment"]];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"//" endQuote:@"\n" name:@"Comment"]];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapedEndQuote:@"\\'" escapedEscape:@"\\\\" name:@"String"]];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapedEndQuote:@"\\\"" escapedEscape:@"\\\\" name:@"String"]];
-    [tokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniser]];
-    [tokeniser setDelegate:[[[CPTestWhiteSpaceIgnoringDelegate alloc] init] autorelease]];
-    CPTokenStream *tokenStream = [tokeniser tokenise:@"node[highway=\"trunk\"] { line-width: 5.0; label: jam; } // Zomg boobs!\n /* Haha, fooled you */ relation[type=\"multipolygon\"] { line-width: 0.0; }"];
-    
-    if (![tokenStream isEqualTo:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:
+    if (![mapCSSTokenStream isEqualTo:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:
            [CPKeywordToken tokenWithKeyword:@"node"],
            [CPKeywordToken tokenWithKeyword:@"["],
            [CPIdentifierToken tokenWithIdentifier:@"highway"],
@@ -275,6 +297,8 @@
            [CPIdentifierToken tokenWithIdentifier:@"jam"],
            [CPKeywordToken tokenWithKeyword:@";"],
            [CPKeywordToken tokenWithKeyword:@"}"],
+           [CPKeywordToken tokenWithKeyword:@"way"],
+           [CPWhiteSpaceToken whiteSpace:@" "],
            [CPKeywordToken tokenWithKeyword:@"relation"],
            [CPKeywordToken tokenWithKeyword:@"["],
            [CPIdentifierToken tokenWithIdentifier:@"type"],
@@ -422,65 +446,7 @@
 
 - (void)testMapCSSParsing
 {
-    NSCharacterSet *identifierCharacters = [NSCharacterSet characterSetWithCharactersInString:
-                                            @"abcdefghijklmnopqrstuvwxyz"
-                                            @"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                            @"0123456789-_"];
-    NSCharacterSet *initialIdCharacters = [NSCharacterSet characterSetWithCharactersInString:
-                                           @"abcdefghijklmnopqrstuvwxyz"
-                                           @"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                           @"_-"];
-    CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"node"     invalidFollowingCharacters:identifierCharacters]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"way"      invalidFollowingCharacters:identifierCharacters]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"relation" invalidFollowingCharacters:identifierCharacters]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"area"     invalidFollowingCharacters:identifierCharacters]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"line"     invalidFollowingCharacters:identifierCharacters]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"*"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"["]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"]"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"{"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"}"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"("]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@")"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"."]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@","]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@";"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"@import"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"url"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"|z"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"-"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"!="]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"=~"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"<"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@">"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"<="]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@">="]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"="]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@":"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"eval"]];
-    [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
-    [tokeniser addTokenRecogniser:[CPNumberRecogniser numberRecogniser]];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" name:@"Comment"]];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"//" endQuote:@"\n" name:@"Comment"]];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/" endQuote:@"/" escapedEndQuote:@"\\/" escapedEscape:@"\\\\" name:@"Regex"]];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapedEndQuote:@"\\'" escapedEscape:@"\\\\" name:@"String"]];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapedEndQuote:@"\\\"" escapedEscape:@"\\\\" name:@"String"]];
-    [tokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniserWithInitialCharacters:initialIdCharacters identifierCharacters:identifierCharacters]];
-    [tokeniser setDelegate:[[[CPTestMapCSSTokenisingDelegate alloc] init] autorelease]];
-    
-    CPTokenStream *tokenStream = [tokeniser tokenise:
-                                  @"node[highway=\"trunk\"]"
-                                  @"{"
-                                  @"  line-width: 5.0;"
-                                  @"  label: jam;"
-                                  @"} // Zomg boobs!\n"
-                                  @"/* Haha, fooled you */"
-                                  @"way relation[type=\"multipolygon\"]"
-                                  @"{"
-                                  @"  line-width: 0.0;"
-                                  @"}"];
-    CPSyntaxTree *tree = [mapCssParser parse:tokenStream];
+    CPSyntaxTree *tree = [mapCssParser parse:mapCSSTokenStream];
     
     if (nil == tree)
     {

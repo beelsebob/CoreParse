@@ -18,6 +18,8 @@
 - (CPShiftReduceAction *)actionForState:(NSUInteger)state token:(CPToken *)token;
 - (NSUInteger)gotoForState:(NSUInteger)state rule:(CPRule *)rule;
 
+- (void)error:(CPTokenStream *)tokenStream;
+
 @end
 
 @implementation CPShiftReduceParser
@@ -99,10 +101,15 @@
         }
         else
         {
-            NSLog(@"Parse error on input %@", nextToken);
+            [self error:tokenStream];
             return nil;
         }
     }
+}
+
+- (void)error:(CPTokenStream *)tokenStream
+{
+    NSLog(@"Parse error on input %@", tokenStream);
 }
 
 - (CPShiftReduceAction *)actionForState:(NSUInteger)state token:(CPToken *)token
