@@ -66,9 +66,9 @@
     [mapCssTokeniser addTokenRecogniser:[CPNumberRecogniser numberRecogniser]];
     [mapCssTokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" name:@"Comment"]];
     [mapCssTokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"//" endQuote:@"\n" name:@"Comment"]];
-    [mapCssTokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/" endQuote:@"/" escapedEndQuote:@"\\/" escapedEscape:@"\\\\" name:@"Regex"]];
-    [mapCssTokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapedEndQuote:@"\\'" escapedEscape:@"\\\\" name:@"String"]];
-    [mapCssTokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapedEndQuote:@"\\\"" escapedEscape:@"\\\\" name:@"String"]];
+    [mapCssTokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/"  endQuote:@"/"  escapeSequence:@"\\" name:@"Regex"]];
+    [mapCssTokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"'"  endQuote:@"'"  escapeSequence:@"\\" name:@"String"]];
+    [mapCssTokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapeSequence:@"\\" name:@"String"]];
     [mapCssTokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniserWithInitialCharacters:initialIdCharacters identifierCharacters:identifierCharacters]];
     [mapCssTokeniser setDelegate:[[[CPTestMapCSSTokenisingDelegate alloc] init] autorelease]];
     
@@ -249,7 +249,7 @@
         STFail(@"Failed to tokenise comment",nil);
     }
     
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapedEndQuote:@"\\\"" escapedEscape:@"\\\\" name:@"String"]];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapeSequence:@"\\" name:@"String"]];
     tokenStream = [tokeniser tokenise:@"/* abc */\"def\""];
     
     if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@" abc " quotedWith:@"/*" name:@"Comment"], [CPQuotedToken content:@"def" quotedWith:@"\"" name:@"String"], [CPEOFToken eof], nil]]])
@@ -258,19 +258,55 @@
     }
     
     tokenStream = [tokeniser tokenise:@"\"def\\\"\""];
-    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@"def\\\"" quotedWith:@"\"" name:@"String"], [CPEOFToken eof], nil]]])
+    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@"def\"" quotedWith:@"\"" name:@"String"], [CPEOFToken eof], nil]]])
     {
         STFail(@"Failed to tokenise string with quote in it",nil);
     }
     
     tokenStream = [tokeniser tokenise:@"\"def\\\\\""];
-    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@"def\\\\" quotedWith:@"\"" name:@"String"], [CPEOFToken eof], nil]]])
+    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@"def\\" quotedWith:@"\"" name:@"String"], [CPEOFToken eof], nil]]])
     {
         STFail(@"Failed to tokenise string with backslash in it",nil);
     }
+
+    tokeniser = [[[CPTokeniser alloc] init] autorelease];
+    CPQuotedRecogniser *rec = [CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapeSequence:@"\\" name:@"String"];
+    rec.escapeReplacer = ^ NSString * (NSString *str, NSUInteger *loc)
+    {
+        if ([str length] > *loc)
+        {
+            switch ([str characterAtIndex:*loc])
+            {
+                case 'b':
+                    *loc = *loc + 1;
+                    return @"\b";
+                case 'f':
+                    *loc = *loc + 1;
+                    return @"\f";
+                case 'n':
+                    *loc = *loc + 1;
+                    return @"\n";
+                case 'r':
+                    *loc = *loc + 1;
+                    return @"\r";
+                case 't':
+                    *loc = *loc + 1;
+                    return @"\t";
+                default:
+                    break;
+            }
+        }
+        return nil;
+    };
+    [tokeniser addTokenRecogniser:rec];
+    tokenStream = [tokeniser tokenise:@"\"\\n\\r\\f\""];
+    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@"\n\r\f" quotedWith:@"\"" name:@"String"], [CPEOFToken eof], nil]]])
+    {
+        STFail(@"Failed to correctly tokenise string with recognised escape chars", nil);
+    }
     
     tokeniser = [[[CPTokeniser alloc] init] autorelease];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapedEndQuote:nil escapedEscape:nil maximumLength:1 name:@"Character"]];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapeSequence:nil maximumLength:1 name:@"Character"]];
     tokenStream = [tokeniser tokenise:@"'a''bc'"];
     if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@"a" quotedWith:@"'" name:@"Character"], nil]]])
     {

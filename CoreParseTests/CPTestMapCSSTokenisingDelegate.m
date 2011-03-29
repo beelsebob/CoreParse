@@ -12,11 +12,59 @@
 
 @implementation CPTestMapCSSTokenisingDelegate
 {
+    NSCharacterSet *symbolsSet;
+    int nestingDepth;
     BOOL justTokenisedObject;
+    BOOL inRange;
+}
+
+- (id)init
+{
+    self = [super init];
+    
+    if (nil != self)
+    {
+        symbolsSet = [[NSCharacterSet characterSetWithCharactersInString:@"*[]{}().,;@|-!=<>:!"] retain];
+    }
+    
+    return self;
+}
+
+- (void)dealloc
+{
+    [symbolsSet release];
+    
+    [super dealloc];
 }
 
 - (BOOL)tokeniser:(CPTokeniser *)tokeniser shouldConsumeToken:(CPToken *)token
 {
+    NSString *name = [token name];
+    if ([name isEqualToString:@"{"] || [name isEqualToString:@"["])
+    {
+        nestingDepth++;
+    }
+    else if ([name isEqualToString:@"}"] || [name isEqualToString:@"]"])
+    {
+        nestingDepth--;
+    }
+    else if ([name isEqualToString:@"|z"])
+    {
+        inRange = YES;
+    }
+    else if (inRange && ![token isKindOfClass:[CPNumberToken class]] && ![name isEqualToString:@"-"])
+    {
+        inRange = NO;
+    }
+    else if (inRange && [token isKindOfClass:[CPNumberToken class]])
+    {
+        return [[(CPNumberToken *)token number] floatValue] >= 0;
+    }
+    else if ([token isKindOfClass:[CPKeywordToken class]])
+    {
+        return 0 == nestingDepth || [symbolsSet characterIsMember:[name characterAtIndex:0]] || [name isEqualToString:@"eval"] || [name isEqualToString:@"url"] || [name isEqualToString:@"set"];
+    }
+    
     return YES;
 }
 
@@ -42,7 +90,7 @@
     }
 
     if ([name isEqualToString:@"node"] || [name isEqualToString:@"way" ] || [name isEqualToString:@"relation"] ||
-        [name isEqualToString:@"area"] || [name isEqualToString:@"line"] || [name isEqualToString:@"*"])
+        [name isEqualToString:@"area"] || [name isEqualToString:@"line"] || [name isEqualToString:@"canvas"] || [name isEqualToString:@"*"])
     {
         justTokenisedObject = YES;
     }

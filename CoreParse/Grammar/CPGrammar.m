@@ -122,6 +122,8 @@
 @implementation CPGrammar
 {
     NSMutableDictionary *rules;
+    
+    NSMutableDictionary *followCache;
 }
 
 @synthesize start;
@@ -165,6 +167,7 @@
     {
         [self setStart:initStart];
         [self setRules:initRules];
+        followCache = [[NSMutableDictionary alloc] init];
     }
     
     return self;
@@ -185,7 +188,7 @@
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"|"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@";"]];
     [tokeniser addTokenRecogniser:[CPNumberRecogniser integerRecogniser]];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapedEndQuote:@"\\\"" escapedEscape:@"\\\\" name:@"String"]];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapeSequence:@"\\" name:@"String"]];
     [tokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniser]];
     [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
     [tokeniser setDelegate:del];
@@ -230,6 +233,7 @@
 {
     [start release];
     [rules release];
+    [followCache release];
     
     [super dealloc];
 }
@@ -304,33 +308,41 @@
 
 - (NSSet *)follow:(NSString *)name
 {
-    NSMutableSet *f = [NSMutableSet setWithObject:@"EOF"];
-    for (CPRule *rule in [self allRules])
+    NSSet *follows = [followCache objectForKey:name];
+    
+    if (nil == follows)
     {
-        NSArray *rightHandSide = [rule rightHandSideElements];
-        NSUInteger numElements = [rightHandSide count];
-        [rightHandSide enumerateObjectsUsingBlock:^(CPGrammarSymbol *rhsE, NSUInteger idx, BOOL *s)
-         {
-             if (![rhsE isTerminal] && [[rhsE name] isEqualToString:name])
+        NSMutableSet *f = [NSMutableSet setWithObject:@"EOF"];
+        for (CPRule *rule in [self allRules])
+        {
+            NSArray *rightHandSide = [rule rightHandSideElements];
+            NSUInteger numElements = [rightHandSide count];
+            [rightHandSide enumerateObjectsUsingBlock:^(CPGrammarSymbol *rhsE, NSUInteger idx, BOOL *s)
              {
-                 if (idx + 1 < numElements)
+                 if (![rhsE isTerminal] && [[rhsE name] isEqualToString:name])
                  {
-                     NSSet *first = [self first:[rightHandSide subarrayWithRange:NSMakeRange(idx+1, [rightHandSide count] - idx - 1)]];
-                     NSSet *firstMinusEmpty = [first objectsPassingTest:^ BOOL (NSString *symbolName, BOOL *fstop)
-                                               {
-                                                   return ![symbolName isEqualToString:@""];
-                                               }];
-                     [f unionSet:firstMinusEmpty];
+                     if (idx + 1 < numElements)
+                     {
+                         NSSet *first = [self first:[rightHandSide subarrayWithRange:NSMakeRange(idx+1, [rightHandSide count] - idx - 1)]];
+                         NSSet *firstMinusEmpty = [first objectsPassingTest:^ BOOL (NSString *symbolName, BOOL *fstop)
+                                                   {
+                                                       return ![symbolName isEqualToString:@""];
+                                                   }];
+                         [f unionSet:firstMinusEmpty];
+                     }
+                     else if (![[rule name] isEqualToString:name])
+                     {
+                         [f unionSet:[self follow:[rule name]]];
+                     }
                  }
-                 else if (![[rule name] isEqualToString:name])
-                 {
-                     [f unionSet:[self follow:[rule name]]];
-                 }
-             }
-         }];
+             }];
+        }
+        
+        follows = f;
+        [followCache setObject:f forKey:name];
     }
     
-    return f;
+    return follows;
 }
 
 - (NSSet *)first:(NSArray *)symbols
