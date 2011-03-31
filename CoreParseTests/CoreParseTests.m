@@ -271,33 +271,33 @@
 
     tokeniser = [[[CPTokeniser alloc] init] autorelease];
     CPQuotedRecogniser *rec = [CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapeSequence:@"\\" name:@"String"];
-    rec.escapeReplacer = ^ NSString * (NSString *str, NSUInteger *loc)
-    {
-        if ([str length] > *loc)
-        {
-            switch ([str characterAtIndex:*loc])
-            {
-                case 'b':
-                    *loc = *loc + 1;
-                    return @"\b";
-                case 'f':
-                    *loc = *loc + 1;
-                    return @"\f";
-                case 'n':
-                    *loc = *loc + 1;
-                    return @"\n";
-                case 'r':
-                    *loc = *loc + 1;
-                    return @"\r";
-                case 't':
-                    *loc = *loc + 1;
-                    return @"\t";
-                default:
-                    break;
-            }
-        }
-        return nil;
-    };
+    [rec setEscapeReplacer:^ NSString * (NSString *str, NSUInteger *loc)
+     {
+         if ([str length] > *loc)
+         {
+             switch ([str characterAtIndex:*loc])
+             {
+                 case 'b':
+                     *loc = *loc + 1;
+                     return @"\b";
+                 case 'f':
+                     *loc = *loc + 1;
+                     return @"\f";
+                 case 'n':
+                     *loc = *loc + 1;
+                     return @"\n";
+                 case 'r':
+                     *loc = *loc + 1;
+                     return @"\r";
+                 case 't':
+                     *loc = *loc + 1;
+                     return @"\t";
+                 default:
+                     break;
+             }
+         }
+         return nil;
+     }];
     [tokeniser addTokenRecogniser:rec];
     tokenStream = [tokeniser tokenise:@"\"\\n\\r\\f\""];
     if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@"\n\r\f" quotedWith:@"\"" name:@"String"], [CPEOFToken eof], nil]]])
@@ -487,6 +487,28 @@
     if (nil == tree)
     {
         STFail(@"Failed to parse MapCSS", nil);
+    }
+}
+
+- (void)testJSONParsing
+{
+    CPJSONParser *jsonParser = [[[CPJSONParser alloc] init] autorelease];
+    id<NSObject> result = [jsonParser parse:@"{\"a\":\"b\", \"c\":true, \"d\":5.93, \"e\":[1,2,3], \"f\":null}"];
+    
+    NSDictionary *expectedResult = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    @"b"                             , @"a",
+                                    [NSNumber numberWithBool:YES]    , @"c",
+                                    [NSNumber numberWithDouble:5.93] , @"d",
+                                    [NSArray arrayWithObjects:
+                                     [NSNumber numberWithDouble:1],
+                                     [NSNumber numberWithDouble:2],
+                                     [NSNumber numberWithDouble:3],
+                                     nil]                            , @"e",
+                                    [NSNull null]                    , @"f",
+                                    nil];
+    if (![result isEqual:expectedResult])
+    {
+        STFail(@"Failed to parse JSON", nil);
     }
 }
     
