@@ -20,8 +20,8 @@
 - (BOOL)constructShiftReduceTables;
 
 - (NSSet *)closure:(NSSet *)i underGrammar:(CPGrammar *)g;
-- (NSSet *)gotoWithItems:(NSSet *)i symbol:(NSObject *)symbol underGrammar:(CPGrammar *)g;
-- (NSArray *)itemsForGrammar:(CPGrammar *)aug;
+- (NSSet *)gotoKernelWithItems:(NSSet *)i symbol:(NSObject *)symbol underGrammar:(CPGrammar *)g;
+- (NSArray *)kernelsForGrammar:(CPGrammar *)aug;
 
 @end
 
@@ -30,16 +30,18 @@
 - (BOOL)constructShiftReduceTables
 {
     CPGrammar *aug = [[self grammar] augmentedGrammar];
-    NSArray *items = [self itemsForGrammar:aug];
-    NSUInteger itemCount = [items count];
+    NSArray *kernels = [self kernelsForGrammar:aug];
+    NSUInteger itemCount = [kernels count];
     
     [self setActionTable:[[[CPShiftReduceActionTable alloc] initWithCapacity:itemCount] autorelease]];
-    [self setGotoTable:[[[CPShiftReduceGotoTable   alloc] initWithCapacity:itemCount] autorelease]];
+    [self setGotoTable:  [[[CPShiftReduceGotoTable   alloc] initWithCapacity:itemCount] autorelease]];
     
+    NSArray *allNonTerminalNames = [[self grammar] allNonTerminalNames];
     NSUInteger idx = 0;
-    for (NSSet *itemsSet in items)
+    for (NSSet *kernel in kernels)
     {
-        for (CPItem *item in itemsSet)
+        NSSet *itemSet = [self closure:kernel underGrammar:aug];
+        for (CPItem *item in itemSet)
         {
             CPGrammarSymbol *next = [item nextSymbol];
             if (nil == next)
@@ -67,8 +69,8 @@
             }
             else if ([next isTerminal])
             {
-                NSSet *g = [self gotoWithItems:itemsSet symbol:next underGrammar:aug];
-                NSUInteger ix = [items indexOfObject:g];
+                NSSet *g = [self gotoKernelWithItems:itemSet symbol:next underGrammar:aug];
+                NSUInteger ix = [kernels indexOfObject:g];
                 BOOL success = [[self actionTable] setAction:[CPShiftReduceAction shiftAction:ix] forState:idx name:[next name]];
                 if (!success)
                 {
@@ -76,26 +78,21 @@
                 }
             }
         }
-        idx++;
-    }
-
-    NSArray *allNonTerminalNames = [[self grammar] allNonTerminalNames];
-    idx = 0;
-    for (NSSet *itemsSet in items)
-    {
+        
         for (NSString *nonTerminalName in allNonTerminalNames)
         {
-            NSSet *g = [self gotoWithItems:itemsSet symbol:[CPGrammarSymbol nonTerminalWithName:nonTerminalName] underGrammar:aug];
-            NSUInteger gotoIndex = [items indexOfObject:g];
+            NSSet *g = [self gotoKernelWithItems:itemSet symbol:[CPGrammarSymbol nonTerminalWithName:nonTerminalName] underGrammar:aug];
+            NSUInteger gotoIndex = [kernels indexOfObject:g];
             BOOL success = [[self gotoTable] setGoto:gotoIndex forState:idx nonTerminalNamed:nonTerminalName];
             if (!success)
             {
                 return NO;
             }
         }
+        
         idx++;
     }
-    
+
     return YES;
 }
 
@@ -129,7 +126,7 @@
     return [j autorelease];
 }
 
-- (NSSet *)gotoWithItems:(NSSet *)i symbol:(NSObject *)symbol underGrammar:(CPGrammar *)g
+- (NSSet *)gotoKernelWithItems:(NSSet *)i symbol:(NSObject *)symbol underGrammar:(CPGrammar *)g
 {
     return [self closure:[[i objectsPassingTest:^ BOOL (CPItem *item, BOOL *stop)
                            {
@@ -142,21 +139,22 @@
             underGrammar:g];
 }
 
-- (NSArray *)itemsForGrammar:(CPGrammar *)aug
+- (NSArray *)kernelsForGrammar:(CPGrammar *)aug
 {
     CPRule *startRule = [[aug rulesForNonTerminalWithName:@"s'"] objectAtIndex:0];
-    NSSet *initialItemSet = [self closure:[NSSet setWithObject:[CPItem itemWithRule:startRule position:0]] underGrammar:aug];
-    NSMutableArray *c = [NSMutableArray arrayWithObject:initialItemSet];
-    NSMutableArray *processingQueue = [NSMutableArray arrayWithObject:initialItemSet];
+    NSSet *initialKernel = [NSSet setWithObject:[CPItem itemWithRule:startRule position:0]];
+    NSMutableArray *c = [NSMutableArray arrayWithObject:initialKernel];
+    NSMutableArray *processingQueue = [NSMutableArray arrayWithObject:initialKernel];
     
     while ([processingQueue count] > 0)
     {
-        NSSet *itemSet = [processingQueue objectAtIndex:0];
+        NSSet *kernel = [processingQueue objectAtIndex:0];
+        NSSet *itemSet = [self closure:kernel underGrammar:aug];
         NSSet *validNexts = [itemSet map:^ id (CPItem *item) { return [item nextSymbol]; }];
         
         for (CPGrammarSymbol *s in validNexts)
         {
-            NSSet *g = [self gotoWithItems:itemSet symbol:s underGrammar:aug];
+            NSSet *g = [self gotoKernelWithItems:itemSet symbol:s underGrammar:aug];
             if (![c containsObject:g])
             {
                 [processingQueue addObject:g];
