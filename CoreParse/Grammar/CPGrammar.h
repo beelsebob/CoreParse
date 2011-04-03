@@ -32,6 +32,10 @@
 
 - (NSUInteger)indexOfRule:(CPRule *)rule;
 
+- (NSSet *)lr0Closure:(NSSet *)i;
+- (NSSet *)lr0GotoKernelWithItems:(NSSet *)i symbol:(NSObject *)symbol;
+- (NSArray *)lr0Kernels;
+
 - (NSSet *)follow:(NSString *)name;
 - (NSSet *)first:(NSArray *)obj;
 

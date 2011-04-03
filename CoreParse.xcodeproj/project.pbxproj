@@ -46,7 +46,7 @@
 		1F38820A1323F760000C8876 /* CPItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3882081323F75F000C8876 /* CPItem.m */; };
 		1F38820D132432B2000C8876 /* NSSetFunctional.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F38820B132432A1000C8876 /* NSSetFunctional.h */; };
 		1F38820E132432B2000C8876 /* NSSetFunctional.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F38820C132432AA000C8876 /* NSSetFunctional.m */; };
-		1F45A2E413422E1300092D78 /* CPJSONParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F45A2E213422E1300092D78 /* CPJSONParser.h */; };
+		1F45A2E413422E1300092D78 /* CPJSONParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F45A2E213422E1300092D78 /* CPJSONParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F45A2E513422E1300092D78 /* CPJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F45A2E313422E1300092D78 /* CPJSONParser.m */; };
 		1F4683891306AA8500407491 /* CPKeywordRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683861306AA8500407491 /* CPKeywordRecogniser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F46838A1306AA8500407491 /* CPKeywordRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4683871306AA8500407491 /* CPKeywordRecogniser.m */; };
@@ -441,6 +441,7 @@
 				1F3882011323DB4A000C8876 /* CPSLRParser.h in Headers */,
 				1FB3EB2C132BB2F200ACC453 /* CPLR1Parser.h in Headers */,
 				1FB3EB3A132D096900ACC453 /* CPGrammarSymbol.h in Headers */,
+				1F45A2E413422E1300092D78 /* CPJSONParser.h in Headers */,
 				1F3881DC1322ACE7000C8876 /* CPShiftReduceParser.h in Headers */,
 				1F3881E11322ADC9000C8876 /* CPShiftReduceAction.h in Headers */,
 				1F3881E51322AEE8000C8876 /* CPShiftReduceState.h in Headers */,
@@ -453,7 +454,6 @@
 				1FB3EB30132BB31700ACC453 /* CPLR1Item.h in Headers */,
 				1FB81322132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.h in Headers */,
 				1FB81326132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.h in Headers */,
-				1F45A2E413422E1300092D78 /* CPJSONParser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

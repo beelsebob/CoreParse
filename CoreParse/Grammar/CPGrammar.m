@@ -21,6 +21,10 @@
 #import "CPQuotedToken.h"
 #import "CPNumberToken.h"
 
+#import "CPItem.h"
+
+#import "NSSetFunctional.h"
+
 @interface CPBNFParserDelegate : NSObject <CPTokeniserDelegate,CPParserDelegate>
 {}
 @end
@@ -304,6 +308,77 @@
     }
     
     return s;
+}
+
+- (NSSet *)lr0Closure:(NSSet *)i
+{
+    NSMutableSet *j = [i mutableCopy];
+    NSMutableArray *processingQueue = [[j allObjects] mutableCopy];
+    
+    while ([processingQueue count] > 0)
+    {
+        CPItem *item = [processingQueue objectAtIndex:0];
+        CPGrammarSymbol *nextSymbol = [item nextSymbol];
+        if (![nextSymbol isTerminal])
+        {
+            [[self rulesForNonTerminalWithName:[nextSymbol name]] enumerateObjectsUsingBlock:^(CPRule *rule, NSUInteger ix, BOOL *s)
+             {
+                 CPItem *newItem = [CPItem itemWithRule:rule position:0];
+                 if (![j containsObject:newItem])
+                 {
+                     [processingQueue addObject:newItem];
+                     [j addObject:newItem];
+                 }
+             }];
+        }
+        
+        [processingQueue removeObjectAtIndex:0];
+    }
+    
+    [processingQueue release];
+    
+    return [j autorelease];
+}
+
+- (NSSet *)lr0GotoKernelWithItems:(NSSet *)i symbol:(NSObject *)symbol
+{
+    return [self lr0Closure:[[i objectsPassingTest:^ BOOL (CPItem *item, BOOL *stop)
+                              {
+                                  return [symbol isEqual:[item nextSymbol]];
+                              }]
+                             map:^ id (CPItem *item)
+                             {
+                                 return [item itemByMovingDotRight];
+                             }]];
+}
+
+- (NSArray *)lr0Kernels
+{
+    CPRule *startRule = [[self rulesForNonTerminalWithName:@"s'"] objectAtIndex:0];
+    NSSet *initialKernel = [NSSet setWithObject:[CPItem itemWithRule:startRule position:0]];
+    NSMutableArray *c = [NSMutableArray arrayWithObject:initialKernel];
+    NSMutableArray *processingQueue = [NSMutableArray arrayWithObject:initialKernel];
+    
+    while ([processingQueue count] > 0)
+    {
+        NSSet *kernel = [processingQueue objectAtIndex:0];
+        NSSet *itemSet = [self lr0Closure:kernel];
+        NSSet *validNexts = [itemSet map:^ id (CPItem *item) { return [item nextSymbol]; }];
+        
+        for (CPGrammarSymbol *s in validNexts)
+        {
+            NSSet *g = [self lr0GotoKernelWithItems:itemSet symbol:s];
+            if (![c containsObject:g])
+            {
+                [processingQueue addObject:g];
+                [c addObject:g];
+            }
+        }
+        
+        [processingQueue removeObjectAtIndex:0];
+    }
+    
+    return c;
 }
 
 - (NSSet *)follow:(NSString *)name
