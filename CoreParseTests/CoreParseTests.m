@@ -379,7 +379,7 @@
     
     if ([result intValue] != 157)
     {
-        STFail(@"Parsed expression had incorrect value", nil);
+        STFail(@"Parsed expression had incorrect value when using SLR parser", nil);
     }
 }
 
@@ -408,7 +408,7 @@
     
     if ([result intValue] != 157)
     {
-        STFail(@"Parsed expression had incorrect value", nil);
+        STFail(@"Parsed expression had incorrect value when using LR(1) parser", nil);
     }
     
     tokeniser = [[[CPTokeniser alloc] init] autorelease];
@@ -430,7 +430,87 @@
     
     if (![tree isEqual:sTree])
     {
-        STFail(@"Parsing LR1 grammar failed", nil);
+        STFail(@"Parsing LR(1) grammar failed when using LR(1) parser", nil);
+    }
+}
+
+- (void)testLALR1
+{
+    CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
+    [tokeniser addTokenRecogniser:[CPNumberRecogniser integerRecogniser]];
+    [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"="]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"*"]];
+    [tokeniser setDelegate:[[[CPTestWhiteSpaceIgnoringDelegate alloc] init] autorelease]];
+    CPTokenStream *tokenStream = [tokeniser tokenise:@"*10 = 5"];
+    
+    CPRule *sL = [CPRule ruleWithName:@"s" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"l"], [CPGrammarSymbol terminalWithName:@"="], [CPGrammarSymbol nonTerminalWithName:@"r"], nil]];
+    CPRule *sR = [CPRule ruleWithName:@"s" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"r"], nil]];
+    CPRule *lM = [CPRule ruleWithName:@"l" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"*"], [CPGrammarSymbol nonTerminalWithName:@"r"], nil]];
+    CPRule *lN = [CPRule ruleWithName:@"l" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"Number"], nil]];
+    CPRule *rL = [CPRule ruleWithName:@"r" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"l"], nil]];
+    CPGrammar *grammar = [CPGrammar grammarWithStart:@"s" rules:[NSArray arrayWithObjects:sL, sR, lM, lN, rL, nil]];
+    CPLALR1Parser *parser = [CPLALR1Parser parserWithGrammar:grammar];
+    CPSyntaxTree *tree = [parser parse:tokenStream];
+    
+    CPSyntaxTree *tenTree  = [CPSyntaxTree syntaxTreeWithRule:lN children:[NSArray arrayWithObject:[CPNumberToken tokenWithNumber:[NSNumber numberWithInt:10]]]];
+    CPSyntaxTree *fiveTree = [CPSyntaxTree syntaxTreeWithRule:lN children:[NSArray arrayWithObject:[CPNumberToken tokenWithNumber:[NSNumber numberWithInt:5]]]];
+    CPSyntaxTree *tenRTree = [CPSyntaxTree syntaxTreeWithRule:rL children:[NSArray arrayWithObject:tenTree]];
+    CPSyntaxTree *starTenTree = [CPSyntaxTree syntaxTreeWithRule:lM children:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"*"], tenRTree, nil]];
+    CPSyntaxTree *fiveRTree = [CPSyntaxTree syntaxTreeWithRule:rL children:[NSArray arrayWithObject:fiveTree]];
+    CPSyntaxTree *wholeTree = [CPSyntaxTree syntaxTreeWithRule:sL children:[NSArray arrayWithObjects:starTenTree, [CPKeywordToken tokenWithKeyword:@"="], fiveRTree, nil]];
+    
+    if (![tree isEqual:wholeTree])
+    {
+        STFail(@"Parsing LALR(1) grammar failed", nil);
+    }
+    
+    tokeniser = [[[CPTokeniser alloc] init] autorelease];
+    [tokeniser addTokenRecogniser:[CPNumberRecogniser integerRecogniser]];
+    [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"+"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"*"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"("]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@")"]];
+    [tokeniser setDelegate:[[[CPTestWhiteSpaceIgnoringDelegate alloc] init] autorelease]];
+    tokenStream = [tokeniser tokenise:@"5 + (2 * 5 + 9) * 8"];
+    
+    CPRule *tE = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol nonTerminalWithName:@"t"]] tag:0];
+    CPRule *aE = [CPRule ruleWithName:@"e" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"e"], [CPGrammarSymbol terminalWithName:@"+"], [CPGrammarSymbol nonTerminalWithName:@"t"], nil] tag:1];
+    CPRule *fT = [CPRule ruleWithName:@"t" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol nonTerminalWithName:@"f"]] tag:2];
+    CPRule *mT = [CPRule ruleWithName:@"t" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"t"], [CPGrammarSymbol terminalWithName:@"*"], [CPGrammarSymbol nonTerminalWithName:@"f"], nil] tag:3];
+    CPRule *iF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol terminalWithName:@"Number"]] tag:4];
+    CPRule *pF = [CPRule ruleWithName:@"f" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"("], [CPGrammarSymbol nonTerminalWithName:@"e"], [CPGrammarSymbol terminalWithName:@")"], nil] tag:5];
+    grammar = [CPGrammar grammarWithStart:@"e" rules:[NSArray arrayWithObjects:tE, aE, fT, mT, iF, pF, nil]];
+    parser = [CPLALR1Parser parserWithGrammar:grammar];
+    [parser setDelegate:[[[CPTestEvaluatorDelegate alloc] init] autorelease]];
+    NSNumber *result = [parser parse:tokenStream];
+    
+    if ([result intValue] != 157)
+    {
+        STFail(@"Parsed expression had incorrect value when using LALR(1) parser", nil);
+    }
+    
+    tokeniser = [[[CPTokeniser alloc] init] autorelease];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"a"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"b"]];
+    tokenStream = [tokeniser tokenise:@"aaabab"];
+    CPRule *s  = [CPRule ruleWithName:@"s" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"b"], [CPGrammarSymbol nonTerminalWithName:@"b"], nil]];
+    CPRule *b1 = [CPRule ruleWithName:@"b" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"a"], [CPGrammarSymbol nonTerminalWithName:@"b"], nil]];
+    CPRule *b2 = [CPRule ruleWithName:@"b" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol terminalWithName:@"b"]]];
+    grammar = [CPGrammar grammarWithStart:@"s" rules:[NSArray arrayWithObjects:s, b1, b2, nil]];
+    parser = [CPLALR1Parser parserWithGrammar:grammar];
+    tree = [parser parse:tokenStream];
+    
+    CPSyntaxTree *bTree = [CPSyntaxTree syntaxTreeWithRule:b2 children:[NSArray arrayWithObject:[CPKeywordToken tokenWithKeyword:@"b"]]];
+    CPSyntaxTree *abTree = [CPSyntaxTree syntaxTreeWithRule:b1 children:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"a"], bTree, nil]];
+    CPSyntaxTree *aabTree = [CPSyntaxTree syntaxTreeWithRule:b1 children:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"a"], abTree, nil]];
+    CPSyntaxTree *aaabTree = [CPSyntaxTree syntaxTreeWithRule:b1 children:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"a"], aabTree, nil]];
+    CPSyntaxTree *sTree = [CPSyntaxTree syntaxTreeWithRule:s children:[NSArray arrayWithObjects:aaabTree, abTree, nil]];
+    
+    if (![tree isEqual:sTree])
+    {
+        STFail(@"Parsing LR(1) grammar failed when using LALR(1) parser", nil);
     }
 }
 

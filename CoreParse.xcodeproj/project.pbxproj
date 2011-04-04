@@ -71,6 +71,8 @@
 		1F530B8813216A1A00F52EB5 /* CPSyntaxTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B8613216A1A00F52EB5 /* CPSyntaxTree.m */; };
 		1F530B911322814000F52EB5 /* CPRule.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F530B8F1322813E00F52EB5 /* CPRule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F530B921322814000F52EB5 /* CPRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B901322813F00F52EB5 /* CPRule.m */; };
+		1F6D44901348CC9500E982C7 /* CPLALR1Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F6D448E1348CC9500E982C7 /* CPLALR1Parser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F6D44911348CC9600E982C7 /* CPLALR1Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D448F1348CC9500E982C7 /* CPLALR1Parser.m */; };
 		1FB3EB24132BA02C00ACC453 /* CPTestEvaluatorDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB22132BA02C00ACC453 /* CPTestEvaluatorDelegate.h */; };
 		1FB3EB25132BA02C00ACC453 /* CPTestEvaluatorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB23132BA02C00ACC453 /* CPTestEvaluatorDelegate.m */; };
 		1FB3EB2C132BB2F200ACC453 /* CPLR1Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB2A132BB2E600ACC453 /* CPLR1Parser.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -167,6 +169,8 @@
 		1F530B8613216A1A00F52EB5 /* CPSyntaxTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSyntaxTree.m; sourceTree = "<group>"; };
 		1F530B8F1322813E00F52EB5 /* CPRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRule.h; sourceTree = "<group>"; };
 		1F530B901322813F00F52EB5 /* CPRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRule.m; sourceTree = "<group>"; };
+		1F6D448E1348CC9500E982C7 /* CPLALR1Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLALR1Parser.h; sourceTree = "<group>"; };
+		1F6D448F1348CC9500E982C7 /* CPLALR1Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLALR1Parser.m; sourceTree = "<group>"; };
 		1FB3EB22132BA02C00ACC453 /* CPTestEvaluatorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTestEvaluatorDelegate.h; sourceTree = "<group>"; };
 		1FB3EB23132BA02C00ACC453 /* CPTestEvaluatorDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTestEvaluatorDelegate.m; sourceTree = "<group>"; };
 		1FB3EB2A132BB2E600ACC453 /* CPLR1Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLR1Parser.h; sourceTree = "<group>"; };
@@ -316,17 +320,19 @@
 				1F3881EC1322B669000C8876 /* CPShiftReduceActionTable.m */,
 				1F3881EF1322B69E000C8876 /* CPShiftReduceGotoTable.h */,
 				1F3881F01322B6A0000C8876 /* CPShiftReduceGotoTable.m */,
+				1F3882071323F75E000C8876 /* CPItem.h */,
+				1F3882081323F75F000C8876 /* CPItem.m */,
+				1FB3EB2E132BB30300ACC453 /* CPLR1Item.h */,
+				1FB3EB2F132BB30A00ACC453 /* CPLR1Item.m */,
 				1F3881DA1322ACE7000C8876 /* CPShiftReduceParser.h */,
 				1F3882031323DDD6000C8876 /* CPShiftReduceParserProtectedMethods.h */,
 				1F3881DB1322ACE7000C8876 /* CPShiftReduceParser.m */,
 				1F3881FF1323DB49000C8876 /* CPSLRParser.h */,
 				1F3882001323DB49000C8876 /* CPSLRParser.m */,
-				1F3882071323F75E000C8876 /* CPItem.h */,
-				1F3882081323F75F000C8876 /* CPItem.m */,
 				1FB3EB2A132BB2E600ACC453 /* CPLR1Parser.h */,
 				1FB3EB2B132BB2ED00ACC453 /* CPLR1Parser.m */,
-				1FB3EB2E132BB30300ACC453 /* CPLR1Item.h */,
-				1FB3EB2F132BB30A00ACC453 /* CPLR1Item.m */,
+				1F6D448E1348CC9500E982C7 /* CPLALR1Parser.h */,
+				1F6D448F1348CC9500E982C7 /* CPLALR1Parser.m */,
 			);
 			path = CPShiftReduceParsers;
 			sourceTree = "<group>";
@@ -440,6 +446,7 @@
 				1F530B911322814000F52EB5 /* CPRule.h in Headers */,
 				1F3882011323DB4A000C8876 /* CPSLRParser.h in Headers */,
 				1FB3EB2C132BB2F200ACC453 /* CPLR1Parser.h in Headers */,
+				1F6D44901348CC9500E982C7 /* CPLALR1Parser.h in Headers */,
 				1FB3EB3A132D096900ACC453 /* CPGrammarSymbol.h in Headers */,
 				1F45A2E413422E1300092D78 /* CPJSONParser.h in Headers */,
 				1F3881DC1322ACE7000C8876 /* CPShiftReduceParser.h in Headers */,
@@ -597,6 +604,7 @@
 				1FB81323132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.m in Sources */,
 				1FB81327132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.m in Sources */,
 				1F45A2E513422E1300092D78 /* CPJSONParser.m in Sources */,
+				1F6D44911348CC9600E982C7 /* CPLALR1Parser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

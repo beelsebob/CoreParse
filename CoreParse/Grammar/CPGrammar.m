@@ -22,6 +22,7 @@
 #import "CPNumberToken.h"
 
 #import "CPItem.h"
+#import "CPLR1Item.h"
 
 #import "NSSetFunctional.h"
 
@@ -119,7 +120,8 @@
 
 @property (readwrite,copy) NSArray *rules;
 
-- (NSSet *)firstSymbol:(NSObject *)obj;
+- (NSSet *)allSymbolNames;
+- (NSSet *)firstSymbol:(CPGrammarSymbol *)obj;
 
 @end
 
@@ -252,6 +254,34 @@
     return rs;
 }
 
+- (NSSet *)allSymbolNames
+{
+    NSMutableSet *symbols = [NSMutableSet set];
+    
+    for (CPRule *rule in [self allRules])
+    {
+        [symbols addObject:[rule name]];
+        for (CPGrammarSymbol *sym in [rule rightHandSideElements])
+        {
+            [symbols addObject:[sym name]];
+        }
+    }
+    
+    return symbols;
+}
+
+- (NSString *)uniqueSymbolNameBasedOnName:(NSString *)name
+{
+    NSString *testName = [[name copy] autorelease];
+    NSSet *allSymbols = [self allSymbolNames];
+    while ([allSymbols containsObject:testName])
+    {
+        testName = [NSString stringWithFormat:@"_%@", testName];
+    }
+    
+    return testName;
+}
+
 - (NSArray *)orderedRules
 {
     return [[[self allRules] allObjects] sortedArrayUsingComparator:^ NSComparisonResult (CPRule *r1, CPRule *r2)
@@ -340,21 +370,21 @@
     return [j autorelease];
 }
 
-- (NSSet *)lr0GotoKernelWithItems:(NSSet *)i symbol:(NSObject *)symbol
+- (NSSet *)lr0GotoKernelWithItems:(NSSet *)i symbol:(CPGrammarSymbol *)symbol
 {
-    return [self lr0Closure:[[i objectsPassingTest:^ BOOL (CPItem *item, BOOL *stop)
-                              {
-                                  return [symbol isEqual:[item nextSymbol]];
-                              }]
-                             map:^ id (CPItem *item)
-                             {
-                                 return [item itemByMovingDotRight];
-                             }]];
+    return [[i objectsPassingTest:^ BOOL (CPItem *item, BOOL *stop)
+             {
+                 return [symbol isEqual:[item nextSymbol]];
+             }]
+            map:^ id (CPItem *item)
+            {
+                return [item itemByMovingDotRight];
+            }];
 }
 
 - (NSArray *)lr0Kernels
 {
-    CPRule *startRule = [[self rulesForNonTerminalWithName:@"s'"] objectAtIndex:0];
+    CPRule *startRule = [[self rulesForNonTerminalWithName:[self start]] objectAtIndex:0];
     NSSet *initialKernel = [NSSet setWithObject:[CPItem itemWithRule:startRule position:0]];
     NSMutableArray *c = [NSMutableArray arrayWithObject:initialKernel];
     NSMutableArray *processingQueue = [NSMutableArray arrayWithObject:initialKernel];
@@ -379,6 +409,56 @@
     }
     
     return c;
+}
+
+- (NSSet *)lr1Closure:(NSSet *)i
+{
+    NSMutableSet *j = [i mutableCopy];
+    NSMutableArray *processingQueue = [[j allObjects] mutableCopy];
+    
+    while ([processingQueue count] > 0)
+    {
+        CPLR1Item *item = (CPLR1Item *)[processingQueue objectAtIndex:0];
+        NSArray *followingSymbols = [item followingSymbols];
+        CPGrammarSymbol *nextSymbol = [followingSymbols count] > 0 ? [followingSymbols objectAtIndex:0] : nil;
+        if (![nextSymbol isTerminal])
+        {
+            NSArray *rs = [self rulesForNonTerminalWithName:[(CPGrammarSymbol *)nextSymbol name]];
+            for (CPRule *r in rs)
+            {
+                NSArray *afterNext = [followingSymbols subarrayWithRange:NSMakeRange(1, [followingSymbols count] - 1)];
+                NSArray *afterNextWithTerminal = [afterNext arrayByAddingObject:[item terminal]];
+                NSSet *firstAfterNext = [self first:afterNextWithTerminal];
+                for (NSString *o in firstAfterNext)
+                {
+                    CPLR1Item *newItem = [CPLR1Item lr1ItemWithRule:r position:0 terminal:[CPGrammarSymbol terminalWithName:o]];
+                    if (![j containsObject:newItem])
+                    {
+                        [processingQueue addObject:newItem];
+                        [j addObject:newItem];
+                    }
+                }
+            }
+        }
+        
+        [processingQueue removeObjectAtIndex:0];
+    }
+    
+    [processingQueue release];
+    
+    return [j autorelease];
+}
+
+- (NSSet *)lr1GotoKernelWithItems:(NSSet *)i symbol:(CPGrammarSymbol *)symbol
+{
+    return [[i objectsPassingTest:^ BOOL (CPItem *item, BOOL *stop)
+                           {
+                               return [symbol isEqual:[item nextSymbol]];
+                           }]
+                          map:^ id (CPItem *item)
+                          {
+                              return [item itemByMovingDotRight];
+                          }];
 }
 
 - (NSSet *)follow:(NSString *)name
@@ -424,7 +504,7 @@
 {
     NSMutableSet *f = [NSMutableSet set];
     
-    for (NSObject *symbol in symbols)
+    for (CPGrammarSymbol *symbol in symbols)
     {
         NSSet *f1 = [self firstSymbol:symbol];
         [f unionSet:f1];
@@ -439,14 +519,15 @@
 
 - (NSSet *)firstSymbol:(CPGrammarSymbol *)sym
 {
-    if ([sym isTerminal])
+    NSString *name = [sym name];
+    if ([sym isTerminal] && nil != name)
     {
-        return [NSSet setWithObject:[sym name]];
+        return [NSSet setWithObject:name];
     }
     else
     {
         NSMutableSet *f = [NSMutableSet set];
-        NSArray *rs = [self rulesForNonTerminalWithName:[sym name]];
+        NSArray *rs = [self rulesForNonTerminalWithName:name];
         BOOL containsEmptyRightHandSide = NO;
         for (CPRule *rule in rs)
         {

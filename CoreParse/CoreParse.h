@@ -33,5 +33,6 @@
 #import "CPParser.h"
 #import "CPSLRParser.h"
 #import "CPLR1Parser.h"
+#import "CPLALR1Parser.h"
 
 #import "CPJSONParser.h"

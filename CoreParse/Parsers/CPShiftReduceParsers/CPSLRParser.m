@@ -28,6 +28,7 @@
     CPGrammar *aug = [[self grammar] augmentedGrammar];
     NSArray *kernels = [aug lr0Kernels];
     NSUInteger itemCount = [kernels count];
+    NSString *startSymbol = [aug start];
     
     [self setActionTable:[[[CPShiftReduceActionTable alloc] initWithCapacity:itemCount] autorelease]];
     [self setGotoTable:  [[[CPShiftReduceGotoTable   alloc] initWithCapacity:itemCount] autorelease]];
@@ -42,7 +43,7 @@
             CPGrammarSymbol *next = [item nextSymbol];
             if (nil == next)
             {
-                if ([[[item rule] name] isEqualToString:@"s'"])
+                if ([[[item rule] name] isEqualToString:startSymbol])
                 {
                     BOOL success = [[self actionTable] setAction:[CPShiftReduceAction acceptAction] forState:idx name:@"EOF"];
                     if (!success)
