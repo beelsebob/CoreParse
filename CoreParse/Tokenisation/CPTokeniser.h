@@ -13,24 +13,115 @@
 
 @class CPTokeniser;
 
+/**
+ * The the delegate of a CPTokeniser must adopt the CPTokeniserDelegate protocol.  This allows for customisation of if/when a tokeniser should produce a token.
+ */
 @protocol CPTokeniserDelegate <NSObject>
 
+/** 
+ * Determines whether a CPTokeniser should produce a token and consume the associated input string.
+ * 
+ * If this method returns NO, the `CPTokeniser` continues to attempt to recognise tokens at the same point in the input string with other token recognisers.
+ * 
+ * @param tokeniser The `CPTokeniser` attempting to produce the token.
+ * @param token The `CPToken` that the tokeniser has recognised.
+ * @return Return YES if the tokeniser should consume the token, NO otherwise.
+ */
 - (BOOL)tokeniser:(CPTokeniser *)tokeniser shouldConsumeToken:(CPToken *)token;
+
+/**
+ * Allows you to replace a taken in the tokeniser's output stream.
+ *
+ * @param tokeniser The `CPTokeniser` that will produce the token.
+ * @param token The `CPToken` that the tokeniser has recognised.
+ * @return Return an array of `CPToken` objects to place in the output token stream.
+ */
 - (NSArray *)tokeniser:(CPTokeniser *)tokeniser willProduceToken:(CPToken *)token;
 
 @end
 
+/**
+ * The `CPTokeniser` class provides tokenisation of NSStrings into `CPTokenStream`s, and describes what kinds of tokens to produce given particular string inputs.
+ *   
+ * Tokenisers are built up by adding a list of `CPTokenRecogniser` objects to the CPTokeniser.
+ * Each one recognises a different token.  Each recogniser is given a chance to match a token in priority order.
+ * When a recogniser matches a token, the `-tokeniser:shouldConsumeToken:` delegate method is called.
+ * If this method returns NO, the rest of the recognisers are tried in priority order.
+ * If it returns YES, `-tokeniser:willProduceToken:` is called, and the resulting array of tokens added to
+ * the output stream.
+ */
 @interface CPTokeniser : NSObject
-{}
 
+///---------------------------------------------------------------------------------------
+/// @name Managing the Delegate
+///---------------------------------------------------------------------------------------
+
+/**
+ * The object that acts as a delegate to the receiving `CPTokeniser`.
+ */
 @property (readwrite, assign) id<CPTokeniserDelegate> delegate;
 
-- (void)addTokenRecogniser:(id<CPTokenRecogniser>)recogniser;
-- (void)insertTokenRecogniser:(id<CPTokenRecogniser>)recogniser atPriority:(NSInteger)pri;
-- (void)insertTokenRecogniser:(id<CPTokenRecogniser>)recogniser before:(id<CPTokenRecogniser>)other;
+///---------------------------------------------------------------------------------------
+/// @name Managing recognised tokens
+///---------------------------------------------------------------------------------------
 
+/**
+ * Adds a token recogniser at the end of the priority list of recognisers.
+ *
+ * @param recogniser The token recogniser to add.  This value must not be `nil`.
+ * @exception Raises an `NSInvalidArgumentException` if recogniser is `nil`.
+ * @see insertTokenRecogniser:atPriority:
+ * @see insertTokenRecogniser:beforeRecogniser:
+ */
+- (void)addTokenRecogniser:(id<CPTokenRecogniser>)recogniser;
+
+/**
+ * Inserts a given token recogniser at a given priority level in the tokeniser.
+ *
+ * The recogniser currently at that priority and all those below it move downwards.
+ * 
+ * @param recogniser The token recogniser to insert.  This value must not be `nil`.
+ * @param priority The priority level to insert at.
+ * @exception Raises an `NSInvalidArgumentException` if recogniser is `nil`.
+ * @exception Raises an `NSRangeException` if priority is greater than the number of token recognisers in the tokeniser.
+ * @see addTokenRecogniser:
+ * @see insertTokenRecogniser:beforeRecogniser:
+ */
+- (void)insertTokenRecogniser:(id<CPTokenRecogniser>)recogniser atPriority:(NSInteger)priority;
+
+/**
+ * Inserts a given token recogniser before another.
+ *
+ * The recogniser currently at that priority and all those below it move downwards.
+ * 
+ * @param recogniser The token recogniser to insert.  This value must not be `nil`.
+ * @param other The token recogniser to insert before.
+ * @exception Raises an `NSInvalidArgumentException` if recogniser is `nil` or if other is not in the tokeniser's priority queue.
+ * @see addTokenRecogniser:
+ * @see insertTokenRecogniser:atPriority:
+ */
+- (void)insertTokenRecogniser:(id<CPTokenRecogniser>)recogniser beforeRecogniser:(id<CPTokenRecogniser>)other;
+
+/**
+ * Removes all occurances of recogniser in the tokeniser's priority list.
+ *
+ * @param recogniser The token recogniser to remove.
+ * @see addTokenRecogniser:
+ */
 - (void)removeTokenRecogniser:(id<CPTokenRecogniser>)recogniser;
 
+///---------------------------------------------------------------------------------------
+/// @name Tokenising
+///---------------------------------------------------------------------------------------
+
+/**
+ * Tokenises an input stream by repeatedly using the recognisers in the tokeniser's priority list.
+ *
+ * If the entire input is tokenised a `CPEOFToken` is added to the end of the result token stream.  If not, the token stream ends with no EOF token.
+ * 
+ * @param input The input stream to tokenise.
+ * @return Returns a token stream containing all tokens found in the input string.
+ */
 - (CPTokenStream *)tokenise:(NSString *)input;
 
 @end

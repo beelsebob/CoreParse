@@ -11,7 +11,6 @@
 #import "CPToken.h"
 
 @interface CPTokenStream : NSObject
-{}
 
 + (id)tokenStreamWithTokens:(NSArray *)tokens;
 - (id)initWithTokens:(NSArray *)tokens;

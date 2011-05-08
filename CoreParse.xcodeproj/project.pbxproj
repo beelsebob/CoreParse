@@ -183,6 +183,8 @@
 		1FB81321132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTestWhiteSpaceIgnoringDelegate.m; sourceTree = "<group>"; };
 		1FB81324132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTestMapCSSTokenisingDelegate.h; sourceTree = "<group>"; };
 		1FB81325132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTestMapCSSTokenisingDelegate.m; sourceTree = "<group>"; };
+		1FE77D551375AE6F00879A41 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1FE77D821375EA8F00879A41 /* CoreParse Documentation */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "CoreParse Documentation"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +223,7 @@
 			children = (
 				1F0E88F6130462F300537D04 /* CoreParse.framework */,
 				1F0E890B130462F300537D04 /* CoreParseTests.octest */,
+				1FE77D821375EA8F00879A41 /* CoreParse Documentation */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				1F0E88F9130462F300537D04 /* Cocoa.framework */,
+				1FE77D551375AE6F00879A41 /* Foundation.framework */,
 				1F0E88FB130462F300537D04 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -324,8 +328,8 @@
 				1F3882081323F75F000C8876 /* CPItem.m */,
 				1FB3EB2E132BB30300ACC453 /* CPLR1Item.h */,
 				1FB3EB2F132BB30A00ACC453 /* CPLR1Item.m */,
-				1F3881DA1322ACE7000C8876 /* CPShiftReduceParser.h */,
 				1F3882031323DDD6000C8876 /* CPShiftReduceParserProtectedMethods.h */,
+				1F3881DA1322ACE7000C8876 /* CPShiftReduceParser.h */,
 				1F3881DB1322ACE7000C8876 /* CPShiftReduceParser.m */,
 				1F3881FF1323DB49000C8876 /* CPSLRParser.h */,
 				1F3882001323DB49000C8876 /* CPSLRParser.m */,
@@ -504,6 +508,21 @@
 			productReference = 1F0E890B130462F300537D04 /* CoreParseTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
+		1FE77D811375EA8F00879A41 /* CoreParse Documentation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1FE77D8B1375EA8F00879A41 /* Build configuration list for PBXNativeTarget "CoreParse Documentation" */;
+			buildPhases = (
+				1FE77D8E1375EAA000879A41 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CoreParse Documentation";
+			productName = "CoreParse Documentation";
+			productReference = 1FE77D821375EA8F00879A41 /* CoreParse Documentation */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -526,6 +545,7 @@
 			targets = (
 				1F0E88F5130462F300537D04 /* CoreParse */,
 				1F0E890A130462F300537D04 /* CoreParseTests */,
+				1FE77D811375EA8F00879A41 /* CoreParse Documentation */,
 			);
 		};
 /* End PBXProject section */
@@ -563,6 +583,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		1FE77D8E1375EAA000879A41 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "appledoc --logformat 0 \\\n         --create-html \\\n         --no-create-docset \\\n         -o $SOURCE_ROOT/Documentation/ \\\n         --project-name CoreParse \\\n         --project-company Beelsebob \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceAction.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceState.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceActionTable.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceGotoTable.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPItem.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPLR1Item.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceParserProtectedMethods.h \\\n         $SOURCE_ROOT/CoreParse\nif [ \"$?\" -eq \"254\" ]; then\n  exit 0\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -710,6 +743,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
 			};
@@ -831,6 +865,35 @@
 			};
 			name = Release;
 		};
+		1FE77D8C1375EA8F00879A41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreParse Documentation/CoreParse Documentation-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		1FE77D8D1375EA8F00879A41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreParse Documentation/CoreParse Documentation-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -860,6 +923,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		1FE77D8B1375EA8F00879A41 /* Build configuration list for PBXNativeTarget "CoreParse Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1FE77D8C1375EA8F00879A41 /* Debug */,
+				1FE77D8D1375EA8F00879A41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

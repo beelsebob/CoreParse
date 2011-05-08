@@ -55,9 +55,14 @@
     [[self tokenRecognisers] insertObject:recogniser atIndex:pri];
 }
 
-- (void)insertTokenRecogniser:(id<CPTokenRecogniser>)recogniser before:(id<CPTokenRecogniser>)other
+- (void)insertTokenRecogniser:(id<CPTokenRecogniser>)recogniser beforeRecogniser:(id<CPTokenRecogniser>)other
 {
-    [self insertTokenRecogniser:recogniser atPriority:[[self tokenRecognisers] indexOfObject:other]];
+    NSUInteger idx = [[self tokenRecognisers] indexOfObject:other];
+    if (NSNotFound == idx)
+    {
+        [NSException raise:NSInvalidArgumentException format:@"Token recogniser to insert before was not found"];
+    }
+    [self insertTokenRecogniser:recogniser atPriority:idx];
 }
 
 - (void)removeTokenRecogniser:(id<CPTokenRecogniser>)recogniser
