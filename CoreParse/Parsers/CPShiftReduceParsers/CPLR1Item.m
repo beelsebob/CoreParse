@@ -10,7 +10,7 @@
 
 @interface CPLR1Item ()
 
-@property (readwrite,retain) NSString *terminal;
+@property (readwrite,retain) CPGrammarSymbol *terminal;
 
 @end
 
