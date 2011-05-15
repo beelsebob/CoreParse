@@ -121,6 +121,7 @@
     {
         [stream pushToken:[CPEOFToken eof]];
     }
+    [stream closeTokenStream];
 }
 
 - (void)addToken:(CPToken *)tok toStream:(CPTokenStream *)stream
