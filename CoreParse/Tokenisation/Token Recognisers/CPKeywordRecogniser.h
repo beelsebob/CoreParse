@@ -16,6 +16,8 @@
  * 
  * A keyword recogniser attempts to recognise a specific word or set of symbols.
  * Keyword recognisers can also check that the keyword is not followed by specific characters in order to stop it recognising the beginnings of words.
+ * 
+ * This recogniser produces `CPKeywordToken`s.
  */
 @interface CPKeywordRecogniser : NSObject <CPTokenRecogniser>
 
@@ -29,6 +31,9 @@
  * @param keyword The keyword to recognise.
  *
  * @return Returns a keyword recogniser for the passed keyword.
+ *
+ * @see initWithKeyword:
+ * @see recogniserForKeyword:invalidFollowingCharacters:
  */
 + (id)recogniserForKeyword:(NSString *)keyword;
 
@@ -39,6 +44,9 @@
  * @param invalidFollowingCharacters A set of characters that may not follow the keyword in the string being tokenised.
  *
  * @return Returns a keyword recogniser for the passed keyword.
+ *
+ * @see recogniserForKeyword:
+ * @see initWithKeyword:invalidFollowingCharacters:
  */
 + (id)recogniserForKeyword:(NSString *)keyword invalidFollowingCharacters:(NSCharacterSet *)invalidFollowingCharacters;
 
@@ -48,6 +56,9 @@
  * @param keyword The keyword to recognise.
  *
  * @return Returns the keyword recogniser initialised to recognise the passed keyword.
+ *
+ * @see recogniserForKeyword:
+ * @see initWithKeyword:invalidFollowingCharacters:
  */
 - (id)initWithKeyword:(NSString *)keyword;
 
@@ -58,6 +69,9 @@
  * @param invalidFollowingCharacters A set of characters that may not follow the keyword in the string being tokenised.
  *
  * @return Returns the keyword recogniser initialised to recognise the passed keyword.
+ *
+ * @see initWithKeyword:
+ * @see recogniserForKeyword:invalidFollowingCharacters:
  */
 - (id)initWithKeyword:(NSString *)keyword invalidFollowingCharacters:(NSCharacterSet *)invalidFollowingCharacters;
 
