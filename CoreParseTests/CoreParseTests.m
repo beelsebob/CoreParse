@@ -173,7 +173,7 @@
     }
     
     tokenStream = [tokeniser tokenise:@"1234"];
-    if ([tokenStream hasToken])
+    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray array]]])
     {
         STFail(@"Tokenising floats recognises integers as well",nil);
     }

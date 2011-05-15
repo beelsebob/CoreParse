@@ -68,11 +68,6 @@ typedef enum
     [super dealloc];
 }
 
-- (BOOL)hasToken
-{
-    return [tokens count] > 0;
-}
-
 - (CPToken *)peekToken
 {
     BOOL lockAquired = [readWriteLock tryLockWhenCondition:CPTokenStreamAvailable];
