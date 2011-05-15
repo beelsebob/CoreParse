@@ -266,7 +266,7 @@ following the escape sequence replaces the whole sequence.</p>
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/name">&nbsp;&nbsp;name</a></code>
-		<span class="tooltip"><p>Determines the <a href="#//api/name/name">name</a> of the <code>CPToken</code> produced.</p></span>
+		<span class="tooltip"><p>Determines the <a href="#//api/name/name">name</a> of the <a href="../Classes/CPToken.html"><code>CPToken</code></a> produced.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -462,7 +462,7 @@ following the escape sequence replaces the whole sequence.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Determines the <a href="#//api/name/name">name</a> of the <code>CPToken</code> produced.</p>
+		<p>Determines the <a href="#//api/name/name">name</a> of the <a href="../Classes/CPToken.html"><code>CPToken</code></a> produced.</p>
 	</div>		
 	
 	
@@ -475,7 +475,7 @@ following the escape sequence replaces the whole sequence.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Determines the <a href="#//api/name/name">name</a> of the <code>CPToken</code> produced.</p>
+		<p>Determines the <a href="#//api/name/name">name</a> of the <a href="../Classes/CPToken.html"><code>CPToken</code></a> produced.</p>
 	</div>
 	
 	
@@ -801,25 +801,20 @@ following the escape sequence replaces the whole sequence.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (id)initWithStartQuote:(NSString *)<em>initStartQuote</em> endQuote:(NSString *)<em>initEndQuote</em> escapeSequence:(NSString *)<em>initEscapeSequence</em> maximumLength:(NSUInteger)<em>initMaximumLength</em> name:(NSString *)<em>name</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (id)initWithStartQuote:(NSString *)<em>startQuote</em> endQuote:(NSString *)<em>endQuote</em> escapeSequence:(NSString *)<em>escapeSequence</em> maximumLength:(NSUInteger)<em>maximumLength</em> name:(NSString *)<em>name</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>name</em></dt>
-			<dd><p>The <a href="#//api/name/name">name</a> to attach to recognised tokens.</p></dd>
+			<dt><em>startQuote</em></dt>
+			<dd><p>A string that indicates the beginning of a quoted literal.</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>endQuote</em></dt>
 			<dd><p>A string that indicates the end of the quoted literal.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>startQuote</em></dt>
-			<dd><p>A string that indicates the beginning of a quoted literal.</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
@@ -830,6 +825,11 @@ following the escape sequence replaces the whole sequence.</p>
 		<dl class="argument-def parameter-def">
 			<dt><em>maximumLength</em></dt>
 			<dd><p>The maximum length of the resulting string.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>name</em></dt>
+			<dd><p>The <a href="#//api/name/name">name</a> to attach to recognised tokens.</p></dd>
 		</dl>
 		
 	</div>
