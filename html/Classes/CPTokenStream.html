@@ -146,7 +146,7 @@
 						<h2 class="subtitle subtitle-overview">Overview</h2>
 						<p><a href="CPTokenStream.html"><code>CPTokenStream</code></a>s store the output of a tokeniser ready for parsing.</p>
 
-<p>This class manages memory safely between tokenising and parsing threads, blocking as apropriate to wait for new tokens.
+<p>This class manages a thread safe buffer between tokenising and parsing threads, blocking as apropriate to wait for new tokens.
 When a tokeniser has consumed its entire input it should call <a href="#//api/name/closeTokenStream"><code>closeTokenStream</code></a> to notify parsers that no further input will be found.
 Tokenisers that consume their entire input with no errors should produce a <code>CPEOFToken</code> at the end of the stream to inform parsers that the stream is complete.</p>
 					</div>
@@ -286,6 +286,15 @@ Tokenisers that consume their entire input with no errors should produce a <code
 	
 	
 	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/initWithTokens:">&ndash; initWithTokens:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
 	
 	
 	<div class="method-subsection declared-in-section">
@@ -383,6 +392,15 @@ Tokenisers that consume their entire input with no errors should produce a <code
 	
 	
 	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/tokenStreamWithTokens:">+ tokenStreamWithTokens:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
 	
 	
 	<div class="method-subsection declared-in-section">
@@ -427,6 +445,15 @@ Tokenisers that consume their entire input with no errors should produce a <code
 	
 	
 	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/popToken">&ndash; popToken</a></p></code></li>
+			
+		</ul>
+	</div>
+	
 	
 	
 	<div class="method-subsection declared-in-section">
@@ -470,6 +497,15 @@ Tokenisers that consume their entire input with no errors should produce a <code
 	
 	
 	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/peekToken">&ndash; peekToken</a></p></code></li>
+			
+		</ul>
+	</div>
 	
 	
 	
@@ -517,6 +553,15 @@ Tokenisers that consume their entire input with no errors should produce a <code
 	
 	
 	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/pushTokens:">&ndash; pushTokens:</a></p></code></li>
+			
+		</ul>
+	</div>
 	
 	
 	
@@ -566,6 +611,15 @@ Tokenisers that consume their entire input with no errors should produce a <code
 	
 	
 	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/pushToken:">&ndash; pushToken:</a></p></code></li>
+			
+		</ul>
+	</div>
 	
 	
 	
