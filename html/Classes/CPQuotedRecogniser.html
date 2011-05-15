@@ -21,6 +21,8 @@
 					<select id="jumpTo">
 	<option value="top">Jump To&#133;</option>
 	
+	<option value="overview">Overview</option>
+	
 	
 	
 	
@@ -30,11 +32,37 @@
 	
 	
 	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/endQuote">&nbsp;&nbsp;&nbsp;&nbsp;endQuote</option>
+	
+	<option value="//api/name/escapeReplacer">&nbsp;&nbsp;&nbsp;&nbsp;escapeReplacer</option>
+	
+	<option value="//api/name/escapeSequence">&nbsp;&nbsp;&nbsp;&nbsp;escapeSequence</option>
+	
+	<option value="//api/name/maximumLength">&nbsp;&nbsp;&nbsp;&nbsp;maximumLength</option>
+	
+	<option value="//api/name/name">&nbsp;&nbsp;&nbsp;&nbsp;name</option>
+	
+	<option value="//api/name/startQuote">&nbsp;&nbsp;&nbsp;&nbsp;startQuote</option>
+	
+	
+	
+	
+	<option value="class_methods">Class Methods</option>
+	
+	<option value="//api/name/quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:name:">&nbsp;&nbsp;&nbsp;&nbsp;+ quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:name:</option>
+	
+	<option value="//api/name/quotedRecogniserWithStartQuote:endQuote:escapeSequence:name:">&nbsp;&nbsp;&nbsp;&nbsp;+ quotedRecogniserWithStartQuote:endQuote:escapeSequence:name:</option>
+	
+	<option value="//api/name/quotedRecogniserWithStartQuote:endQuote:name:">&nbsp;&nbsp;&nbsp;&nbsp;+ quotedRecogniserWithStartQuote:endQuote:name:</option>
 	
 	
 	
 	
 	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/initWithStartQuote:endQuote:escapeSequence:maximumLength:name:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithStartQuote:endQuote:escapeSequence:maximumLength:name:</option>
 	
 	<option value="//api/name/recogniseTokenInString:currentTokenPosition:">&nbsp;&nbsp;&nbsp;&nbsp;- recogniseTokenInString:currentTokenPosition:</option>
 	
@@ -47,10 +75,16 @@
 		<nav id="tocContainer" class="isShowingTOC">
 			<ul id="toc" role="tree">
 				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
 
 
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Creating and Initialising a Quoted Recogniser">Creating and Initialising a Quoted Recogniser</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Configuring a Quoted Recogniser">Configuring a Quoted Recogniser</a></span></li>
 	
 </ul></li>
 
@@ -58,11 +92,39 @@
 
 
 
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/endQuote">endQuote</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/escapeReplacer">escapeReplacer</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/escapeSequence">escapeSequence</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/maximumLength">maximumLength</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/name">name</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/startQuote">startQuote</a></span></li>
+	
+</ul></li>
 
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:name:">quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:name:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/quotedRecogniserWithStartQuote:endQuote:escapeSequence:name:">quotedRecogniserWithStartQuote:endQuote:escapeSequence:name:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/quotedRecogniserWithStartQuote:endQuote:name:">quotedRecogniserWithStartQuote:endQuote:name:</a></span></li>
+	
+</ul></li>
 
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithStartQuote:endQuote:escapeSequence:maximumLength:name:">initWithStartQuote:endQuote:escapeSequence:maximumLength:name:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/recogniseTokenInString:currentTokenPosition:">recogniseTokenInString:currentTokenPosition:</a></span></li>
 	
@@ -103,6 +165,22 @@
 					
 					
 					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <a href="CPQuotedRecogniser.html"><code>CPQuotedRecogniser</code></a> class is used to recognise quoted literals in the input string.  This can be used for quoted characters, strings, comments and many other things.</p>
+
+<p>Quoted tokens are recognised via a start string and end string.  You may optionally add an escape sequence string that stops the end quote being recognised at that point in the input.
+You may optionally provide a block used to replace escape sequences with their actual meaning.  If you don&rsquo;t provide an escape replcement block it is assumed that the character
+following the escape sequence replaces the whole sequence.</p>
+
+<p>Finally, you may also provide a maximum length for the quoted sequence to recognise.  If you want to recognise strings of any length, pass NSNotFound.</p>
+
+<p>This recogniser produces <a href="../Classes/CPQuotedToken.html"><code>CPQuotedToken</code></a>s.  The <a href="#//api/name/name">name</a> of the produced tokens is determined by the <a href="#//api/name/name"><code>name</code></a> property.</p>
+					</div>
+					
+					
+					
 					
 					
 					<div class="section section-tasks">
@@ -110,8 +188,94 @@
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
+						<a title="Creating and Initialising a Quoted Recogniser" name="task_Creating and Initialising a Quoted Recogniser"></a>
+						<h3 class="subsubtitle task-title">Creating and Initialising a Quoted Recogniser</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/quotedRecogniserWithStartQuote:endQuote:name:">+&nbsp;quotedRecogniserWithStartQuote:endQuote:name:</a></code>
+		<span class="tooltip"><p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/quotedRecogniserWithStartQuote:endQuote:escapeSequence:name:">+&nbsp;quotedRecogniserWithStartQuote:endQuote:escapeSequence:name:</a></code>
+		<span class="tooltip"><p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence"><code>escapeSequence</code></a> string.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:name:">+&nbsp;quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:name:</a></code>
+		<span class="tooltip"><p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence"><code>escapeSequence</code></a> string.  Quoted strings have a maximum length.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithStartQuote:endQuote:escapeSequence:maximumLength:name:">&ndash;&nbsp;initWithStartQuote:endQuote:escapeSequence:maximumLength:name:</a></code>
+		<span class="tooltip"><p>Initialises a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence"><code>escapeSequence</code></a> string.  Quoted strings have a maximum length.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
 						
 						
+						<a title="Configuring a Quoted Recogniser" name="task_Configuring a Quoted Recogniser"></a>
+						<h3 class="subsubtitle task-title">Configuring a Quoted Recogniser</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/startQuote">&nbsp;&nbsp;startQuote</a></code>
+		<span class="tooltip"><p>Determines the string used to indicate the start of the quoted literal.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/endQuote">&nbsp;&nbsp;endQuote</a></code>
+		<span class="tooltip"><p>Determines the string used to indicate the end of the quoted literal.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/escapeSequence">&nbsp;&nbsp;escapeSequence</a></code>
+		<span class="tooltip"><p>Determines the string used to indicate an escaped character in the quoted literal.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/escapeReplacer">&nbsp;&nbsp;escapeReplacer</a></code>
+		<span class="tooltip"><p>Determines how much of the input string to consume when an escaped literal is found, and what to replace it with.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/maximumLength">&nbsp;&nbsp;maximumLength</a></code>
+		<span class="tooltip"><p>Determines the maximum length of the quoted literal not including quotes.  To indicate the literal can be any length specify NSNotFound.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/name">&nbsp;&nbsp;name</a></code>
+		<span class="tooltip"><p>Determines the <a href="#//api/name/name">name</a> of the <code>CPToken</code> produced.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+						
+						
+						<h3 class="subsubtitle task-title">Other Methods</h3>
 
 						<ul class="task-list">
 							<li>
@@ -130,13 +294,582 @@
 					
 					
 					
+					<div class="section section-methods">
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/endQuote" title="endQuote"></a>
+	<h3 class="subsubtitle method-title">endQuote</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Determines the string used to indicate the end of the quoted literal.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (readwrite, copy) NSString *endQuote</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Determines the string used to indicate the end of the quoted literal.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/startQuote">@property startQuote</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPQuotedRecogniser.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/escapeReplacer" title="escapeReplacer"></a>
+	<h3 class="subsubtitle method-title">escapeReplacer</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Determines how much of the input string to consume when an escaped literal is found, and what to replace it with.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (readwrite, copy) NSString *( ^ escapeReplacer ) ( NSString *tokenStream , NSUInteger *quotePosition ) escapeReplacer</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Determines how much of the input string to consume when an escaped literal is found, and what to replace it with.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPQuotedRecogniser.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/escapeSequence" title="escapeSequence"></a>
+	<h3 class="subsubtitle method-title">escapeSequence</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Determines the string used to indicate an escaped character in the quoted literal.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (readwrite, copy) NSString *escapeSequence</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Determines the string used to indicate an escaped character in the quoted literal.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPQuotedRecogniser.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/maximumLength" title="maximumLength"></a>
+	<h3 class="subsubtitle method-title">maximumLength</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Determines the maximum length of the quoted literal not including quotes.  To indicate the literal can be any length specify NSNotFound.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (readwrite, assign) NSUInteger maximumLength</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Determines the maximum length of the quoted literal not including quotes.  To indicate the literal can be any length specify NSNotFound.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPQuotedRecogniser.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/name" title="name"></a>
+	<h3 class="subsubtitle method-title">name</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Determines the <a href="#//api/name/name">name</a> of the <code>CPToken</code> produced.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (readwrite, copy) NSString *name</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Determines the <a href="#//api/name/name">name</a> of the <code>CPToken</code> produced.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPQuotedRecogniser.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/startQuote" title="startQuote"></a>
+	<h3 class="subsubtitle method-title">startQuote</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Determines the string used to indicate the start of the quoted literal.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (readwrite, copy) NSString *startQuote</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Determines the string used to indicate the start of the quoted literal.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/endQuote">@property endQuote</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPQuotedRecogniser.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
 					
+					
+					
+					<div class="section section-methods">
+						<a title="Class Methods" name="class_methods"></a>
+						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:name:" title="quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:name:"></a>
+	<h3 class="subsubtitle method-title">quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:name:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence"><code>escapeSequence</code></a> string.  Quoted strings have a maximum length.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (id)quotedRecogniserWithStartQuote:(NSString *)<em>startQuote</em> endQuote:(NSString *)<em>endQuote</em> escapeSequence:(NSString *)<em>escapeSequence</em> maximumLength:(NSUInteger)<em>maximumLength</em> name:(NSString *)<em>name</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>startQuote</em></dt>
+			<dd><p>A string that indicates the beginning of a quoted literal.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>endQuote</em></dt>
+			<dd><p>A string that indicates the end of the quoted literal.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>escapeSequence</em></dt>
+			<dd><p>A string that indicates an escaped character.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>maximumLength</em></dt>
+			<dd><p>The maximum length of the resulting string.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>name</em></dt>
+			<dd><p>The <a href="#//api/name/name">name</a> to attach to recognised tokens.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Returns a <a href="../Classes/CPIdentifierRecogniser.html"><code>CPIdentifierRecogniser</code></a> that recognises C like identifiers.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence"><code>escapeSequence</code></a> string.  Quoted strings have a maximum length.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/quotedRecogniserWithStartQuote:endQuote:name:">+ quotedRecogniserWithStartQuote:endQuote:name:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/quotedRecogniserWithStartQuote:endQuote:escapeSequence:name:">+ quotedRecogniserWithStartQuote:endQuote:escapeSequence:name:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/initWithStartQuote:endQuote:escapeSequence:maximumLength:name:">&ndash; initWithStartQuote:endQuote:escapeSequence:maximumLength:name:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPQuotedRecogniser.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/quotedRecogniserWithStartQuote:endQuote:escapeSequence:name:" title="quotedRecogniserWithStartQuote:endQuote:escapeSequence:name:"></a>
+	<h3 class="subsubtitle method-title">quotedRecogniserWithStartQuote:endQuote:escapeSequence:name:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence"><code>escapeSequence</code></a> string.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (id)quotedRecogniserWithStartQuote:(NSString *)<em>startQuote</em> endQuote:(NSString *)<em>endQuote</em> escapeSequence:(NSString *)<em>escapeSequence</em> name:(NSString *)<em>name</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>startQuote</em></dt>
+			<dd><p>A string that indicates the beginning of a quoted literal.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>endQuote</em></dt>
+			<dd><p>A string that indicates the end of the quoted literal.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>escapeSequence</em></dt>
+			<dd><p>A string that indicates an escaped character.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>name</em></dt>
+			<dd><p>The <a href="#//api/name/name">name</a> to attach to recognised tokens.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Returns a <a href="../Classes/CPIdentifierRecogniser.html"><code>CPIdentifierRecogniser</code></a> that recognises C like identifiers.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence"><code>escapeSequence</code></a> string.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/quotedRecogniserWithStartQuote:endQuote:name:">+ quotedRecogniserWithStartQuote:endQuote:name:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:name:">+ quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:name:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPQuotedRecogniser.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/quotedRecogniserWithStartQuote:endQuote:name:" title="quotedRecogniserWithStartQuote:endQuote:name:"></a>
+	<h3 class="subsubtitle method-title">quotedRecogniserWithStartQuote:endQuote:name:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (id)quotedRecogniserWithStartQuote:(NSString *)<em>startQuote</em> endQuote:(NSString *)<em>endQuote</em> name:(NSString *)<em>name</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>startQuote</em></dt>
+			<dd><p>A string that indicates the beginning of a quoted literal.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>endQuote</em></dt>
+			<dd><p>A string that indicates the end of the quoted literal.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>name</em></dt>
+			<dd><p>The <a href="#//api/name/name">name</a> to attach to recognised tokens.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Returns a <a href="../Classes/CPIdentifierRecogniser.html"><code>CPIdentifierRecogniser</code></a> that recognises C like identifiers.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/quotedRecogniserWithStartQuote:endQuote:escapeSequence:name:">+ quotedRecogniserWithStartQuote:endQuote:escapeSequence:name:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:name:">+ quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:name:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPQuotedRecogniser.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
 					
 					
 					
 					<div class="section section-methods">
 						<a title="Instance Methods" name="instance_methods"></a>
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithStartQuote:endQuote:escapeSequence:maximumLength:name:" title="initWithStartQuote:endQuote:escapeSequence:maximumLength:name:"></a>
+	<h3 class="subsubtitle method-title">initWithStartQuote:endQuote:escapeSequence:maximumLength:name:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Initialises a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence"><code>escapeSequence</code></a> string.  Quoted strings have a maximum length.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithStartQuote:(NSString *)<em>initStartQuote</em> endQuote:(NSString *)<em>initEndQuote</em> escapeSequence:(NSString *)<em>initEscapeSequence</em> maximumLength:(NSUInteger)<em>initMaximumLength</em> name:(NSString *)<em>name</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>name</em></dt>
+			<dd><p>The <a href="#//api/name/name">name</a> to attach to recognised tokens.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>endQuote</em></dt>
+			<dd><p>A string that indicates the end of the quoted literal.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>startQuote</em></dt>
+			<dd><p>A string that indicates the beginning of a quoted literal.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>escapeSequence</em></dt>
+			<dd><p>A string that indicates an escaped character.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>maximumLength</em></dt>
+			<dd><p>The maximum length of the resulting string.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Returns a <a href="../Classes/CPIdentifierRecogniser.html"><code>CPIdentifierRecogniser</code></a> that recognises C like identifiers.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Initialises a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence"><code>escapeSequence</code></a> string.  Quoted strings have a maximum length.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:name:">+ quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:name:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPQuotedRecogniser.h</code><br />
+	</div>				
+	
+	
+</div>
 						
 						<div class="section-method">
 	<a name="//api/name/recogniseTokenInString:currentTokenPosition:" title="recogniseTokenInString:currentTokenPosition:"></a>
