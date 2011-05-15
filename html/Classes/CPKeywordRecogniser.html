@@ -21,6 +21,8 @@
 					<select id="jumpTo">
 	<option value="top">Jump To&#133;</option>
 	
+	<option value="overview">Overview</option>
+	
 	
 	
 	
@@ -30,11 +32,29 @@
 	
 	
 	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/invalidFollowingCharacters">&nbsp;&nbsp;&nbsp;&nbsp;invalidFollowingCharacters</option>
+	
+	<option value="//api/name/keyword">&nbsp;&nbsp;&nbsp;&nbsp;keyword</option>
+	
+	
+	
+	
+	<option value="class_methods">Class Methods</option>
+	
+	<option value="//api/name/recogniserForKeyword:">&nbsp;&nbsp;&nbsp;&nbsp;+ recogniserForKeyword:</option>
+	
+	<option value="//api/name/recogniserForKeyword:invalidFollowingCharacters:">&nbsp;&nbsp;&nbsp;&nbsp;+ recogniserForKeyword:invalidFollowingCharacters:</option>
 	
 	
 	
 	
 	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/initWithKeyword:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithKeyword:</option>
+	
+	<option value="//api/name/initWithKeyword:invalidFollowingCharacters:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithKeyword:invalidFollowingCharacters:</option>
 	
 	<option value="//api/name/recogniseTokenInString:currentTokenPosition:">&nbsp;&nbsp;&nbsp;&nbsp;- recogniseTokenInString:currentTokenPosition:</option>
 	
@@ -47,10 +67,16 @@
 		<nav id="tocContainer" class="isShowingTOC">
 			<ul id="toc" role="tree">
 				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
 
 
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Creating and Initialising a Keyword Recogniser">Creating and Initialising a Keyword Recogniser</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Configuring a Keyword Recogniser">Configuring a Keyword Recogniser</a></span></li>
 	
 </ul></li>
 
@@ -58,11 +84,31 @@
 
 
 
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/invalidFollowingCharacters">invalidFollowingCharacters</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/keyword">keyword</a></span></li>
+	
+</ul></li>
 
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/recogniserForKeyword:">recogniserForKeyword:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/recogniserForKeyword:invalidFollowingCharacters:">recogniserForKeyword:invalidFollowingCharacters:</a></span></li>
+	
+</ul></li>
 
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithKeyword:">initWithKeyword:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithKeyword:invalidFollowingCharacters:">initWithKeyword:invalidFollowingCharacters:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/recogniseTokenInString:currentTokenPosition:">recogniseTokenInString:currentTokenPosition:</a></span></li>
 	
@@ -103,6 +149,17 @@
 					
 					
 					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <a href="CPKeywordRecogniser.html"><code>CPKeywordRecogniser</code></a> class attempts to recognise a specific <a href="#//api/name/keyword">keyword</a> in a token stream.</p>
+
+<p>A <a href="#//api/name/keyword">keyword</a> recogniser attempts to recognise a specific word or set of symbols.
+Keyword recognisers can also check that the <a href="#//api/name/keyword">keyword</a> is not followed by specific characters in order to stop it recognising the beginnings of words.</p>
+					</div>
+					
+					
+					
 					
 					
 					<div class="section section-tasks">
@@ -110,8 +167,66 @@
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
+						<a title="Creating and Initialising a Keyword Recogniser" name="task_Creating and Initialising a Keyword Recogniser"></a>
+						<h3 class="subsubtitle task-title">Creating and Initialising a Keyword Recogniser</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/recogniserForKeyword:">+&nbsp;recogniserForKeyword:</a></code>
+		<span class="tooltip"><p>Creates a Keyword Recogniser for a specific <a href="#//api/name/keyword">keyword</a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithKeyword:">&ndash;&nbsp;initWithKeyword:</a></code>
+		<span class="tooltip"><p>Initialises a Keyword Recogniser to recognise a specific <a href="#//api/name/keyword">keyword</a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/recogniserForKeyword:invalidFollowingCharacters:">+&nbsp;recogniserForKeyword:invalidFollowingCharacters:</a></code>
+		<span class="tooltip"><p>Creates a Keyword Recogniser for a specific <a href="#//api/name/keyword">keyword</a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithKeyword:invalidFollowingCharacters:">&ndash;&nbsp;initWithKeyword:invalidFollowingCharacters:</a></code>
+		<span class="tooltip"><p>Initialises a Keyword Recogniser to recognise a specific <a href="#//api/name/keyword">keyword</a>.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
 						
 						
+						<a title="Configuring a Keyword Recogniser" name="task_Configuring a Keyword Recogniser"></a>
+						<h3 class="subsubtitle task-title">Configuring a Keyword Recogniser</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/keyword">&nbsp;&nbsp;keyword</a></code>
+		<span class="tooltip"><p>The <a href="#//api/name/keyword">keyword</a> that the recogniser should attempt to recognise.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/invalidFollowingCharacters">&nbsp;&nbsp;invalidFollowingCharacters</a></code>
+		<span class="tooltip"><p>A set of characters that may not follow the <a href="#//api/name/keyword">keyword</a>.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+						
+						
+						<h3 class="subsubtitle task-title">Other Methods</h3>
 
 						<ul class="task-list">
 							<li>
@@ -130,13 +245,317 @@
 					
 					
 					
+					<div class="section section-methods">
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/invalidFollowingCharacters" title="invalidFollowingCharacters"></a>
+	<h3 class="subsubtitle method-title">invalidFollowingCharacters</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>A set of characters that may not follow the <a href="#//api/name/keyword">keyword</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (readwrite, retain) NSCharacterSet *invalidFollowingCharacters</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>A set of characters that may not follow the <a href="#//api/name/keyword">keyword</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPKeywordRecogniser.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/keyword" title="keyword"></a>
+	<h3 class="subsubtitle method-title">keyword</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The <a href="#//api/name/keyword">keyword</a> that the recogniser should attempt to recognise.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (readwrite, retain) NSString *keyword</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The <a href="#//api/name/keyword">keyword</a> that the recogniser should attempt to recognise.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPKeywordRecogniser.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
 					
+					
+					
+					<div class="section section-methods">
+						<a title="Class Methods" name="class_methods"></a>
+						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/recogniserForKeyword:" title="recogniserForKeyword:"></a>
+	<h3 class="subsubtitle method-title">recogniserForKeyword:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Creates a Keyword Recogniser for a specific <a href="#//api/name/keyword">keyword</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (id)recogniserForKeyword:(NSString *)<em>keyword</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>keyword</em></dt>
+			<dd><p>The <a href="#//api/name/keyword">keyword</a> to recognise.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Returns a <a href="#//api/name/keyword">keyword</a> recogniser for the passed <a href="#//api/name/keyword">keyword</a>.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Creates a Keyword Recogniser for a specific <a href="#//api/name/keyword">keyword</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPKeywordRecogniser.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/recogniserForKeyword:invalidFollowingCharacters:" title="recogniserForKeyword:invalidFollowingCharacters:"></a>
+	<h3 class="subsubtitle method-title">recogniserForKeyword:invalidFollowingCharacters:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Creates a Keyword Recogniser for a specific <a href="#//api/name/keyword">keyword</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (id)recogniserForKeyword:(NSString *)<em>keyword</em> invalidFollowingCharacters:(NSCharacterSet *)<em>invalidFollowingCharacters</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>keyword</em></dt>
+			<dd><p>The <a href="#//api/name/keyword">keyword</a> to recognise.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>invalidFollowingCharacters</em></dt>
+			<dd><p>A set of characters that may not follow the <a href="#//api/name/keyword">keyword</a> in the string being tokenised.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Returns a <a href="#//api/name/keyword">keyword</a> recogniser for the passed <a href="#//api/name/keyword">keyword</a>.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Creates a Keyword Recogniser for a specific <a href="#//api/name/keyword">keyword</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPKeywordRecogniser.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
 					
 					
 					
 					<div class="section section-methods">
 						<a title="Instance Methods" name="instance_methods"></a>
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithKeyword:" title="initWithKeyword:"></a>
+	<h3 class="subsubtitle method-title">initWithKeyword:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Initialises a Keyword Recogniser to recognise a specific <a href="#//api/name/keyword">keyword</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithKeyword:(NSString *)<em>keyword</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>keyword</em></dt>
+			<dd><p>The <a href="#//api/name/keyword">keyword</a> to recognise.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Returns the <a href="#//api/name/keyword">keyword</a> recogniser initialised to recognise the passed <a href="#//api/name/keyword">keyword</a>.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Initialises a Keyword Recogniser to recognise a specific <a href="#//api/name/keyword">keyword</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPKeywordRecogniser.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithKeyword:invalidFollowingCharacters:" title="initWithKeyword:invalidFollowingCharacters:"></a>
+	<h3 class="subsubtitle method-title">initWithKeyword:invalidFollowingCharacters:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Initialises a Keyword Recogniser to recognise a specific <a href="#//api/name/keyword">keyword</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithKeyword:(NSString *)<em>keyword</em> invalidFollowingCharacters:(NSCharacterSet *)<em>invalidFollowingCharacters</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>keyword</em></dt>
+			<dd><p>The <a href="#//api/name/keyword">keyword</a> to recognise.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>invalidFollowingCharacters</em></dt>
+			<dd><p>A set of characters that may not follow the <a href="#//api/name/keyword">keyword</a> in the string being tokenised.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Returns the <a href="#//api/name/keyword">keyword</a> recogniser initialised to recognise the passed <a href="#//api/name/keyword">keyword</a>.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Initialises a Keyword Recogniser to recognise a specific <a href="#//api/name/keyword">keyword</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPKeywordRecogniser.h</code><br />
+	</div>				
+	
+	
+</div>
 						
 						<div class="section-method">
 	<a name="//api/name/recogniseTokenInString:currentTokenPosition:" title="recogniseTokenInString:currentTokenPosition:"></a>
