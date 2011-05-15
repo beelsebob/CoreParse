@@ -10,13 +10,24 @@
 
 @interface CPTokenStream ()
 
-@property (readwrite,retain) NSMutableArray *tokens;
+@property (readwrite,copy) NSArray *tokens;
+
+- (void)unlockTokenStream;
 
 @end
 
-@implementation CPTokenStream
+typedef enum
+{
+    CPTokenStreamAvailable = 0,
+    CPTokenStreamUnavailable
+} CPTokenStreamLockCondition;
 
-@synthesize tokens;
+@implementation CPTokenStream
+{
+    BOOL isClosed;
+    NSMutableArray *tokens;
+    NSConditionLock *readWriteLock;
+}
 
 + (id)tokenStreamWithTokens:(NSArray *)tokens
 {
@@ -41,6 +52,8 @@
     
     if (nil != self)
     {
+        isClosed = NO;
+        readWriteLock = [[NSConditionLock alloc] initWithCondition:CPTokenStreamUnavailable];
         [self setTokens:[NSMutableArray array]];
     }
     
@@ -50,6 +63,7 @@
 - (void)dealloc
 {
     [tokens release];
+    [readWriteLock release];
     
     [super dealloc];
 }
@@ -61,65 +75,92 @@
 
 - (CPToken *)peekToken
 {
-    @synchronized(self)
+    BOOL lockAquired = [readWriteLock tryLockWhenCondition:CPTokenStreamAvailable];
+    CPToken *token = nil;
+    
+    if (lockAquired)
     {
-        return [[[tokens objectAtIndex:0] retain] autorelease];
+        if ([tokens count] > 0)
+        {
+            token = [[[tokens objectAtIndex:0] retain] autorelease];
+        }
+        [readWriteLock unlockWithCondition:CPTokenStreamAvailable];
     }
+    
+    return token;
 }
 
 - (CPToken *)popToken
 {
-    CPToken *first;
-    @synchronized(self)
+    [readWriteLock lockWhenCondition:CPTokenStreamAvailable];
+    CPToken *token = nil;
+    if ([tokens count] > 0)
     {
-        first = [[[tokens objectAtIndex:0] retain] autorelease];
+        token = [[[tokens objectAtIndex:0] retain] autorelease];
         [tokens removeObjectAtIndex:0];
     }
-    return first;
+    [self unlockTokenStream];
+    return token;
+}
+
+
+- (NSArray *)tokens
+{
+    return [[tokens copy] autorelease];
+}
+
+- (void)setTokens:(NSMutableArray *)newTokens
+{
+    [readWriteLock lock];
+    if (tokens != newTokens)
+    {
+        [tokens release];
+        tokens = [newTokens mutableCopy];
+    }
+    [self unlockTokenStream];
 }
 
 - (void)pushToken:(CPToken *)token
 {
-    @synchronized(self)
-    {
-        [tokens addObject:token];
-    }
+    [readWriteLock lock];
+    [tokens addObject:token];
+    [readWriteLock unlockWithCondition:CPTokenStreamAvailable];
 }
 
 - (void)pushTokens:(NSArray *)newTokens
 {
-    @synchronized(self)
-    {
-        [tokens addObjectsFromArray:newTokens];
-    }
+    [readWriteLock lock];
+    [tokens addObjectsFromArray:newTokens];
+    [self unlockTokenStream];
+}
+
+- (void)closeTokenStream
+{
+    [readWriteLock lock];
+    isClosed = YES;
+    [readWriteLock unlockWithCondition:CPTokenStreamAvailable];
 }
 
 - (NSString *)description
 {
     NSMutableString *desc = [NSMutableString string];
     
-    @synchronized(self)
+    for (CPToken *tok in [self tokens])
     {
-        for (CPToken *tok in tokens)
-        {
-            [desc appendFormat:@"%@ ", tok];
-        }
+        [desc appendFormat:@"%@ ", tok];
     }
     
     return desc;
 }
 
-- (NSArray *)peekAllRemainingTokens
+- (void)unlockTokenStream
 {
-    @synchronized(self)
-    {
-        return [[tokens copy] autorelease];
-    }
+    [readWriteLock unlockWithCondition:isClosed || [tokens count] > 0 ? CPTokenStreamAvailable : CPTokenStreamUnavailable];
 }
 
 - (NSUInteger)hash
 {
-    return [[self peekAllRemainingTokens] hash];
+    return [[self tokens] hash];
 }
 
 - (BOOL)isEqual:(id)object
@@ -127,7 +168,7 @@
     if ([object isKindOfClass:[CPTokenStream class]])
     {
         CPTokenStream *other = (CPTokenStream *)object;
-        return [[other peekAllRemainingTokens] isEqualToArray:[self peekAllRemainingTokens]];
+        return [[other tokens] isEqualToArray:[self tokens]];
     }
     return NO;
 }

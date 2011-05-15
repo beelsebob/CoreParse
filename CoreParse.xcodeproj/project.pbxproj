@@ -595,7 +595,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "appledoc --logformat 0 \\\n         --create-html \\\n         --no-create-docset \\\n         -o $SOURCE_ROOT/Documentation/ \\\n         --project-name CoreParse \\\n         --project-company Beelsebob \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceAction.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceState.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceActionTable.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceGotoTable.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPItem.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPLR1Item.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceParserProtectedMethods.h \\\n         $SOURCE_ROOT/CoreParse\nif [ \"$?\" -eq \"254\" ]; then\n  exit 0\nfi\n";
+			shellScript = "appledoc --logformat 0 \\\n         --exit-threshold 4 \\\n         --create-html \\\n         --no-create-docset \\\n         -o $SOURCE_ROOT/Documentation/ \\\n         --project-name CoreParse \\\n         --project-company Beelsebob \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceAction.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceState.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceActionTable.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceGotoTable.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPItem.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPLR1Item.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceParserProtectedMethods.h \\\n         $SOURCE_ROOT/CoreParse\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -931,6 +931,7 @@
 				1FE77D8D1375EA8F00879A41 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

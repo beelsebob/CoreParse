@@ -14,8 +14,15 @@
 #import "CPTestWhiteSpaceIgnoringDelegate.h"
 #import "CPTestMapCSSTokenisingDelegate.h"
 
+@interface CoreParseTests ()
+
+- (void)runMapCSSTokeniser:(CPTokenStream *)result;
+
+@end
+
 @implementation CoreParseTests
 {
+    NSString *mapCssInput;
     CPParser *mapCssParser;
     CPTokenStream *mapCSSTokenStream;
     CPTokeniser *mapCssTokeniser;
@@ -72,17 +79,18 @@
     [mapCssTokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniserWithInitialCharacters:initialIdCharacters identifierCharacters:identifierCharacters]];
     [mapCssTokeniser setDelegate:[[[CPTestMapCSSTokenisingDelegate alloc] init] autorelease]];
     
-    mapCSSTokenStream = [[mapCssTokeniser tokenise:
-                          @"node[highway=\"trunk\"]"
-                          @"{"
-                          @"  line-width: 5.0;"
-                          @"  label: jam;"
-                          @"} // Zomg boobs!\n"
-                          @"/* Haha, fooled you */"
-                          @"way relation[type=\"multipolygon\"]"
-                          @"{"
-                          @"  line-width: 0.0;"
-                          @"}"] retain];
+    mapCssInput = @"node[highway=\"trunk\"]"
+                  @"{"
+                  @"  line-width: 5.0;"
+                  @"  label: jam;"
+                  @"} // Zomg boobs!\n"
+                  @"/* Haha, fooled you */"
+                  @"way relation[type=\"multipolygon\"]"
+                  @"{"
+                  @"  line-width: 0.0;"
+                  @"}";
+    
+    mapCSSTokenStream = [[mapCssTokeniser tokenise:mapCssInput] retain];
 
     CPGrammar *grammar = [CPGrammar grammarWithStart:@"ruleset"
                                       backusNaurForm:
@@ -568,6 +576,26 @@
     {
         STFail(@"Failed to parse MapCSS", nil);
     }
+}
+
+- (void)testParallelParsing
+{
+    CPTokenStream *stream = [[[CPTokenStream alloc] init] autorelease];
+    [NSThread detachNewThreadSelector:@selector(runMapCSSTokeniser:) toTarget:self withObject:stream];
+    CPSyntaxTree *tree1 = [mapCssParser parse:stream];
+    CPSyntaxTree *tree2 = [mapCssParser parse:mapCSSTokenStream];
+    
+    if (![tree1 isEqual:tree2])
+    {
+        STFail(@"Parallel parse of MapCSS failed", nil);
+    }
+}
+
+- (void)runMapCSSTokeniser:(CPTokenStream *)result
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    [mapCssTokeniser tokenise:mapCssInput into:result];
+    [pool drain];
 }
 
 - (void)testJSONParsing

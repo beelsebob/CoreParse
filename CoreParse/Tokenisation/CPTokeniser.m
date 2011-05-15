@@ -73,6 +73,14 @@
 - (CPTokenStream *)tokenise:(NSString *)input
 {
     CPTokenStream *stream = [[[CPTokenStream alloc] init] autorelease];
+    
+    [self tokenise:input into:stream];
+    
+    return stream;
+}
+
+- (void)tokenise:(NSString *)input into:(CPTokenStream *)stream
+{
     NSUInteger currentTokenOffset = 0;
     NSUInteger inputLength = [input length];
     NSArray *recs = [self tokenRecognisers];
@@ -113,8 +121,6 @@
     {
         [stream pushToken:[CPEOFToken eof]];
     }
-    
-    return stream;
 }
 
 - (void)addToken:(CPToken *)tok toStream:(CPTokenStream *)stream

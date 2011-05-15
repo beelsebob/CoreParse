@@ -23,6 +23,6 @@
 - (void)pushToken:(CPToken *)token;
 - (void)pushTokens:(NSArray *)tokens;
 
-- (NSArray *)peekAllRemainingTokens;
+- (void)closeTokenStream;
 
 @end

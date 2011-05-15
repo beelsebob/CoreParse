@@ -61,15 +61,15 @@
 - (id)parse:(CPTokenStream *)tokenStream
 {
     NSMutableArray *stateStack = [NSMutableArray arrayWithObject:[CPShiftReduceState shiftReduceStateWithObject:nil state:0]];
+    CPToken *nextToken = [tokenStream popToken];
     while (1)
     {
-        CPToken *nextToken = [tokenStream peekToken];
         CPShiftReduceAction *action = [self actionForState:[(CPShiftReduceState *)[stateStack lastObject] state] token:nextToken];
         
         if ([action isShiftAction])
         {
             [stateStack addObject:[CPShiftReduceState shiftReduceStateWithObject:nextToken state:[action newState]]];
-            [tokenStream popToken];
+            nextToken = [tokenStream popToken];
         }
         else if ([action isReduceAction])
         {
