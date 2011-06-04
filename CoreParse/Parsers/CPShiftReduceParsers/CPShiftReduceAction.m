@@ -8,6 +8,8 @@
 
 #import "CPShiftReduceAction.h"
 
+#import "CPGrammarInternal.h"
+
 typedef enum
 {
     kActionTypeShift = 0,

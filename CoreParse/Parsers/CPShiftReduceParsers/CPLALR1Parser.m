@@ -15,6 +15,8 @@
 
 #import "CPShiftReduceAction.h"
 
+#import "CPGrammarInternal.h"
+
 @interface CPLALR1Parser ()
 
 - (NSArray *)kernelsForGrammar:(CPGrammar *)aug;

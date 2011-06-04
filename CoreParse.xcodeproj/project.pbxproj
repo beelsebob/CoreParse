@@ -85,6 +85,10 @@
 		1FB81323132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB81321132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.m */; };
 		1FB81326132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB81324132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.h */; };
 		1FB81327132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB81325132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.m */; };
+		1FC1827D139ADC800027F597 /* CPGrammarPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC1827B139ADC800027F597 /* CPGrammarPrivate.h */; };
+		1FC1827E139ADC800027F597 /* CPGrammarPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC1827C139ADC800027F597 /* CPGrammarPrivate.m */; };
+		1FC18282139AE3810027F597 /* CPGrammarInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC18280139AE3800027F597 /* CPGrammarInternal.h */; };
+		1FC18283139AE3810027F597 /* CPGrammarInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC18281139AE3810027F597 /* CPGrammarInternal.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +187,10 @@
 		1FB81321132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTestWhiteSpaceIgnoringDelegate.m; sourceTree = "<group>"; };
 		1FB81324132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTestMapCSSTokenisingDelegate.h; sourceTree = "<group>"; };
 		1FB81325132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTestMapCSSTokenisingDelegate.m; sourceTree = "<group>"; };
+		1FC1827B139ADC800027F597 /* CPGrammarPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPGrammarPrivate.h; sourceTree = "<group>"; };
+		1FC1827C139ADC800027F597 /* CPGrammarPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPGrammarPrivate.m; sourceTree = "<group>"; };
+		1FC18280139AE3800027F597 /* CPGrammarInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPGrammarInternal.h; sourceTree = "<group>"; };
+		1FC18281139AE3810027F597 /* CPGrammarInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPGrammarInternal.m; sourceTree = "<group>"; };
 		1FE77D551375AE6F00879A41 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1FE77D821375EA8F00879A41 /* CoreParse Documentation */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "CoreParse Documentation"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -394,6 +402,10 @@
 			children = (
 				1F50A93C1308604A00C50D7D /* CPGrammar.h */,
 				1F50A93D1308604A00C50D7D /* CPGrammar.m */,
+				1FC1827B139ADC800027F597 /* CPGrammarPrivate.h */,
+				1FC1827C139ADC800027F597 /* CPGrammarPrivate.m */,
+				1FC18280139AE3800027F597 /* CPGrammarInternal.h */,
+				1FC18281139AE3810027F597 /* CPGrammarInternal.m */,
 				1F530B8F1322813E00F52EB5 /* CPRule.h */,
 				1F530B901322813F00F52EB5 /* CPRule.m */,
 				1FB3EB38132D096700ACC453 /* CPGrammarSymbol.h */,
@@ -465,6 +477,8 @@
 				1FB3EB30132BB31700ACC453 /* CPLR1Item.h in Headers */,
 				1FB81322132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.h in Headers */,
 				1FB81326132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.h in Headers */,
+				1FC1827D139ADC800027F597 /* CPGrammarPrivate.h in Headers */,
+				1FC18282139AE3810027F597 /* CPGrammarInternal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,7 +526,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1FE77D8B1375EA8F00879A41 /* Build configuration list for PBXNativeTarget "CoreParse Documentation" */;
 			buildPhases = (
-				1FE77D8E1375EAA000879A41 /* ShellScript */,
+				1FE77D8E1375EAA000879A41 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -584,18 +598,19 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
-		1FE77D8E1375EAA000879A41 /* ShellScript */ = {
+		1FE77D8E1375EAA000879A41 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "appledoc --logformat 0 \\\n         --exit-threshold 4 \\\n         --create-html \\\n         --no-create-docset \\\n         -o $SOURCE_ROOT/../CoreParseDocs/ \\\n         --project-name CoreParse \\\n         --project-company Beelsebob \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceAction.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceState.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceActionTable.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceGotoTable.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPItem.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPLR1Item.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceParserProtectedMethods.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Grammar/CPGrammar.m \\\n         $SOURCE_ROOT/CoreParse\n";
+			shellScript = "appledoc --logformat xcode \\\n         --exit-threshold 4 \\\n         --create-html \\\n         --no-create-docset \\\n         -o $SOURCE_ROOT/../CoreParseDocs/ \\\n         --project-name CoreParse \\\n         --project-company Beelsebob \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceAction.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceState.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceActionTable.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceGotoTable.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPItem.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPLR1Item.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Parsers/CPShiftReduceParsers/CPShiftReduceParserProtectedMethods.h \\\n         --ignore $SOURCE_ROOT/CoreParse/Grammar/CPGrammar.m \\\n         $SOURCE_ROOT/CoreParse\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -638,6 +653,8 @@
 				1FB81327132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.m in Sources */,
 				1F45A2E513422E1300092D78 /* CPJSONParser.m in Sources */,
 				1F6D44911348CC9600E982C7 /* CPLALR1Parser.m in Sources */,
+				1FC1827E139ADC800027F597 /* CPGrammarPrivate.m in Sources */,
+				1FC18283139AE3810027F597 /* CPGrammarInternal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

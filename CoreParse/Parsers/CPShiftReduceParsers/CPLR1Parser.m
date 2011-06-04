@@ -15,6 +15,8 @@
 
 #import "CPShiftReduceAction.h"
 
+#import "CPGrammarInternal.h"
+
 @interface CPLR1Parser ()
 
 - (BOOL)constructShiftReduceTables;

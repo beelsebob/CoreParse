@@ -8,6 +8,8 @@
 
 #import "CPSLRParser.h"
 
+#import "CPGrammarInternal.h"
+
 #import "CPItem.h"
 #import "CPGrammarSymbol.h"
 #import "CPShiftReduceAction.h"
