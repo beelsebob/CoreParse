@@ -43,11 +43,6 @@
     [super dealloc];
 }
 
-- (NSString *)description
-{
-    return @"< >";
-}
-
 - (NSString *)name
 {
     return @"Whitespace";

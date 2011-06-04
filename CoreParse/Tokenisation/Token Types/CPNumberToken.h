@@ -10,12 +10,44 @@
 
 #import "CPToken.h"
 
+/**
+ * The `CPNumberToken` class reperesents a number appearing in the input.
+ * 
+ * These tokens return `@"Number"` as their name.
+ */
 @interface CPNumberToken : CPToken
-{}
 
-@property (readwrite,copy) NSNumber *number;
+///---------------------------------------------------------------------------------------
+/// @name Creating and Initialising a Number Token
+///---------------------------------------------------------------------------------------
 
+/**
+ * Creates a number token with the number found in the input.
+ *
+ * @param number The number found in the input stream.
+ * @return Returns a `CPNumberToken` representing the specified number.
+ *
+ * @see initWithNumber:
+ */
 + (id)tokenWithNumber:(NSNumber *)number;
+
+/**
+ * Initialises a number token with the number found in the input.
+ *
+ * @param number The number found in the input stream.
+ * @return Returns a `CPNumberToken` representing the specified number.
+ *
+ * @see tokenWithNumber:
+ */
 - (id)initWithNumber:(NSNumber *)number;
+
+///---------------------------------------------------------------------------------------
+/// @name Configuring a Number Token
+///---------------------------------------------------------------------------------------
+
+/**
+ * The number found in the input stream.
+ */
+@property (readwrite,copy) NSNumber *number;
 
 @end

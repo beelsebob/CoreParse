@@ -10,9 +10,18 @@
 
 #import "CPToken.h"
 
+/**
+ * The `CPEOFToken` class reperesents the end of a token stream.
+ *
+ * These tokens return `@"EOF"` as their name.
+ */
 @interface CPEOFToken : CPToken
-{}
 
+/**
+ * Creates an end of file token.
+ *
+ * @return A token representing the end of the input stream.
+ */
 + (id)eof;
 
 @end

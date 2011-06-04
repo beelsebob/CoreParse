@@ -10,12 +10,44 @@
 
 #import "CPToken.h"
 
+/**
+ * The `CPIdentifierToken` class reperesents an identifier appearing in the input.
+ * 
+ * These tokens return `@"Identifier"` as their name.
+ */
 @interface CPIdentifierToken : CPToken
-{}
 
-@property (readwrite,copy) NSString *identifier;
+///---------------------------------------------------------------------------------------
+/// @name Creating and Initialising an Identifier Token
+///---------------------------------------------------------------------------------------
 
+/**
+ * Creates an identifier token with the identifier found in the input.
+ *
+ * @param identifier The identifier found in the input stream.
+ * @return Returns a `CPIdentifierToken` representing the specified identifier.
+ *
+ * @see initWithIdentifier:
+ */
 + (id)tokenWithIdentifier:(NSString *)identifier;
+
+/**
+ * Initialises an identifier token with the identifier found in the input.
+ *
+ * @param identifier The identifier found in the input stream.
+ * @return Returns a `CPIdentifierToken` representing the specified identifier.
+ *
+ * @see tokenWithIdentifier:
+ */
 - (id)initWithIdentifier:(NSString *)identifier;
+
+///---------------------------------------------------------------------------------------
+/// @name Configuring an Identifier Token
+///---------------------------------------------------------------------------------------
+
+/**
+ * The identifier found in the input stream
+ */
+@property (readwrite,copy) NSString *identifier;
 
 @end
