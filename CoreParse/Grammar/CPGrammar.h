@@ -12,7 +12,7 @@
 #import "CPRule.h"
 
 /**
- * The `CPGrammar` class represents a context free grammar.  Grammars can be used later to construct parsers.
+ * The CPGrammar class represents a context free grammar.  Grammars can be used later to construct parsers.
  */
 @interface CPGrammar : NSObject
 
@@ -24,8 +24,8 @@
  * Creates a grammar based on a starting non-terminal and a list of rules.
  *
  * @param start The non-terminal that all parses must reduce to.
- * @param rules An array of `CPRules` to describe the grammar.
- * @return Returns a `CPGrammar` based on the rules and starting non-terminal.
+ * @param rules An array of CPRules to describe the grammar.
+ * @return Returns a CPGrammar based on the rules and starting non-terminal.
  *
  * @see initWithStart:rules:
  * @see grammarWithStart:backusNaurForm:
@@ -35,11 +35,11 @@
 /**
  * Creates a grammar based on a starting non-terminal and some backus naur form.
  *
- * see `initWithStart:backusNaurForm:` for a description of the syntax used for BNF.
+ * see initWithStart:backusNaurForm: for a description of the syntax used for BNF.
  * 
  * @param start The non-terminal that all parses must reduce to.
  * @param bnf   BNF for the grammar.
- * @return Returns a `CPGrammar` based on the BNF and starting non-terminal.
+ * @return Returns a CPGrammar based on the BNF and starting non-terminal.
  *
  * @see grammarWithStart:backusNaurForm:
  * @see initWithStart:backusNaurForm:
@@ -50,8 +50,8 @@
  * Initialises a grammar based on a starting non-terminal and a list of rules.
  *
  * @param start The non-terminal that all parses must reduce to.
- * @param rules An array of `CPRules` to describe the grammar.
- * @return Returns a `CPGrammar` based on the rules and starting non-terminal.
+ * @param rules An array of CPRules to describe the grammar.
+ * @return Returns a CPGrammar based on the rules and starting non-terminal.
  *
  * @see grammarWithStart:rules:
  * @see initWithStart:backusNaurForm:
@@ -91,7 +91,7 @@
  * 
  * @param start The non-terminal that all parses must reduce to.
  * @param bnf   BNF for the grammar.
- * @return Returns a `CPGrammar` based on the BNF and starting non-terminal.
+ * @return Returns a CPGrammar based on the BNF and starting non-terminal.
  *
  * @see initWithStart:rules:
  * @see grammarWithStart:backusNaurForm:
@@ -110,13 +110,6 @@
 - (NSSet *)allRules;
 
 /**
- * All the non-terminals that the grammar can expand.
- *
- * @return An array of non-terminal names that are explained by the grammar.
- */
-- (NSArray *)allNonTerminalNames;
-
-/**
  * Adds a rule to the grammar.
  * 
  * @param rule The rule to add.
@@ -126,6 +119,13 @@
 ///---------------------------------------------------------------------------------------
 /// @name Retreiving Grammar Rules
 ///---------------------------------------------------------------------------------------
+
+/**
+ * All the non-terminals that the grammar can expand.
+ *
+ * @return An array of non-terminal names that are explained by the grammar.
+ */
+- (NSArray *)allNonTerminalNames;
 
 /**
  * The rules relevant when attempting to match a non-terminal.

@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 
 /**
- * The `CPToken` class reperesents a token in the token stream.
+ * The CPToken class reperesents a token in the token stream.
  * 
- * All tokens respond to the `-name` message which is used to identify the token while parsing.
+ * All tokens respond to the -name message which is used to identify the token while parsing.
  *
- * `CPToken` is an abstract class.  `CPTokenRegniser`s should add instances of `CPToken`s concrete subclasses to their token stream.
+ * CPToken is an abstract class.  CPTokenRegnisers should add instances of CPTokens concrete subclasses to their token stream.
  */
 @interface CPToken : NSObject
 

@@ -11,7 +11,7 @@
 #import "CPToken.h"
 
 /**
- * The `CPKeywordToken` class reperesents a keyword appearing in the input.
+ * The CPKeywordToken class reperesents a keyword appearing in the input.
  *
  * These tokens can be used to return both language keywords and predetermined operators amongst other things.
  * 
@@ -27,7 +27,7 @@
  * Creates a keyword token with a certain name.
  *
  * @param keyword The name of the keyword found in the input stream.
- * @return Returns a `CPKeywordToken` representing the specified keyword.
+ * @return Returns a CPKeywordToken representing the specified keyword.
  *
  * @see initWithKeyword:
  */
@@ -37,7 +37,7 @@
  * Initialises a keyword token with a certain name.
  *
  * @param keyword The name of the keyword found in the input stream.
- * @return Returns a `CPKeywordToken` representing the specified keyword.
+ * @return Returns a CPKeywordToken representing the specified keyword.
  *
  * @see tokenWithKeyword:
  */

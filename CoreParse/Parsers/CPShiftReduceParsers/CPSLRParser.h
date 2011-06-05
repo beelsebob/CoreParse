@@ -10,7 +10,11 @@
 
 #import "CPShiftReduceParser.h"
 
+/**
+ * The CPSLRParser class is a concrete implementation of CPParser based on the simple left-to-right parsing method.
+ * 
+ * The SLR parser is the fastest parser type available in CoreParse, but covers the smallest set of grammars.
+ */
 @interface CPSLRParser : CPShiftReduceParser
-{}
 
 @end

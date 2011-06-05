@@ -11,7 +11,7 @@
 #import "CPToken.h"
 
 /**
- * The `CPQuotedToken` class reperesents a quoted literal appearing in the input.
+ * The CPQuotedToken class reperesents a quoted literal appearing in the input.
  * 
  * These tokens return the name specified on their creation as their name.
  */
@@ -27,7 +27,7 @@
  * @param content    The string found inside the quotes.
  * @param startQuote The symbol used to quote the content.
  * @param name       The name to use for this token.
- * @return Returns a `CPQuotedToken` representing the specified quoted literal.
+ * @return Returns a CPQuotedToken representing the specified quoted literal.
  *
  * @see initWithContent:quoteType:name:
  */
@@ -39,7 +39,7 @@
  * @param content    The string found inside the quotes.
  * @param startQuote The symbol used to quote the content.
  * @param name       The name to use for this token.
- * @return Returns a `CPQuotedToken` representing the specified quoted literal.
+ * @return Returns a CPQuotedToken representing the specified quoted literal.
  *
  * @see content:quotedWith:name:
  */

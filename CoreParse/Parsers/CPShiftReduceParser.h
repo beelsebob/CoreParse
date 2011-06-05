@@ -10,7 +10,11 @@
 
 #import "CPParser.h"
 
+/**
+ * The CPShiftReduceParser is a further abstract class based on CPParser.  This implements the parts of a parser in common between all shift/reduce type parsers.
+ *
+ * @warning Note that to create a parser you should use one of CPShiftReduceParser's subclasses.
+ */
 @interface CPShiftReduceParser : CPParser
-{}
 
 @end

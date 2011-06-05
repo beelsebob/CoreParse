@@ -11,7 +11,7 @@
 #import "CPToken.h"
 
 /**
- * The `CPIdentifierToken` class reperesents an identifier appearing in the input.
+ * The CPIdentifierToken class reperesents an identifier appearing in the input.
  * 
  * These tokens return `@"Identifier"` as their name.
  */
@@ -25,7 +25,7 @@
  * Creates an identifier token with the identifier found in the input.
  *
  * @param identifier The identifier found in the input stream.
- * @return Returns a `CPIdentifierToken` representing the specified identifier.
+ * @return Returns a CPIdentifierToken representing the specified identifier.
  *
  * @see initWithIdentifier:
  */
@@ -35,7 +35,7 @@
  * Initialises an identifier token with the identifier found in the input.
  *
  * @param identifier The identifier found in the input stream.
- * @return Returns a `CPIdentifierToken` representing the specified identifier.
+ * @return Returns a CPIdentifierToken representing the specified identifier.
  *
  * @see tokenWithIdentifier:
  */

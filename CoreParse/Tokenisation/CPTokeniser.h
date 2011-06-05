@@ -14,17 +14,17 @@
 @class CPTokeniser;
 
 /**
- * The the delegate of a CPTokeniser must adopt the CPTokeniserDelegate protocol.  This allows for customisation of if/when a tokeniser should produce a token.
+ * The delegate of a CPTokeniser must adopt the CPTokeniserDelegate protocol.  This allows for customising if/when a tokeniser should produce a token.
  */
 @protocol CPTokeniserDelegate <NSObject>
 
 /** 
  * Determines whether a CPTokeniser should produce a token and consume the associated input string.
  * 
- * If this method returns NO, the `CPTokeniser` continues to attempt to recognise tokens at the same point in the input string with other token recognisers.
+ * If this method returns NO, the CPTokeniser continues to attempt to recognise tokens at the same point in the input string with other token recognisers.
  * 
- * @param tokeniser The `CPTokeniser` attempting to produce the token.
- * @param token The `CPToken` that the tokeniser has recognised.
+ * @param tokeniser The CPTokeniser attempting to produce the token.
+ * @param token The CPToken that the tokeniser has recognised.
  * @return Return YES if the tokeniser should consume the token, NO otherwise.
  */
 - (BOOL)tokeniser:(CPTokeniser *)tokeniser shouldConsumeToken:(CPToken *)token;
@@ -32,22 +32,22 @@
 /**
  * Allows you to replace a taken in the tokeniser's output stream.
  *
- * @param tokeniser The `CPTokeniser` that will produce the token.
- * @param token The `CPToken` that the tokeniser has recognised.
- * @return Return an array of `CPToken` objects to place in the output token stream.
+ * @param tokeniser The CPTokeniser that will produce the token.
+ * @param token The CPToken that the tokeniser has recognised.
+ * @return Return an array of CPToken objects to place in the output token stream.
  */
 - (NSArray *)tokeniser:(CPTokeniser *)tokeniser willProduceToken:(CPToken *)token;
 
 @end
 
 /**
- * The `CPTokeniser` class provides tokenisation of NSStrings into `CPTokenStream`s, and describes what kinds of tokens to produce given particular string inputs.
+ * The CPTokeniser class provides tokenisation of NSStrings into CPTokenStreams, and describes what kinds of tokens to produce given particular string inputs.
  *   
- * Tokenisers are built up by adding a list of `CPTokenRecogniser` objects to the CPTokeniser.
+ * Tokenisers are built up by adding a list of CPTokenRecogniser objects to the CPTokeniser.
  * Each one recognises a different token.  Each recogniser is given a chance to match a token in priority order.
- * When a recogniser matches a token, the `-tokeniser:shouldConsumeToken:` delegate method is called.
+ * When a recogniser matches a token, the -tokeniser:shouldConsumeToken: delegate method is called.
  * If this method returns NO, the rest of the recognisers are tried in priority order.
- * If it returns YES, `-tokeniser:willProduceToken:` is called, and the resulting array of tokens added to
+ * If it returns YES, -tokeniser:willProduceToken: is called, and the resulting array of tokens added to
  * the output stream.
  */
 @interface CPTokeniser : NSObject
@@ -57,7 +57,7 @@
 ///---------------------------------------------------------------------------------------
 
 /**
- * The object that acts as a delegate to the receiving `CPTokeniser`.
+ * The object that acts as a delegate to the receiving CPTokeniser.
  */
 @property (readwrite, assign) id<CPTokeniserDelegate> delegate;
 
@@ -117,7 +117,7 @@
 /**
  * Tokenises an input string by repeatedly using the recognisers in the tokeniser's priority list.
  *
- * If the entire input is tokenised a `CPEOFToken` is added to the end of the result token stream.  If not, the token stream ends with no EOF token.
+ * If the entire input is tokenised a CPEOFToken is added to the end of the result token stream.  If not, the token stream ends with no EOF token.
  * 
  * @param input The input string to tokenise.
  * @return Returns a token stream containing all tokens found in the input string.
@@ -125,9 +125,9 @@
 - (CPTokenStream *)tokenise:(NSString *)input;
 
 /**
- * Tokenises an input string into a pre-allocated output `CPTokenStream`.
+ * Tokenises an input string into a pre-allocated output CPTokenStream.
  *
- * If the entire input is tokenised a `CPEOFToken` is added to the end of the result token stream.  If not, the token stream ends with no EOF token.
+ * If the entire input is tokenised a CPEOFToken is added to the end of the result token stream.  If not, the token stream ends with no EOF token.
  * This method can be useful for multithreading parsers, allowing you to create the token stream that the tokeniser writes to and pass it to both tokeniser and parser threads.
  * 
  * @param input The input string to tokenise.

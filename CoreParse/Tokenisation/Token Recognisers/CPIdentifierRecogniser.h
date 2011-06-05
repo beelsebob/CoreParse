@@ -11,11 +11,11 @@
 #import "CPTokenRecogniser.h"
 
 /**
- * The `CPIdentifierRecogniser` class attempts to recognise identifiers on the input string.
+ * The CPIdentifierRecogniser class attempts to recognise identifiers on the input string.
  *
  * Identifiers are sequences of characters which begin with a character in one set, and then may contain many characters in a further set subsequently.
  * 
- * This recogniser produces `CPIdentifierToken`s.
+ * This recogniser produces CPIdentifierTokens.
  */
 @interface CPIdentifierRecogniser : NSObject <CPTokenRecogniser>
 
@@ -26,29 +26,29 @@
 /**
  * Creates an identifier recogniser that recognises identifiers starting with any english alphabetic character or underscore, and then containing any number of those characters, hyphens, or numeric characters.
  *
- * @return Returns a `CPIdentifierRecogniser` that recognises C like identifiers.
+ * @return Returns a CPIdentifierRecogniser that recognises C like identifiers.
  *
  * @see identifierRecogniserWithInitialCharacters:identifierCharacters:
  */
 + (id)identifierRecogniser;
 
 /**
- * Creates an identifier recogniser that recognises identifiers starting with any character in `initialCharacters`, and then containing any number of characters in `identifierCharacters`.
+ * Creates an identifier recogniser that recognises identifiers starting with any character in initialCharacters, and then containing any number of characters in identifierCharacters.
  *
  * @param initialCharacters The set of characters that the identifier may begin with.
  * @param identifierCharacters The set of characters that the identifier may contain, after its first character.
- * @return Returns a `CPIdentifierRecogniser` that recognises identifiers based on the input character sets.
+ * @return Returns a CPIdentifierRecogniser that recognises identifiers based on the input character sets.
  *
  * @see initWithInitialCharacters:identifierCharacters:
  */
 + (id)identifierRecogniserWithInitialCharacters:(NSCharacterSet *)initialCharacters identifierCharacters:(NSCharacterSet *)identifierCharacters;
 
 /**
- * Initialises an identifier recogniser that recognises identifiers starting with any character in `initialCharacters`, and then containing any number of characters in `identifierCharacters`.
+ * Initialises an identifier recogniser that recognises identifiers starting with any character in initialCharacters, and then containing any number of characters in identifierCharacters.
  *
  * @param initialCharacters The set of characters that the identifier may begin with.
  * @param identifierCharacters The set of characters that the identifier may contain, after its first character.
- * @return Returns the `CPIdentifierRecogniser` that recognises identifiers based on the input character sets.
+ * @return Returns the CPIdentifierRecogniser that recognises identifiers based on the input character sets.
  *
  * @see identifierRecogniserWithInitialCharacters:identifierCharacters:
  */

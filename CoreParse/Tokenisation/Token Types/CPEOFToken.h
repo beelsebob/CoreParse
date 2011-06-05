@@ -11,7 +11,7 @@
 #import "CPToken.h"
 
 /**
- * The `CPEOFToken` class reperesents the end of a token stream.
+ * The CPEOFToken class reperesents the end of a token stream.
  *
  * These tokens return `@"EOF"` as their name.
  */

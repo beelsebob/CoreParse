@@ -11,7 +11,7 @@
 #import "CPToken.h"
 
 /**
- * The `CPNumberToken` class reperesents a number appearing in the input.
+ * The CPNumberToken class reperesents a number appearing in the input.
  * 
  * These tokens return `@"Number"` as their name.
  */
@@ -25,7 +25,7 @@
  * Creates a number token with the number found in the input.
  *
  * @param number The number found in the input stream.
- * @return Returns a `CPNumberToken` representing the specified number.
+ * @return Returns a CPNumberToken representing the specified number.
  *
  * @see initWithNumber:
  */
@@ -35,7 +35,7 @@
  * Initialises a number token with the number found in the input.
  *
  * @param number The number found in the input stream.
- * @return Returns a `CPNumberToken` representing the specified number.
+ * @return Returns a CPNumberToken representing the specified number.
  *
  * @see tokenWithNumber:
  */

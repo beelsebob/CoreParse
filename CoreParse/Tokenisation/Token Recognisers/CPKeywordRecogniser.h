@@ -12,12 +12,12 @@
 #import "CPKeywordToken.h"
 
 /**
- * The `CPKeywordRecogniser` class attempts to recognise a specific keyword in a token stream.
+ * The CPKeywordRecogniser class attempts to recognise a specific keyword in a token stream.
  * 
  * A keyword recogniser attempts to recognise a specific word or set of symbols.
  * Keyword recognisers can also check that the keyword is not followed by specific characters in order to stop it recognising the beginnings of words.
  * 
- * This recogniser produces `CPKeywordToken`s.
+ * This recogniser produces CPKeywordTokens.
  */
 @interface CPKeywordRecogniser : NSObject <CPTokenRecogniser>
 

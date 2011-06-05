@@ -11,9 +11,9 @@
 #import "CPTokenRecogniser.h"
 
 /**
- * The `CPWhiteSpaceRecogniser` class attempts to recognise white space on the input string.
+ * The CPWhiteSpaceRecogniser class attempts to recognise white space on the input string.
  * 
- * This recogniser produces `CPWhiteSpaceToken`s.
+ * This recogniser produces CPWhiteSpaceTokens.
  */
 @interface CPWhiteSpaceRecogniser : NSObject <CPTokenRecogniser>
 
@@ -24,7 +24,7 @@
 /**
  * Creates a whitespace recogniser.
  *
- * @return Returns a `CPWhiteSpaceRecogniser`.
+ * @return Returns a CPWhiteSpaceRecogniser.
  */
 + (id)whiteSpaceRecogniser;
 

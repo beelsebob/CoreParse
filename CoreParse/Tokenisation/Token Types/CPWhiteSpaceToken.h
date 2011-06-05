@@ -11,7 +11,7 @@
 #import "CPToken.h"
 
 /**
- * The `CPWhiteSpaceToken` class reperesents some white space appearing in the input.
+ * The CPWhiteSpaceToken class reperesents some white space appearing in the input.
  * 
  * These tokens return `@"Whitespace"` as their name.
  */
@@ -25,7 +25,7 @@
  * Creates a white space token with the white space found in the input.
  *
  * @param whiteSpace The white space found in the input stream.
- * @return Returns a `CPWhiteSpaceToken` representing the specified white space.
+ * @return Returns a CPWhiteSpaceToken representing the specified white space.
  *
  * @see initWithWhiteSpace:
  */
@@ -35,7 +35,7 @@
  * Initialises a white space token with the white space found in the input.
  *
  * @param whiteSpace The white space found in the input stream.
- * @return Returns a `CPWhiteSpaceToken` representing the specified white space.
+ * @return Returns a CPWhiteSpaceToken representing the specified white space.
  *
  * @see whiteSpace:
  */
