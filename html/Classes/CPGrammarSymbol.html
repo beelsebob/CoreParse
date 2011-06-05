@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>CPKeywordToken Class Reference</title>
+		<title>CPGrammarSymbol Class Reference</title>
 		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
@@ -11,7 +11,7 @@
 	<body>
 		<header id="top_header">
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">CPKeywordToken Class Reference</h1>
+				<h1 class="hideInXcode">CPGrammarSymbol Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -34,23 +34,25 @@
 	
 	<option value="properties">Properties</option>
 	
-	<option value="//api/name/keyword">&nbsp;&nbsp;&nbsp;&nbsp;keyword</option>
+	<option value="//api/name/name">&nbsp;&nbsp;&nbsp;&nbsp;name</option>
+	
+	<option value="//api/name/terminal">&nbsp;&nbsp;&nbsp;&nbsp;terminal</option>
 	
 	
 	
 	
 	<option value="class_methods">Class Methods</option>
 	
-	<option value="//api/name/tokenWithKeyword:">&nbsp;&nbsp;&nbsp;&nbsp;+ tokenWithKeyword:</option>
+	<option value="//api/name/nonTerminalWithName:">&nbsp;&nbsp;&nbsp;&nbsp;+ nonTerminalWithName:</option>
+	
+	<option value="//api/name/terminalWithName:">&nbsp;&nbsp;&nbsp;&nbsp;+ terminalWithName:</option>
 	
 	
 	
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/initWithKeyword:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithKeyword:</option>
-	
-	<option value="//api/name/name">&nbsp;&nbsp;&nbsp;&nbsp;- name</option>
+	<option value="//api/name/initWithName:isTerminal:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithName:isTerminal:</option>
 	
 	
 	
@@ -68,9 +70,9 @@
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Creating and Initialising a Keyword Token">Creating and Initialising a Keyword Token</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Creating and Initialising a Rule">Creating and Initialising a Rule</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Configuring a Keyword Token">Configuring a Keyword Token</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Configuring a Rule">Configuring a Rule</a></span></li>
 	
 </ul></li>
 
@@ -80,7 +82,9 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/keyword">keyword</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/name">name</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/terminal">terminal</a></span></li>
 	
 </ul></li>
 
@@ -88,7 +92,9 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/tokenWithKeyword:">tokenWithKeyword:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/nonTerminalWithName:">nonTerminalWithName:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/terminalWithName:">terminalWithName:</a></span></li>
 	
 </ul></li>
 
@@ -96,9 +102,7 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithKeyword:">initWithKeyword:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/name">name</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithName:isTerminal:">initWithName:isTerminal:</a></span></li>
 	
 </ul></li>
 
@@ -107,7 +111,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="CPKeywordToken Class Reference" name="top"></a>
+				<a title="CPGrammarSymbol Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -116,7 +120,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">CPKeywordToken Class Reference</h1>
+						<h1 class="title title-header">CPGrammarSymbol Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -124,10 +128,10 @@
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<td class="specification-title">Inherits from</td>
-	<td class="specification-value"><a href="../Classes/CPToken.html">CPToken</a> : NSObject</td>
+	<td class="specification-value">NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">CPKeywordToken.h<br />CPKeywordToken.m</td>
+	<td class="specification-value">CPGrammarSymbol.h<br />CPGrammarSymbol.m</td>
 </tr>
 						</tbody></table></div>
 					
@@ -137,11 +141,9 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>The <a href="CPKeywordToken.html">CPKeywordToken</a> class reperesents a <a href="#//api/name/keyword">keyword</a> appearing in the input.</p>
+						<p>The <a href="CPGrammarSymbol.html">CPGrammarSymbol</a> class represents a <a href="#//api/name/terminal">terminal</a> or non<a href="#//api/name/terminal">terminal</a> grammar symbol.</p>
 
-<p>These tokens can be used to return both language keywords and predetermined operators amongst other things.</p>
-
-<p>These tokens return the <a href="#//api/name/keyword">keyword</a> <a href="#//api/name/name">name</a> as their <a href="#//api/name/name">name</a>.</p>
+<p>All grammar symbols carry a <a href="#//api/name/name">name</a> which is used in constructing CPRules.</p>
 					</div>
 					
 					
@@ -153,21 +155,28 @@
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
-						<a title="Creating and Initialising a Keyword Token" name="task_Creating and Initialising a Keyword Token"></a>
-						<h3 class="subsubtitle task-title">Creating and Initialising a Keyword Token</h3>
+						<a title="Creating and Initialising a Rule" name="task_Creating and Initialising a Rule"></a>
+						<h3 class="subsubtitle task-title">Creating and Initialising a Rule</h3>
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/tokenWithKeyword:">+&nbsp;tokenWithKeyword:</a></code>
-		<span class="tooltip"><p>Creates a <a href="#//api/name/keyword">keyword</a> token with a certain <a href="#//api/name/name">name</a>.</p></span>
+		<code><a href="#//api/name/nonTerminalWithName:">+&nbsp;nonTerminalWithName:</a></code>
+		<span class="tooltip"><p>Creates a non<a href="#//api/name/terminal">terminal</a> grammar symbol.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithKeyword:">&ndash;&nbsp;initWithKeyword:</a></code>
-		<span class="tooltip"><p>Initialises a <a href="#//api/name/keyword">keyword</a> token with a certain <a href="#//api/name/name">name</a>.</p></span>
+		<code><a href="#//api/name/terminalWithName:">+&nbsp;terminalWithName:</a></code>
+		<span class="tooltip"><p>Creates a <a href="#//api/name/terminal">terminal</a> grammar symbol.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithName:isTerminal:">&ndash;&nbsp;initWithName:isTerminal:</a></code>
+		<span class="tooltip"><p>Initialises a grammar symbol.</p></span>
 	</span>
 	
 	
@@ -175,31 +184,23 @@
 						</ul>
 						
 						
-						<a title="Configuring a Keyword Token" name="task_Configuring a Keyword Token"></a>
-						<h3 class="subsubtitle task-title">Configuring a Keyword Token</h3>
+						<a title="Configuring a Rule" name="task_Configuring a Rule"></a>
+						<h3 class="subsubtitle task-title">Configuring a Rule</h3>
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/keyword">&nbsp;&nbsp;keyword</a></code>
-		<span class="tooltip"><p>The <a href="#//api/name/name">name</a> of the <a href="#//api/name/keyword">keyword</a> found in the input stream.</p></span>
+		<code><a href="#//api/name/name">&nbsp;&nbsp;name</a></code>
+		<span class="tooltip"><p>The grammar symbol&rsquo;s <a href="#//api/name/name">name</a>.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
-</li>
-						</ul>
-						
-						
-						
-						<h3 class="subsubtitle task-title">Other Methods</h3>
-
-						<ul class="task-list">
-							<li>
+</li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/name">&ndash;&nbsp;name</a></code>
-		<span class="tooltip"><p>The token <a href="../Classes/CPToken.html#//api/name/name">name</a>.</p></span>
+		<code><a href="#//api/name/terminal">&nbsp;&nbsp;terminal</a></code>
+		<span class="tooltip"><p>Whether the grammar symbol is a <a href="#//api/name/terminal">terminal</a> or non<a href="#//api/name/terminal">terminal</a>.</p></span>
 	</span>
-	
+	<span class="task-item-suffix">property</span>
 	
 </li>
 						</ul>
@@ -215,17 +216,17 @@
 						<h2 class="subtitle subtitle-methods">Properties</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/keyword" title="keyword"></a>
-	<h3 class="subsubtitle method-title">keyword</h3>
+	<a name="//api/name/name" title="name"></a>
+	<h3 class="subsubtitle method-title">name</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The <a href="#//api/name/name">name</a> of the <a href="#//api/name/keyword">keyword</a> found in the input stream.</p>
+		<p>The grammar symbol&rsquo;s <a href="#//api/name/name">name</a>.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (readwrite, copy) NSString *keyword</code></div>
+	<div class="method-subsection method-declaration"><code>@property (readwrite, copy) NSString *name</code></div>
 	
 	
 	
@@ -234,7 +235,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The <a href="#//api/name/name">name</a> of the <a href="#//api/name/keyword">keyword</a> found in the input stream.</p>
+		<p>The grammar symbol&rsquo;s <a href="#//api/name/name">name</a>.</p>
 	</div>
 	
 	
@@ -245,7 +246,44 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CPKeywordToken.h</code><br />
+		<code class="declared-in-ref">CPGrammarSymbol.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/terminal" title="terminal"></a>
+	<h3 class="subsubtitle method-title">terminal</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Whether the grammar symbol is a <a href="#//api/name/terminal">terminal</a> or non<a href="#//api/name/terminal">terminal</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (readwrite, assign, getter=isTerminal) BOOL terminal</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Whether the grammar symbol is a <a href="#//api/name/terminal">terminal</a> or non<a href="#//api/name/terminal">terminal</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPGrammarSymbol.h</code><br />
 	</div>				
 	
 	
@@ -260,25 +298,25 @@
 						<h2 class="subtitle subtitle-methods">Class Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/tokenWithKeyword:" title="tokenWithKeyword:"></a>
-	<h3 class="subsubtitle method-title">tokenWithKeyword:</h3>
+	<a name="//api/name/nonTerminalWithName:" title="nonTerminalWithName:"></a>
+	<h3 class="subsubtitle method-title">nonTerminalWithName:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Creates a <a href="#//api/name/keyword">keyword</a> token with a certain <a href="#//api/name/name">name</a>.</p>
+		<p>Creates a non<a href="#//api/name/terminal">terminal</a> grammar symbol.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>+ (id)tokenWithKeyword:(NSString *)<em>keyword</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (id)nonTerminalWithName:(NSString *)<em>name</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>keyword</em></dt>
-			<dd><p>The <a href="#//api/name/name">name</a> of the <a href="#//api/name/keyword">keyword</a> found in the input stream.</p></dd>
+			<dt><em>name</em></dt>
+			<dd><p>The non<a href="#//api/name/terminal">terminal</a> <a href="#//api/name/name">name</a>.</p></dd>
 		</dl>
 		
 	</div>
@@ -287,14 +325,14 @@
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>Returns a <a href="CPKeywordToken.html">CPKeywordToken</a> representing the specified <a href="#//api/name/keyword">keyword</a>.</p>
+		<p>Returns a non<a href="#//api/name/terminal">terminal</a> <a href="CPGrammarSymbol.html">CPGrammarSymbol</a> with the specified <a href="#//api/name/name">name</a>.</p>
 	</div>
 	
 	
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Creates a <a href="#//api/name/keyword">keyword</a> token with a certain <a href="#//api/name/name">name</a>.</p>
+		<p>Creates a non<a href="#//api/name/terminal">terminal</a> grammar symbol.</p>
 	</div>
 	
 	
@@ -305,7 +343,9 @@
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/initWithKeyword:">&ndash; initWithKeyword:</a></p></code></li>
+			<li><code><p><a href="#//api/name/terminalWithName:">+ terminalWithName:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/initWithName:isTerminal:">&ndash; initWithName:isTerminal:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -314,7 +354,70 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CPKeywordToken.h</code><br />
+		<code class="declared-in-ref">CPGrammarSymbol.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/terminalWithName:" title="terminalWithName:"></a>
+	<h3 class="subsubtitle method-title">terminalWithName:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Creates a <a href="#//api/name/terminal">terminal</a> grammar symbol.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (id)terminalWithName:(NSString *)<em>name</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>name</em></dt>
+			<dd><p>The <a href="#//api/name/terminal">terminal</a> <a href="#//api/name/name">name</a>.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Returns a <a href="#//api/name/terminal">terminal</a> <a href="CPGrammarSymbol.html">CPGrammarSymbol</a> with the specified <a href="#//api/name/name">name</a>.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Creates a <a href="#//api/name/terminal">terminal</a> grammar symbol.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/nonTerminalWithName:">+ nonTerminalWithName:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/initWithName:isTerminal:">&ndash; initWithName:isTerminal:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPGrammarSymbol.h</code><br />
 	</div>				
 	
 	
@@ -329,25 +432,30 @@
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/initWithKeyword:" title="initWithKeyword:"></a>
-	<h3 class="subsubtitle method-title">initWithKeyword:</h3>
+	<a name="//api/name/initWithName:isTerminal:" title="initWithName:isTerminal:"></a>
+	<h3 class="subsubtitle method-title">initWithName:isTerminal:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Initialises a <a href="#//api/name/keyword">keyword</a> token with a certain <a href="#//api/name/name">name</a>.</p>
+		<p>Initialises a grammar symbol.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (id)initWithKeyword:(NSString *)<em>keyword</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (id)initWithName:(NSString *)<em>name</em> isTerminal:(BOOL)<em>terminal</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>keyword</em></dt>
-			<dd><p>The <a href="#//api/name/name">name</a> of the <a href="#//api/name/keyword">keyword</a> found in the input stream.</p></dd>
+			<dt><em>name</em></dt>
+			<dd><p>The non<a href="#//api/name/terminal">terminal</a> <a href="#//api/name/name">name</a>.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>terminal</em></dt>
+			<dd><p>Specifies whether the grammar symbol is a <a href="#//api/name/terminal">terminal</a> or non<a href="#//api/name/terminal">terminal</a>.</p></dd>
 		</dl>
 		
 	</div>
@@ -356,14 +464,14 @@
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>Returns a <a href="CPKeywordToken.html">CPKeywordToken</a> representing the specified <a href="#//api/name/keyword">keyword</a>.</p>
+		<p>Returns a <a href="CPGrammarSymbol.html">CPGrammarSymbol</a> with the specified <a href="#//api/name/name">name</a>.</p>
 	</div>
 	
 	
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Initialises a <a href="#//api/name/keyword">keyword</a> token with a certain <a href="#//api/name/name">name</a>.</p>
+		<p>Initialises a grammar symbol.</p>
 	</div>
 	
 	
@@ -374,7 +482,9 @@
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/tokenWithKeyword:">+ tokenWithKeyword:</a></p></code></li>
+			<li><code><p><a href="#//api/name/terminalWithName:">+ terminalWithName:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/nonTerminalWithName:">+ nonTerminalWithName:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -383,44 +493,7 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CPKeywordToken.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/name" title="name"></a>
-	<h3 class="subsubtitle method-title">name</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>The token <a href="../Classes/CPToken.html#//api/name/name">name</a>.</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>- (NSString *)name</code></div>
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>The token <a href="../Classes/CPToken.html#//api/name/name">name</a>.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CPToken.h</code><br />
+		<code class="declared-in-ref">CPGrammarSymbol.h</code><br />
 	</div>				
 	
 	

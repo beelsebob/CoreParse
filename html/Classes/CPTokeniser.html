@@ -144,13 +144,13 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>The <a href="CPTokeniser.html"><code>CPTokeniser</code></a> class provides tokenisation of NSStrings into <a href="../Classes/CPTokenStream.html"><code>CPTokenStream</code></a>s, and describes what kinds of tokens to produce given particular string inputs.</p>
+						<p>The <a href="CPTokeniser.html">CPTokeniser</a> class provides tokenisation of NSStrings into CPTokenStreams, and describes what kinds of tokens to produce given particular string inputs.</p>
 
-<p>Tokenisers are built up by adding a list of <a href="../Protocols/CPTokenRecogniser.html"><code>CPTokenRecogniser</code></a> objects to the <a href="CPTokeniser.html">CPTokeniser</a>.
+<p>Tokenisers are built up by adding a list of <a href="../Protocols/CPTokenRecogniser.html">CPTokenRecogniser</a> objects to the <a href="CPTokeniser.html">CPTokeniser</a>.
 Each one recognises a different token.  Each recogniser is given a chance to match a token in priority order.
-When a recogniser matches a token, the <code>-tokeniser:shouldConsumeToken:</code> <a href="#//api/name/delegate">delegate</a> method is called.
+When a recogniser matches a token, the -tokeniser:shouldConsumeToken: <a href="#//api/name/delegate">delegate</a> method is called.
 If this method returns NO, the rest of the recognisers are tried in priority order.
-If it returns YES, <code>-tokeniser:willProduceToken:</code> is called, and the resulting array of tokens added to
+If it returns YES, -tokeniser:willProduceToken: is called, and the resulting array of tokens added to
 the output stream.</p>
 					</div>
 					
@@ -170,7 +170,7 @@ the output stream.</p>
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
-		<span class="tooltip"><p>The object that acts as a <a href="#//api/name/delegate">delegate</a> to the receiving <a href="CPTokeniser.html"><code>CPTokeniser</code></a>.</p></span>
+		<span class="tooltip"><p>The object that acts as a <a href="#//api/name/delegate">delegate</a> to the receiving <a href="CPTokeniser.html">CPTokeniser</a>.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -228,7 +228,7 @@ the output stream.</p>
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/tokenise:into:">&ndash;&nbsp;tokenise:into:</a></code>
-		<span class="tooltip"><p>Tokenises an input string into a pre-allocated output <a href="../Classes/CPTokenStream.html"><code>CPTokenStream</code></a>.</p></span>
+		<span class="tooltip"><p>Tokenises an input string into a pre-allocated output <a href="../Classes/CPTokenStream.html">CPTokenStream</a>.</p></span>
 	</span>
 	
 	
@@ -252,7 +252,7 @@ the output stream.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The object that acts as a <a href="#//api/name/delegate">delegate</a> to the receiving <a href="CPTokeniser.html"><code>CPTokeniser</code></a>.</p>
+		<p>The object that acts as a <a href="#//api/name/delegate">delegate</a> to the receiving <a href="CPTokeniser.html">CPTokeniser</a>.</p>
 	</div>		
 	
 	
@@ -265,7 +265,7 @@ the output stream.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The object that acts as a <a href="#//api/name/delegate">delegate</a> to the receiving <a href="CPTokeniser.html"><code>CPTokeniser</code></a>.</p>
+		<p>The object that acts as a <a href="#//api/name/delegate">delegate</a> to the receiving <a href="CPTokeniser.html">CPTokeniser</a>.</p>
 	</div>
 	
 	
@@ -608,7 +608,7 @@ the output stream.</p>
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Tokenises an input string by repeatedly using the recognisers in the tokeniser&rsquo;s priority list.</p>
 
-<p>If the entire input is tokenised a <a href="../Classes/CPEOFToken.html"><code>CPEOFToken</code></a> is added to the end of the result token stream.  If not, the token stream ends with no EOF token.</p>
+<p>If the entire input is tokenised a <a href="../Classes/CPEOFToken.html">CPEOFToken</a> is added to the end of the result token stream.  If not, the token stream ends with no EOF token.</p>
 	</div>
 	
 	
@@ -632,7 +632,7 @@ the output stream.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Tokenises an input string into a pre-allocated output <a href="../Classes/CPTokenStream.html"><code>CPTokenStream</code></a>.</p>
+		<p>Tokenises an input string into a pre-allocated output <a href="../Classes/CPTokenStream.html">CPTokenStream</a>.</p>
 	</div>		
 	
 	
@@ -660,9 +660,9 @@ the output stream.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Tokenises an input string into a pre-allocated output <a href="../Classes/CPTokenStream.html"><code>CPTokenStream</code></a>.</p>
+		<p>Tokenises an input string into a pre-allocated output <a href="../Classes/CPTokenStream.html">CPTokenStream</a>.</p>
 
-<p>If the entire input is tokenised a <a href="../Classes/CPEOFToken.html"><code>CPEOFToken</code></a> is added to the end of the result token stream.  If not, the token stream ends with no EOF token.
+<p>If the entire input is tokenised a <a href="../Classes/CPEOFToken.html">CPEOFToken</a> is added to the end of the result token stream.  If not, the token stream ends with no EOF token.
 This method can be useful for multithreading parsers, allowing you to create the token stream that the tokeniser writes to and pass it to both tokeniser and parser threads.</p>
 	</div>
 	
@@ -693,7 +693,7 @@ This method can be useful for multithreading parsers, allowing you to create the
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2011 Beelsebob. All rights reserved. (Last updated: 2011-06-04)</span><br />
+						<p><span class="copyright">&copy; 2011 Beelsebob. All rights reserved. (Last updated: 2011-06-05)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.4 (build 701)</a>.</span></p>
 						

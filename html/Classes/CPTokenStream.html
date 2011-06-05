@@ -144,11 +144,11 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p><a href="CPTokenStream.html"><code>CPTokenStream</code></a>s store the output of a tokeniser ready for parsing.</p>
+						<p>CPTokenStreams store the output of a tokeniser ready for parsing.</p>
 
 <p>This class manages a thread safe buffer between tokenising and parsing threads, blocking as apropriate to wait for new tokens.
-When a tokeniser has consumed its entire input it should call <a href="#//api/name/closeTokenStream"><code>closeTokenStream</code></a> to notify parsers that no further input will be found.
-Tokenisers that consume their entire input with no errors should produce a <a href="../Classes/CPEOFToken.html"><code>CPEOFToken</code></a> at the end of the stream to inform parsers that the stream is complete.</p>
+When a tokeniser has consumed its entire input it should call <a href="#//api/name/closeTokenStream">closeTokenStream</a> to notify parsers that no further input will be found.
+Tokenisers that consume their entire input with no errors should produce a <a href="../Classes/CPEOFToken.html">CPEOFToken</a> at the end of the stream to inform parsers that the stream is complete.</p>
 					</div>
 					
 					
@@ -203,14 +203,14 @@ Tokenisers that consume their entire input with no errors should produce a <a hr
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/pushToken:">&ndash;&nbsp;pushToken:</a></code>
-		<span class="tooltip"><p>Adds a <a href="../Classes/CPToken.html"><code>CPToken</code></a> to the end of the token stream.</p></span>
+		<span class="tooltip"><p>Adds a <a href="../Classes/CPToken.html">CPToken</a> to the end of the token stream.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/pushTokens:">&ndash;&nbsp;pushTokens:</a></code>
-		<span class="tooltip"><p>Adds several <a href="../Classes/CPToken.html"><code>CPToken</code></a>s to the end of the token stream.</p></span>
+		<span class="tooltip"><p>Adds several CPTokens to the end of the token stream.</p></span>
 	</span>
 	
 	
@@ -272,7 +272,7 @@ Tokenisers that consume their entire input with no errors should produce a <a hr
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>Returns a token stream containing <a href="#//api/name/tokens"><code>tokens</code></a> at its start.</p>
+		<p>Returns a token stream containing <a href="#//api/name/tokens">tokens</a> at its start.</p>
 	</div>
 	
 	
@@ -378,7 +378,7 @@ Tokenisers that consume their entire input with no errors should produce a <a hr
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>Returns the token stream, now containing <a href="#//api/name/tokens"><code>tokens</code></a> at its start.</p>
+		<p>Returns the token stream, now containing <a href="#//api/name/tokens">tokens</a> at its start.</p>
 	</div>
 	
 	
@@ -429,7 +429,7 @@ Tokenisers that consume their entire input with no errors should produce a <a hr
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>The first <a href="../Classes/CPToken.html"><code>CPToken</code></a> in the stream.</p>
+		<p>The first <a href="../Classes/CPToken.html">CPToken</a> in the stream.</p>
 	</div>
 	
 	
@@ -482,7 +482,7 @@ Tokenisers that consume their entire input with no errors should produce a <a hr
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>The first <a href="../Classes/CPToken.html"><code>CPToken</code></a> in the stream.</p>
+		<p>The first <a href="../Classes/CPToken.html">CPToken</a> in the stream.</p>
 	</div>
 	
 	
@@ -524,7 +524,7 @@ Tokenisers that consume their entire input with no errors should produce a <a hr
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Adds a <a href="../Classes/CPToken.html"><code>CPToken</code></a> to the end of the token stream.</p>
+		<p>Adds a <a href="../Classes/CPToken.html">CPToken</a> to the end of the token stream.</p>
 	</div>		
 	
 	
@@ -547,7 +547,7 @@ Tokenisers that consume their entire input with no errors should produce a <a hr
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Adds a <a href="../Classes/CPToken.html"><code>CPToken</code></a> to the end of the token stream.</p>
+		<p>Adds a <a href="../Classes/CPToken.html">CPToken</a> to the end of the token stream.</p>
 	</div>
 	
 	
@@ -580,7 +580,7 @@ Tokenisers that consume their entire input with no errors should produce a <a hr
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Adds several <a href="../Classes/CPToken.html"><code>CPToken</code></a>s to the end of the token stream.</p>
+		<p>Adds several CPTokens to the end of the token stream.</p>
 	</div>		
 	
 	
@@ -603,7 +603,7 @@ Tokenisers that consume their entire input with no errors should produce a <a hr
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Adds several <a href="../Classes/CPToken.html"><code>CPToken</code></a>s to the end of the token stream.</p>
+		<p>Adds several CPTokens to the end of the token stream.</p>
 
 <p>The <a href="#//api/name/tokens">tokens</a> are added in order.</p>
 	</div>
@@ -644,7 +644,7 @@ Tokenisers that consume their entire input with no errors should produce a <a hr
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2011 Beelsebob. All rights reserved. (Last updated: 2011-06-04)</span><br />
+						<p><span class="copyright">&copy; 2011 Beelsebob. All rights reserved. (Last updated: 2011-06-05)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.4 (build 701)</a>.</span></p>
 						

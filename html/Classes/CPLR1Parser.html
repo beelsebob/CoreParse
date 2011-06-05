@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>CPEOFToken Class Reference</title>
+		<title>CPLR1Parser Class Reference</title>
 		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
@@ -11,7 +11,7 @@
 	<body>
 		<header id="top_header">
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">CPEOFToken Class Reference</h1>
+				<h1 class="hideInXcode">CPLR1Parser Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -26,24 +26,12 @@
 	
 	
 	
-	<option value="tasks">Tasks</option>
 	
 	
 	
 	
 	
 	
-	
-	<option value="class_methods">Class Methods</option>
-	
-	<option value="//api/name/eof">&nbsp;&nbsp;&nbsp;&nbsp;+ eof</option>
-	
-	
-	
-	
-	<option value="instance_methods">Instance Methods</option>
-	
-	<option value="//api/name/name">&nbsp;&nbsp;&nbsp;&nbsp;- name</option>
 	
 	
 	
@@ -59,9 +47,6 @@
 
 
 
-<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
-	
-</ul></li>
 
 
 
@@ -69,26 +54,13 @@
 
 
 
-<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/eof">eof</a></span></li>
-	
-</ul></li>
-
-
-
-<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/name">name</a></span></li>
-	
-</ul></li>
 
 
 			</ul>
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="CPEOFToken Class Reference" name="top"></a>
+				<a title="CPLR1Parser Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -97,7 +69,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">CPEOFToken Class Reference</h1>
+						<h1 class="title title-header">CPLR1Parser Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -105,10 +77,10 @@
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<td class="specification-title">Inherits from</td>
-	<td class="specification-value"><a href="../Classes/CPToken.html">CPToken</a> : NSObject</td>
+	<td class="specification-value"><a href="../Classes/CPShiftReduceParser.html">CPShiftReduceParser</a> : <a href="../Classes/CPParser.html">CPParser</a> : NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">CPEOFToken.h<br />CPEOFToken.m</td>
+	<td class="specification-value">CPLR1Parser.h<br />CPLR1Parser.m</td>
 </tr>
 						</tbody></table></div>
 					
@@ -118,49 +90,9 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>The <a href="CPEOFToken.html">CPEOFToken</a> class reperesents the end of a token stream.</p>
+						<p>The <a href="CPLR1Parser.html">CPLR1Parser</a> class is a concrete implementation of <a href="../Classes/CPParser.html">CPParser</a> based on the left-to-right parsing method with a one symbol lookahead.</p>
 
-<p>These tokens return <code>@"EOF"</code> as their <a href="#//api/name/name">name</a>.</p>
-					</div>
-					
-					
-					
-					
-					
-					<div class="section section-tasks">
-						<a title="Tasks" name="tasks"></a>
-						<h2 class="subtitle subtitle-tasks">Tasks</h2>
-						
-						
-						
-						<h3 class="subsubtitle task-title">Other Methods</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/eof">+&nbsp;eof</a></code>
-		<span class="tooltip"><p>Creates an end of file token.</p></span>
-	</span>
-	
-	
-</li>
-						</ul>
-						
-						
-						
-						<h3 class="subsubtitle task-title">Other Methods</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/name">&ndash;&nbsp;name</a></code>
-		<span class="tooltip"><p>The token <a href="../Classes/CPToken.html#//api/name/name">name</a>.</p></span>
-	</span>
-	
-	
-</li>
-						</ul>
-						
+<p>The LR1 parser is the slowest parser type available in CoreParse, but covers the largest set of grammars.  LR1 parsers may consume significant amounts of memory.</p>
 					</div>
 					
 					
@@ -169,98 +101,11 @@
 					
 					
 					
-					<div class="section section-methods">
-						<a title="Class Methods" name="class_methods"></a>
-						<h2 class="subtitle subtitle-methods">Class Methods</h2>
-						
-						<div class="section-method">
-	<a name="//api/name/eof" title="eof"></a>
-	<h3 class="subsubtitle method-title">eof</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Creates an end of file token.</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>+ (id)eof</code></div>
-	
-	
-	
-	
-	<div class="method-subsection return">
-		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>A token representing the end of the input stream.</p>
-	</div>
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Creates an end of file token.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CPEOFToken.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-					</div>
 					
 					
 					
-					<div class="section section-methods">
-						<a title="Instance Methods" name="instance_methods"></a>
-						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
-						
-						<div class="section-method">
-	<a name="//api/name/name" title="name"></a>
-	<h3 class="subsubtitle method-title">name</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>The token <a href="../Classes/CPToken.html#//api/name/name">name</a>.</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>- (NSString *)name</code></div>
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>The token <a href="../Classes/CPToken.html#//api/name/name">name</a>.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CPToken.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-					</div>
+					
+					
 					
 					
 				</div>

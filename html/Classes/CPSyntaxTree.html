@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>CPKeywordToken Class Reference</title>
+		<title>CPSyntaxTree Class Reference</title>
 		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
@@ -11,7 +11,7 @@
 	<body>
 		<header id="top_header">
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">CPKeywordToken Class Reference</h1>
+				<h1 class="hideInXcode">CPSyntaxTree Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -34,23 +34,23 @@
 	
 	<option value="properties">Properties</option>
 	
-	<option value="//api/name/keyword">&nbsp;&nbsp;&nbsp;&nbsp;keyword</option>
+	<option value="//api/name/children">&nbsp;&nbsp;&nbsp;&nbsp;children</option>
+	
+	<option value="//api/name/rule">&nbsp;&nbsp;&nbsp;&nbsp;rule</option>
 	
 	
 	
 	
 	<option value="class_methods">Class Methods</option>
 	
-	<option value="//api/name/tokenWithKeyword:">&nbsp;&nbsp;&nbsp;&nbsp;+ tokenWithKeyword:</option>
+	<option value="//api/name/syntaxTreeWithRule:children:">&nbsp;&nbsp;&nbsp;&nbsp;+ syntaxTreeWithRule:children:</option>
 	
 	
 	
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/initWithKeyword:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithKeyword:</option>
-	
-	<option value="//api/name/name">&nbsp;&nbsp;&nbsp;&nbsp;- name</option>
+	<option value="//api/name/initWithRule:children:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithRule:children:</option>
 	
 	
 	
@@ -68,9 +68,9 @@
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Creating and Initialising a Keyword Token">Creating and Initialising a Keyword Token</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Creating and Initialising a Syntax Tree">Creating and Initialising a Syntax Tree</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Configuring a Keyword Token">Configuring a Keyword Token</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Configuring a Syntax Tree">Configuring a Syntax Tree</a></span></li>
 	
 </ul></li>
 
@@ -80,7 +80,9 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/keyword">keyword</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/children">children</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/rule">rule</a></span></li>
 	
 </ul></li>
 
@@ -88,7 +90,7 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/tokenWithKeyword:">tokenWithKeyword:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/syntaxTreeWithRule:children:">syntaxTreeWithRule:children:</a></span></li>
 	
 </ul></li>
 
@@ -96,9 +98,7 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithKeyword:">initWithKeyword:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/name">name</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithRule:children:">initWithRule:children:</a></span></li>
 	
 </ul></li>
 
@@ -107,7 +107,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="CPKeywordToken Class Reference" name="top"></a>
+				<a title="CPSyntaxTree Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -116,7 +116,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">CPKeywordToken Class Reference</h1>
+						<h1 class="title title-header">CPSyntaxTree Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -124,10 +124,10 @@
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<td class="specification-title">Inherits from</td>
-	<td class="specification-value"><a href="../Classes/CPToken.html">CPToken</a> : NSObject</td>
+	<td class="specification-value">NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">CPKeywordToken.h<br />CPKeywordToken.m</td>
+	<td class="specification-value">CPSyntaxTree.h<br />CPSyntaxTree.m</td>
 </tr>
 						</tbody></table></div>
 					
@@ -137,11 +137,9 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>The <a href="CPKeywordToken.html">CPKeywordToken</a> class reperesents a <a href="#//api/name/keyword">keyword</a> appearing in the input.</p>
+						<p>The <a href="CPSyntaxTree.html">CPSyntaxTree</a> class represents a node in a syntax tree.</p>
 
-<p>These tokens can be used to return both language keywords and predetermined operators amongst other things.</p>
-
-<p>These tokens return the <a href="#//api/name/keyword">keyword</a> <a href="#//api/name/name">name</a> as their <a href="#//api/name/name">name</a>.</p>
+<p>Syntax trees carry the <a href="#//api/name/rule">rule</a> that was matched to create the tree and the child elements that in order match up with the right hand side of the <a href="#//api/name/rule">rule</a>.</p>
 					</div>
 					
 					
@@ -153,21 +151,21 @@
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
-						<a title="Creating and Initialising a Keyword Token" name="task_Creating and Initialising a Keyword Token"></a>
-						<h3 class="subsubtitle task-title">Creating and Initialising a Keyword Token</h3>
+						<a title="Creating and Initialising a Syntax Tree" name="task_Creating and Initialising a Syntax Tree"></a>
+						<h3 class="subsubtitle task-title">Creating and Initialising a Syntax Tree</h3>
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/tokenWithKeyword:">+&nbsp;tokenWithKeyword:</a></code>
-		<span class="tooltip"><p>Creates a <a href="#//api/name/keyword">keyword</a> token with a certain <a href="#//api/name/name">name</a>.</p></span>
+		<code><a href="#//api/name/syntaxTreeWithRule:children:">+&nbsp;syntaxTreeWithRule:children:</a></code>
+		<span class="tooltip"><p>Creates a syntax tree based on a <a href="#//api/name/rule">rule</a> and some child trees.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithKeyword:">&ndash;&nbsp;initWithKeyword:</a></code>
-		<span class="tooltip"><p>Initialises a <a href="#//api/name/keyword">keyword</a> token with a certain <a href="#//api/name/name">name</a>.</p></span>
+		<code><a href="#//api/name/initWithRule:children:">&ndash;&nbsp;initWithRule:children:</a></code>
+		<span class="tooltip"><p>Initialises a syntax tree based on a <a href="#//api/name/rule">rule</a> and some child trees.</p></span>
 	</span>
 	
 	
@@ -175,31 +173,23 @@
 						</ul>
 						
 						
-						<a title="Configuring a Keyword Token" name="task_Configuring a Keyword Token"></a>
-						<h3 class="subsubtitle task-title">Configuring a Keyword Token</h3>
+						<a title="Configuring a Syntax Tree" name="task_Configuring a Syntax Tree"></a>
+						<h3 class="subsubtitle task-title">Configuring a Syntax Tree</h3>
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/keyword">&nbsp;&nbsp;keyword</a></code>
-		<span class="tooltip"><p>The <a href="#//api/name/name">name</a> of the <a href="#//api/name/keyword">keyword</a> found in the input stream.</p></span>
+		<code><a href="#//api/name/rule">&nbsp;&nbsp;rule</a></code>
+		<span class="tooltip"><p>The <a href="#//api/name/rule">rule</a> matched to create this syntax tree.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
-</li>
-						</ul>
-						
-						
-						
-						<h3 class="subsubtitle task-title">Other Methods</h3>
-
-						<ul class="task-list">
-							<li>
+</li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/name">&ndash;&nbsp;name</a></code>
-		<span class="tooltip"><p>The token <a href="../Classes/CPToken.html#//api/name/name">name</a>.</p></span>
+		<code><a href="#//api/name/children">&nbsp;&nbsp;children</a></code>
+		<span class="tooltip"><p>The <a href="#//api/name/children">children</a> that match the right hand side of the matched <a href="#//api/name/rule">rule</a>.</p></span>
 	</span>
-	
+	<span class="task-item-suffix">property</span>
 	
 </li>
 						</ul>
@@ -215,17 +205,17 @@
 						<h2 class="subtitle subtitle-methods">Properties</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/keyword" title="keyword"></a>
-	<h3 class="subsubtitle method-title">keyword</h3>
+	<a name="//api/name/children" title="children"></a>
+	<h3 class="subsubtitle method-title">children</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The <a href="#//api/name/name">name</a> of the <a href="#//api/name/keyword">keyword</a> found in the input stream.</p>
+		<p>The <a href="#//api/name/children">children</a> that match the right hand side of the matched <a href="#//api/name/rule">rule</a>.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (readwrite, copy) NSString *keyword</code></div>
+	<div class="method-subsection method-declaration"><code>@property (readonly, copy) NSArray *children</code></div>
 	
 	
 	
@@ -234,7 +224,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The <a href="#//api/name/name">name</a> of the <a href="#//api/name/keyword">keyword</a> found in the input stream.</p>
+		<p>The <a href="#//api/name/children">children</a> that match the right hand side of the matched <a href="#//api/name/rule">rule</a>.</p>
 	</div>
 	
 	
@@ -245,7 +235,44 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CPKeywordToken.h</code><br />
+		<code class="declared-in-ref">CPSyntaxTree.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/rule" title="rule"></a>
+	<h3 class="subsubtitle method-title">rule</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The <a href="#//api/name/rule">rule</a> matched to create this syntax tree.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (readonly, retain) CPRule *rule</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The <a href="#//api/name/rule">rule</a> matched to create this syntax tree.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPSyntaxTree.h</code><br />
 	</div>				
 	
 	
@@ -260,25 +287,30 @@
 						<h2 class="subtitle subtitle-methods">Class Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/tokenWithKeyword:" title="tokenWithKeyword:"></a>
-	<h3 class="subsubtitle method-title">tokenWithKeyword:</h3>
+	<a name="//api/name/syntaxTreeWithRule:children:" title="syntaxTreeWithRule:children:"></a>
+	<h3 class="subsubtitle method-title">syntaxTreeWithRule:children:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Creates a <a href="#//api/name/keyword">keyword</a> token with a certain <a href="#//api/name/name">name</a>.</p>
+		<p>Creates a syntax tree based on a <a href="#//api/name/rule">rule</a> and some child trees.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>+ (id)tokenWithKeyword:(NSString *)<em>keyword</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (id)syntaxTreeWithRule:(CPRule *)<em>nonTerminal</em> children:(NSArray *)<em>children</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>keyword</em></dt>
-			<dd><p>The <a href="#//api/name/name">name</a> of the <a href="#//api/name/keyword">keyword</a> found in the input stream.</p></dd>
+			<dt><em>nonTerminal</em></dt>
+			<dd><p>The <a href="#//api/name/rule">rule</a> that was matched to create this tree node.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>children</em></dt>
+			<dd><p>The child trees that represent the components of the right hand side of the <a href="#//api/name/rule">rule</a>.</p></dd>
 		</dl>
 		
 	</div>
@@ -287,14 +319,14 @@
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>Returns a <a href="CPKeywordToken.html">CPKeywordToken</a> representing the specified <a href="#//api/name/keyword">keyword</a>.</p>
+		<p>Returns a syntax tree with apropriate <a href="#//api/name/children">children</a>, and matching a specified <a href="#//api/name/rule">rule</a>.</p>
 	</div>
 	
 	
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Creates a <a href="#//api/name/keyword">keyword</a> token with a certain <a href="#//api/name/name">name</a>.</p>
+		<p>Creates a syntax tree based on a <a href="#//api/name/rule">rule</a> and some child trees.</p>
 	</div>
 	
 	
@@ -305,7 +337,7 @@
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/initWithKeyword:">&ndash; initWithKeyword:</a></p></code></li>
+			<li><code><p><a href="#//api/name/initWithRule:children:">&ndash; initWithRule:children:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -314,7 +346,7 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CPKeywordToken.h</code><br />
+		<code class="declared-in-ref">CPSyntaxTree.h</code><br />
 	</div>				
 	
 	
@@ -329,25 +361,30 @@
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/initWithKeyword:" title="initWithKeyword:"></a>
-	<h3 class="subsubtitle method-title">initWithKeyword:</h3>
+	<a name="//api/name/initWithRule:children:" title="initWithRule:children:"></a>
+	<h3 class="subsubtitle method-title">initWithRule:children:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Initialises a <a href="#//api/name/keyword">keyword</a> token with a certain <a href="#//api/name/name">name</a>.</p>
+		<p>Initialises a syntax tree based on a <a href="#//api/name/rule">rule</a> and some child trees.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (id)initWithKeyword:(NSString *)<em>keyword</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (id)initWithRule:(CPRule *)<em>nonTerminal</em> children:(NSArray *)<em>children</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>keyword</em></dt>
-			<dd><p>The <a href="#//api/name/name">name</a> of the <a href="#//api/name/keyword">keyword</a> found in the input stream.</p></dd>
+			<dt><em>nonTerminal</em></dt>
+			<dd><p>The <a href="#//api/name/rule">rule</a> that was matched to create this tree node.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>children</em></dt>
+			<dd><p>The child trees that represent the components of the right hand side of the <a href="#//api/name/rule">rule</a>.</p></dd>
 		</dl>
 		
 	</div>
@@ -356,14 +393,14 @@
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>Returns a <a href="CPKeywordToken.html">CPKeywordToken</a> representing the specified <a href="#//api/name/keyword">keyword</a>.</p>
+		<p>Returns a syntax tree with apropriate <a href="#//api/name/children">children</a>, and matching a specified <a href="#//api/name/rule">rule</a>.</p>
 	</div>
 	
 	
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Initialises a <a href="#//api/name/keyword">keyword</a> token with a certain <a href="#//api/name/name">name</a>.</p>
+		<p>Initialises a syntax tree based on a <a href="#//api/name/rule">rule</a> and some child trees.</p>
 	</div>
 	
 	
@@ -374,7 +411,7 @@
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/tokenWithKeyword:">+ tokenWithKeyword:</a></p></code></li>
+			<li><code><p><a href="#//api/name/syntaxTreeWithRule:children:">+ syntaxTreeWithRule:children:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -383,44 +420,7 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CPKeywordToken.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/name" title="name"></a>
-	<h3 class="subsubtitle method-title">name</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>The token <a href="../Classes/CPToken.html#//api/name/name">name</a>.</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>- (NSString *)name</code></div>
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>The token <a href="../Classes/CPToken.html#//api/name/name">name</a>.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CPToken.h</code><br />
+		<code class="declared-in-ref">CPSyntaxTree.h</code><br />
 	</div>				
 	
 	

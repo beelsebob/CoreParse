@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>CPEOFToken Class Reference</title>
+		<title>CPParserDelegate Protocol Reference</title>
 		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
@@ -11,7 +11,7 @@
 	<body>
 		<header id="top_header">
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">CPEOFToken Class Reference</h1>
+				<h1 class="hideInXcode">CPParserDelegate Protocol Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -34,16 +34,11 @@
 	
 	
 	
-	<option value="class_methods">Class Methods</option>
-	
-	<option value="//api/name/eof">&nbsp;&nbsp;&nbsp;&nbsp;+ eof</option>
-	
-	
 	
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/name">&nbsp;&nbsp;&nbsp;&nbsp;- name</option>
+	<option value="//api/name/parser:didProduceSyntaxTree:">&nbsp;&nbsp;&nbsp;&nbsp;- parser:didProduceSyntaxTree:</option>
 	
 	
 	
@@ -69,17 +64,11 @@
 
 
 
-<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/eof">eof</a></span></li>
-	
-</ul></li>
-
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/name">name</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/parser:didProduceSyntaxTree:">parser:didProduceSyntaxTree:</a></span></li>
 	
 </ul></li>
 
@@ -88,7 +77,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="CPEOFToken Class Reference" name="top"></a>
+				<a title="CPParserDelegate Protocol Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -97,18 +86,18 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">CPEOFToken Class Reference</h1>
+						<h1 class="title title-header">CPParserDelegate Protocol Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
-	<td class="specification-title">Inherits from</td>
-	<td class="specification-value"><a href="../Classes/CPToken.html">CPToken</a> : NSObject</td>
+	<td class="specification-title">Conforms to</td>
+	<td class="specification-value">NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">CPEOFToken.h<br />CPEOFToken.m</td>
+	<td class="specification-value">CPParser.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -118,9 +107,10 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>The <a href="CPEOFToken.html">CPEOFToken</a> class reperesents the end of a token stream.</p>
+						<p>The delegate of a <a href="../Classes/CPParser.html">CPParser</a> must adopt the <a href="CPParserDelegate.html">CPParserDelegate</a> protocol.  This allows you to replace the produced syntax trees with data structures of your choice.</p>
 
-<p>These tokens return <code>@"EOF"</code> as their <a href="#//api/name/name">name</a>.</p>
+<p>Significant processing can be performed in a parser delegate.  For example, a parser for numeric expressions could replace each syntax tree with an NSNumber representing
+the resultant value of evaluating the expression.  This would allow you to parse, and compute the result of the expression in one pass.</p>
 					</div>
 					
 					
@@ -133,31 +123,16 @@
 						
 						
 						
-						<h3 class="subsubtitle task-title">Other Methods</h3>
+						
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/eof">+&nbsp;eof</a></code>
-		<span class="tooltip"><p>Creates an end of file token.</p></span>
+		<code><a href="#//api/name/parser:didProduceSyntaxTree:">&ndash;&nbsp;parser:didProduceSyntaxTree:</a></code>
+		<span class="tooltip"><p>Should return an object to replace a produced syntax tree with.</p></span>
 	</span>
 	
-	
-</li>
-						</ul>
-						
-						
-						
-						<h3 class="subsubtitle task-title">Other Methods</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/name">&ndash;&nbsp;name</a></code>
-		<span class="tooltip"><p>The token <a href="../Classes/CPToken.html#//api/name/name">name</a>.</p></span>
-	</span>
-	
-	
+	<span class="task-item-suffix">required method</span>
 </li>
 						</ul>
 						
@@ -168,54 +143,6 @@
 					
 					
 					
-					
-					<div class="section section-methods">
-						<a title="Class Methods" name="class_methods"></a>
-						<h2 class="subtitle subtitle-methods">Class Methods</h2>
-						
-						<div class="section-method">
-	<a name="//api/name/eof" title="eof"></a>
-	<h3 class="subsubtitle method-title">eof</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Creates an end of file token.</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>+ (id)eof</code></div>
-	
-	
-	
-	
-	<div class="method-subsection return">
-		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>A token representing the end of the input stream.</p>
-	</div>
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Creates an end of file token.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CPEOFToken.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-					</div>
 					
 					
 					
@@ -224,26 +151,48 @@
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/name" title="name"></a>
-	<h3 class="subsubtitle method-title">name</h3>
+	<a name="//api/name/parser:didProduceSyntaxTree:" title="parser:didProduceSyntaxTree:"></a>
+	<h3 class="subsubtitle method-title">parser:didProduceSyntaxTree:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The token <a href="../Classes/CPToken.html#//api/name/name">name</a>.</p>
+		<p>Should return an object to replace a produced syntax tree with.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (NSString *)name</code></div>
+	<div class="method-subsection method-declaration"><code>- (id)parser:(CPParser *)<em>parser</em> didProduceSyntaxTree:(CPSyntaxTree *)<em>syntaxTree</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>parser</em></dt>
+			<dd><p>The parser which produced the syntax tree.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>syntaxTree</em></dt>
+			<dd><p>The syntax tree the parser has produced.</p></dd>
+		</dl>
+		
+	</div>
 	
 	
 	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An object value to replace the syntax tree with.</p>
+	</div>
 	
 	
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The token <a href="../Classes/CPToken.html#//api/name/name">name</a>.</p>
+		<p>Should return an object to replace a produced syntax tree with.</p>
+
+<p>You should not return <code>nil</code> from this method.</p><div class="warning"><p>Note that it is not guarenteed that this method will be called in the same order as the structures appear in your input stream.</p></div>
 	</div>
 	
 	
@@ -254,7 +203,7 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CPToken.h</code><br />
+		<code class="declared-in-ref">CPParser.h</code><br />
 	</div>				
 	
 	

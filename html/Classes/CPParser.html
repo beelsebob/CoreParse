@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>CPKeywordToken Class Reference</title>
+		<title>CPParser Class Reference</title>
 		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
@@ -11,7 +11,7 @@
 	<body>
 		<header id="top_header">
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">CPKeywordToken Class Reference</h1>
+				<h1 class="hideInXcode">CPParser Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -34,23 +34,25 @@
 	
 	<option value="properties">Properties</option>
 	
-	<option value="//api/name/keyword">&nbsp;&nbsp;&nbsp;&nbsp;keyword</option>
+	<option value="//api/name/delegate">&nbsp;&nbsp;&nbsp;&nbsp;delegate</option>
+	
+	<option value="//api/name/grammar">&nbsp;&nbsp;&nbsp;&nbsp;grammar</option>
 	
 	
 	
 	
 	<option value="class_methods">Class Methods</option>
 	
-	<option value="//api/name/tokenWithKeyword:">&nbsp;&nbsp;&nbsp;&nbsp;+ tokenWithKeyword:</option>
+	<option value="//api/name/parserWithGrammar:">&nbsp;&nbsp;&nbsp;&nbsp;+ parserWithGrammar:</option>
 	
 	
 	
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/initWithKeyword:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithKeyword:</option>
+	<option value="//api/name/initWithGrammar:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithGrammar:</option>
 	
-	<option value="//api/name/name">&nbsp;&nbsp;&nbsp;&nbsp;- name</option>
+	<option value="//api/name/parse:">&nbsp;&nbsp;&nbsp;&nbsp;- parse:</option>
 	
 	
 	
@@ -68,9 +70,13 @@
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Creating and Initialising a Keyword Token">Creating and Initialising a Keyword Token</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Creating and Initialising a Parser">Creating and Initialising a Parser</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Configuring a Keyword Token">Configuring a Keyword Token</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Managing the Delegate">Managing the Delegate</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Finding out about the parsed Grammar">Finding out about the parsed Grammar</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Parsing a Token Stream.">Parsing a Token Stream.</a></span></li>
 	
 </ul></li>
 
@@ -80,7 +86,9 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/keyword">keyword</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/delegate">delegate</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/grammar">grammar</a></span></li>
 	
 </ul></li>
 
@@ -88,7 +96,7 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/tokenWithKeyword:">tokenWithKeyword:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/parserWithGrammar:">parserWithGrammar:</a></span></li>
 	
 </ul></li>
 
@@ -96,9 +104,9 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithKeyword:">initWithKeyword:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithGrammar:">initWithGrammar:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/name">name</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/parse:">parse:</a></span></li>
 	
 </ul></li>
 
@@ -107,7 +115,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="CPKeywordToken Class Reference" name="top"></a>
+				<a title="CPParser Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -116,7 +124,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">CPKeywordToken Class Reference</h1>
+						<h1 class="title title-header">CPParser Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -124,10 +132,10 @@
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<td class="specification-title">Inherits from</td>
-	<td class="specification-value"><a href="../Classes/CPToken.html">CPToken</a> : NSObject</td>
+	<td class="specification-value">NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">CPKeywordToken.h<br />CPKeywordToken.m</td>
+	<td class="specification-value">CPParser.h<br />CPParser.m</td>
 </tr>
 						</tbody></table></div>
 					
@@ -137,11 +145,9 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>The <a href="CPKeywordToken.html">CPKeywordToken</a> class reperesents a <a href="#//api/name/keyword">keyword</a> appearing in the input.</p>
+						<p>The <a href="CPParser.html">CPParser</a> class allows you to parse token streams.</p>
 
-<p>These tokens can be used to return both language keywords and predetermined operators amongst other things.</p>
-
-<p>These tokens return the <a href="#//api/name/keyword">keyword</a> <a href="#//api/name/name">name</a> as their <a href="#//api/name/name">name</a>.</p>
+<p>Parsers are built by constructing a <a href="#//api/name/grammar">grammar</a>, and then using it to create a parser.  The parser <a href="#//api/name/delegate">delegate</a> may be used to monitor and replace output from the parser.</p><div class="warning"><p>Note that <a href="CPParser.html">CPParser</a> is an abstract superclass.  Use one of its subclasses to construct your parser.</p></div>
 					</div>
 					
 					
@@ -153,21 +159,21 @@
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
-						<a title="Creating and Initialising a Keyword Token" name="task_Creating and Initialising a Keyword Token"></a>
-						<h3 class="subsubtitle task-title">Creating and Initialising a Keyword Token</h3>
+						<a title="Creating and Initialising a Parser" name="task_Creating and Initialising a Parser"></a>
+						<h3 class="subsubtitle task-title">Creating and Initialising a Parser</h3>
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/tokenWithKeyword:">+&nbsp;tokenWithKeyword:</a></code>
-		<span class="tooltip"><p>Creates a <a href="#//api/name/keyword">keyword</a> token with a certain <a href="#//api/name/name">name</a>.</p></span>
+		<code><a href="#//api/name/parserWithGrammar:">+&nbsp;parserWithGrammar:</a></code>
+		<span class="tooltip"><p>Creates a parser for a certain <a href="#//api/name/grammar">grammar</a>.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithKeyword:">&ndash;&nbsp;initWithKeyword:</a></code>
-		<span class="tooltip"><p>Initialises a <a href="#//api/name/keyword">keyword</a> token with a certain <a href="#//api/name/name">name</a>.</p></span>
+		<code><a href="#//api/name/initWithGrammar:">&ndash;&nbsp;initWithGrammar:</a></code>
+		<span class="tooltip"><p>Initialises a parser for a certain <a href="#//api/name/grammar">grammar</a>.</p></span>
 	</span>
 	
 	
@@ -175,14 +181,14 @@
 						</ul>
 						
 						
-						<a title="Configuring a Keyword Token" name="task_Configuring a Keyword Token"></a>
-						<h3 class="subsubtitle task-title">Configuring a Keyword Token</h3>
+						<a title="Managing the Delegate" name="task_Managing the Delegate"></a>
+						<h3 class="subsubtitle task-title">Managing the Delegate</h3>
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/keyword">&nbsp;&nbsp;keyword</a></code>
-		<span class="tooltip"><p>The <a href="#//api/name/name">name</a> of the <a href="#//api/name/keyword">keyword</a> found in the input stream.</p></span>
+		<code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+		<span class="tooltip"><p>The parser&rsquo;s <a href="#//api/name/delegate">delegate</a>.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -190,14 +196,29 @@
 						</ul>
 						
 						
-						
-						<h3 class="subsubtitle task-title">Other Methods</h3>
+						<a title="Finding out about the parsed Grammar" name="task_Finding out about the parsed Grammar"></a>
+						<h3 class="subsubtitle task-title">Finding out about the parsed Grammar</h3>
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/name">&ndash;&nbsp;name</a></code>
-		<span class="tooltip"><p>The token <a href="../Classes/CPToken.html#//api/name/name">name</a>.</p></span>
+		<code><a href="#//api/name/grammar">&nbsp;&nbsp;grammar</a></code>
+		<span class="tooltip"><p>The parser&rsquo;s <a href="#//api/name/grammar">grammar</a>.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+						
+						<a title="Parsing a Token Stream." name="task_Parsing a Token Stream."></a>
+						<h3 class="subsubtitle task-title">Parsing a Token Stream.</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/parse:">&ndash;&nbsp;parse:</a></code>
+		<span class="tooltip"><p>Parses an input token stream.</p></span>
 	</span>
 	
 	
@@ -215,17 +236,17 @@
 						<h2 class="subtitle subtitle-methods">Properties</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/keyword" title="keyword"></a>
-	<h3 class="subsubtitle method-title">keyword</h3>
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="subsubtitle method-title">delegate</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The <a href="#//api/name/name">name</a> of the <a href="#//api/name/keyword">keyword</a> found in the input stream.</p>
+		<p>The parser&rsquo;s <a href="#//api/name/delegate">delegate</a>.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (readwrite, copy) NSString *keyword</code></div>
+	<div class="method-subsection method-declaration"><code>@property (readwrite, assign) id&lt;CPParserDelegate&gt; delegate</code></div>
 	
 	
 	
@@ -234,7 +255,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The <a href="#//api/name/name">name</a> of the <a href="#//api/name/keyword">keyword</a> found in the input stream.</p>
+		<p>The parser&rsquo;s <a href="#//api/name/delegate">delegate</a>.</p>
 	</div>
 	
 	
@@ -245,7 +266,44 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CPKeywordToken.h</code><br />
+		<code class="declared-in-ref">CPParser.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/grammar" title="grammar"></a>
+	<h3 class="subsubtitle method-title">grammar</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The parser&rsquo;s <a href="#//api/name/grammar">grammar</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (readonly, retain) CPGrammar *grammar</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The parser&rsquo;s <a href="#//api/name/grammar">grammar</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPParser.h</code><br />
 	</div>				
 	
 	
@@ -260,25 +318,25 @@
 						<h2 class="subtitle subtitle-methods">Class Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/tokenWithKeyword:" title="tokenWithKeyword:"></a>
-	<h3 class="subsubtitle method-title">tokenWithKeyword:</h3>
+	<a name="//api/name/parserWithGrammar:" title="parserWithGrammar:"></a>
+	<h3 class="subsubtitle method-title">parserWithGrammar:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Creates a <a href="#//api/name/keyword">keyword</a> token with a certain <a href="#//api/name/name">name</a>.</p>
+		<p>Creates a parser for a certain <a href="#//api/name/grammar">grammar</a>.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>+ (id)tokenWithKeyword:(NSString *)<em>keyword</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (id)parserWithGrammar:(CPGrammar *)<em>grammar</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>keyword</em></dt>
-			<dd><p>The <a href="#//api/name/name">name</a> of the <a href="#//api/name/keyword">keyword</a> found in the input stream.</p></dd>
+			<dt><em>grammar</em></dt>
+			<dd><p>The <a href="#//api/name/grammar">grammar</a> on which to base the parser.</p></dd>
 		</dl>
 		
 	</div>
@@ -287,34 +345,25 @@
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>Returns a <a href="CPKeywordToken.html">CPKeywordToken</a> representing the specified <a href="#//api/name/keyword">keyword</a>.</p>
+		<p>Returns a parser that parses the input <a href="#//api/name/grammar">grammar</a>, or nil if no such parser could be created.</p>
 	</div>
 	
 	
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Creates a <a href="#//api/name/keyword">keyword</a> token with a certain <a href="#//api/name/name">name</a>.</p>
+		<p>Creates a parser for a certain <a href="#//api/name/grammar">grammar</a>.</p>
 	</div>
 	
 	
 	
 	
-	
-	<div class="method-subsection see-also-section">
-		<h4 class="method-subtitle">See Also</h4>
-		<ul>
-			
-			<li><code><p><a href="#//api/name/initWithKeyword:">&ndash; initWithKeyword:</a></p></code></li>
-			
-		</ul>
-	</div>
 	
 	
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CPKeywordToken.h</code><br />
+		<code class="declared-in-ref">CPParser.h</code><br />
 	</div>				
 	
 	
@@ -329,25 +378,25 @@
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/initWithKeyword:" title="initWithKeyword:"></a>
-	<h3 class="subsubtitle method-title">initWithKeyword:</h3>
+	<a name="//api/name/initWithGrammar:" title="initWithGrammar:"></a>
+	<h3 class="subsubtitle method-title">initWithGrammar:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Initialises a <a href="#//api/name/keyword">keyword</a> token with a certain <a href="#//api/name/name">name</a>.</p>
+		<p>Initialises a parser for a certain <a href="#//api/name/grammar">grammar</a>.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (id)initWithKeyword:(NSString *)<em>keyword</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (id)initWithGrammar:(CPGrammar *)<em>grammar</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>keyword</em></dt>
-			<dd><p>The <a href="#//api/name/name">name</a> of the <a href="#//api/name/keyword">keyword</a> found in the input stream.</p></dd>
+			<dt><em>grammar</em></dt>
+			<dd><p>The <a href="#//api/name/grammar">grammar</a> on which to base the parser.</p></dd>
 		</dl>
 		
 	</div>
@@ -356,60 +405,68 @@
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>Returns a <a href="CPKeywordToken.html">CPKeywordToken</a> representing the specified <a href="#//api/name/keyword">keyword</a>.</p>
+		<p>Returns a parser that parses the input <a href="#//api/name/grammar">grammar</a>, or nil if no such parser could be created.</p>
 	</div>
 	
 	
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Initialises a <a href="#//api/name/keyword">keyword</a> token with a certain <a href="#//api/name/name">name</a>.</p>
+		<p>Initialises a parser for a certain <a href="#//api/name/grammar">grammar</a>.</p>
 	</div>
 	
 	
 	
 	
-	
-	<div class="method-subsection see-also-section">
-		<h4 class="method-subtitle">See Also</h4>
-		<ul>
-			
-			<li><code><p><a href="#//api/name/tokenWithKeyword:">+ tokenWithKeyword:</a></p></code></li>
-			
-		</ul>
-	</div>
 	
 	
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CPKeywordToken.h</code><br />
+		<code class="declared-in-ref">CPParser.h</code><br />
 	</div>				
 	
 	
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/name" title="name"></a>
-	<h3 class="subsubtitle method-title">name</h3>
+	<a name="//api/name/parse:" title="parse:"></a>
+	<h3 class="subsubtitle method-title">parse:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The token <a href="../Classes/CPToken.html#//api/name/name">name</a>.</p>
+		<p>Parses an input token stream.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (NSString *)name</code></div>
+	<div class="method-subsection method-declaration"><code>- (id)parse:(CPTokenStream *)<em>tokenStream</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>tokenStream</em></dt>
+			<dd><p>The token stream to parse.</p></dd>
+		</dl>
+		
+	</div>
 	
 	
 	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Returns the parsed syntax tree for the whole stream or <code>nil</code> if the token stream could not be parsed.</p>
+	</div>
 	
 	
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The token <a href="../Classes/CPToken.html#//api/name/name">name</a>.</p>
+		<p>Parses an input token stream.</p>
+
+<p>Currently if errors are generated, <code>nil</code> is returned and the error Logged using NSLog.  This behaviour may change in the future to return the error in a more usable form.</p>
 	</div>
 	
 	
@@ -420,7 +477,7 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CPToken.h</code><br />
+		<code class="declared-in-ref">CPParser.h</code><br />
 	</div>				
 	
 	

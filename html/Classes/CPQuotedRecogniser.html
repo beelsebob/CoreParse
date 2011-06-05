@@ -168,7 +168,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>The <a href="CPQuotedRecogniser.html"><code>CPQuotedRecogniser</code></a> class is used to recognise quoted literals in the input string.  This can be used for quoted strings, characters, comments and many other things.</p>
+						<p>The <a href="CPQuotedRecogniser.html">CPQuotedRecogniser</a> class is used to recognise quoted literals in the input string.  This can be used for quoted strings, characters, comments and many other things.</p>
 
 <p>Quoted tokens are recognised via a start string and end string.  You may optionally add an escape sequence string that stops the end quote being recognised at that point in the input.
 You may optionally provide a block used to replace escape sequences with their actual meaning.  If you don&rsquo;t provide an escape replcement block it is assumed that the character
@@ -176,7 +176,7 @@ following the escape sequence replaces the whole sequence.</p>
 
 <p>Finally, you may also provide a maximum length for the quoted sequence to recognise.  If you want to recognise strings of any length, pass NSNotFound.</p>
 
-<p>This recogniser produces <a href="../Classes/CPQuotedToken.html"><code>CPQuotedToken</code></a>s.  The <a href="#//api/name/name">name</a> of the produced tokens is determined by the <a href="#//api/name/name"><code>name</code></a> property.</p>
+<p>This recogniser produces CPQuotedTokens.  The <a href="#//api/name/name">name</a> of the produced tokens is determined by the <a href="#//api/name/name">name</a> property.</p>
 					</div>
 					
 					
@@ -195,28 +195,28 @@ following the escape sequence replaces the whole sequence.</p>
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/quotedRecogniserWithStartQuote:endQuote:name:">+&nbsp;quotedRecogniserWithStartQuote:endQuote:name:</a></code>
-		<span class="tooltip"><p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.</p></span>
+		<span class="tooltip"><p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote">startQuote</a> and ending with <a href="#//api/name/endQuote">endQuote</a>.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/quotedRecogniserWithStartQuote:endQuote:escapeSequence:name:">+&nbsp;quotedRecogniserWithStartQuote:endQuote:escapeSequence:name:</a></code>
-		<span class="tooltip"><p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence"><code>escapeSequence</code></a> string.</p></span>
+		<span class="tooltip"><p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote">startQuote</a> and ending with <a href="#//api/name/endQuote">endQuote</a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence">escapeSequence</a> string.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:name:">+&nbsp;quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:name:</a></code>
-		<span class="tooltip"><p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence"><code>escapeSequence</code></a> string.  Quoted strings have a maximum length.</p></span>
+		<span class="tooltip"><p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote">startQuote</a> and ending with <a href="#//api/name/endQuote">endQuote</a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence">escapeSequence</a> string.  Quoted strings have a maximum length.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/initWithStartQuote:endQuote:escapeSequence:maximumLength:name:">&ndash;&nbsp;initWithStartQuote:endQuote:escapeSequence:maximumLength:name:</a></code>
-		<span class="tooltip"><p>Initialises a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence"><code>escapeSequence</code></a> string.  Quoted strings have a maximum length.</p></span>
+		<span class="tooltip"><p>Initialises a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote">startQuote</a> and ending with <a href="#//api/name/endQuote">endQuote</a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence">escapeSequence</a> string.  Quoted strings have a maximum length.</p></span>
 	</span>
 	
 	
@@ -266,7 +266,7 @@ following the escape sequence replaces the whole sequence.</p>
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/name">&nbsp;&nbsp;name</a></code>
-		<span class="tooltip"><p>Determines the <a href="#//api/name/name">name</a> of the <a href="../Classes/CPToken.html"><code>CPToken</code></a> produced.</p></span>
+		<span class="tooltip"><p>Determines the <a href="#//api/name/name">name</a> of the <a href="../Classes/CPToken.html">CPToken</a> produced.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -281,7 +281,7 @@ following the escape sequence replaces the whole sequence.</p>
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/recogniseTokenInString:currentTokenPosition:">&ndash;&nbsp;recogniseTokenInString:currentTokenPosition:</a></code>
-		<span class="tooltip"><p>Attempts to recognise a token at <code>tokenPosition</code> in <code>tokenString</code>.</p></span>
+		<span class="tooltip"><p>Attempts to recognise a token at tokenPosition in tokenString.</p></span>
 	</span>
 	
 	
@@ -462,7 +462,7 @@ following the escape sequence replaces the whole sequence.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Determines the <a href="#//api/name/name">name</a> of the <a href="../Classes/CPToken.html"><code>CPToken</code></a> produced.</p>
+		<p>Determines the <a href="#//api/name/name">name</a> of the <a href="../Classes/CPToken.html">CPToken</a> produced.</p>
 	</div>		
 	
 	
@@ -475,7 +475,7 @@ following the escape sequence replaces the whole sequence.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Determines the <a href="#//api/name/name">name</a> of the <a href="../Classes/CPToken.html"><code>CPToken</code></a> produced.</p>
+		<p>Determines the <a href="#//api/name/name">name</a> of the <a href="../Classes/CPToken.html">CPToken</a> produced.</p>
 	</div>
 	
 	
@@ -553,7 +553,7 @@ following the escape sequence replaces the whole sequence.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence"><code>escapeSequence</code></a> string.  Quoted strings have a maximum length.</p>
+		<p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote">startQuote</a> and ending with <a href="#//api/name/endQuote">endQuote</a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence">escapeSequence</a> string.  Quoted strings have a maximum length.</p>
 	</div>		
 	
 	
@@ -594,14 +594,14 @@ following the escape sequence replaces the whole sequence.</p>
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>Returns a <a href="CPQuotedRecogniser.html"><code>CPQuotedRecogniser</code></a> that recognises C like identifiers.</p>
+		<p>Returns a <a href="CPQuotedRecogniser.html">CPQuotedRecogniser</a> that recognises C like identifiers.</p>
 	</div>
 	
 	
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence"><code>escapeSequence</code></a> string.  Quoted strings have a maximum length.</p>
+		<p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote">startQuote</a> and ending with <a href="#//api/name/endQuote">endQuote</a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence">escapeSequence</a> string.  Quoted strings have a maximum length.</p>
 	</div>
 	
 	
@@ -638,7 +638,7 @@ following the escape sequence replaces the whole sequence.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence"><code>escapeSequence</code></a> string.</p>
+		<p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote">startQuote</a> and ending with <a href="#//api/name/endQuote">endQuote</a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence">escapeSequence</a> string.</p>
 	</div>		
 	
 	
@@ -674,14 +674,14 @@ following the escape sequence replaces the whole sequence.</p>
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>Returns a <a href="CPQuotedRecogniser.html"><code>CPQuotedRecogniser</code></a> that recognises C like identifiers.</p>
+		<p>Returns a <a href="CPQuotedRecogniser.html">CPQuotedRecogniser</a> that recognises C like identifiers.</p>
 	</div>
 	
 	
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence"><code>escapeSequence</code></a> string.</p>
+		<p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote">startQuote</a> and ending with <a href="#//api/name/endQuote">endQuote</a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence">escapeSequence</a> string.</p>
 	</div>
 	
 	
@@ -716,7 +716,7 @@ following the escape sequence replaces the whole sequence.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.</p>
+		<p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote">startQuote</a> and ending with <a href="#//api/name/endQuote">endQuote</a>.</p>
 	</div>		
 	
 	
@@ -747,14 +747,14 @@ following the escape sequence replaces the whole sequence.</p>
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>Returns a <a href="CPQuotedRecogniser.html"><code>CPQuotedRecogniser</code></a> that recognises C like identifiers.</p>
+		<p>Returns a <a href="CPQuotedRecogniser.html">CPQuotedRecogniser</a> that recognises C like identifiers.</p>
 	</div>
 	
 	
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.</p>
+		<p>Creates a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote">startQuote</a> and ending with <a href="#//api/name/endQuote">endQuote</a>.</p>
 	</div>
 	
 	
@@ -797,7 +797,7 @@ following the escape sequence replaces the whole sequence.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Initialises a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence"><code>escapeSequence</code></a> string.  Quoted strings have a maximum length.</p>
+		<p>Initialises a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote">startQuote</a> and ending with <a href="#//api/name/endQuote">endQuote</a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence">escapeSequence</a> string.  Quoted strings have a maximum length.</p>
 	</div>		
 	
 	
@@ -838,14 +838,14 @@ following the escape sequence replaces the whole sequence.</p>
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>Returns a <a href="CPQuotedRecogniser.html"><code>CPQuotedRecogniser</code></a> that recognises C like identifiers.</p>
+		<p>Returns a <a href="CPQuotedRecogniser.html">CPQuotedRecogniser</a> that recognises C like identifiers.</p>
 	</div>
 	
 	
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Initialises a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote"><code>startQuote</code></a> and ending with <a href="#//api/name/endQuote"><code>endQuote</code></a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence"><code>escapeSequence</code></a> string.  Quoted strings have a maximum length.</p>
+		<p>Initialises a quoted recogniser that recognises quoted litterals starting with <a href="#//api/name/startQuote">startQuote</a> and ending with <a href="#//api/name/endQuote">endQuote</a>.  Escaped sequences are recognised by the <a href="#//api/name/escapeSequence">escapeSequence</a> string.  Quoted strings have a maximum length.</p>
 	</div>
 	
 	
@@ -878,7 +878,7 @@ following the escape sequence replaces the whole sequence.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Attempts to recognise a token at <code>tokenPosition</code> in <code>tokenString</code>.</p>
+		<p>Attempts to recognise a token at tokenPosition in tokenString.</p>
 	</div>		
 	
 	
@@ -911,10 +911,10 @@ following the escape sequence replaces the whole sequence.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Attempts to recognise a token at <code>tokenPosition</code> in <code>tokenString</code>.</p>
+		<p>Attempts to recognise a token at tokenPosition in tokenString.</p>
 
-<p>If a token is successfully recognised, it should be returned, and <code>tokenPosition</code> advanced to after the consumed characters.
-If no valid token is found <code>nil</code> must be returned instead, and <code>tokenPosition</code> left unchanged.</p>
+<p>If a token is successfully recognised, it should be returned, and tokenPosition advanced to after the consumed characters.
+If no valid token is found <code>nil</code> must be returned instead, and tokenPosition left unchanged.</p>
 	</div>
 	
 	
@@ -944,7 +944,7 @@ If no valid token is found <code>nil</code> must be returned instead, and <code>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2011 Beelsebob. All rights reserved. (Last updated: 2011-06-04)</span><br />
+						<p><span class="copyright">&copy; 2011 Beelsebob. All rights reserved. (Last updated: 2011-06-05)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.4 (build 701)</a>.</span></p>
 						
