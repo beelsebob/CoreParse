@@ -67,3 +67,61 @@ We construct parsers by specifying their grammar.  We can construct a grammar si
     CPGrammar *grammar = [CPGrammar grammarWithStart:@"e" backusNaurForm:expressionGrammar];
 
 The numbers on each line indicate a "tag" which will be used to recognise the rules later on.
+
+Now that we have our grammar we may construct a parser from it, and set ourself as the delegate:
+
+    CPParser *parser = [CPLALR1Parser parserWithGrammar:grammar];
+    [parser setDelegate:self];
+
+We implement the delegate method.  Note that instead of returning a tree structure at each stage, we collapse the syntax tree into the resulting number.  The result of doing this is that when we parse, the output of the CPParser is not a syntax tree, but instead the value of the computed expression:
+
+    - (id)parser:(CPParser *)parser didProduceSyntaxTree:(CPSyntaxTree *)syntaxTree
+    {
+        CPRule *r = [syntaxTree rule];
+        NSArray *c = [syntaxTree children];
+        
+        switch ([r tag])
+        {
+            case 0:
+            case 2:
+                return [c objectAtIndex:0];
+            case 1:
+            {
+                NSString *operator = [[c objectAtIndex:1] keyword];
+                if ([operator isEqualToString:@"+"])
+                {
+                    return [NSNumber numberWithInt:[[c objectAtIndex:0] doubleValue] + [[c objectAtIndex:2] doubleValue]];
+                }
+                else
+                {
+                    return [NSNumber numberWithInt:[[c objectAtIndex:0] doubleValue] - [[c objectAtIndex:2] doubleValue]];
+                }
+            }
+            case 3:
+            {
+                NSString *operator = [[c objectAtIndex:1] keyword];
+                if ([operator isEqualToString:@"*"])
+                {
+                    return [NSNumber numberWithInt:[[c objectAtIndex:0] doubleValue] * [[c objectAtIndex:2] doubleValue]];
+                }
+                else
+                {
+                    return [NSNumber numberWithInt:[[c objectAtIndex:0] doubleValue] / [[c objectAtIndex:2] doubleValue]];
+                }
+            }
+            case 4:
+                return [(CPNumberToken *)[c objectAtIndex:0] number];
+            case 5:
+                return [c objectAtIndex:1];
+            default:
+                return syntaxTree;
+        }
+    }
+
+We can now parse the token stream we produced earlier:
+
+    NSLog(@"%@", [parser parse:tokenStream]);
+
+Which outputs:
+
+    80.2
