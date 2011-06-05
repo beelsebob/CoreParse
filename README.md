@@ -31,6 +31,7 @@ Our example language will involve several symbols, numbers, whitespace, and comm
 Note that the comment tokeniser is added before the keyword recogniser for the divide symbol.  This gives it higher precidence, and means that the first slash of a comment will not be recognised as a division.
 
 Next, we add ourself as a delegate to the tokeniser.  We implement the tokeniser delegate methods in such a way that whitespace tokens and comments, although consumed, will not appear in the tokeniser's output:
+
     - (BOOL)tokeniser:(CPTokeniser *)tokeniser shouldConsumeToken:(CPToken *)token
     {
         return YES;
@@ -46,12 +47,14 @@ Next, we add ourself as a delegate to the tokeniser.  We implement the tokeniser
     }
 
 We can now invoke our tokeniser.
+
     CPTokenStream *tokenStream = [tokeniser tokenise:@"5 + (2.0 / 5.0 + 9) * 8"];
 
 Parsing
 -------
 
 We construct parsers by specifying their grammar.  We can construct a grammar simply using a simple BNF like language:
+
     NSString \*expressionGrammar =
         @"0 e ::= <t>;"
         @"1 e ::= <e> <a> <t>;"
