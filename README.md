@@ -17,13 +17,13 @@ CoreParse's tokenisation class is CPTokeniser.  To specify how tokens are constr
 
 Our example language will involve several symbols, numbers, whitespace, and comments.  We add these to the tokeniser:
 
-    CPTokeniser \*tokeniser = [[[CPTokeniser alloc] init] autorelease];
+    CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
     [tokeniser addTokenRecogniser:[CPNumberRecogniser numberRecogniser]];
     [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/\*" endQuote:@"\*/" name:@"Comment"]];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" name:@"Comment"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"+"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"-"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"\*"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"*"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"/"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"("]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@")"]];
@@ -55,15 +55,15 @@ Parsing
 
 We construct parsers by specifying their grammar.  We can construct a grammar simply using a simple BNF like language:
 
-    NSString \*expressionGrammar =
+    NSString *expressionGrammar =
         @"0 e ::= <t>;"
         @"1 e ::= <e> <a> <t>;"
         @"2 t ::= <f>;"
         @"3 t ::= <t> <m> <f>;"
-        @"4 f ::= \\"Number\\";"
-        @"5 f ::= \\"(\\" <e> \\")\\";"
-        @"6 a ::= \\"+\\" | \\"-\\";"
-        @"7 m ::= \\"\*\\" | \\"/\\";";
+        @"4 f ::= \"Number\";"
+        @"5 f ::= \"(\" <e> \")\";"
+        @"6 a ::= \"+\" | \"-\";"
+        @"7 m ::= \"*\" | \"/\";";
     CPGrammar *grammar = [CPGrammar grammarWithStart:@"e" backusNaurForm:expressionGrammar];
 
 The numbers on each line indicate a "tag" which will be used to recognise the rules later on.
