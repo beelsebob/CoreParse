@@ -84,6 +84,8 @@ We implement the delegate method.  Note that instead of returning a tree structu
         {
             case 0:
             case 2:
+            case 6:
+            case 7:
                 return [c objectAtIndex:0];
             case 1:
             {
