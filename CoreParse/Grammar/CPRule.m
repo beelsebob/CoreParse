@@ -17,6 +17,7 @@
 
 @synthesize name;
 @synthesize tag;
+@synthesize representitiveClass;
 
 - (NSArray *)rightHandSideElements
 {
@@ -35,12 +36,12 @@
     }
 }
 
-+ (id)ruleWithName:(NSString *)name rightHandSideElements:(NSArray *)rightHandSideElements tag:(NSUInteger)tag
++ (id)ruleWithName:(NSString *)name rightHandSideElements:(NSArray *)rightHandSideElements representitiveClass:(Class)representitiveClass
 {
-    return [[[self alloc] initWithName:name rightHandSideElements:rightHandSideElements tag:tag] autorelease];
+    return [[[self alloc] initWithName:name rightHandSideElements:rightHandSideElements representitiveClass:representitiveClass] autorelease];
 }
 
-- (id)initWithName:(NSString *)initName rightHandSideElements:(NSArray *)rightHandSideElements tag:(NSUInteger)initTag
+- (id)initWithName:(NSString *)initName rightHandSideElements:(NSArray *)rightHandSideElements representitiveClass:(Class)initRepresentitiveClass
 {
     self = [super init];
     
@@ -48,6 +49,24 @@
     {
         [self setName:initName];
         [self setRightHandSideElements:rightHandSideElements];
+        [self setTag:0];
+        [self setRepresentitiveClass:initRepresentitiveClass];
+    }
+    
+    return self;
+}
+
++ (id)ruleWithName:(NSString *)name rightHandSideElements:(NSArray *)rightHandSideElements tag:(NSUInteger)tag
+{
+    return [[[self alloc] initWithName:name rightHandSideElements:rightHandSideElements tag:tag] autorelease];
+}
+
+- (id)initWithName:(NSString *)initName rightHandSideElements:(NSArray *)rightHandSideElements tag:(NSUInteger)initTag
+{
+    self = [self initWithName:initName rightHandSideElements:rightHandSideElements representitiveClass:nil];
+    
+    if (nil != self)
+    {
         [self setTag:initTag];
     }
     

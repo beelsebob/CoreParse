@@ -73,6 +73,10 @@
 		1F530B921322814000F52EB5 /* CPRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B901322813F00F52EB5 /* CPRule.m */; };
 		1F6D44901348CC9500E982C7 /* CPLALR1Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F6D448E1348CC9500E982C7 /* CPLALR1Parser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F6D44911348CC9600E982C7 /* CPLALR1Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D448F1348CC9500E982C7 /* CPLALR1Parser.m */; };
+		1F9F83A113B731F3006E939D /* Expression.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9F839F13B731F3006E939D /* Expression.h */; };
+		1F9F83A213B731F3006E939D /* Expression.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83A013B731F3006E939D /* Expression.m */; };
+		1F9F83A613B732AC006E939D /* Term.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9F83A413B732AC006E939D /* Term.h */; };
+		1F9F83A713B732AC006E939D /* Term.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83A513B732AC006E939D /* Term.m */; };
 		1FB3EB24132BA02C00ACC453 /* CPTestEvaluatorDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB22132BA02C00ACC453 /* CPTestEvaluatorDelegate.h */; };
 		1FB3EB25132BA02C00ACC453 /* CPTestEvaluatorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB23132BA02C00ACC453 /* CPTestEvaluatorDelegate.m */; };
 		1FB3EB2C132BB2F200ACC453 /* CPLR1Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB2A132BB2E600ACC453 /* CPLR1Parser.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -176,6 +180,10 @@
 		1F530B901322813F00F52EB5 /* CPRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRule.m; sourceTree = "<group>"; };
 		1F6D448E1348CC9500E982C7 /* CPLALR1Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLALR1Parser.h; sourceTree = "<group>"; };
 		1F6D448F1348CC9500E982C7 /* CPLALR1Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLALR1Parser.m; sourceTree = "<group>"; };
+		1F9F839F13B731F3006E939D /* Expression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Expression.h; sourceTree = "<group>"; };
+		1F9F83A013B731F3006E939D /* Expression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Expression.m; sourceTree = "<group>"; };
+		1F9F83A413B732AC006E939D /* Term.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Term.h; sourceTree = "<group>"; };
+		1F9F83A513B732AC006E939D /* Term.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Term.m; sourceTree = "<group>"; };
 		1FB3EB22132BA02C00ACC453 /* CPTestEvaluatorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTestEvaluatorDelegate.h; sourceTree = "<group>"; };
 		1FB3EB23132BA02C00ACC453 /* CPTestEvaluatorDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTestEvaluatorDelegate.m; sourceTree = "<group>"; };
 		1FB3EB2A132BB2E600ACC453 /* CPLR1Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLR1Parser.h; sourceTree = "<group>"; };
@@ -297,6 +305,10 @@
 				1FB81321132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.m */,
 				1FB81324132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.h */,
 				1FB81325132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.m */,
+				1F9F839F13B731F3006E939D /* Expression.h */,
+				1F9F83A013B731F3006E939D /* Expression.m */,
+				1F9F83A413B732AC006E939D /* Term.h */,
+				1F9F83A513B732AC006E939D /* Term.m */,
 			);
 			path = CoreParseTests;
 			sourceTree = "<group>";
@@ -490,6 +502,8 @@
 				1FB81326132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.h in Headers */,
 				1FC1827D139ADC800027F597 /* CPGrammarPrivate.h in Headers */,
 				1FC18282139AE3810027F597 /* CPGrammarInternal.h in Headers */,
+				1F9F83A113B731F3006E939D /* Expression.h in Headers */,
+				1F9F83A613B732AC006E939D /* Term.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,6 +681,8 @@
 				1F6D44911348CC9600E982C7 /* CPLALR1Parser.m in Sources */,
 				1FC1827E139ADC800027F597 /* CPGrammarPrivate.m in Sources */,
 				1FC18283139AE3810027F597 /* CPGrammarInternal.m in Sources */,
+				1F9F83A213B731F3006E939D /* Expression.m in Sources */,
+				1F9F83A713B732AC006E939D /* Term.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

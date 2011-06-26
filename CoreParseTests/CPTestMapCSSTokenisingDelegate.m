@@ -8,8 +8,6 @@
 
 #import "CPTestMapCSSTokenisingDelegate.h"
 
-#import <CoreParse/CoreParse.h>
-
 @implementation CPTestMapCSSTokenisingDelegate
 {
     NSCharacterSet *symbolsSet;

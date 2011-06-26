@@ -1,8 +1,8 @@
 //
-//  CPTestMapCSSTokenisingDelegate.h
+//  Term.h
 //  CoreParse
 //
-//  Created by Tom Davie on 15/03/2011.
+//  Created by Thomas Davie on 26/06/2011.
 //  Copyright 2011 In The Beginning... All rights reserved.
 //
 
@@ -10,6 +10,8 @@
 
 #import <CoreParse/CoreParse.h>
 
-@interface CPTestMapCSSTokenisingDelegate : NSObject <CPTokeniserDelegate>
+@interface Term : NSObject <CPParseResult>
+
+@property (readwrite,assign) float value;
 
 @end

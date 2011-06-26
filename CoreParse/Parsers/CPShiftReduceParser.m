@@ -86,10 +86,21 @@
             [stateStack removeObjectsInRange:stateStackRange];
             
             CPSyntaxTree *tree = [CPSyntaxTree syntaxTreeWithRule:reductionRule children:components];
-            id result = tree;
-            if ([[self delegate] respondsToSelector:@selector(parser:didProduceSyntaxTree:)])
+            id result = nil;
+            
+            Class c = [reductionRule representitiveClass];
+            if (nil != c)
             {
-                result = [[self delegate] parser:self didProduceSyntaxTree:tree];
+                result = [(id<CPParseResult>)[c alloc] initWithSyntaxTree:tree];
+            }
+            
+            if (nil == result)
+            {
+                result = tree;
+                if ([[self delegate] respondsToSelector:@selector(parser:didProduceSyntaxTree:)])
+                {
+                    result = [[self delegate] parser:self didProduceSyntaxTree:tree];
+                }
             }
             
             NSUInteger newState = [self gotoForState:[(CPShiftReduceState *)[stateStack lastObject] state] rule:reductionRule];

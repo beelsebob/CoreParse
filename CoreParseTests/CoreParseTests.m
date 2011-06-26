@@ -14,6 +14,8 @@
 #import "CPTestWhiteSpaceIgnoringDelegate.h"
 #import "CPTestMapCSSTokenisingDelegate.h"
 
+#import "Expression.h"
+
 @interface CoreParseTests ()
 
 - (void)runMapCSSTokeniser:(CPTokenStream *)result;
@@ -588,6 +590,29 @@
     if (![tree1 isEqual:tree2])
     {
         STFail(@"Parallel parse of MapCSS failed", nil);
+    }
+}
+
+- (void)testParseResultParsing
+{
+    CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
+    [tokeniser addTokenRecogniser:[CPNumberRecogniser integerRecogniser]];
+    [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"+"]];
+    [tokeniser setDelegate:[[[CPTestWhiteSpaceIgnoringDelegate alloc] init] autorelease]];
+    CPTokenStream *tokenStream = [tokeniser tokenise:@"5 + 9 + 2 + 7"];
+    
+    NSString *testGrammar =
+        @"Expression ::= <Term>;"
+        @"Expression ::= <Expression> \"+\" <Term>;"
+        @"Term       ::= \"Number\";";
+    CPGrammar *grammar = [CPGrammar grammarWithStart:@"Expression" backusNaurForm:testGrammar];
+    CPParser *parser = [CPSLRParser parserWithGrammar:grammar];
+    Expression *e = [parser parse:tokenStream];
+    
+    if ([e value] != 23)
+    {
+        STFail(@"Parsing with ParseResult protocol produced incorrect result: %f", [e value]);
     }
 }
 

@@ -56,73 +56,58 @@ Parsing
 We construct parsers by specifying their grammar.  We can construct a grammar simply using a simple BNF like language:
 
     NSString *expressionGrammar =
-        @"0 e ::= <t>;"
-        @"1 e ::= <e> <a> <t>;"
-        @"2 t ::= <f>;"
-        @"3 t ::= <t> <m> <f>;"
-        @"4 f ::= \"Number\";"
-        @"5 f ::= \"(\" <e> \")\";"
-        @"6 a ::= \"+\" | \"-\";"
-        @"7 m ::= \"*\" | \"/\";";
-    CPGrammar *grammar = [CPGrammar grammarWithStart:@"e" backusNaurForm:expressionGrammar];
-
-The numbers on each line indicate a "tag" which will be used to recognise the rules later on.
-
-Now that we have our grammar we may construct a parser from it, and set ourself as the delegate:
-
+        @"Expression ::= <Term>;"
+        @"Expression ::= <Expression> <AddOp> <Term>;"
+        @"Term       ::= <Factor>;"
+        @"Term       ::= <Term> <MultOp> <Factor>;"
+        @"Factor     ::= \"Number\";"
+        @"Factor     ::= \"(\" <Expression> \")\";"
+        @"AddOp      ::= \"+\" | \"-\";"
+        @"MultOp     ::= \"*\" | \"/\";";
+    CPGrammar *grammar = [CPGrammar grammarWithStart:@"Expression" backusNaurForm:expressionGrammar];
     CPParser *parser = [CPLALR1Parser parserWithGrammar:grammar];
     [parser setDelegate:self];
 
-We implement the delegate method.  Note that instead of returning a tree structure at each stage, we collapse the syntax tree into the resulting number.  The result of doing this is that when we parse, the output of the CPParser is not a syntax tree, but instead the value of the computed expression:
+When a rule is matched by the parser, the `initWithSyntaxTree:` method will be called on a new instance of the apropriate class.  If no such class exists the parser delegate's `parser:didProduceSyntaxTree:` method is called.  To deal with this cleanly, we implement 3 classes ÐÊExpression, Term and Factor.  AddOp and MultOp non-terminals are dealt with by the parser delegate.  Here we see the initWithSyntaxTree: method for the Expression class, these methods are similar for Term and Factor:
+    
+    - (id)initWithSyntaxTree:(CPSyntaxTree *)syntaxTree
+    {
+        self = [self init];
+        
+        if (nil != self)
+        {
+            NSArray *components = [syntaxTree children];
+            if ([components count] == 1)
+            {
+                [self setValue:[(Term *)[components objectAtIndex:0] value]];
+            }
+            else
+            {
+                NSString *op = [components objectAtIndex:1];
+                if ([op isEqualToString:@"+"])
+                {
+                    [self setValue:[(Expression *)[components objectAtIndex:0] value] + [(Term *)[components objectAtIndex:2] value]];
+                }
+                else
+                {
+                    [self setValue:[(Expression *)[components objectAtIndex:0] value] - [(Term *)[components objectAtIndex:2] value]];
+                }
+            }
+        }
+        
+        return self;
+    }
+
+We must also implement the delegate's method for dealing with AddOps and MultOps:
 
     - (id)parser:(CPParser *)parser didProduceSyntaxTree:(CPSyntaxTree *)syntaxTree
     {
-        CPRule *r = [syntaxTree rule];
-        NSArray *c = [syntaxTree children];
-        
-        switch ([r tag])
-        {
-            case 0:
-            case 2:
-            case 6:
-            case 7:
-                return [c objectAtIndex:0];
-            case 1:
-            {
-                NSString *operator = [[c objectAtIndex:1] keyword];
-                if ([operator isEqualToString:@"+"])
-                {
-                    return [NSNumber numberWithInt:[[c objectAtIndex:0] doubleValue] + [[c objectAtIndex:2] doubleValue]];
-                }
-                else
-                {
-                    return [NSNumber numberWithInt:[[c objectAtIndex:0] doubleValue] - [[c objectAtIndex:2] doubleValue]];
-                }
-            }
-            case 3:
-            {
-                NSString *operator = [[c objectAtIndex:1] keyword];
-                if ([operator isEqualToString:@"*"])
-                {
-                    return [NSNumber numberWithInt:[[c objectAtIndex:0] doubleValue] * [[c objectAtIndex:2] doubleValue]];
-                }
-                else
-                {
-                    return [NSNumber numberWithInt:[[c objectAtIndex:0] doubleValue] / [[c objectAtIndex:2] doubleValue]];
-                }
-            }
-            case 4:
-                return [(CPNumberToken *)[c objectAtIndex:0] number];
-            case 5:
-                return [c objectAtIndex:1];
-            default:
-                return syntaxTree;
-        }
+        return [(CPQuotedToken *)[[syntaxTree children] objectAtIndex:0] content];
     }
 
 We can now parse the token stream we produced earlier:
 
-    NSLog(@"%@", [parser parse:tokenStream]);
+    NSLog(@"%@", [(Expression *)[parser parse:tokenStream] value]);
 
 Which outputs:
 

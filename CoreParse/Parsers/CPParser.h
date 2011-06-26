@@ -16,6 +16,22 @@
 @class CPParser;
 
 /**
+ * The CPParseResult protocol declares a method that a class must implement so that instances can be created as the result of parsing a token stream.
+ */
+@protocol CPParseResult <NSObject>
+
+/**
+ * Returns an object initialised with the contents of a syntax tree.
+ * 
+ * @param syntaxTree The syntax tree to initialise the object with.
+ * 
+ * @return An object created using the contents of the syntax tree.
+ */
+- (id)initWithSyntaxTree:(CPSyntaxTree *)syntaxTree;
+
+@end
+
+/**
  * The delegate of a CPParser must adopt the CPParserDelegate protocol.  This allows you to replace the produced syntax trees with data structures of your choice.
  * 
  * Significant processing can be performed in a parser delegate.  For example, a parser for numeric expressions could replace each syntax tree with an NSNumber representing

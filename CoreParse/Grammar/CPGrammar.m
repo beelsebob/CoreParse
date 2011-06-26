@@ -27,6 +27,8 @@
 
 #import "NSSetFunctional.h"
 
+#import <objc/runtime.h>
+
 @interface CPBNFParserDelegate : NSObject <CPTokeniserDelegate,CPParserDelegate>
 @end
 
@@ -62,7 +64,10 @@
             NSMutableArray *rules = [NSMutableArray arrayWithCapacity:[arrs count]];
             for (NSArray *rhs in arrs)
             {
-                [rules addObject:[CPRule ruleWithName:[(CPIdentifierToken *)[children objectAtIndex:0] identifier] rightHandSideElements:rhs]];
+                NSString *name = [(CPIdentifierToken *)[children objectAtIndex:0] identifier];
+                Class c = NSClassFromString(name);
+                CPRule *rule = nil == c || !class_conformsToProtocol(c, @protocol(CPParseResult)) ? [CPRule ruleWithName:name rightHandSideElements:rhs] : [CPRule ruleWithName:name rightHandSideElements:rhs representitiveClass:c];
+                [rules addObject:rule];
             }
             return rules;
         }

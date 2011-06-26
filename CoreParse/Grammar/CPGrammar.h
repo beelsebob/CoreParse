@@ -66,28 +66,26 @@
  *
  * The grammar used for parsing the BNF can be expressed as follows:
  * 
- * <code>
- * 0  ruleset       ::= &lt;ruleset&gt; &lt;rule&gt;;<br />
- * 1  ruleset       ::= &lt;rule&gt;;
- * 
- * 2  rule          ::= "Number" &lt;unNumbered&gt;;<br />
- * 3  rule          ::= &lt;unNumbered&gt;;
- * 
- * 4  unNumbered    ::= "Identifier" "::=" &lt;rightHandSide&gt; ";";
- * 
- * 5  rightHandSide ::= &lt;rightHandSide> "|" &lt;sumset&gt;;<br />
- * 6  rightHandSide ::= &lt;rightHandSide> "|";<br />
- * 7  rightHandSide ::= &lt;sumset>;
- * 
- * 8  sumset        ::= &lt;sumset&gt; &lt;grammarSymbol&gt;;<br />
- * 9  sumset        ::= &lt;grammarSymbol&gt;;
- * 
- * 10 grammarSymbol ::= &lt;nonTerminal&gt;;<br />
- * 11 grammarSymbol ::= &lt;terminal&gt;;
- * 
- * 12 nonTerminal   ::= "&lt;" "Identifier" "&gt;";<br />
- * 13 terminal      ::= String;
- * </code>
+ *     0  ruleset       ::= &lt;ruleset&gt; &lt;rule&gt;;<br />
+ *     1  ruleset       ::= &lt;rule&gt;;
+ *     
+ *     2  rule          ::= "Number" &lt;unNumbered&gt;;<br />
+ *     3  rule          ::= &lt;unNumbered&gt;;
+ *     
+ *     4  unNumbered    ::= "Identifier" "::=" &lt;rightHandSide&gt; ";";
+ *     
+ *     5  rightHandSide ::= &lt;rightHandSide> "|" &lt;sumset&gt;;<br />
+ *     6  rightHandSide ::= &lt;rightHandSide> "|";<br />
+ *     7  rightHandSide ::= &lt;sumset>;
+ *     
+ *     8  sumset        ::= &lt;sumset&gt; &lt;grammarSymbol&gt;;<br />
+ *     9  sumset        ::= &lt;grammarSymbol&gt;;
+ *     
+ *     10 grammarSymbol ::= &lt;nonTerminal&gt;;<br />
+ *     11 grammarSymbol ::= &lt;terminal&gt;;
+ *     
+ *     12 nonTerminal   ::= "&lt;" "Identifier" "&gt;";<br />
+ *     13 terminal      ::= String;
  * 
  * @param start The non-terminal that all parses must reduce to.
  * @param bnf   BNF for the grammar.
