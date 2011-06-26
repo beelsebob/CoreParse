@@ -36,6 +36,8 @@
 	
 	<option value="//api/name/name">&nbsp;&nbsp;&nbsp;&nbsp;name</option>
 	
+	<option value="//api/name/representitiveClass">&nbsp;&nbsp;&nbsp;&nbsp;representitiveClass</option>
+	
 	<option value="//api/name/rightHandSideElements">&nbsp;&nbsp;&nbsp;&nbsp;rightHandSideElements</option>
 	
 	<option value="//api/name/tag">&nbsp;&nbsp;&nbsp;&nbsp;tag</option>
@@ -47,6 +49,8 @@
 	
 	<option value="//api/name/ruleWithName:rightHandSideElements:">&nbsp;&nbsp;&nbsp;&nbsp;+ ruleWithName:rightHandSideElements:</option>
 	
+	<option value="//api/name/ruleWithName:rightHandSideElements:representitiveClass:">&nbsp;&nbsp;&nbsp;&nbsp;+ ruleWithName:rightHandSideElements:representitiveClass:</option>
+	
 	<option value="//api/name/ruleWithName:rightHandSideElements:tag:">&nbsp;&nbsp;&nbsp;&nbsp;+ ruleWithName:rightHandSideElements:tag:</option>
 	
 	
@@ -55,6 +59,8 @@
 	<option value="instance_methods">Instance Methods</option>
 	
 	<option value="//api/name/initWithName:rightHandSideElements:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithName:rightHandSideElements:</option>
+	
+	<option value="//api/name/initWithName:rightHandSideElements:representitiveClass:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithName:rightHandSideElements:representitiveClass:</option>
 	
 	<option value="//api/name/initWithName:rightHandSideElements:tag:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithName:rightHandSideElements:tag:</option>
 	
@@ -88,6 +94,8 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/name">name</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/representitiveClass">representitiveClass</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/rightHandSideElements">rightHandSideElements</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/tag">tag</a></span></li>
@@ -100,6 +108,8 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/ruleWithName:rightHandSideElements:">ruleWithName:rightHandSideElements:</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/ruleWithName:rightHandSideElements:representitiveClass:">ruleWithName:rightHandSideElements:representitiveClass:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/ruleWithName:rightHandSideElements:tag:">ruleWithName:rightHandSideElements:tag:</a></span></li>
 	
 </ul></li>
@@ -109,6 +119,8 @@
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithName:rightHandSideElements:">initWithName:rightHandSideElements:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithName:rightHandSideElements:representitiveClass:">initWithName:rightHandSideElements:representitiveClass:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithName:rightHandSideElements:tag:">initWithName:rightHandSideElements:tag:</a></span></li>
 	
@@ -190,6 +202,14 @@ Also specifies a <a href="#//api/name/tag">tag</a> by which the rule can be iden
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/ruleWithName:rightHandSideElements:representitiveClass:">+&nbsp;ruleWithName:rightHandSideElements:representitiveClass:</a></code>
+		<span class="tooltip"><p>Creates a rule based on a non-terminal <a href="#//api/name/name">name</a> and an array of grammar symbols to make up the right hand side.
+Also specifies the class to allocate to represent this rule.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/initWithName:rightHandSideElements:">&ndash;&nbsp;initWithName:rightHandSideElements:</a></code>
 		<span class="tooltip"><p>Initialises a rule based on a non-terminal <a href="#//api/name/name">name</a> and an array of grammar symbols to make up the right hand side.</p></span>
 	</span>
@@ -200,6 +220,14 @@ Also specifies a <a href="#//api/name/tag">tag</a> by which the rule can be iden
 		<code><a href="#//api/name/initWithName:rightHandSideElements:tag:">&ndash;&nbsp;initWithName:rightHandSideElements:tag:</a></code>
 		<span class="tooltip"><p>Initialises a rule based on a non-terminal <a href="#//api/name/name">name</a> and an array of grammar symbols to make up the right hand side.
 Also specifies a <a href="#//api/name/tag">tag</a> by which the rule can be identified in a parser delegate</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithName:rightHandSideElements:representitiveClass:">&ndash;&nbsp;initWithName:rightHandSideElements:representitiveClass:</a></code>
+		<span class="tooltip"><p>Initialises a rule based on a non-terminal <a href="#//api/name/name">name</a> and an array of grammar symbols to make up the right hand side.
+Also specifies the class to allocate to represent this rule.</p></span>
 	</span>
 	
 	
@@ -229,6 +257,13 @@ Also specifies a <a href="#//api/name/tag">tag</a> by which the rule can be iden
 	<span class="tooltip">
 		<code><a href="#//api/name/tag">&nbsp;&nbsp;tag</a></code>
 		<span class="tooltip"><p>A <a href="#//api/name/tag">tag</a> used to identify the rule in the parser delegate.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/representitiveClass">&nbsp;&nbsp;representitiveClass</a></code>
+		<span class="tooltip"><p>The class used to represent syntax trees based off this rule.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -266,6 +301,43 @@ Also specifies a <a href="#//api/name/tag">tag</a> by which the rule can be iden
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Specifies the <a href="#//api/name/name">name</a> of the non-terminal this rule describes.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPRule.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/representitiveClass" title="representitiveClass"></a>
+	<h3 class="subsubtitle method-title">representitiveClass</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The class used to represent syntax trees based off this rule.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (readwrite, assign) Class representitiveClass</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The class used to represent syntax trees based off this rule.</p>
 	</div>
 	
 	
@@ -419,7 +491,86 @@ Also specifies a <a href="#//api/name/tag">tag</a> by which the rule can be iden
 			
 			<li><code><p><a href="#//api/name/ruleWithName:rightHandSideElements:tag:">+ ruleWithName:rightHandSideElements:tag:</a></p></code></li>
 			
+			<li><code><p><a href="#//api/name/ruleWithName:rightHandSideElements:representitiveClass:">+ ruleWithName:rightHandSideElements:representitiveClass:</a></p></code></li>
+			
 			<li><code><p><a href="#//api/name/initWithName:rightHandSideElements:">&ndash; initWithName:rightHandSideElements:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPRule.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/ruleWithName:rightHandSideElements:representitiveClass:" title="ruleWithName:rightHandSideElements:representitiveClass:"></a>
+	<h3 class="subsubtitle method-title">ruleWithName:rightHandSideElements:representitiveClass:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Creates a rule based on a non-terminal <a href="#//api/name/name">name</a> and an array of grammar symbols to make up the right hand side.
+Also specifies the class to allocate to represent this rule.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (id)ruleWithName:(NSString *)<em>name</em> rightHandSideElements:(NSArray *)<em>rightHandSideElements</em> representitiveClass:(Class)<em>representitiveClass</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>name</em></dt>
+			<dd><p>The non-terminal the rule reduces.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>rightHandSideElements</em></dt>
+			<dd><p>An array of CPGrammarSymbols that make up the right hand side of the rule.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>representitiveClass</em></dt>
+			<dd><p>The class used to represent this rule.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Returns a <a href="CPRule.html">CPRule</a> based on the right hand side and non-terminal <a href="#//api/name/name">name</a>.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Creates a rule based on a non-terminal <a href="#//api/name/name">name</a> and an array of grammar symbols to make up the right hand side.
+Also specifies the class to allocate to represent this rule.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/ruleWithName:rightHandSideElements:">+ ruleWithName:rightHandSideElements:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/ruleWithName:rightHandSideElements:tag:">+ ruleWithName:rightHandSideElements:tag:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/initWithName:rightHandSideElements:representitiveClass:">&ndash; initWithName:rightHandSideElements:representitiveClass:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -493,6 +644,8 @@ Also specifies a <a href="#//api/name/tag">tag</a> by which the rule can be iden
 		<ul>
 			
 			<li><code><p><a href="#//api/name/ruleWithName:rightHandSideElements:">+ ruleWithName:rightHandSideElements:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/ruleWithName:rightHandSideElements:representitiveClass:">+ ruleWithName:rightHandSideElements:representitiveClass:</a></p></code></li>
 			
 			<li><code><p><a href="#//api/name/initWithName:rightHandSideElements:tag:">&ndash; initWithName:rightHandSideElements:tag:</a></p></code></li>
 			
@@ -571,6 +724,83 @@ Also specifies a <a href="#//api/name/tag">tag</a> by which the rule can be iden
 			<li><code><p><a href="#//api/name/initWithName:rightHandSideElements:tag:">&ndash; initWithName:rightHandSideElements:tag:</a></p></code></li>
 			
 			<li><code><p><a href="#//api/name/ruleWithName:rightHandSideElements:">+ ruleWithName:rightHandSideElements:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPRule.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithName:rightHandSideElements:representitiveClass:" title="initWithName:rightHandSideElements:representitiveClass:"></a>
+	<h3 class="subsubtitle method-title">initWithName:rightHandSideElements:representitiveClass:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Initialises a rule based on a non-terminal <a href="#//api/name/name">name</a> and an array of grammar symbols to make up the right hand side.
+Also specifies the class to allocate to represent this rule.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithName:(NSString *)<em>name</em> rightHandSideElements:(NSArray *)<em>rightHandSideElements</em> representitiveClass:(Class)<em>representitiveClass</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>name</em></dt>
+			<dd><p>The non-terminal the rule reduces.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>rightHandSideElements</em></dt>
+			<dd><p>An array of CPGrammarSymbols that make up the right hand side of the rule.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>representitiveClass</em></dt>
+			<dd><p>The class used to represent this rule.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Returns a <a href="CPRule.html">CPRule</a> based on the right hand side and non-terminal <a href="#//api/name/name">name</a>.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Initialises a rule based on a non-terminal <a href="#//api/name/name">name</a> and an array of grammar symbols to make up the right hand side.
+Also specifies the class to allocate to represent this rule.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/initWithName:rightHandSideElements:">&ndash; initWithName:rightHandSideElements:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/initWithName:rightHandSideElements:tag:">&ndash; initWithName:rightHandSideElements:tag:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/ruleWithName:rightHandSideElements:representitiveClass:">+ ruleWithName:rightHandSideElements:representitiveClass:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -673,7 +903,7 @@ Also specifies a <a href="#//api/name/tag">tag</a> by which the rule can be iden
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2011 Beelsebob. All rights reserved. (Last updated: 2011-06-05)</span><br />
+						<p><span class="copyright">&copy; 2011 Beelsebob. All rights reserved. (Last updated: 2011-06-26)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.4 (build 701)</a>.</span></p>
 						
