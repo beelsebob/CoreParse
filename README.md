@@ -104,7 +104,7 @@ We must also implement the delegate's method for dealing with AddOps and MulOps:
 
 We can now parse the token stream we produced earlier:
 
-    NSLog(@"%@", [(Expression *)[parser parse:tokenStream] value]);
+    NSLog(@"%f", [(Expression *)[parser parse:tokenStream] value]);
 
 Which outputs:
 
