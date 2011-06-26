@@ -68,7 +68,7 @@ We construct parsers by specifying their grammar.  We can construct a grammar si
     CPParser *parser = [CPLALR1Parser parserWithGrammar:grammar];
     [parser setDelegate:self];
 
-When a rule is matched by the parser, the `initWithSyntaxTree:` method will be called on a new instance of the apropriate class.  If no such class exists the parser delegate's `parser:didProduceSyntaxTree:` method is called.  To deal with this cleanly, we implement 3 classes ÐÊExpression, Term and Factor.  AddOp and MultOp non-terminals are dealt with by the parser delegate.  Here we see the initWithSyntaxTree: method for the Expression class, these methods are similar for Term and Factor:
+When a rule is matched by the parser, the `initWithSyntaxTree:` method will be called on a new instance of the apropriate class.  If no such class exists the parser delegate's `parser:didProduceSyntaxTree:` method is called.  To deal with this cleanly, we implement 3 classes -ÊExpression, Term and Factor.  AddOp and MultOp non-terminals are dealt with by the parser delegate.  Here we see the initWithSyntaxTree: method for the Expression class, these methods are similar for Term and Factor:
     
     - (id)initWithSyntaxTree:(CPSyntaxTree *)syntaxTree
     {
