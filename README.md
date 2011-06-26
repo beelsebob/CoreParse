@@ -56,12 +56,9 @@ Parsing
 We construct parsers by specifying their grammar.  We can construct a grammar simply using a simple BNF like language:
 
     NSString *expressionGrammar =
-        @"Expression ::= <Term>;"
-        @"Expression ::= <Expression> <AddOp> <Term>;"
-        @"Term       ::= <Factor>;"
-        @"Term       ::= <Term> <MultOp> <Factor>;"
-        @"Factor     ::= \"Number\";"
-        @"Factor     ::= \"(\" <Expression> \")\";"
+        @"Expression ::= <Term>     | <Expression> <AddOp>  <Term>;"
+        @"Term       ::= <Factor>   | <Term>       <MultOp> <Factor>;"
+        @"Factor     ::= \"Number\" | \"(\" <Expression> \")\";"
         @"AddOp      ::= \"+\" | \"-\";"
         @"MultOp     ::= \"*\" | \"/\";";
     CPGrammar *grammar = [CPGrammar grammarWithStart:@"Expression" backusNaurForm:expressionGrammar];

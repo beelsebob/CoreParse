@@ -603,8 +603,7 @@
     CPTokenStream *tokenStream = [tokeniser tokenise:@"5 + 9 + 2 + 7"];
     
     NSString *testGrammar =
-        @"Expression ::= <Term>;"
-        @"Expression ::= <Expression> \"+\" <Term>;"
+        @"Expression ::= <Term> | <Expression> \"+\" <Term>;"
         @"Term       ::= \"Number\";";
     CPGrammar *grammar = [CPGrammar grammarWithStart:@"Expression" backusNaurForm:testGrammar];
     CPParser *parser = [CPSLRParser parserWithGrammar:grammar];
