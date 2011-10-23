@@ -13,6 +13,8 @@
 
 #import "CPGrammarSymbol.h"
 
+#import "CPRHSItemResult.h"
+
 @interface CPShiftReduceParser ()
 
 - (CPShiftReduceAction *)actionForState:(NSUInteger)state token:(CPToken *)token;
@@ -78,13 +80,18 @@
             NSMutableArray *components = [NSMutableArray arrayWithCapacity:numElements];
             NSRange stateStackRange = NSMakeRange([stateStack count] - numElements, numElements);
             [stateStack enumerateObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:stateStackRange]
-                                          options:NSEnumerationConcurrent | NSEnumerationReverse
+                                          options:NSEnumerationReverse
                                        usingBlock:^(CPShiftReduceState *state, NSUInteger idx, BOOL *stop)
              {
-                 [components insertObject:[state object] atIndex:0];
+                 id o = [state object];
+                 if ([o isKindOfClass:[CPRHSItemResult class]])
+                 {
+                     o = [(CPRHSItemResult *)o contents];
+                 }
+                 [components insertObject:o atIndex:0];
              }];
             [stateStack removeObjectsInRange:stateStackRange];
-            
+                        
             CPSyntaxTree *tree = [CPSyntaxTree syntaxTreeWithRule:reductionRule children:components];
             id result = nil;
             

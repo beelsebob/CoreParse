@@ -12,6 +12,9 @@
 #import "CPItem.h"
 #import "CPLR1Item.h"
 
+#import "CPRHSItem.h"
+#import "CPRHSItemResult.h"
+
 #import "NSSetFunctional.h"
 
 @implementation CPGrammar (CPGrammarInternal)
@@ -221,14 +224,126 @@
 
 - (NSString *)uniqueSymbolNameBasedOnName:(NSString *)name
 {
+    return [self symbolNameNotInSet:[self allSymbolNames] basedOnName:name];
+}
+
+- (NSString *)symbolNameNotInSet:(NSSet *)symbols basedOnName:(NSString *)name
+{
     NSString *testName = [[name copy] autorelease];
-    NSSet *allSymbols = [self allSymbolNames];
-    while ([allSymbols containsObject:testName])
+    while ([symbols containsObject:testName])
     {
         testName = [NSString stringWithFormat:@"_%@", testName];
     }
     
     return testName;
 }
+
+- (NSArray *)tidyRightHandSides:(NSArray *)oldRules
+{
+    NSMutableSet *rhsElements = [NSMutableSet set];
+    for (CPRule *r in oldRules)
+    {
+        [rhsElements unionSet:[self collectRHSElementsForNewRules:[r rightHandSideElements]]];
+    }
+    
+    NSDictionary *names = [self nameNewRules:rhsElements withRules:oldRules];
+    
+    return [self addRHSRules:names toRules:oldRules];
+}
+
+- (NSSet *)collectRHSElementsForNewRules:(NSArray *)rightHandSide
+{
+    NSMutableSet *ret = [NSMutableSet set];
+    Class itemClass = [CPRHSItem class];
+    for (id element in rightHandSide)
+    {
+        if ([element isKindOfClass:itemClass])
+        {
+            [ret addObject:element];
+            [ret unionSet:[self collectRHSElementsForNewRules:[(CPRHSItem *)element contents]]];
+        }
+    }
+    return ret;
+}
+
+- (NSDictionary *)nameNewRules:(NSSet *)rhsElements withRules:(NSArray *)oldRules
+{
+    NSSet *symbolNames = [self symbolNamesInRules:oldRules];
+    NSUInteger name = 0;
+    NSMutableDictionary *namedRules = [NSMutableDictionary dictionaryWithCapacity:[rhsElements count]];
+    for (CPRHSItem *item in rhsElements)
+    {
+        [namedRules setObject:[self symbolNameNotInSet:symbolNames basedOnName:[NSString stringWithFormat:@"RHS%d", name]] forKey:item];
+        name++;
+    }
+    return namedRules;
+}
+         
+- (NSArray *)addRHSRules:(NSDictionary *)newRules toRules:(NSArray *)oldRules
+{
+    NSMutableArray *rules = [[NSMutableArray alloc] initWithArray:oldRules];
+    
+    Class rhsItemClass = [CPRHSItemResult class];
+    for (CPRHSItem *item in newRules)
+    {
+        NSString *ruleName = [newRules objectForKey:item];
+        CPRule *rule;
+        if ([item mayNotExist])
+        {
+            rule = [[[CPRule alloc] initWithName:ruleName rightHandSideElements:[NSArray array]] autorelease];
+            [rule setTag:0];
+        }
+        else
+        {
+            rule = [[[CPRule alloc] initWithName:ruleName rightHandSideElements:[item contents]] autorelease];
+            [rule setTag:1];
+        }
+        [rule setRepresentitiveClass:rhsItemClass];
+        [rules addObject:rule];
+        
+        if ([item repeats])
+        {
+            rule = [[[CPRule alloc] initWithName:ruleName rightHandSideElements:[[item contents] arrayByAddingObject:[CPGrammarSymbol nonTerminalWithName:ruleName]]] autorelease];
+            [rule setTag:2];
+        }
+        else if ([item mayNotExist])
+        {
+            rule = [[[CPRule alloc] initWithName:ruleName rightHandSideElements:[item contents]] autorelease];
+            [rule setTag:1];
+        }
+        else
+        {
+            rule = nil;
+        }
+        
+        if (nil != rule)
+        {
+            [rule setRepresentitiveClass:rhsItemClass];
+            [rules addObject:rule];
+        }
+    }
+    
+    Class itemClass = [CPRHSItem class];
+    for (CPRule *rule in rules)
+    {
+        NSArray *rhsElements = [rule rightHandSideElements];
+        NSMutableArray *newRightHandSideElements = [NSMutableArray arrayWithCapacity:[rhsElements count]];
+        for (id element in rhsElements)
+        {
+            if ([element isKindOfClass:itemClass])
+            {
+                [newRightHandSideElements addObject:[CPGrammarSymbol nonTerminalWithName:[newRules objectForKey:element]]];
+            }
+            else
+            {
+                [newRightHandSideElements addObject:element];
+            }
+        }
+        [rule setRightHandSideElements:newRightHandSideElements];
+    }
+    
+    return rules;
+}
+
 
 @end

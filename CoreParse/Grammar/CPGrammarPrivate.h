@@ -20,6 +20,7 @@
 - (NSArray *)orderedRules;
 
 - (NSSet *)allSymbolNames;
+- (NSSet *)symbolNamesInRules:(NSArray *)rules;
 - (NSSet *)firstSymbol:(CPGrammarSymbol *)obj;
 
 @end

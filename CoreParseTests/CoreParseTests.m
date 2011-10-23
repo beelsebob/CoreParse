@@ -557,6 +557,7 @@
     
     if (![grammar isEqual:grammar1])
     {
+
         STFail(@"Crating grammar from BNF failed", nil);
     }
     
@@ -641,6 +642,74 @@
     if (![result isEqual:expectedResult])
     {
         STFail(@"Failed to parse JSON", nil);
+    }
+}
+
+- (void)testEBNF
+{
+    CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"a"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"b"]];
+    CPTokenStream *tokenStream = [tokeniser tokenise:@"baaa"];
+    NSString *starGrammarString = @"A ::= \"b\"\"a\"*;";
+    CPGrammar *starGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:starGrammarString];
+    CPParser *starParser = [CPLALR1Parser parserWithGrammar:starGrammar];
+    CPSyntaxTree *starTree = [starParser parse:tokenStream];
+    tokenStream = [tokeniser tokenise:@"baaa"];
+    NSString *plusGrammarString = @"A ::= \"b\"\"a\"+;";
+    CPGrammar *plusGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:plusGrammarString];
+    CPParser *plusParser = [CPLALR1Parser parserWithGrammar:plusGrammar];
+    CPSyntaxTree *plusTree = [plusParser parse:tokenStream];
+    tokenStream = [tokeniser tokenise:@"baaa"];
+    NSString *queryGrammarString = @"A ::= \"b\"\"a\"\"a\"\"a\"\"a\"?;";
+    CPGrammar *queryGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:queryGrammarString];
+    CPParser *queryParser = [CPLALR1Parser parserWithGrammar:queryGrammar];
+    CPSyntaxTree *queryTree = [queryParser parse:tokenStream];
+    tokenStream = [tokeniser tokenise:@"baaab"];
+    NSString *parenGrammarString = @"A ::= \"b\"(\"a\")*\"b\";";
+    CPGrammar *parenGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:parenGrammarString];
+    CPParser *parenParser = [CPLALR1Parser parserWithGrammar:parenGrammar];
+    CPSyntaxTree *parenTree = [parenParser parse:tokenStream];
+    
+    STAssertNotNil(starTree, @"EBNF star parser produced nil result", nil);
+    NSArray *as = [[starTree children] objectAtIndex:1];
+    if (![[(CPKeywordToken *)[[starTree children] objectAtIndex:0] keyword] isEqualToString:@"b"] ||
+        [as count] != 3 ||
+        ![[(CPKeywordToken *)[as objectAtIndex:0] keyword] isEqualToString:@"a"] ||
+        ![[(CPKeywordToken *)[as objectAtIndex:1] keyword] isEqualToString:@"a"] ||
+        ![[(CPKeywordToken *)[as objectAtIndex:2] keyword] isEqualToString:@"a"])
+    {
+        STFail(@"EBNF star parser did not correctly parse its result", nil);
+    }
+    STAssertNotNil(plusTree, @"EBNF plus parser produced nil result", nil);
+    as = [[plusTree children] objectAtIndex:1];
+    if (![[(CPKeywordToken *)[[plusTree children] objectAtIndex:0] keyword] isEqualToString:@"b"] ||
+        [as count] != 3 ||
+        ![[(CPKeywordToken *)[as objectAtIndex:0] keyword] isEqualToString:@"a"] ||
+        ![[(CPKeywordToken *)[as objectAtIndex:1] keyword] isEqualToString:@"a"] ||
+        ![[(CPKeywordToken *)[as objectAtIndex:2] keyword] isEqualToString:@"a"])
+    {
+        STFail(@"EBNF plus parser did not correctly parse its result", nil);
+    }
+    STAssertNotNil(queryTree, @"EBNF query parser produced nil result", nil);
+    as = [[queryTree children] objectAtIndex:4];
+    if (![[(CPKeywordToken *)[[queryTree children] objectAtIndex:0] keyword] isEqualToString:@"b"] ||
+        ![[(CPKeywordToken *)[[queryTree children] objectAtIndex:1] keyword] isEqualToString:@"a"] ||
+        ![[(CPKeywordToken *)[[queryTree children] objectAtIndex:2] keyword] isEqualToString:@"a"] ||
+        ![[(CPKeywordToken *)[[queryTree children] objectAtIndex:3] keyword] isEqualToString:@"a"] ||
+        [as count] != 0)
+    {
+        STFail(@"EBNF query parser did not correctly parse its result", nil);
+    }
+    STAssertNotNil(parenTree, @"EBNF paren parser produced nil result", nil);
+    as = [[parenTree children] objectAtIndex:1];
+    if (![[(CPKeywordToken *)[[parenTree children] objectAtIndex:0] keyword] isEqualToString:@"b"] ||
+        [as count] != 3 ||
+        ![[(CPKeywordToken *)[(NSArray *)[as objectAtIndex:0] objectAtIndex:0] keyword] isEqualToString:@"a"] ||
+        ![[(CPKeywordToken *)[(NSArray *)[as objectAtIndex:1] objectAtIndex:0] keyword] isEqualToString:@"a"] ||
+        ![[(CPKeywordToken *)[(NSArray *)[as objectAtIndex:2] objectAtIndex:0] keyword] isEqualToString:@"a"])
+    {
+        STFail(@"EBNF paren parser did not correctly parse its result", nil);
     }
 }
     

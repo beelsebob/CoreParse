@@ -77,6 +77,8 @@
 		1F9F83A213B731F3006E939D /* Expression.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83A013B731F3006E939D /* Expression.m */; };
 		1F9F83A613B732AC006E939D /* Term.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9F83A413B732AC006E939D /* Term.h */; };
 		1F9F83A713B732AC006E939D /* Term.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83A513B732AC006E939D /* Term.m */; };
+		1F9F83AC13B7CABA006E939D /* CPRHSItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9F83AA13B7CAB9006E939D /* CPRHSItem.h */; };
+		1F9F83AD13B7CABA006E939D /* CPRHSItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83AB13B7CABA006E939D /* CPRHSItem.m */; };
 		1FB3EB24132BA02C00ACC453 /* CPTestEvaluatorDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB22132BA02C00ACC453 /* CPTestEvaluatorDelegate.h */; };
 		1FB3EB25132BA02C00ACC453 /* CPTestEvaluatorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB23132BA02C00ACC453 /* CPTestEvaluatorDelegate.m */; };
 		1FB3EB2C132BB2F200ACC453 /* CPLR1Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB2A132BB2E600ACC453 /* CPLR1Parser.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -89,6 +91,8 @@
 		1FB81323132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB81321132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.m */; };
 		1FB81326132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB81324132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.h */; };
 		1FB81327132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB81325132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.m */; };
+		1FC00D5014544EDC00DC8D35 /* CPRHSItemResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC00D4E14544EDC00DC8D35 /* CPRHSItemResult.h */; };
+		1FC00D5114544EDC00DC8D35 /* CPRHSItemResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC00D4F14544EDC00DC8D35 /* CPRHSItemResult.m */; };
 		1FC1827D139ADC800027F597 /* CPGrammarPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC1827B139ADC800027F597 /* CPGrammarPrivate.h */; };
 		1FC1827E139ADC800027F597 /* CPGrammarPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC1827C139ADC800027F597 /* CPGrammarPrivate.m */; };
 		1FC18282139AE3810027F597 /* CPGrammarInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC18280139AE3800027F597 /* CPGrammarInternal.h */; };
@@ -184,6 +188,8 @@
 		1F9F83A013B731F3006E939D /* Expression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Expression.m; sourceTree = "<group>"; };
 		1F9F83A413B732AC006E939D /* Term.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Term.h; sourceTree = "<group>"; };
 		1F9F83A513B732AC006E939D /* Term.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Term.m; sourceTree = "<group>"; };
+		1F9F83AA13B7CAB9006E939D /* CPRHSItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRHSItem.h; sourceTree = "<group>"; };
+		1F9F83AB13B7CABA006E939D /* CPRHSItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRHSItem.m; sourceTree = "<group>"; };
 		1FB3EB22132BA02C00ACC453 /* CPTestEvaluatorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTestEvaluatorDelegate.h; sourceTree = "<group>"; };
 		1FB3EB23132BA02C00ACC453 /* CPTestEvaluatorDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTestEvaluatorDelegate.m; sourceTree = "<group>"; };
 		1FB3EB2A132BB2E600ACC453 /* CPLR1Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLR1Parser.h; sourceTree = "<group>"; };
@@ -196,6 +202,8 @@
 		1FB81321132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTestWhiteSpaceIgnoringDelegate.m; sourceTree = "<group>"; };
 		1FB81324132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTestMapCSSTokenisingDelegate.h; sourceTree = "<group>"; };
 		1FB81325132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTestMapCSSTokenisingDelegate.m; sourceTree = "<group>"; };
+		1FC00D4E14544EDC00DC8D35 /* CPRHSItemResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRHSItemResult.h; sourceTree = "<group>"; };
+		1FC00D4F14544EDC00DC8D35 /* CPRHSItemResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRHSItemResult.m; sourceTree = "<group>"; };
 		1FC1827B139ADC800027F597 /* CPGrammarPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPGrammarPrivate.h; sourceTree = "<group>"; };
 		1FC1827C139ADC800027F597 /* CPGrammarPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPGrammarPrivate.m; sourceTree = "<group>"; };
 		1FC18280139AE3800027F597 /* CPGrammarInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPGrammarInternal.h; sourceTree = "<group>"; };
@@ -425,6 +433,10 @@
 				1F530B901322813F00F52EB5 /* CPRule.m */,
 				1FB3EB38132D096700ACC453 /* CPGrammarSymbol.h */,
 				1FB3EB39132D096800ACC453 /* CPGrammarSymbol.m */,
+				1F9F83AA13B7CAB9006E939D /* CPRHSItem.h */,
+				1F9F83AB13B7CABA006E939D /* CPRHSItem.m */,
+				1FC00D4E14544EDC00DC8D35 /* CPRHSItemResult.h */,
+				1FC00D4F14544EDC00DC8D35 /* CPRHSItemResult.m */,
 			);
 			path = Grammar;
 			sourceTree = "<group>";
@@ -504,6 +516,8 @@
 				1FC18282139AE3810027F597 /* CPGrammarInternal.h in Headers */,
 				1F9F83A113B731F3006E939D /* Expression.h in Headers */,
 				1F9F83A613B732AC006E939D /* Term.h in Headers */,
+				1F9F83AC13B7CABA006E939D /* CPRHSItem.h in Headers */,
+				1FC00D5014544EDC00DC8D35 /* CPRHSItemResult.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,6 +582,7 @@
 		1F0E88EC130462F300537D04 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "In The Beginning...";
 			};
 			buildConfigurationList = 1F0E88EF130462F300537D04 /* Build configuration list for PBXProject "CoreParse" */;
@@ -683,6 +698,8 @@
 				1FC18283139AE3810027F597 /* CPGrammarInternal.m in Sources */,
 				1F9F83A213B731F3006E939D /* Expression.m in Sources */,
 				1F9F83A713B732AC006E939D /* Term.m in Sources */,
+				1F9F83AD13B7CABA006E939D /* CPRHSItem.m in Sources */,
+				1FC00D5114544EDC00DC8D35 /* CPRHSItemResult.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
