@@ -63,29 +63,43 @@
  *
  * The BNF is expressed using rules in the form `nonTerminal ::= <subNonTerminal> "subTerminal" <subNonTerminal>;`.  Rules may optionally be prefixed with a number indicating their tag.
  * This allows you to quickly construct grammars in a readable form.
+ * You may also use EBNF to construct grammars.  This allows you to use the symbols "*", "+", and "?" to indicate that a construction may appear 0 or more; 1 or more; and 0 or 1 times respectively.
+ * You may also parenthesise subrules.
+ * 
+ * When you use any of the above EBNF constructs or parentheses, the parser will return the contents in an NSArray.
  *
  * The grammar used for parsing the BNF can be expressed as follows:
  * 
- *     0  ruleset       ::= &lt;ruleset&gt; &lt;rule&gt;;<br />
- *     1  ruleset       ::= &lt;rule&gt;;
+ *     0  ruleset           ::= &lt;ruleset&gt; &lt;rule&gt;;<br />
+ *     1  ruleset           ::= &lt;rule&gt;;
  *     
- *     2  rule          ::= "Number" &lt;unNumbered&gt;;<br />
- *     3  rule          ::= &lt;unNumbered&gt;;
+ *     2  rule              ::= "Number" &lt;unNumbered&gt;;<br />
+ *     3  rule              ::= &lt;unNumbered&gt;;
  *     
- *     4  unNumbered    ::= "Identifier" "::=" &lt;rightHandSide&gt; ";";
+ *     4  unNumbered        ::= "Identifier" "::=" &lt;rightHandSide&gt; ";";
  *     
- *     5  rightHandSide ::= &lt;rightHandSide> "|" &lt;sumset&gt;;<br />
- *     6  rightHandSide ::= &lt;rightHandSide> "|";<br />
- *     7  rightHandSide ::= &lt;sumset>;
+ *     5  rightHandSide     ::= &lt;rightHandSide> "|" &lt;sumset&gt;;<br />
+ *     6  rightHandSide     ::= &lt;rightHandSide> "|";<br />
+ *     7  rightHandSide     ::= &lt;sumset>;
  *     
- *     8  sumset        ::= &lt;sumset&gt; &lt;grammarSymbol&gt;;<br />
- *     9  sumset        ::= &lt;grammarSymbol&gt;;
+ *     8  sumset            ::= &lt;sumset&gt; &lt;rightHandSideItem&gt;;<br />
+ *     9  sumset            ::= &lt;rightHandSideItem&gt;;
+ *
+ *     10 rightHandSideItem ::= &lt;unit&gt;;<br />
+ *     11 rightHandSideItem ::= &lt;unit&gt; &lt;repeatSymbol&gt;;
+ *
+ *     12 unit              ::= &lt;gramarSymbol&gt;;<br />
+ *     13 unit              ::= "(" &lt;sumset&gt; ")";
+ *
+ *     14 repeatSymbol      ::= "*";<br />
+ *     15 repeatSymbol      ::= "+";<br />
+ *     16 repeatSymbol      ::= "?";
  *     
- *     10 grammarSymbol ::= &lt;nonTerminal&gt;;<br />
- *     11 grammarSymbol ::= &lt;terminal&gt;;
+ *     17 grammarSymbol     ::= &lt;nonTerminal&gt;;<br />
+ *     18 grammarSymbol     ::= &lt;terminal&gt;;
  *     
- *     12 nonTerminal   ::= "&lt;" "Identifier" "&gt;";<br />
- *     13 terminal      ::= String;
+ *     19 nonTerminal       ::= "&lt;" "Identifier" "&gt;";<br />
+ *     20 terminal          ::= String;
  * 
  * @param start The non-terminal that all parses must reduce to.
  * @param bnf   BNF for the grammar.
