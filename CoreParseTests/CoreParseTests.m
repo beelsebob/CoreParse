@@ -564,7 +564,6 @@
 
 - (void)testMapCSSParsing
 {
-    sleep(20.0);
     [self setUpMapCSS];
     CPSyntaxTree *tree = [mapCssParser parse:[mapCssTokeniser tokenise:mapCssInput]];
     
