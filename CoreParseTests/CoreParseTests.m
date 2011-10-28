@@ -96,30 +96,27 @@
 
     CPGrammar *grammar = [CPGrammar grammarWithStart:@"ruleset"
                                       backusNaurForm:
-                          @"ruleset      ::= <rule> | <ruleset> <rule>;"
-                          @"rule         ::= <selectors> <declarations> | <import>;"
-                          @"import       ::= \"@import\" \"url\" \"(\" \"String\" \")\" \"Identifier\";"
-                          @"selectors    ::= <selector> | <selectors> \",\" <selector>;"
-                          @"selector     ::= <subselector> | <selector> <subselector>;"
-                          @"subselector  ::= <object> \"Whitespace\" | <object> <zoom> | <object> <zoom> <tests> | <class>;"
-                          @"zoom         ::= \"|z\" <range> | ;"
-                          @"range        ::= \"Number\" | \"Number\" \"-\" \"Number\";"
-                          @"tests        ::= <test> | <tests> <test>;"
-                          @"test         ::= \"[\" <condition> \"]\";"
-                          @"condition    ::= <key> <binary> <value> | <unary> <key> | <key>;"
-                          @"key          ::= \"Identifier\";"
-                          @"value        ::= \"String\" | \"Regex\";"
-                          @"binary       ::= \"=\" | \"!=\" | \"=~\" | \"<\" | \">\" | \"<=\" | \">=\";"
-                          @"unary        ::= \"-\" | \"!\";"
-                          @"class        ::= \".\" \"Identifier\";"
-                          @"object       ::= \"node\" | \"way\" | \"relation\" | \"area\" | \"line\" | \"*\";"
-                          @"declarations ::= <declaration> | <declarations> <declaration>;"
-                          @"declaration  ::= \"{\" <styleset> \"}\" | \"{\" \"}\";"
-                          @"styleset     ::= <style> | <styleset> <style>;"
-                          @"style        ::= <styledef> \";\";"
-                          @"styledef     ::= <key> \":\" <unquoted>;"
-                          @"unquoted     ::= \"Number\" | \"Identifier\";"];
-    mapCssParser = [[CPSLRParser alloc] initWithGrammar:grammar];
+                          @"ruleset       ::= <rule>*;"
+                          @"rule          ::= <selector> <commaSelector>* <declaration>+ | <import>;"
+                          @"import        ::= \"@import\" \"url\" \"(\" \"String\" \")\" \"Identifier\";"
+                          @"commaSelector ::= \",\" <selector>;"
+                          @"selector      ::= <subselector>+;"
+                          @"subselector   ::= <object> \"Whitespace\" | <object> <zoom> <test>* | <class>;"
+                          @"zoom          ::= \"|z\" <range> | ;"
+                          @"range         ::= \"Number\" | \"Number\" \"-\" \"Number\";"
+                          @"test          ::= \"[\" <condition> \"]\";"
+                          @"condition     ::= <key> <binary> <value> | <unary> <key> | <key>;"
+                          @"key           ::= \"Identifier\";"
+                          @"value         ::= \"String\" | \"Regex\";"
+                          @"binary        ::= \"=\" | \"!=\" | \"=~\" | \"<\" | \">\" | \"<=\" | \">=\";"
+                          @"unary         ::= \"-\" | \"!\";"
+                          @"class         ::= \".\" \"Identifier\";"
+                          @"object        ::= \"node\" | \"way\" | \"relation\" | \"area\" | \"line\" | \"*\";"
+                          @"declaration   ::= \"{\" <style>+ \"}\" | \"{\" \"}\";"
+                          @"style         ::= <styledef> \";\";"
+                          @"styledef      ::= <key> \":\" <unquoted>;"
+                          @"unquoted      ::= \"Number\" | \"Identifier\";"];
+    mapCssParser = [[CPLALR1Parser alloc] initWithGrammar:grammar];
 }
 
 - (void)tearDown
