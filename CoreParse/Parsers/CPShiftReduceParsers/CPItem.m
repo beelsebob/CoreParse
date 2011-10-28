@@ -81,14 +81,14 @@
     if ([object isKindOfClass:[CPItem class]])
     {
         CPItem *other = (CPItem *)object;
-        return [other rule] == [self rule] && [other position] == [self position];
+        return [other position] == position && [other rule] == rule;
     }
     return NO;
 }
 
 - (NSUInteger)hash
 {
-    return [[self rule] hash] + position;
+    return ((NSUInteger)rule << 4) + position;
 }
 
 - (NSString *)description

@@ -66,10 +66,17 @@
             {
                 NSSet *g = [aug lr0GotoKernelWithItems:itemsSet symbol:next];
                 NSSet *lr0G = [g map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }];
-                NSUInteger ix = [kernels indexOfObjectPassingTest:^ BOOL (NSSet *lr1Kernel, NSUInteger indx, BOOL *stop)
-                                 {
-                                     return [[lr1Kernel map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }] isEqualToSet:lr0G];
-                                 }];
+                NSUInteger indx = 0;
+                NSUInteger ix = NSNotFound;
+                for (NSSet *lr1Kernel in kernels)
+                {
+                    if ([[lr1Kernel map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }] isEqualToSet:lr0G])
+                    {
+                        ix = indx;
+                        break;
+                    }
+                    indx++;
+                }
                 BOOL success = [[self actionTable] setAction:[CPShiftReduceAction shiftAction:ix] forState:idx name:[next name]];
                 if (!success)
                 {
@@ -82,10 +89,17 @@
         {
             NSSet *g = [aug lr0GotoKernelWithItems:itemsSet symbol:[CPGrammarSymbol nonTerminalWithName:nonTerminalName]];
             NSSet *lr0G = [g map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }];
-            NSUInteger gotoIndex = [kernels indexOfObjectPassingTest:^ BOOL (NSSet *lr1Kernel, NSUInteger indx, BOOL *stop)
-                                    {
-                                        return [[lr1Kernel map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }] isEqualToSet:lr0G];
-                                    }];
+            NSUInteger indx = 0;
+            NSUInteger gotoIndex = NSNotFound;
+            for (NSSet *lr1Kernel in kernels)
+            {
+                if ([[lr1Kernel map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }] isEqualToSet:lr0G])
+                {
+                    gotoIndex = indx;
+                    break;
+                }
+                indx++;
+            }
             BOOL success = [[self gotoTable] setGoto:gotoIndex forState:idx nonTerminalNamed:nonTerminalName];
             if (!success)
             {

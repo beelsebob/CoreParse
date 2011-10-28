@@ -29,10 +29,8 @@
     CPTokeniser *mapCssTokeniser;
 }
 
-- (void)setUp
+- (void)setUpMapCSS
 {
-    [super setUp];
-    
     NSCharacterSet *identifierCharacters = [NSCharacterSet characterSetWithCharactersInString:
                                             @"abcdefghijklmnopqrstuvwxyz"
                                             @"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -81,15 +79,15 @@
     [mapCssTokeniser setDelegate:[[[CPTestMapCSSTokenisingDelegate alloc] init] autorelease]];
     
     mapCssInput = @"node[highway=\"trunk\"]"
-                  @"{"
-                  @"  line-width: 5.0;"
-                  @"  label: jam;"
-                  @"} // Zomg boobs!\n"
-                  @"/* Haha, fooled you */"
-                  @"way relation[type=\"multipolygon\"]"
-                  @"{"
-                  @"  line-width: 0.0;"
-                  @"}";
+    @"{"
+    @"  line-width: 5.0;"
+    @"  label: jam;"
+    @"} // Zomg boobs!\n"
+    @"/* Haha, fooled you */"
+    @"way relation[type=\"multipolygon\"]"
+    @"{"
+    @"  line-width: 0.0;"
+    @"}";
     
     CPGrammar *grammar = [CPGrammar grammarWithStart:@"ruleset"
                                       backusNaurForm:
@@ -116,12 +114,10 @@
     mapCssParser = [[CPLALR1Parser alloc] initWithGrammar:grammar];
 }
 
-- (void)tearDown
+- (void)tearDownMapCSS
 {
     [mapCssParser release];
     [mapCssTokeniser release];
-    
-    [super tearDown];
 }
 
 - (void)testKeywordTokeniser
@@ -319,6 +315,7 @@
 
 - (void)testMapCSSTokenisation
 {
+    [self setUpMapCSS];
     if (![[mapCssTokeniser tokenise:mapCssInput] isEqualTo:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:
            [CPKeywordToken tokenWithKeyword:@"node"],
            [CPKeywordToken tokenWithKeyword:@"["],
@@ -355,6 +352,7 @@
     {
         STFail(@"Tokenisation of MapCSS failed", nil);
     }
+    [self tearDownMapCSS];
 }
 
 - (void)testSLR
@@ -566,16 +564,20 @@
 
 - (void)testMapCSSParsing
 {
+    sleep(20.0);
+    [self setUpMapCSS];
     CPSyntaxTree *tree = [mapCssParser parse:[mapCssTokeniser tokenise:mapCssInput]];
     
     if (nil == tree)
     {
         STFail(@"Failed to parse MapCSS", nil);
     }
+    [self tearDownMapCSS];
 }
 
 - (void)testParallelParsing
 {
+    [self setUpMapCSS];
     CPTokenStream *stream = [[[CPTokenStream alloc] init] autorelease];
     [NSThread detachNewThreadSelector:@selector(runMapCSSTokeniser:) toTarget:self withObject:stream];
     CPSyntaxTree *tree1 = [mapCssParser parse:stream];
@@ -585,6 +587,7 @@
     {
         STFail(@"Parallel parse of MapCSS failed", nil);
     }
+    [self tearDownMapCSS];
 }
 
 - (void)testParseResultParsing
@@ -708,14 +711,16 @@
 
 - (void)testEncodingAndDecodingOfParsers
 {
+    [self setUpMapCSS];
     NSData *d = [NSKeyedArchiver archivedDataWithRootObject:mapCssParser];
     CPParser *mapCssParser2 = [NSKeyedUnarchiver unarchiveObjectWithData:d];
     CPSyntaxTree *tree = [mapCssParser2 parse:[mapCssTokeniser tokenise:mapCssInput]];
     
     if (nil == tree)
     {
-        STFail(@"Failed to parse MapCSS", nil);
+        STFail(@"Failed to encode and decode MapCSSParser", nil);
     }
+    [self tearDownMapCSS];
 }
     
 @end

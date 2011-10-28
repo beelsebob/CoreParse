@@ -131,7 +131,7 @@
 
 - (NSUInteger)hash
 {
-    return [self tag] << 16 + [[self name] hash];
+    return [name hash] << 16 + [self tag] ;
 }
 
 - (BOOL)isEqual:(id)object
@@ -139,7 +139,7 @@
     if ([object isKindOfClass:[CPRule class]])
     {
         CPRule *other = (CPRule *)object;
-        return [other tag] == [self tag] && [[other name] isEqualToString:[self name]] && [[other rightHandSideElements] isEqualToArray:[self rightHandSideElements]];
+        return [other tag] == tag && [[other name] isEqualToString:name] && [[other rightHandSideElements] isEqualToArray:rightHandSide];
     }
     
     return NO;
