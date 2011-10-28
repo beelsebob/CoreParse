@@ -13,7 +13,7 @@
  * 
  * All grammar symbols carry a name which is used in constructing CPRules.
  */
-@interface CPGrammarSymbol : NSObject
+@interface CPGrammarSymbol : NSObject <NSCoding>
 
 ///---------------------------------------------------------------------------------------
 /// @name Creating and Initialising a Rule

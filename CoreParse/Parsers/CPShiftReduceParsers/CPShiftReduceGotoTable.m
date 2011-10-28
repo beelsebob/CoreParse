@@ -31,6 +31,25 @@
     return self;
 }
 
+#define CPShiftReduceGotoTableTableKey @"t"
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    
+    if (nil != self)
+    {
+        table = [[aDecoder decodeObjectForKey:CPShiftReduceGotoTableTableKey] retain];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:table forKey:CPShiftReduceGotoTableTableKey];
+}
+
 - (void)dealloc
 {
     [table release];

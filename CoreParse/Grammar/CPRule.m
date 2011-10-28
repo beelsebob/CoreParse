@@ -88,6 +88,34 @@
     return [self initWithName:@"" rightHandSideElements:[NSArray array]];
 }
 
+#define CPRuleTagKey                 @"t"
+#define CPRuleNameKey                @"n"
+#define CPRuleRHSElementsKey         @"r"
+#define CPRuleRepresentitiveClassKey @"c"
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    
+    if (nil != self)
+    {
+        [self setTag:[aDecoder decodeIntegerForKey:CPRuleTagKey]];
+        [self setName:[aDecoder decodeObjectForKey:CPRuleNameKey]];
+        [self setRightHandSideElements:[aDecoder decodeObjectForKey:CPRuleRHSElementsKey]];
+        [self setRepresentitiveClass:NSClassFromString([aDecoder decodeObjectForKey:CPRuleRepresentitiveClassKey])];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeInteger:[self tag] forKey:CPRuleTagKey];
+    [aCoder encodeObject:[self name] forKey:CPRuleNameKey];
+    [aCoder encodeObject:[self rightHandSideElements] forKey:CPRuleRHSElementsKey];
+    [aCoder encodeObject:NSStringFromClass([self representitiveClass]) forKey:CPRuleRepresentitiveClassKey];
+}
+
 - (void)dealloc
 {
     [name release];

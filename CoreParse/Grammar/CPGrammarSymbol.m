@@ -42,6 +42,28 @@
     return [self initWithName:@"" isTerminal:NO];
 }
 
+#define CPGrammarSymbolNameKey     @"n"
+#define CPGrammarSymbolTerminalKey @"t"
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    
+    if (nil != self)
+    {
+        [self setName:[aDecoder decodeObjectForKey:CPGrammarSymbolNameKey]];
+        [self setTerminal:[aDecoder decodeBoolForKey:CPGrammarSymbolTerminalKey]];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:[self name] forKey:CPGrammarSymbolNameKey];
+    [aCoder encodeBool:[self isTerminal] forKey:CPGrammarSymbolTerminalKey];
+}
+
 - (BOOL)isEqual:(id)object
 {
     if ([object isKindOfClass:[CPGrammarSymbol class]])

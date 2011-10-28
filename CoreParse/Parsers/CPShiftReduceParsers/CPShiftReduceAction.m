@@ -83,6 +83,49 @@ ActionDetails;
     return self;
 }
 
+#define CPShiftReduceActionTypeKey  @"t"
+#define CPShiftReduceActionShiftKey @"s"
+#define CPShiftReduceActionRuleKey  @"r"
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    
+    if (nil != self)
+    {
+        type = [aDecoder decodeIntForKey:CPShiftReduceActionTypeKey];
+        switch (type)
+        {
+            case kActionTypeShift:
+                details.shift = [aDecoder decodeIntegerForKey:CPShiftReduceActionShiftKey];
+                break;
+            case kActionTypeReduce:
+                details.reductionRule = [[aDecoder decodeObjectForKey:CPShiftReduceActionRuleKey] retain];
+            case kActionTypeAccept:
+            default:
+                break;
+        }
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeInt:type forKey:CPShiftReduceActionTypeKey];
+    switch (type)
+    {
+        case kActionTypeShift:
+            [aCoder encodeInteger:details.shift forKey:CPShiftReduceActionShiftKey];
+            break;
+        case kActionTypeReduce:
+            [aCoder encodeObject:details.reductionRule forKey:CPShiftReduceActionRuleKey];
+        case kActionTypeAccept:
+        default:
+            break;
+    }
+}
+
 - (void)dealloc
 {
     if (kActionTypeReduce == type)

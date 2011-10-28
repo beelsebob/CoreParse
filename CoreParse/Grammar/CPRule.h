@@ -19,7 +19,7 @@
  * During parsing, a CPParser will inform its delegate of which CPRule it has matched to form a reduction.  The tag
  * property is provided to allow you to easily identify which rule has been matched.
  */
-@interface CPRule : NSObject
+@interface CPRule : NSObject <NSCoding>
 
 ///---------------------------------------------------------------------------------------
 /// @name Creating and Initialising a Rule

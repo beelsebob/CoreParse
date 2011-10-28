@@ -14,7 +14,7 @@
 /**
  * The CPGrammar class represents a context free grammar.  Grammars can be used later to construct parsers.
  */
-@interface CPGrammar : NSObject
+@interface CPGrammar : NSObject <NSCoding>
 
 ///---------------------------------------------------------------------------------------
 /// @name Creating and Initialising a Grammar

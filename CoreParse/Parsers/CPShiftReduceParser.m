@@ -46,6 +46,30 @@
     return self;
 }
 
+#define CPShiftReduceParserGrammarKey     @"g"
+#define CPShiftReduceParserActionTableKey @"at"
+#define CPShiftReduceParserGotoTableKey   @"gt"
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithGrammar:[aDecoder decodeObjectForKey:CPShiftReduceParserGrammarKey]];
+    
+    if (nil != self)
+    {
+        [self setActionTable:[aDecoder decodeObjectForKey:CPShiftReduceParserActionTableKey]];
+        [self setGotoTable:[aDecoder decodeObjectForKey:CPShiftReduceParserGotoTableKey]];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:[self grammar]     forKey:CPShiftReduceParserGrammarKey];
+    [aCoder encodeObject:[self actionTable] forKey:CPShiftReduceParserActionTableKey];
+    [aCoder encodeObject:[self gotoTable]   forKey:CPShiftReduceParserGotoTableKey];
+}
+
 - (void)dealloc
 {
     [actionTable release];

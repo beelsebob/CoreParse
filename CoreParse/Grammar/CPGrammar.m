@@ -257,9 +257,32 @@
     return [self initWithStart:nil rules:[NSArray array]];
 }
 
+#define CPGrammarStartKey @"s"
+#define CPGrammarRulesKey @"r"
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    
+    if (nil != self)
+    {
+        [self setStart:[aDecoder decodeObjectForKey:CPGrammarStartKey]];
+        [self setRules:[aDecoder decodeObjectForKey:CPGrammarRulesKey]];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:[self start] forKey:CPGrammarStartKey];
+    [aCoder encodeObject:[self rules] forKey:CPGrammarRulesKey];
+}
+
 - (void)dealloc
 {
     [start release];
+    [self setRules:nil];
     
     [super dealloc];
 }

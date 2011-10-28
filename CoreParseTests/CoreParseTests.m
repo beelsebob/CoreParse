@@ -26,7 +26,6 @@
 {
     NSString *mapCssInput;
     CPParser *mapCssParser;
-    CPTokenStream *mapCSSTokenStream;
     CPTokeniser *mapCssTokeniser;
 }
 
@@ -92,8 +91,6 @@
                   @"  line-width: 0.0;"
                   @"}";
     
-    mapCSSTokenStream = [[mapCssTokeniser tokenise:mapCssInput] retain];
-
     CPGrammar *grammar = [CPGrammar grammarWithStart:@"ruleset"
                                       backusNaurForm:
                           @"ruleset       ::= <rule>*;"
@@ -122,7 +119,6 @@
 - (void)tearDown
 {
     [mapCssParser release];
-    [mapCSSTokenStream release];
     [mapCssTokeniser release];
     
     [super tearDown];
@@ -323,7 +319,7 @@
 
 - (void)testMapCSSTokenisation
 {
-    if (![mapCSSTokenStream isEqualTo:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:
+    if (![[mapCssTokeniser tokenise:mapCssInput] isEqualTo:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:
            [CPKeywordToken tokenWithKeyword:@"node"],
            [CPKeywordToken tokenWithKeyword:@"["],
            [CPIdentifierToken tokenWithIdentifier:@"highway"],
@@ -570,7 +566,7 @@
 
 - (void)testMapCSSParsing
 {
-    CPSyntaxTree *tree = [mapCssParser parse:mapCSSTokenStream];
+    CPSyntaxTree *tree = [mapCssParser parse:[mapCssTokeniser tokenise:mapCssInput]];
     
     if (nil == tree)
     {
@@ -583,7 +579,7 @@
     CPTokenStream *stream = [[[CPTokenStream alloc] init] autorelease];
     [NSThread detachNewThreadSelector:@selector(runMapCSSTokeniser:) toTarget:self withObject:stream];
     CPSyntaxTree *tree1 = [mapCssParser parse:stream];
-    CPSyntaxTree *tree2 = [mapCssParser parse:mapCSSTokenStream];
+    CPSyntaxTree *tree2 = [mapCssParser parse:[mapCssTokeniser tokenise:mapCssInput]];
     
     if (![tree1 isEqual:tree2])
     {
@@ -707,6 +703,18 @@
         ![[(CPKeywordToken *)[(NSArray *)[as objectAtIndex:2] objectAtIndex:0] keyword] isEqualToString:@"a"])
     {
         STFail(@"EBNF paren parser did not correctly parse its result", nil);
+    }
+}
+
+- (void)testEncodingAndDecodingOfParsers
+{
+    NSData *d = [NSKeyedArchiver archivedDataWithRootObject:mapCssParser];
+    CPParser *mapCssParser2 = [NSKeyedUnarchiver unarchiveObjectWithData:d];
+    CPSyntaxTree *tree = [mapCssParser2 parse:[mapCssTokeniser tokenise:mapCssInput]];
+    
+    if (nil == tree)
+    {
+        STFail(@"Failed to parse MapCSS", nil);
     }
 }
     

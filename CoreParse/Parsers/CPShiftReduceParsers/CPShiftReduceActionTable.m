@@ -34,6 +34,32 @@
     return self;
 }
 
+#define CPShiftReduceActionTableTableKey @"t"
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    
+    if (nil != self)
+    {
+        NSArray *rows = [aDecoder decodeObjectForKey:CPShiftReduceActionTableTableKey];
+        capacity = [rows count];
+        table = malloc(capacity * sizeof(NSMutableDictionary *));
+        [rows getObjects:table range:NSMakeRange(0, capacity)];
+        for (NSUInteger i = 0; i < capacity; i++)
+        {
+            [table[i] retain];
+        }
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:[NSArray arrayWithObjects:table count:capacity] forKey:CPShiftReduceActionTableTableKey];
+}
+
 - (void)dealloc
 {
     for (NSUInteger state = 0; state < capacity; state++)
