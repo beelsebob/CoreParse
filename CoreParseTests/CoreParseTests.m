@@ -316,7 +316,7 @@
 - (void)testMapCSSTokenisation
 {
     [self setUpMapCSS];
-    if (![[mapCssTokeniser tokenise:mapCssInput] isEqualTo:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:
+    if (![(CPTokenStream *)[mapCssTokeniser tokenise:mapCssInput] isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:
            [CPKeywordToken tokenWithKeyword:@"node"],
            [CPKeywordToken tokenWithKeyword:@"["],
            [CPIdentifierToken tokenWithIdentifier:@"highway"],

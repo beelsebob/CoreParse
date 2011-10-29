@@ -73,6 +73,52 @@
 		1F530B921322814000F52EB5 /* CPRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B901322813F00F52EB5 /* CPRule.m */; };
 		1F6D44901348CC9500E982C7 /* CPLALR1Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F6D448E1348CC9500E982C7 /* CPLALR1Parser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F6D44911348CC9600E982C7 /* CPLALR1Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D448F1348CC9500E982C7 /* CPLALR1Parser.m */; };
+		1F928180145C11050033BC34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE77D551375AE6F00879A41 /* Foundation.framework */; };
+		1F92818E145C11050033BC34 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F92818D145C11050033BC34 /* SenTestingKit.framework */; };
+		1F928190145C11050033BC34 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F92818F145C11050033BC34 /* UIKit.framework */; };
+		1F928191145C11050033BC34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE77D551375AE6F00879A41 /* Foundation.framework */; };
+		1F928194145C11050033BC34 /* libCoreParse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F92817F145C11050033BC34 /* libCoreParse.a */; };
+		1F9281A5145C11A60033BC34 /* CPTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0E8938130463E900537D04 /* CPTokeniser.m */; };
+		1F9281A6145C11A60033BC34 /* CPTokenStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0E8942130466D000537D04 /* CPTokenStream.m */; };
+		1F9281A7145C11A60033BC34 /* CPKeywordRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4683871306AA8500407491 /* CPKeywordRecogniser.m */; };
+		1F9281A8145C11A60033BC34 /* CPNumberRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4683951306BF6300407491 /* CPNumberRecogniser.m */; };
+		1F9281A9145C11A60033BC34 /* CPWhiteSpaceRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4683A11306D66500407491 /* CPWhiteSpaceRecogniser.m */; };
+		1F9281AA145C11A60033BC34 /* CPIdentifierRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1DFCE01306E3C300B22855 /* CPIdentifierRecogniser.m */; };
+		1F9281AB145C11A60033BC34 /* CPQuotedRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1DFCF21307D2C500B22855 /* CPQuotedRecogniser.m */; };
+		1F9281AC145C11A60033BC34 /* CPToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0E894B1306795600537D04 /* CPToken.m */; };
+		1F9281AD145C11A60033BC34 /* CPEOFToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4683911306B71D00407491 /* CPEOFToken.m */; };
+		1F9281AE145C11A60033BC34 /* CPKeywordToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F46838D1306B45500407491 /* CPKeywordToken.m */; };
+		1F9281AF145C11A60033BC34 /* CPNumberToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4683991306C22900407491 /* CPNumberToken.m */; };
+		1F9281B0145C11A60033BC34 /* CPWhiteSpaceToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4683A51306D7CF00407491 /* CPWhiteSpaceToken.m */; };
+		1F9281B1145C11A60033BC34 /* CPIdentifierToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1DFCE41306E8E900B22855 /* CPIdentifierToken.m */; };
+		1F9281B2145C11A60033BC34 /* CPQuotedToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1DFCEE1307D18900B22855 /* CPQuotedToken.m */; };
+		1F9281B3145C11A60033BC34 /* CPGrammar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F50A93D1308604A00C50D7D /* CPGrammar.m */; };
+		1F9281B4145C11A60033BC34 /* CPGrammarPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC1827C139ADC800027F597 /* CPGrammarPrivate.m */; };
+		1F9281B5145C11A60033BC34 /* CPGrammarInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC18281139AE3810027F597 /* CPGrammarInternal.m */; };
+		1F9281B6145C11A60033BC34 /* CPRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B901322813F00F52EB5 /* CPRule.m */; };
+		1F9281B7145C11A60033BC34 /* CPGrammarSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB39132D096800ACC453 /* CPGrammarSymbol.m */; };
+		1F9281B8145C11A60033BC34 /* CPRHSItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83AB13B7CABA006E939D /* CPRHSItem.m */; };
+		1F9281B9145C11A60033BC34 /* CPRHSItemResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC00D4F14544EDC00DC8D35 /* CPRHSItemResult.m */; };
+		1F9281BA145C11A60033BC34 /* CPSyntaxTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B8613216A1A00F52EB5 /* CPSyntaxTree.m */; };
+		1F9281BB145C11A60033BC34 /* CPParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B7D13215A6F00F52EB5 /* CPParser.m */; };
+		1F9281BC145C11A60033BC34 /* CPShiftReduceAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3881E01322ADC9000C8876 /* CPShiftReduceAction.m */; };
+		1F9281BD145C11A60033BC34 /* CPShiftReduceState.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3881E41322AEE8000C8876 /* CPShiftReduceState.m */; };
+		1F9281BE145C11A60033BC34 /* CPShiftReduceActionTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3881EC1322B669000C8876 /* CPShiftReduceActionTable.m */; };
+		1F9281BF145C11A60033BC34 /* CPShiftReduceGotoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3881F01322B6A0000C8876 /* CPShiftReduceGotoTable.m */; };
+		1F9281C0145C11A60033BC34 /* CPItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3882081323F75F000C8876 /* CPItem.m */; };
+		1F9281C1145C11A60033BC34 /* CPLR1Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB2F132BB30A00ACC453 /* CPLR1Item.m */; };
+		1F9281C2145C11A60033BC34 /* CPShiftReduceParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3881DB1322ACE7000C8876 /* CPShiftReduceParser.m */; };
+		1F9281C3145C11A60033BC34 /* CPSLRParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3882001323DB49000C8876 /* CPSLRParser.m */; };
+		1F9281C4145C11A60033BC34 /* CPLR1Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB2B132BB2ED00ACC453 /* CPLR1Parser.m */; };
+		1F9281C5145C11A60033BC34 /* CPLALR1Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D448F1348CC9500E982C7 /* CPLALR1Parser.m */; };
+		1F9281C6145C11A60033BC34 /* CPJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F45A2E313422E1300092D78 /* CPJSONParser.m */; };
+		1F9281C7145C11A60033BC34 /* NSSetFunctional.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F38820C132432AA000C8876 /* NSSetFunctional.m */; };
+		1F9281C8145C17580033BC34 /* CoreParseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0E8919130462F300537D04 /* CoreParseTests.m */; };
+		1F9281C9145C18220033BC34 /* CPTestEvaluatorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB23132BA02C00ACC453 /* CPTestEvaluatorDelegate.m */; };
+		1F9281CA145C18220033BC34 /* CPTestWhiteSpaceIgnoringDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB81321132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.m */; };
+		1F9281CB145C18220033BC34 /* CPTestMapCSSTokenisingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB81325132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.m */; };
+		1F9281CC145C18220033BC34 /* Expression.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83A013B731F3006E939D /* Expression.m */; };
+		1F9281CD145C18220033BC34 /* Term.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83A513B732AC006E939D /* Term.m */; };
 		1F9F83A113B731F3006E939D /* Expression.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9F839F13B731F3006E939D /* Expression.h */; };
 		1F9F83A213B731F3006E939D /* Expression.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83A013B731F3006E939D /* Expression.m */; };
 		1F9F83A613B732AC006E939D /* Term.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9F83A413B732AC006E939D /* Term.h */; };
@@ -107,6 +153,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 1F0E88F5130462F300537D04;
 			remoteInfo = CoreParse;
+		};
+		1F928192145C11050033BC34 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F0E88EC130462F300537D04 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F92817E145C11050033BC34;
+			remoteInfo = iOSCoreParse;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -184,6 +237,10 @@
 		1F530B901322813F00F52EB5 /* CPRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRule.m; sourceTree = "<group>"; };
 		1F6D448E1348CC9500E982C7 /* CPLALR1Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLALR1Parser.h; sourceTree = "<group>"; };
 		1F6D448F1348CC9500E982C7 /* CPLALR1Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLALR1Parser.m; sourceTree = "<group>"; };
+		1F92817F145C11050033BC34 /* libCoreParse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoreParse.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F92818C145C11050033BC34 /* CoreParseTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreParseTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F92818D145C11050033BC34 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		1F92818F145C11050033BC34 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		1F9F839F13B731F3006E939D /* Expression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Expression.h; sourceTree = "<group>"; };
 		1F9F83A013B731F3006E939D /* Expression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Expression.m; sourceTree = "<group>"; };
 		1F9F83A413B732AC006E939D /* Term.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Term.h; sourceTree = "<group>"; };
@@ -231,6 +288,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1F92817C145C11050033BC34 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F928180145C11050033BC34 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F928188145C11050033BC34 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F92818E145C11050033BC34 /* SenTestingKit.framework in Frameworks */,
+				1F928190145C11050033BC34 /* UIKit.framework in Frameworks */,
+				1F928191145C11050033BC34 /* Foundation.framework in Frameworks */,
+				1F928194145C11050033BC34 /* libCoreParse.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -251,6 +327,8 @@
 				1F0E88F6130462F300537D04 /* CoreParse.framework */,
 				1F0E890B130462F300537D04 /* CoreParseTests.octest */,
 				1FE77D821375EA8F00879A41 /* CoreParse Documentation */,
+				1F92817F145C11050033BC34 /* libCoreParse.a */,
+				1F92818C145C11050033BC34 /* CoreParseTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -260,6 +338,8 @@
 			children = (
 				1F0E88F9130462F300537D04 /* Cocoa.framework */,
 				1FE77D551375AE6F00879A41 /* Foundation.framework */,
+				1F92818D145C11050033BC34 /* SenTestingKit.framework */,
+				1F92818F145C11050033BC34 /* UIKit.framework */,
 				1F0E88FB130462F300537D04 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -521,6 +601,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1F92817D145C11050033BC34 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -559,6 +646,42 @@
 			name = CoreParseTests;
 			productName = CoreParseTests;
 			productReference = 1F0E890B130462F300537D04 /* CoreParseTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+		1F92817E145C11050033BC34 /* iOSCoreParse */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F9281A2145C11050033BC34 /* Build configuration list for PBXNativeTarget "iOSCoreParse" */;
+			buildPhases = (
+				1F92817B145C11050033BC34 /* Sources */,
+				1F92817C145C11050033BC34 /* Frameworks */,
+				1F92817D145C11050033BC34 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iOSCoreParse;
+			productName = iOSCoreParse;
+			productReference = 1F92817F145C11050033BC34 /* libCoreParse.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		1F92818B145C11050033BC34 /* iOSCoreParseTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F9281A3145C11050033BC34 /* Build configuration list for PBXNativeTarget "iOSCoreParseTests" */;
+			buildPhases = (
+				1F928187145C11050033BC34 /* Sources */,
+				1F928188145C11050033BC34 /* Frameworks */,
+				1F928189145C11050033BC34 /* Resources */,
+				1F92818A145C11050033BC34 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1F928193145C11050033BC34 /* PBXTargetDependency */,
+			);
+			name = iOSCoreParseTests;
+			productName = iOSCoreParseTests;
+			productReference = 1F92818C145C11050033BC34 /* CoreParseTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 		1FE77D811375EA8F00879A41 /* CoreParse Documentation */ = {
@@ -600,6 +723,8 @@
 				1F0E88F5130462F300537D04 /* CoreParse */,
 				1F0E890A130462F300537D04 /* CoreParseTests */,
 				1FE77D811375EA8F00879A41 /* CoreParse Documentation */,
+				1F92817E145C11050033BC34 /* iOSCoreParse */,
+				1F92818B145C11050033BC34 /* iOSCoreParseTests */,
 			);
 		};
 /* End PBXProject section */
@@ -623,10 +748,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1F928189145C11050033BC34 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		1F0E8909130462F300537D04 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		1F92818A145C11050033BC34 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -711,6 +856,61 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1F92817B145C11050033BC34 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F9281A5145C11A60033BC34 /* CPTokeniser.m in Sources */,
+				1F9281A6145C11A60033BC34 /* CPTokenStream.m in Sources */,
+				1F9281A7145C11A60033BC34 /* CPKeywordRecogniser.m in Sources */,
+				1F9281A8145C11A60033BC34 /* CPNumberRecogniser.m in Sources */,
+				1F9281A9145C11A60033BC34 /* CPWhiteSpaceRecogniser.m in Sources */,
+				1F9281AA145C11A60033BC34 /* CPIdentifierRecogniser.m in Sources */,
+				1F9281AB145C11A60033BC34 /* CPQuotedRecogniser.m in Sources */,
+				1F9281AC145C11A60033BC34 /* CPToken.m in Sources */,
+				1F9281AD145C11A60033BC34 /* CPEOFToken.m in Sources */,
+				1F9281AE145C11A60033BC34 /* CPKeywordToken.m in Sources */,
+				1F9281AF145C11A60033BC34 /* CPNumberToken.m in Sources */,
+				1F9281B0145C11A60033BC34 /* CPWhiteSpaceToken.m in Sources */,
+				1F9281B1145C11A60033BC34 /* CPIdentifierToken.m in Sources */,
+				1F9281B2145C11A60033BC34 /* CPQuotedToken.m in Sources */,
+				1F9281B3145C11A60033BC34 /* CPGrammar.m in Sources */,
+				1F9281B4145C11A60033BC34 /* CPGrammarPrivate.m in Sources */,
+				1F9281B5145C11A60033BC34 /* CPGrammarInternal.m in Sources */,
+				1F9281B6145C11A60033BC34 /* CPRule.m in Sources */,
+				1F9281B7145C11A60033BC34 /* CPGrammarSymbol.m in Sources */,
+				1F9281B8145C11A60033BC34 /* CPRHSItem.m in Sources */,
+				1F9281B9145C11A60033BC34 /* CPRHSItemResult.m in Sources */,
+				1F9281BA145C11A60033BC34 /* CPSyntaxTree.m in Sources */,
+				1F9281BB145C11A60033BC34 /* CPParser.m in Sources */,
+				1F9281BC145C11A60033BC34 /* CPShiftReduceAction.m in Sources */,
+				1F9281BD145C11A60033BC34 /* CPShiftReduceState.m in Sources */,
+				1F9281BE145C11A60033BC34 /* CPShiftReduceActionTable.m in Sources */,
+				1F9281BF145C11A60033BC34 /* CPShiftReduceGotoTable.m in Sources */,
+				1F9281C0145C11A60033BC34 /* CPItem.m in Sources */,
+				1F9281C1145C11A60033BC34 /* CPLR1Item.m in Sources */,
+				1F9281C2145C11A60033BC34 /* CPShiftReduceParser.m in Sources */,
+				1F9281C3145C11A60033BC34 /* CPSLRParser.m in Sources */,
+				1F9281C4145C11A60033BC34 /* CPLR1Parser.m in Sources */,
+				1F9281C5145C11A60033BC34 /* CPLALR1Parser.m in Sources */,
+				1F9281C6145C11A60033BC34 /* CPJSONParser.m in Sources */,
+				1F9281C7145C11A60033BC34 /* NSSetFunctional.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F928187145C11050033BC34 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F9281C9145C18220033BC34 /* CPTestEvaluatorDelegate.m in Sources */,
+				1F9281CA145C18220033BC34 /* CPTestWhiteSpaceIgnoringDelegate.m in Sources */,
+				1F9281CB145C18220033BC34 /* CPTestMapCSSTokenisingDelegate.m in Sources */,
+				1F9281CC145C18220033BC34 /* Expression.m in Sources */,
+				1F9281CD145C18220033BC34 /* Term.m in Sources */,
+				1F9281C8145C17580033BC34 /* CoreParseTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -718,6 +918,11 @@
 			isa = PBXTargetDependency;
 			target = 1F0E88F5130462F300537D04 /* CoreParse */;
 			targetProxy = 1F0E890D130462F300537D04 /* PBXContainerItemProxy */;
+		};
+		1F928193145C11050033BC34 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1F92817E145C11050033BC34 /* iOSCoreParse */;
+			targetProxy = 1F928192145C11050033BC34 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -760,7 +965,7 @@
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
-				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_PEDANTIC = NO;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
@@ -773,7 +978,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				VALID_ARCHS = x86_64;
+				VALID_ARCHS = "armv6 x86_64 armv7";
 			};
 			name = Debug;
 		};
@@ -794,7 +999,7 @@
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
-				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_PEDANTIC = NO;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
@@ -805,9 +1010,9 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
-				VALID_ARCHS = x86_64;
+				VALID_ARCHS = "armv6 x86_64 armv7";
 			};
 			name = Release;
 		};
@@ -927,6 +1132,103 @@
 			};
 			name = Release;
 		};
+		1F92819E145C11050033BC34 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/iOSCoreParse.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreParse/CoreParse-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = CoreParse;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		1F92819F145C11050033BC34 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/iOSCoreParse.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreParse/CoreParse-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = CoreParse;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1F9281A0145C11050033BC34 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreParse/CoreParse-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = "CoreParseTests/CoreParseTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = CoreParseTests;
+				SDKROOT = iphoneos;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		1F9281A1145C11050033BC34 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreParse/CoreParse-Prefix.pch";
+				INFOPLIST_FILE = "CoreParseTests/CoreParseTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = CoreParseTests;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		1FE77D8C1375EA8F00879A41 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -985,6 +1287,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		1F9281A2145C11050033BC34 /* Build configuration list for PBXNativeTarget "iOSCoreParse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F92819E145C11050033BC34 /* Debug */,
+				1F92819F145C11050033BC34 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		1F9281A3145C11050033BC34 /* Build configuration list for PBXNativeTarget "iOSCoreParseTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F9281A0145C11050033BC34 /* Debug */,
+				1F9281A1145C11050033BC34 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		1FE77D8B1375EA8F00879A41 /* Build configuration list for PBXNativeTarget "CoreParse Documentation" */ = {
 			isa = XCConfigurationList;
