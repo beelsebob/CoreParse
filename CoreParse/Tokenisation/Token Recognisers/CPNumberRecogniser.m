@@ -15,6 +15,28 @@
 @synthesize recognisesInts;
 @synthesize recognisesFloats;
 
+#define CPNumberRecogniserRecognisesIntsKey @"N.i"
+#define CPNumberRecogniserRecognisesFloatsKey @"N.f"
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    
+    if (nil != self)
+    {
+        [self setRecognisesInts:[aDecoder decodeBoolForKey:CPNumberRecogniserRecognisesIntsKey]];
+        [self setRecognisesFloats:[aDecoder decodeBoolForKey:CPNumberRecogniserRecognisesFloatsKey]];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeBool:[self recognisesInts] forKey:CPNumberRecogniserRecognisesIntsKey];
+    [aCoder encodeBool:[self recognisesFloats] forKey:CPNumberRecogniserRecognisesFloatsKey];
+}
+
 + (id)integerRecogniser
 {
     CPNumberRecogniser *rec = [[[CPNumberRecogniser alloc] init] autorelease];

@@ -53,6 +53,28 @@
     return [self initWithKeyword:@" "];
 }
 
+#define CPKeywordRecogniserKeywordKey @"K.k"
+#define CPKeywordRecogniserInvalidFollowingCharactersKey @"K.f"
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    
+    if (nil != self)
+    {
+        [self setKeyword:[aDecoder decodeObjectForKey:CPKeywordRecogniserKeywordKey]];
+        [self setInvalidFollowingCharacters:[aDecoder decodeObjectForKey:CPKeywordRecogniserInvalidFollowingCharactersKey]];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:[self keyword] forKey:CPKeywordRecogniserKeywordKey];
+    [aCoder encodeObject:[self invalidFollowingCharacters] forKey:CPKeywordRecogniserInvalidFollowingCharactersKey];
+}
+
 - (void)dealloc
 {
     [keyword release];

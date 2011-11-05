@@ -38,6 +38,28 @@
     return self;
 }
 
+#define CPIdentifierRecogniserInitialCharactersKey @"I.i"
+#define CPIdentifierRecogniserIdentifierCharactersKey @"I.c"
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    
+    if (nil != self)
+    {
+        [self setInitialCharacters:[aDecoder decodeObjectForKey:CPIdentifierRecogniserInitialCharactersKey]];
+        [self setIdentifierCharacters:[aDecoder decodeObjectForKey:CPIdentifierRecogniserIdentifierCharactersKey]];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:[self initialCharacters] forKey:CPIdentifierRecogniserInitialCharactersKey];
+    [aCoder encodeObject:[self identifierCharacters] forKey:CPIdentifierRecogniserIdentifierCharactersKey];
+}
+
 - (void)dealloc
 {
     [initialCharacters release];

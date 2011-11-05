@@ -45,6 +45,13 @@
     [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"relation" invalidFollowingCharacters:identifierCharacters]];
     [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"area"     invalidFollowingCharacters:identifierCharacters]];
     [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"line"     invalidFollowingCharacters:identifierCharacters]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"canvas"   invalidFollowingCharacters:identifierCharacters]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"url"      invalidFollowingCharacters:identifierCharacters]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"eval"     invalidFollowingCharacters:identifierCharacters]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"rgba"     invalidFollowingCharacters:identifierCharacters]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"rgb"      invalidFollowingCharacters:identifierCharacters]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"pt"       invalidFollowingCharacters:identifierCharacters]];
+    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"px"       invalidFollowingCharacters:identifierCharacters]];
     [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"*"]];
     [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"["]];
     [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"]"]];
@@ -56,7 +63,6 @@
     [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@","]];
     [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@";"]];
     [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"@import"]];
-    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"url"]];
     [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"|z"]];
     [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"-"]];
     [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"!="]];
@@ -67,7 +73,6 @@
     [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@">="]];
     [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"="]];
     [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@":"]];
-    [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"eval"]];
     [mapCssTokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
     [mapCssTokeniser addTokenRecogniser:[CPNumberRecogniser numberRecogniser]];
     [mapCssTokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" name:@"Comment"]];
@@ -562,6 +567,30 @@
     }
 }
 
+- (void)testMapCSSTokenisationPt
+{
+    [self setUpMapCSS];
+    CPTokenStream *t = [mapCssTokeniser tokenise:@"way { jam: 0.0 pt; }"];
+    
+    if (![t isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:
+                                                          [CPKeywordToken tokenWithKeyword:@"way"],
+                                                          [CPWhiteSpaceToken whiteSpace:@" "],
+                                                          [CPKeywordToken tokenWithKeyword:@"{"],
+                                                          [CPIdentifierToken tokenWithIdentifier:@"jam"],
+                                                          [CPKeywordToken tokenWithKeyword:@":"],
+                                                          [CPNumberToken tokenWithNumber:[NSNumber numberWithFloat:0.0f]],
+                                                          [CPKeywordToken tokenWithKeyword:@"pt"],
+                                                          [CPKeywordToken tokenWithKeyword:@";"],
+                                                          [CPKeywordToken tokenWithKeyword:@"}"],
+                                                          [CPEOFToken eof],
+                                                          nil]]])
+    {
+        STFail(@"Tokenised MapCSS with size specifier incorrectly", nil);
+    }
+    
+    [self tearDownMapCSS];
+}
+
 - (void)testMapCSSParsing
 {
     [self setUpMapCSS];
@@ -711,9 +740,21 @@
 - (void)testEncodingAndDecodingOfParsers
 {
     [self setUpMapCSS];
-    NSData *d = [NSKeyedArchiver archivedDataWithRootObject:mapCssParser];
+    
+    NSData *d = [NSKeyedArchiver archivedDataWithRootObject:mapCssTokeniser];
+    CPTokeniser *mapCssTokeniser2 = [NSKeyedUnarchiver unarchiveObjectWithData:d];
+    [mapCssTokeniser2 setDelegate:[mapCssTokeniser delegate]];
+    CPTokenStream *tokenStream = [mapCssTokeniser tokenise:mapCssInput];
+    CPTokenStream *tokenStream2 = [mapCssTokeniser2 tokenise:mapCssInput];
+    
+    if (![tokenStream isEqual:tokenStream2])
+    {
+        STFail(@"Failed to encode and decode MapCSSTokeniser", nil);
+    }
+    
+    d = [NSKeyedArchiver archivedDataWithRootObject:mapCssParser];
     CPParser *mapCssParser2 = [NSKeyedUnarchiver unarchiveObjectWithData:d];
-    CPSyntaxTree *tree = [mapCssParser2 parse:[mapCssTokeniser tokenise:mapCssInput]];
+    CPSyntaxTree *tree = [mapCssParser2 parse:tokenStream];
     
     if (nil == tree)
     {

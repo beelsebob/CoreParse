@@ -978,7 +978,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				VALID_ARCHS = "armv6 x86_64 armv7";
+				SUPPORTED_PLATFORMS = macosx;
+				VALID_ARCHS = "armv6 i386 x86_64 armv7";
 			};
 			name = Debug;
 		};
@@ -1012,7 +1013,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
-				VALID_ARCHS = "armv6 x86_64 armv7";
+				SUPPORTED_PLATFORMS = macosx;
+				VALID_ARCHS = "armv6 i386 x86_64 armv7";
 			};
 			name = Release;
 		};
@@ -1152,6 +1154,8 @@
 				PRODUCT_NAME = CoreParse;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				VALID_ARCHS = "armv6 armv7";
 			};
 			name = Debug;
 		};
@@ -1159,7 +1163,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					"x86-64",
+					i386,
+					armv6,
+					armv7,
+				);
 				COPY_PHASE_STRIP = YES;
 				DSTROOT = /tmp/iOSCoreParse.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1170,7 +1179,9 @@
 				PRODUCT_NAME = CoreParse;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv6 armv7";
 			};
 			name = Release;
 		};
@@ -1200,6 +1211,7 @@
 				);
 				PRODUCT_NAME = CoreParseTests;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -1224,6 +1236,7 @@
 				);
 				PRODUCT_NAME = CoreParseTests;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = octest;
 			};
@@ -1295,6 +1308,7 @@
 				1F92819F145C11050033BC34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1F9281A3145C11050033BC34 /* Build configuration list for PBXNativeTarget "iOSCoreParseTests" */ = {
 			isa = XCConfigurationList;
@@ -1303,6 +1317,7 @@
 				1F9281A1145C11050033BC34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1FE77D8B1375EA8F00879A41 /* Build configuration list for PBXNativeTarget "CoreParse Documentation" */ = {
 			isa = XCConfigurationList;

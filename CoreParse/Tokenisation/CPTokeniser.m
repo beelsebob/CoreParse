@@ -38,6 +38,25 @@
     return self;
 }
 
+#define CPTokeniserTokenRecognisersKey @"T.r"
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    
+    if (nil != self)
+    {
+        [self setTokenRecognisers:[aDecoder decodeObjectForKey:CPTokeniserTokenRecognisersKey]];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:[self tokenRecognisers] forKey:CPTokeniserTokenRecognisersKey];
+}
+
 - (void)dealloc
 {
     [tokenRecognisers release];

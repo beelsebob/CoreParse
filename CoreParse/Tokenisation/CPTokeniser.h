@@ -50,7 +50,7 @@
  * If it returns YES, -tokeniser:willProduceToken: is called, and the resulting array of tokens added to
  * the output stream.
  */
-@interface CPTokeniser : NSObject
+@interface CPTokeniser : NSObject <NSCoding>
 
 ///---------------------------------------------------------------------------------------
 /// @name Managing the Delegate

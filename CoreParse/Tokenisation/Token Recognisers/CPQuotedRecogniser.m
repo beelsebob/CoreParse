@@ -50,11 +50,47 @@
     return self;
 }
 
+#define CPQuotedRecogniserStartQuoteKey     @"Q.s"
+#define CPQuotedRecogniserEndQuoteKey       @"Q.e"
+#define CPQuotedRecogniserEscapeSequenceKey @"Q.es"
+#define CPQuotedRecogniserMaximumLengthKey  @"Q.m"
+#define CPQuotedRecogniserNameKey           @"Q.n"
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    
+    if (nil != self)
+    {
+        [self setStartQuote:[aDecoder decodeObjectForKey:CPQuotedRecogniserStartQuoteKey]];
+        [self setEndQuote:[aDecoder decodeObjectForKey:CPQuotedRecogniserEndQuoteKey]];
+        [self setEscapeSequence:[aDecoder decodeObjectForKey:CPQuotedRecogniserEscapeSequenceKey]];
+        [self setMaximumLength:[aDecoder decodeIntegerForKey:CPQuotedRecogniserMaximumLengthKey]];
+        [self setName:[aDecoder decodeObjectForKey:CPQuotedRecogniserNameKey]];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    if (nil != [self escapeReplacer])
+    {
+        NSLog(@"Warning: encoding CPQuoteRecogniser with an escapeReplacer set.  This will not be recreated when decoded.");
+    }
+    [aCoder encodeObject:[self startQuote]     forKey:CPQuotedRecogniserStartQuoteKey];
+    [aCoder encodeObject:[self endQuote]       forKey:CPQuotedRecogniserEndQuoteKey];
+    [aCoder encodeObject:[self escapeSequence] forKey:CPQuotedRecogniserEscapeSequenceKey];
+    [aCoder encodeInteger:[self maximumLength] forKey:CPQuotedRecogniserMaximumLengthKey];
+    [aCoder encodeObject:[self name]           forKey:CPQuotedRecogniserNameKey];
+}
+
 - (void)dealloc
 {
     [startQuote release];
     [endQuote release];
     [escapeSequence release];
+    [escapeReplacer release];
     [name release];
     
     [super dealloc];

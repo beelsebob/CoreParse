@@ -12,6 +12,15 @@
 
 @implementation CPWhiteSpaceRecogniser
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    return [super init];
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+}
+
 + (id)whiteSpaceRecogniser
 {
     return [[[CPWhiteSpaceRecogniser alloc] init] autorelease];
