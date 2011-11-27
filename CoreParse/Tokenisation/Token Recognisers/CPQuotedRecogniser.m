@@ -65,7 +65,15 @@
         [self setStartQuote:[aDecoder decodeObjectForKey:CPQuotedRecogniserStartQuoteKey]];
         [self setEndQuote:[aDecoder decodeObjectForKey:CPQuotedRecogniserEndQuoteKey]];
         [self setEscapeSequence:[aDecoder decodeObjectForKey:CPQuotedRecogniserEscapeSequenceKey]];
-        [self setMaximumLength:[aDecoder decodeIntegerForKey:CPQuotedRecogniserMaximumLengthKey]];
+        @try
+        {
+            [self setMaximumLength:[aDecoder decodeIntegerForKey:CPQuotedRecogniserMaximumLengthKey]];
+        }
+        @catch (NSException *exception)
+        {
+            NSLog(@"Warning, value for maximum length too long for this platform, allowing infinite lengths");
+            [self setMaximumLength:NSNotFound];
+        }
         [self setName:[aDecoder decodeObjectForKey:CPQuotedRecogniserNameKey]];
     }
     

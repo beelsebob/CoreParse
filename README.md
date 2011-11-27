@@ -10,6 +10,8 @@ Parsing Guide
 
 CoreParse is a powerful framework for tokenising and parsing.  This document explains how to create a tokeniser and parser from scratch, and how to use those parsers to create your model data structures for you.  We will follow the same example throughout this document.  This will deal with parsing a simple numerical expression and computing the result.
 
+gavineadie has implemented this entire example, to see full working source see https://github.com/gavineadie/ParseTest/.
+
 Tokenisation
 ------------
 
