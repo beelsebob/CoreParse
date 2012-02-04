@@ -58,8 +58,8 @@ Parsing
 We construct parsers by specifying their grammar.  We can construct a grammar simply using a simple BNF like language:
 
     NSString *expressionGrammar =
-        @"Expression ::= <Term>     | <Expression> <AddOp> <Term>;"
-        @"Term       ::= <Factor>   | <Term>       <MulOp> <Factor>;"
+        @"Expression ::= <Term>   | <Expression> <AddOp> <Term>;"
+        @"Term       ::= <Factor> | <Term>       <MulOp> <Factor>;"
         @"Factor     ::= 'Number' | '(' <Expression> ')';"
         @"AddOp      ::= '+' | '-';"
         @"MulOp      ::= '*' | '/';";
