@@ -98,24 +98,24 @@
                                       backusNaurForm:
                           @"ruleset       ::= <rule>*;"
                           @"rule          ::= <selector> <commaSelector>* <declaration>+ | <import>;"
-                          @"import        ::= \"@import\" \"url\" \"(\" \"String\" \")\" \"Identifier\";"
-                          @"commaSelector ::= \",\" <selector>;"
+                          @"import        ::= '@import' 'url' '(' 'String' ')' 'Identifier';"
+                          @"commaSelector ::= ',' <selector>;"
                           @"selector      ::= <subselector>+;"
-                          @"subselector   ::= <object> \"Whitespace\" | <object> <zoom> <test>* | <class>;"
-                          @"zoom          ::= \"|z\" <range> | ;"
-                          @"range         ::= \"Number\" | \"Number\" \"-\" \"Number\";"
-                          @"test          ::= \"[\" <condition> \"]\";"
+                          @"subselector   ::= <object> 'Whitespace' | <object> <zoom> <test>* | <class>;"
+                          @"zoom          ::= '|z' <range> | ;"
+                          @"range         ::= 'Number' | 'Number' '-' 'Number';"
+                          @"test          ::= '[' <condition> ']';"
                           @"condition     ::= <key> <binary> <value> | <unary> <key> | <key>;"
-                          @"key           ::= \"Identifier\";"
-                          @"value         ::= \"String\" | \"Regex\";"
-                          @"binary        ::= \"=\" | \"!=\" | \"=~\" | \"<\" | \">\" | \"<=\" | \">=\";"
-                          @"unary         ::= \"-\" | \"!\";"
-                          @"class         ::= \".\" \"Identifier\";"
-                          @"object        ::= \"node\" | \"way\" | \"relation\" | \"area\" | \"line\" | \"*\";"
-                          @"declaration   ::= \"{\" <style>+ \"}\" | \"{\" \"}\";"
-                          @"style         ::= <styledef> \";\";"
-                          @"styledef      ::= <key> \":\" <unquoted>;"
-                          @"unquoted      ::= \"Number\" | \"Identifier\";"];
+                          @"key           ::= 'Identifier';"
+                          @"value         ::= 'String' | 'Regex';"
+                          @"binary        ::= '=' | '!=' | '=~' | '<' | '>' | '<=' | '>=';"
+                          @"unary         ::= '-' | '!';"
+                          @"class         ::= '.' 'Identifier';"
+                          @"object        ::= 'node' | 'way' | 'relation' | 'area' | 'line' | '*';"
+                          @"declaration   ::= '{' <style>+ '}' | '{' '}';"
+                          @"style         ::= <styledef> ';';"
+                          @"styledef      ::= <key> ':' <unquoted>;"
+                          @"unquoted      ::= 'Number' | 'Identifier';"];
     mapCssParser = [[CPLALR1Parser alloc] initWithGrammar:grammar];
 }
 
@@ -131,11 +131,8 @@
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"{"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"}"]];
     CPTokenStream *tokenStream = [tokeniser tokenise:@"{}"];
-    
-    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"{"], [CPKeywordToken tokenWithKeyword:@"}"], [CPEOFToken eof], nil]]])
-    {
-        STFail(@"Incorrect tokenisation of braces",nil);
-    }
+    CPTokenStream *expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"{"], [CPKeywordToken tokenWithKeyword:@"}"], [CPEOFToken eof], nil]];
+    STAssertEqualObjects(tokenStream, expectedTokenStream, @"Incorrect tokenisation of braces", nil);
 }
 
 - (void)testIntegerTokeniser
@@ -143,18 +140,12 @@
     CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
     [tokeniser addTokenRecogniser:[CPNumberRecogniser integerRecogniser]];
     CPTokenStream *tokenStream = [tokeniser tokenise:@"1234"];
-    
-    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPNumberToken tokenWithNumber:[NSNumber numberWithInteger:1234]], [CPEOFToken eof], nil]]])
-    {
-        STFail(@"Incorrect tokenisation of integers",nil);
-    }
+    CPTokenStream *expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPNumberToken tokenWithNumber:[NSNumber numberWithInteger:1234]], [CPEOFToken eof], nil]];
+    STAssertEqualObjects(tokenStream, expectedTokenStream, @"Incorrect tokenisation of integers", nil);
 
     tokenStream = [tokeniser tokenise:@"1234abcd"];
-    
-    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPNumberToken tokenWithNumber:[NSNumber numberWithInteger:1234]], nil]]])
-    {
-        STFail(@"Incorrect tokenisation of integers with additional cruft",nil);
-    }
+    expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPNumberToken tokenWithNumber:[NSNumber numberWithInteger:1234]], nil]];
+    STAssertEqualObjects(tokenStream, expectedTokenStream, @"Incorrect tokenisation of integers with additional cruft", nil);
 }
 
 - (void)testFloatTokeniser
@@ -162,17 +153,12 @@
     CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
     [tokeniser addTokenRecogniser:[CPNumberRecogniser floatRecogniser]];
     CPTokenStream *tokenStream = [tokeniser tokenise:@"1234.5678"];
-    
-    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPNumberToken tokenWithNumber:[NSNumber numberWithDouble:1234.5678]], [CPEOFToken eof], nil]]])
-    {
-        STFail(@"Incorrect tokenisation of floats",nil);
-    }
+    CPTokenStream *expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPNumberToken tokenWithNumber:[NSNumber numberWithDouble:1234.5678]], [CPEOFToken eof], nil]];
+    STAssertEqualObjects(tokenStream, expectedTokenStream, @"Incorrect tokenisation of floats", nil);
     
     tokenStream = [tokeniser tokenise:@"1234"];
-    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray array]]])
-    {
-        STFail(@"Tokenising floats recognises integers as well",nil);
-    }
+    expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray array]];
+    STAssertEqualObjects(tokenStream, expectedTokenStream, @"Tokenising floats recognises integers as well", nil);
 }
 
 - (void)testNumberTokeniser
@@ -181,16 +167,12 @@
     [tokeniser addTokenRecogniser:[CPNumberRecogniser numberRecogniser]];
 
     CPTokenStream *tokenStream = [tokeniser tokenise:@"1234.5678"];
-    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPNumberToken tokenWithNumber:[NSNumber numberWithDouble:1234.5678]], [CPEOFToken eof], nil]]])
-    {
-        STFail(@"Incorrect tokenisation of numbers",nil);
-    }
+    CPTokenStream *expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPNumberToken tokenWithNumber:[NSNumber numberWithDouble:1234.5678]], [CPEOFToken eof], nil]];
+    STAssertEqualObjects(tokenStream, expectedTokenStream, @"Incorrect tokenisation of numbers", nil);
     
     tokenStream = [tokeniser tokenise:@"1234abcd"];
-    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPNumberToken tokenWithNumber:[NSNumber numberWithInteger:1234]], nil]]])
-    {
-        STFail(@"Incorrect tokenisation of numbers with additional cruft",nil);
-    }
+    expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPNumberToken tokenWithNumber:[NSNumber numberWithInteger:1234]], nil]];
+    STAssertEqualObjects(tokenStream, expectedTokenStream, @"Incorrect tokenisation of numbers with additional cruft", nil);
 }
 
 - (void)testWhiteSpaceTokeniser
@@ -199,14 +181,11 @@
     [tokeniser addTokenRecogniser:[CPNumberRecogniser numberRecogniser]];
     [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
     CPTokenStream *tokenStream = [tokeniser tokenise:@"12.34 56.78\t90"];
-    
-    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:
-                                                                    [CPNumberToken tokenWithNumber:[NSNumber numberWithDouble:12.34]], [CPWhiteSpaceToken whiteSpace:@" "],
-                                                                    [CPNumberToken tokenWithNumber:[NSNumber numberWithDouble:56.78]], [CPWhiteSpaceToken whiteSpace:@"\t"],
-                                                                    [CPNumberToken tokenWithNumber:[NSNumber numberWithDouble:90]]   , [CPEOFToken eof], nil]]])
-    {
-        STFail(@"Failed to tokenise white space correctly",nil);
-    }
+    CPTokenStream *expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:
+                                                                               [CPNumberToken tokenWithNumber:[NSNumber numberWithDouble:12.34]], [CPWhiteSpaceToken whiteSpace:@" "],
+                                                                               [CPNumberToken tokenWithNumber:[NSNumber numberWithDouble:56.78]], [CPWhiteSpaceToken whiteSpace:@"\t"],
+                                                                               [CPNumberToken tokenWithNumber:[NSNumber numberWithDouble:90]]   , [CPEOFToken eof], nil]];
+    STAssertEqualObjects(tokenStream, expectedTokenStream, @"Failed to tokenise white space correctly", nil);
 }
 
 - (void)testIdentifierTokeniser
@@ -216,30 +195,24 @@
     [tokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniser]];
     [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
     CPTokenStream *tokenStream = [tokeniser tokenise:@"long jam _ham long _spam59e_53"];
-    
-    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:
-                                                                    [CPKeywordToken tokenWithKeyword:@"long"]             , [CPWhiteSpaceToken whiteSpace:@" "],
-                                                                    [CPIdentifierToken tokenWithIdentifier:@"jam"]        , [CPWhiteSpaceToken whiteSpace:@" "],
-                                                                    [CPIdentifierToken tokenWithIdentifier:@"_ham"]       , [CPWhiteSpaceToken whiteSpace:@" "],
-                                                                    [CPKeywordToken tokenWithKeyword:@"long"]             , [CPWhiteSpaceToken whiteSpace:@" "],
-                                                                    [CPIdentifierToken tokenWithIdentifier:@"_spam59e_53"], [CPEOFToken eof], nil]]])
-    {
-        STFail(@"Failed to tokenise identifiers space correctly",nil);
-    }
+    CPTokenStream *expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:
+                                                                               [CPKeywordToken tokenWithKeyword:@"long"]             , [CPWhiteSpaceToken whiteSpace:@" "],
+                                                                               [CPIdentifierToken tokenWithIdentifier:@"jam"]        , [CPWhiteSpaceToken whiteSpace:@" "],
+                                                                               [CPIdentifierToken tokenWithIdentifier:@"_ham"]       , [CPWhiteSpaceToken whiteSpace:@" "],
+                                                                               [CPKeywordToken tokenWithKeyword:@"long"]             , [CPWhiteSpaceToken whiteSpace:@" "],
+                                                                               [CPIdentifierToken tokenWithIdentifier:@"_spam59e_53"], [CPEOFToken eof], nil]];
+    STAssertEqualObjects(tokenStream, expectedTokenStream, @"Failed to tokenise identifiers space correctly", nil);
     
     tokeniser = [[[CPTokeniser alloc] init] autorelease];
     [tokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniserWithInitialCharacters:[NSCharacterSet characterSetWithCharactersInString:@"abc"]
                                                                                identifierCharacters:[NSCharacterSet characterSetWithCharactersInString:@"def"]]];
     [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
     tokenStream = [tokeniser tokenise:@"adef abdef"];
-    
-    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:
-                                                                    [CPIdentifierToken tokenWithIdentifier:@"adef"], [CPWhiteSpaceToken whiteSpace:@" "],
-                                                                    [CPIdentifierToken tokenWithIdentifier:@"a"], [CPIdentifierToken tokenWithIdentifier:@"bdef"],
-                                                                    [CPEOFToken eof], nil]]])
-    {
-        STFail(@"Incorrectly tokenised identifiers", nil);
-    }
+    expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:
+                                                                [CPIdentifierToken tokenWithIdentifier:@"adef"], [CPWhiteSpaceToken whiteSpace:@" "],
+                                                                [CPIdentifierToken tokenWithIdentifier:@"a"], [CPIdentifierToken tokenWithIdentifier:@"bdef"],
+                                                                [CPEOFToken eof], nil]];
+    STAssertEqualObjects(tokenStream, expectedTokenStream, @"Incorrectly tokenised identifiers", nil);
 }
 
 - (void)testQuotedTokeniser
@@ -247,31 +220,21 @@
     CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
     [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" name:@"Comment"]];
     CPTokenStream *tokenStream = [tokeniser tokenise:@"/* abcde ghi */"];
-    
-    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@" abcde ghi " quotedWith:@"/*" name:@"Comment"], [CPEOFToken eof], nil]]])
-    {
-        STFail(@"Failed to tokenise comment",nil);
-    }
+    CPTokenStream *expectdTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@" abcde ghi " quotedWith:@"/*" name:@"Comment"], [CPEOFToken eof], nil]];
+    STAssertEqualObjects(tokenStream, expectdTokenStream, @"Failed to tokenise comment", nil);
     
     [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapeSequence:@"\\" name:@"String"]];
     tokenStream = [tokeniser tokenise:@"/* abc */\"def\""];
-    
-    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@" abc " quotedWith:@"/*" name:@"Comment"], [CPQuotedToken content:@"def" quotedWith:@"\"" name:@"String"], [CPEOFToken eof], nil]]])
-    {
-        STFail(@"Failed to tokenise comment and string",nil);
-    }
+    expectdTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@" abc " quotedWith:@"/*" name:@"Comment"], [CPQuotedToken content:@"def" quotedWith:@"\"" name:@"String"], [CPEOFToken eof], nil]];
+    STAssertEqualObjects(tokenStream, expectdTokenStream, @"Failed to tokenise comment and string", nil);
     
     tokenStream = [tokeniser tokenise:@"\"def\\\"\""];
-    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@"def\"" quotedWith:@"\"" name:@"String"], [CPEOFToken eof], nil]]])
-    {
-        STFail(@"Failed to tokenise string with quote in it",nil);
-    }
+    expectdTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@"def\"" quotedWith:@"\"" name:@"String"], [CPEOFToken eof], nil]];
+    STAssertEqualObjects(tokenStream, expectdTokenStream, @"Failed to tokenise string with quote in it", nil);
     
     tokenStream = [tokeniser tokenise:@"\"def\\\\\""];
-    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@"def\\" quotedWith:@"\"" name:@"String"], [CPEOFToken eof], nil]]])
-    {
-        STFail(@"Failed to tokenise string with backslash in it",nil);
-    }
+    expectdTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@"def\\" quotedWith:@"\"" name:@"String"], [CPEOFToken eof], nil]];
+    STAssertEqualObjects(tokenStream, expectdTokenStream, @"Failed to tokenise string with backslash in it", nil);
 
     tokeniser = [[[CPTokeniser alloc] init] autorelease];
     CPQuotedRecogniser *rec = [CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapeSequence:@"\\" name:@"String"];
@@ -304,59 +267,56 @@
      }];
     [tokeniser addTokenRecogniser:rec];
     tokenStream = [tokeniser tokenise:@"\"\\n\\r\\f\""];
-    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@"\n\r\f" quotedWith:@"\"" name:@"String"], [CPEOFToken eof], nil]]])
-    {
-        STFail(@"Failed to correctly tokenise string with recognised escape chars", nil);
-    }
+    expectdTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@"\n\r\f" quotedWith:@"\"" name:@"String"], [CPEOFToken eof], nil]];
+    STAssertEqualObjects(tokenStream, expectdTokenStream, @"Failed to correctly tokenise string with recognised escape chars", nil);
     
     tokeniser = [[[CPTokeniser alloc] init] autorelease];
     [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapeSequence:nil maximumLength:1 name:@"Character"]];
     tokenStream = [tokeniser tokenise:@"'a''bc'"];
-    if (![tokenStream isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@"a" quotedWith:@"'" name:@"Character"], nil]]])
-    {
-        STFail(@"Failed to correctly tokenise characters",nil);
-    }
+    expectdTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@"a" quotedWith:@"'" name:@"Character"], nil]];
+    STAssertEqualObjects(tokenStream, expectdTokenStream, @"Failed to correctly tokenise characters", nil);
 }
 
 - (void)testMapCSSTokenisation
 {
     [self setUpMapCSS];
-    if (![(CPTokenStream *)[mapCssTokeniser tokenise:mapCssInput] isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:
-           [CPKeywordToken tokenWithKeyword:@"node"],
-           [CPKeywordToken tokenWithKeyword:@"["],
-           [CPIdentifierToken tokenWithIdentifier:@"highway"],
-           [CPKeywordToken tokenWithKeyword:@"="],
-           [CPQuotedToken content:@"trunk" quotedWith:@"\"" name:@"String"],
-           [CPKeywordToken tokenWithKeyword:@"]"],
-           [CPKeywordToken tokenWithKeyword:@"{"],
-           [CPIdentifierToken tokenWithIdentifier:@"line-width"],
-           [CPKeywordToken tokenWithKeyword:@":"],
-           [CPNumberToken tokenWithNumber:[NSNumber numberWithFloat:5.0f]],
-           [CPKeywordToken tokenWithKeyword:@";"],
-           [CPIdentifierToken tokenWithIdentifier:@"label"],
-           [CPKeywordToken tokenWithKeyword:@":"],
-           [CPIdentifierToken tokenWithIdentifier:@"jam"],
-           [CPKeywordToken tokenWithKeyword:@";"],
-           [CPKeywordToken tokenWithKeyword:@"}"],
-           [CPKeywordToken tokenWithKeyword:@"way"],
-           [CPWhiteSpaceToken whiteSpace:@" "],
-           [CPKeywordToken tokenWithKeyword:@"relation"],
-           [CPKeywordToken tokenWithKeyword:@"["],
-           [CPIdentifierToken tokenWithIdentifier:@"type"],
-           [CPKeywordToken tokenWithKeyword:@"="],
-           [CPQuotedToken content:@"multipolygon" quotedWith:@"\"" name:@"String"],
-           [CPKeywordToken tokenWithKeyword:@"]"],
-           [CPKeywordToken tokenWithKeyword:@"{"],
-           [CPIdentifierToken tokenWithIdentifier:@"line-width"],
-           [CPKeywordToken tokenWithKeyword:@":"],
-           [CPNumberToken tokenWithNumber:[NSNumber numberWithFloat:0.0f]],
-           [CPKeywordToken tokenWithKeyword:@";"],
-           [CPKeywordToken tokenWithKeyword:@"}"],
-           [CPEOFToken eof],
-           nil]]])
-    {
-        STFail(@"Tokenisation of MapCSS failed", nil);
-    }
+    
+    CPTokenStream *tokenStream = [mapCssTokeniser tokenise:mapCssInput];
+    CPTokenStream *expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:
+                                                                               [CPKeywordToken tokenWithKeyword:@"node"],
+                                                                               [CPKeywordToken tokenWithKeyword:@"["],
+                                                                               [CPIdentifierToken tokenWithIdentifier:@"highway"],
+                                                                               [CPKeywordToken tokenWithKeyword:@"="],
+                                                                               [CPQuotedToken content:@"trunk" quotedWith:@"\"" name:@"String"],
+                                                                               [CPKeywordToken tokenWithKeyword:@"]"],
+                                                                               [CPKeywordToken tokenWithKeyword:@"{"],
+                                                                               [CPIdentifierToken tokenWithIdentifier:@"line-width"],
+                                                                               [CPKeywordToken tokenWithKeyword:@":"],
+                                                                               [CPNumberToken tokenWithNumber:[NSNumber numberWithFloat:5.0f]],
+                                                                               [CPKeywordToken tokenWithKeyword:@";"],
+                                                                               [CPIdentifierToken tokenWithIdentifier:@"label"],
+                                                                               [CPKeywordToken tokenWithKeyword:@":"],
+                                                                               [CPIdentifierToken tokenWithIdentifier:@"jam"],
+                                                                               [CPKeywordToken tokenWithKeyword:@";"],
+                                                                               [CPKeywordToken tokenWithKeyword:@"}"],
+                                                                               [CPKeywordToken tokenWithKeyword:@"way"],
+                                                                               [CPWhiteSpaceToken whiteSpace:@" "],
+                                                                               [CPKeywordToken tokenWithKeyword:@"relation"],
+                                                                               [CPKeywordToken tokenWithKeyword:@"["],
+                                                                               [CPIdentifierToken tokenWithIdentifier:@"type"],
+                                                                               [CPKeywordToken tokenWithKeyword:@"="],
+                                                                               [CPQuotedToken content:@"multipolygon" quotedWith:@"\"" name:@"String"],
+                                                                               [CPKeywordToken tokenWithKeyword:@"]"],
+                                                                               [CPKeywordToken tokenWithKeyword:@"{"],
+                                                                               [CPIdentifierToken tokenWithIdentifier:@"line-width"],
+                                                                               [CPKeywordToken tokenWithKeyword:@":"],
+                                                                               [CPNumberToken tokenWithNumber:[NSNumber numberWithFloat:0.0f]],
+                                                                               [CPKeywordToken tokenWithKeyword:@";"],
+                                                                               [CPKeywordToken tokenWithKeyword:@"}"],
+                                                                               [CPEOFToken eof],
+                                                                               nil]];
+    STAssertEqualObjects(tokenStream, expectedTokenStream, @"Tokenisation of MapCSS failed", nil);
+    
     [self tearDownMapCSS];
 }
 
@@ -383,10 +343,7 @@
     [parser setDelegate:[[[CPTestEvaluatorDelegate alloc] init] autorelease]];
     NSNumber *result = [parser parse:tokenStream];
     
-    if ([result intValue] != 157)
-    {
-        STFail(@"Parsed expression had incorrect value when using SLR parser", nil);
-    }
+    STAssertEquals([result intValue], 157, @"Parsed expression had incorrect value when using SLR parser", nil);
 }
 
 - (void)testLR1
@@ -412,10 +369,7 @@
     [parser setDelegate:[[[CPTestEvaluatorDelegate alloc] init] autorelease]];
     NSNumber *result = [parser parse:tokenStream];
     
-    if ([result intValue] != 157)
-    {
-        STFail(@"Parsed expression had incorrect value when using LR(1) parser", nil);
-    }
+    STAssertEquals([result intValue], 157, @"Parsed expression had incorrect value when using LR(1) parser", nil);
     
     tokeniser = [[[CPTokeniser alloc] init] autorelease];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"a"]];
@@ -434,10 +388,7 @@
     CPSyntaxTree *aaabTree = [CPSyntaxTree syntaxTreeWithRule:b1 children:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"a"], aabTree, nil]];
     CPSyntaxTree *sTree = [CPSyntaxTree syntaxTreeWithRule:s children:[NSArray arrayWithObjects:aaabTree, abTree, nil]];
     
-    if (![tree isEqual:sTree])
-    {
-        STFail(@"Parsing LR(1) grammar failed when using LR(1) parser", nil);
-    }
+    STAssertEqualObjects(tree, sTree, @"Parsing LR(1) grammar failed when using LR(1) parser", nil);
 }
 
 - (void)testLALR1
@@ -466,10 +417,7 @@
     CPSyntaxTree *fiveRTree = [CPSyntaxTree syntaxTreeWithRule:rL children:[NSArray arrayWithObject:fiveTree]];
     CPSyntaxTree *wholeTree = [CPSyntaxTree syntaxTreeWithRule:sL children:[NSArray arrayWithObjects:starTenTree, [CPKeywordToken tokenWithKeyword:@"="], fiveRTree, nil]];
     
-    if (![tree isEqual:wholeTree])
-    {
-        STFail(@"Parsing LALR(1) grammar failed", nil);
-    }
+    STAssertEqualObjects(tree, wholeTree, @"Parsing LALR(1) grammar failed", nil);
     
     tokeniser = [[[CPTokeniser alloc] init] autorelease];
     [tokeniser addTokenRecogniser:[CPNumberRecogniser integerRecogniser]];
@@ -492,10 +440,7 @@
     [parser setDelegate:[[[CPTestEvaluatorDelegate alloc] init] autorelease]];
     NSNumber *result = [parser parse:tokenStream];
     
-    if ([result intValue] != 157)
-    {
-        STFail(@"Parsed expression had incorrect value when using LALR(1) parser", nil);
-    }
+    STAssertEquals([result intValue], 157, @"Parsed expression had incorrect value when using LALR(1) parser", nil);
     
     tokeniser = [[[CPTokeniser alloc] init] autorelease];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"a"]];
@@ -514,10 +459,7 @@
     CPSyntaxTree *aaabTree = [CPSyntaxTree syntaxTreeWithRule:b1 children:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"a"], aabTree, nil]];
     CPSyntaxTree *sTree = [CPSyntaxTree syntaxTreeWithRule:s children:[NSArray arrayWithObjects:aaabTree, abTree, nil]];
     
-    if (![tree isEqual:sTree])
-    {
-        STFail(@"Parsing LR(1) grammar failed when using LALR(1) parser", nil);
-    }
+    STAssertEqualObjects(tree, sTree, @"Parsing LR(1) grammar failed when using LALR(1) parser", nil);
 }
 
 - (void)testBNFGrammarGeneration
@@ -544,49 +486,59 @@
     CPGrammar *grammar = [CPGrammar grammarWithStart:@"e" rules:[NSArray arrayWithObjects:e1,e2,t1,t2,f1,f2, nil]];
     NSString *testGrammar =
         @"0 e ::= <t>;"
-        @"1 e ::= <e> \"+\" <t>;"
+        @"1 e ::= <e> '+' <t>;"
         @"2 t ::= <f>;"
-        @"3 t ::= <t> \"*\" <f>;"
-        @"4 f ::= \"Number\";"
-        @"5 f ::= \"(\" <e> \")\";";
+        @"3 t ::= <t> '*' <f>;"
+        @"4 f ::= 'Number';"
+        @"5 f ::= '(' <e> ')';";
     CPGrammar *grammar1 = [CPGrammar grammarWithStart:@"e" backusNaurForm:testGrammar];
     
-    if (![grammar isEqual:grammar1])
-    {
-
-        STFail(@"Crating grammar from BNF failed", nil);
-    }
-    
+    STAssertEqualObjects(grammar, grammar1, @"Crating grammar from BNF failed", nil);
+        
     CPParser *parser = [CPSLRParser parserWithGrammar:grammar];
     [parser setDelegate:[[[CPTestEvaluatorDelegate alloc] init] autorelease]];
     NSNumber *result = [parser parse:tokenStream];
     
-    if ([result intValue] != 157)
-    {
-        STFail(@"Parsed expression had incorrect value", nil);
-    }
+    STAssertEquals([result intValue], 157, @"Parsed expression had incorrect value", nil);
+}
+
+- (void)testSingleQuotesInGrammars
+{
+    NSString *testGrammar1 =
+        @"e ::= <t>;"
+        @"e ::= <e> \"+\" <t>;"
+        @"t ::= <f>;"
+        @"t ::= <t> \"*\" <f>;"
+        @"f ::= \"Number\";"
+        @"f ::= \"(\" <e> \")\";";
+    NSString *testGrammar2 =
+        @"e ::= <t>;"
+        @"e ::= <e> '+' <t>;"
+        @"t ::= <f>;"
+        @"t ::= <t> '*' <f>;"
+        @"f ::= \"Number\";"
+        @"f ::= '(' <e> ')';";
+    
+    STAssertEqualObjects([CPGrammar grammarWithStart:@"e" backusNaurForm:testGrammar1], [CPGrammar grammarWithStart:@"e" backusNaurForm:testGrammar2], @"Grammars using double and single quotes were not equal", nil);
 }
 
 - (void)testMapCSSTokenisationPt
 {
     [self setUpMapCSS];
-    CPTokenStream *t = [mapCssTokeniser tokenise:@"way { jam: 0.0 pt; }"];
-    
-    if (![t isEqual:[CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:
-                                                          [CPKeywordToken tokenWithKeyword:@"way"],
-                                                          [CPWhiteSpaceToken whiteSpace:@" "],
-                                                          [CPKeywordToken tokenWithKeyword:@"{"],
-                                                          [CPIdentifierToken tokenWithIdentifier:@"jam"],
-                                                          [CPKeywordToken tokenWithKeyword:@":"],
-                                                          [CPNumberToken tokenWithNumber:[NSNumber numberWithFloat:0.0f]],
-                                                          [CPKeywordToken tokenWithKeyword:@"pt"],
-                                                          [CPKeywordToken tokenWithKeyword:@";"],
-                                                          [CPKeywordToken tokenWithKeyword:@"}"],
-                                                          [CPEOFToken eof],
-                                                          nil]]])
-    {
-        STFail(@"Tokenised MapCSS with size specifier incorrectly", nil);
-    }
+    CPTokenStream *t1 = [mapCssTokeniser tokenise:@"way { jam: 0.0 pt; }"];
+    CPTokenStream *t2 = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:
+                                                              [CPKeywordToken tokenWithKeyword:@"way"],
+                                                              [CPWhiteSpaceToken whiteSpace:@" "],
+                                                              [CPKeywordToken tokenWithKeyword:@"{"],
+                                                              [CPIdentifierToken tokenWithIdentifier:@"jam"],
+                                                              [CPKeywordToken tokenWithKeyword:@":"],
+                                                              [CPNumberToken tokenWithNumber:[NSNumber numberWithFloat:0.0f]],
+                                                              [CPKeywordToken tokenWithKeyword:@"pt"],
+                                                              [CPKeywordToken tokenWithKeyword:@";"],
+                                                              [CPKeywordToken tokenWithKeyword:@"}"],
+                                                              [CPEOFToken eof],
+                                                              nil]];
+    STAssertEqualObjects(t1, t2, @"Tokenised MapCSS with size specifier incorrectly", nil);
     
     [self tearDownMapCSS];
 }
@@ -596,10 +548,8 @@
     [self setUpMapCSS];
     CPSyntaxTree *tree = [mapCssParser parse:[mapCssTokeniser tokenise:mapCssInput]];
     
-    if (nil == tree)
-    {
-        STFail(@"Failed to parse MapCSS", nil);
-    }
+    STAssertNotNil(tree, @"Failed to parse MapCSS", nil);
+    
     [self tearDownMapCSS];
 }
 
@@ -611,10 +561,8 @@
     CPSyntaxTree *tree1 = [mapCssParser parse:stream];
     CPSyntaxTree *tree2 = [mapCssParser parse:[mapCssTokeniser tokenise:mapCssInput]];
     
-    if (![tree1 isEqual:tree2])
-    {
-        STFail(@"Parallel parse of MapCSS failed", nil);
-    }
+    STAssertEqualObjects(tree1, tree2, @"Parallel parse of MapCSS failed", nil);
+    
     [self tearDownMapCSS];
 }
 
@@ -628,16 +576,13 @@
     CPTokenStream *tokenStream = [tokeniser tokenise:@"5 + 9 + 2 + 7"];
     
     NSString *testGrammar =
-        @"Expression ::= <Term> | <Expression> \"+\" <Term>;"
-        @"Term       ::= \"Number\";";
+        @"Expression ::= <Term> | <Expression> '+' <Term>;"
+        @"Term       ::= 'Number';";
     CPGrammar *grammar = [CPGrammar grammarWithStart:@"Expression" backusNaurForm:testGrammar];
     CPParser *parser = [CPSLRParser parserWithGrammar:grammar];
     Expression *e = [parser parse:tokenStream];
     
-    if ([e value] != 23)
-    {
-        STFail(@"Parsing with ParseResult protocol produced incorrect result: %f", [e value]);
-    }
+    STAssertEquals([e value], 23.0f, @"Parsing with ParseResult protocol produced incorrect result: %f", [e value]);
 }
 
 - (void)runMapCSSTokeniser:(CPTokenStream *)result
@@ -663,10 +608,7 @@
                                      nil]                            , @"e",
                                     [NSNull null]                    , @"f",
                                     nil];
-    if (![result isEqual:expectedResult])
-    {
-        STFail(@"Failed to parse JSON", nil);
-    }
+    STAssertEqualObjects(result, expectedResult, @"Failed to parse JSON", nil);
 }
 
 - (void)testEBNF
@@ -675,22 +617,22 @@
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"a"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"b"]];
     CPTokenStream *tokenStream = [tokeniser tokenise:@"baaa"];
-    NSString *starGrammarString = @"A ::= \"b\"\"a\"*;";
+    NSString *starGrammarString = @"A ::= 'b''a'*;";
     CPGrammar *starGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:starGrammarString];
     CPParser *starParser = [CPLALR1Parser parserWithGrammar:starGrammar];
     CPSyntaxTree *starTree = [starParser parse:tokenStream];
     tokenStream = [tokeniser tokenise:@"baaa"];
-    NSString *plusGrammarString = @"A ::= \"b\"\"a\"+;";
+    NSString *plusGrammarString = @"A ::= 'b''a'+;";
     CPGrammar *plusGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:plusGrammarString];
     CPParser *plusParser = [CPLALR1Parser parserWithGrammar:plusGrammar];
     CPSyntaxTree *plusTree = [plusParser parse:tokenStream];
     tokenStream = [tokeniser tokenise:@"baaa"];
-    NSString *queryGrammarString = @"A ::= \"b\"\"a\"\"a\"\"a\"\"a\"?;";
+    NSString *queryGrammarString = @"A ::= 'b''a''a''a''a'?;";
     CPGrammar *queryGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:queryGrammarString];
     CPParser *queryParser = [CPLALR1Parser parserWithGrammar:queryGrammar];
     CPSyntaxTree *queryTree = [queryParser parse:tokenStream];
     tokenStream = [tokeniser tokenise:@"baaab"];
-    NSString *parenGrammarString = @"A ::= \"b\"(\"a\")*\"b\";";
+    NSString *parenGrammarString = @"A ::= 'b'('a')*'b';";
     CPGrammar *parenGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:parenGrammarString];
     CPParser *parenParser = [CPLALR1Parser parserWithGrammar:parenGrammar];
     CPSyntaxTree *parenTree = [parenParser parse:tokenStream];
@@ -747,19 +689,14 @@
     CPTokenStream *tokenStream = [mapCssTokeniser tokenise:mapCssInput];
     CPTokenStream *tokenStream2 = [mapCssTokeniser2 tokenise:mapCssInput];
     
-    if (![tokenStream isEqual:tokenStream2])
-    {
-        STFail(@"Failed to encode and decode MapCSSTokeniser", nil);
-    }
+    STAssertEqualObjects(tokenStream, tokenStream2, @"Failed to encode and decode MapCSSTokeniser", nil);
     
     d = [NSKeyedArchiver archivedDataWithRootObject:mapCssParser];
     CPParser *mapCssParser2 = [NSKeyedUnarchiver unarchiveObjectWithData:d];
     CPSyntaxTree *tree = [mapCssParser2 parse:tokenStream];
     
-    if (nil == tree)
-    {
-        STFail(@"Failed to encode and decode MapCSSParser", nil);
-    }
+    STAssertNotNil(tree, @"Failed to encode and decode MapCSSParser", nil);
+    
     [self tearDownMapCSS];
 }
     

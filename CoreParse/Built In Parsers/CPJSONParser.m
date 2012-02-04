@@ -81,23 +81,23 @@
         
         CPGrammar *jsonGrammar = [CPGrammar grammarWithStart:@"value"
                                               backusNaurForm:
-                                  @"0  value    ::= \"String\";"
-                                  @"1  value    ::= \"Number\";"
+                                  @"0  value    ::= 'String';"
+                                  @"1  value    ::= 'Number';"
                                   @"2  value    ::= <object>;"
                                   @"3  value    ::= <array>;"
                                   @"4  value    ::= <boolean>;"
-                                  @"5  value    ::= \"null\";"
-                                  @"6  object   ::= \"{\" \"}\";"
-                                  @"7  object   ::= \"{\" <members> \"}\";"
+                                  @"5  value    ::= 'null';"
+                                  @"6  object   ::= '{' '}';"
+                                  @"7  object   ::= '{' <members> '}';"
                                   @"8  members  ::= <pair>;"
-                                  @"9  members  ::= <pair> \",\" <members>;"
-                                  @"10 pair     ::= \"String\" \":\" <value>;"
-                                  @"11 array    ::= \"[\" \"]\";"
-                                  @"12 array    ::= \"[\" <elements> \"]\";"
+                                  @"9  members  ::= <pair> ',' <members>;"
+                                  @"10 pair     ::= 'String' ':' <value>;"
+                                  @"11 array    ::= '[' ']';"
+                                  @"12 array    ::= '[' <elements> ']';"
                                   @"13 elements ::= <value>;"
-                                  @"14 elements ::= <value> \",\" <elements>;"
-                                  @"15 boolean  ::= \"true\";"
-                                  @"16 boolean  ::= \"false\";"];
+                                  @"14 elements ::= <value> ',' <elements>;"
+                                  @"15 boolean  ::= 'true';"
+                                  @"16 boolean  ::= 'false';"];
         jsonParser = [[CPSLRParser parserWithGrammar:jsonGrammar] retain];
         [jsonParser setDelegate:self];
     }

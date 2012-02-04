@@ -206,6 +206,7 @@
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@";"]];
     [tokeniser addTokenRecogniser:[CPNumberRecogniser integerRecogniser]];
     [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapeSequence:@"\\" name:@"String"]];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapeSequence:@"\\" name:@"String"]];
     [tokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniser]];
     [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
     [tokeniser setDelegate:del];
