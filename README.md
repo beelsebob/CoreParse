@@ -60,9 +60,9 @@ We construct parsers by specifying their grammar.  We can construct a grammar si
     NSString *expressionGrammar =
         @"Expression ::= <Term>     | <Expression> <AddOp> <Term>;"
         @"Term       ::= <Factor>   | <Term>       <MulOp> <Factor>;"
-        @"Factor     ::= \"Number\" | \"(\" <Expression> \")\";"
-        @"AddOp      ::= \"+\" | \"-\";"
-        @"MulOp      ::= \"*\" | \"/\";";
+        @"Factor     ::= 'Number' | '(' <Expression> ')';"
+        @"AddOp      ::= '+' | '-';"
+        @"MulOp      ::= '*' | '/';";
     CPGrammar *grammar = [CPGrammar grammarWithStart:@"Expression" backusNaurForm:expressionGrammar];
     CPParser *parser = [CPLALR1Parser parserWithGrammar:grammar];
     [parser setDelegate:self];
