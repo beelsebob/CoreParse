@@ -38,6 +38,20 @@
  */
 - (NSArray *)tokeniser:(CPTokeniser *)tokeniser willProduceToken:(CPToken *)token;
 
+@optional
+
+/**
+ * This method is called when no recogniser matches a token at the current position in the input stream.  You must provide a new location in the input stream to start
+ * tokenising from again, or NSNotFound to stop the tokeniser.  You may optionally provide an error message to attach to a CPErrorToken.
+ *
+ * @param tokeniser The CPTokeniser that could not match any token in the input stream.
+ * @param input The input given to the tokeniser.
+ * @param position The position in the input stream at which the tokeniser failed.
+ * @param errorMessage A pointer to which you can write to provide an error message to output in an error token.
+ * @return Return a new position in the input to begin tokenising from.  Return NSNotFound to request that the tokeniser stops.
+ */
+- (NSUInteger)tokeniser:(CPTokeniser *)tokeniser didNotFindTokenOnInput:(NSString *)input position:(NSUInteger)position error:(NSString **)errorMessage;
+
 @end
 
 /**

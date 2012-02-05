@@ -18,6 +18,7 @@
 #import "CPQuotedRecogniser.h"
 
 #import "CPToken.h"
+#import "CPErrorToken.h"
 #import "CPEOFToken.h"
 #import "CPKeywordToken.h"
 #import "CPNumberToken.h"

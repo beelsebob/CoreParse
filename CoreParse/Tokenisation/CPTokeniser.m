@@ -9,6 +9,7 @@
 #import "CPTokeniser.h"
 
 #import "CPEOFToken.h"
+#import "CPErrorToken.h"
 
 @interface CPTokeniser ()
 {
@@ -104,10 +105,9 @@
     NSUInteger inputLength = [input length];
     NSArray *recs = [self tokenRecognisers];
     
-    BOOL recognised = YES;
-    while (currentTokenOffset < inputLength && recognised)
+    while (currentTokenOffset < inputLength)
     {
-        recognised = NO;
+        BOOL recognised = NO;
         for (id<CPTokenRecogniser> recogniser in recs)
         {
             NSUInteger lastTokenOffset = currentTokenOffset;
@@ -133,6 +133,26 @@
                     recognised = YES;
                     break;
                 }
+            }
+        }
+        
+        if (!recognised)
+        {
+            if ([delegate respondsToSelector:@selector(tokeniser:didNotFindTokenOnInput:position:error:)])
+            {
+                NSString *err = nil;
+                currentTokenOffset = [delegate tokeniser:self didNotFindTokenOnInput:input position:currentTokenOffset error:&err];
+                [self addToken:[CPErrorToken errorWithMessage:err] toStream:stream];
+                if (NSNotFound == currentTokenOffset)
+                {
+                    break;
+                }
+            }
+            else
+            {
+                [self addToken:[CPErrorToken errorWithMessage:[NSString stringWithFormat:@"The tokeniser encountered an invalid input \"%@\", and could not handle it.  Implement -tokeniser:didNotFindTokenAtInputPosition:error: to make this do something more useful", [input substringWithRange:NSMakeRange(currentTokenOffset, MIN((NSUInteger)10, [input length] - currentTokenOffset))]]]
+                                                     toStream:stream];
+                break;
             }
         }
     }

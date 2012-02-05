@@ -125,6 +125,10 @@
 		1F9F83A713B732AC006E939D /* Term.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83A513B732AC006E939D /* Term.m */; };
 		1F9F83AC13B7CABA006E939D /* CPRHSItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9F83AA13B7CAB9006E939D /* CPRHSItem.h */; };
 		1F9F83AD13B7CABA006E939D /* CPRHSItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83AB13B7CABA006E939D /* CPRHSItem.m */; };
+		1FA68DA014DE98C4005519B9 /* CPErrorToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA68D9E14DE98C4005519B9 /* CPErrorToken.h */; };
+		1FA68DA114DE98C4005519B9 /* CPErrorToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA68D9F14DE98C4005519B9 /* CPErrorToken.m */; };
+		1FA68DA514DE9D3D005519B9 /* CPTestErrorHandlingDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA68DA314DE9D3D005519B9 /* CPTestErrorHandlingDelegate.h */; };
+		1FA68DA614DE9D3D005519B9 /* CPTestErrorHandlingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA68DA414DE9D3D005519B9 /* CPTestErrorHandlingDelegate.m */; };
 		1FB3EB24132BA02C00ACC453 /* CPTestEvaluatorDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB22132BA02C00ACC453 /* CPTestEvaluatorDelegate.h */; };
 		1FB3EB25132BA02C00ACC453 /* CPTestEvaluatorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB23132BA02C00ACC453 /* CPTestEvaluatorDelegate.m */; };
 		1FB3EB2C132BB2F200ACC453 /* CPLR1Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB2A132BB2E600ACC453 /* CPLR1Parser.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -247,6 +251,10 @@
 		1F9F83A513B732AC006E939D /* Term.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Term.m; sourceTree = "<group>"; };
 		1F9F83AA13B7CAB9006E939D /* CPRHSItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRHSItem.h; sourceTree = "<group>"; };
 		1F9F83AB13B7CABA006E939D /* CPRHSItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRHSItem.m; sourceTree = "<group>"; };
+		1FA68D9E14DE98C4005519B9 /* CPErrorToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPErrorToken.h; sourceTree = "<group>"; };
+		1FA68D9F14DE98C4005519B9 /* CPErrorToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPErrorToken.m; sourceTree = "<group>"; };
+		1FA68DA314DE9D3D005519B9 /* CPTestErrorHandlingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTestErrorHandlingDelegate.h; sourceTree = "<group>"; };
+		1FA68DA414DE9D3D005519B9 /* CPTestErrorHandlingDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTestErrorHandlingDelegate.m; sourceTree = "<group>"; };
 		1FB3EB22132BA02C00ACC453 /* CPTestEvaluatorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTestEvaluatorDelegate.h; sourceTree = "<group>"; };
 		1FB3EB23132BA02C00ACC453 /* CPTestEvaluatorDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTestEvaluatorDelegate.m; sourceTree = "<group>"; };
 		1FB3EB2A132BB2E600ACC453 /* CPLR1Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLR1Parser.h; sourceTree = "<group>"; };
@@ -393,6 +401,8 @@
 				1FB81321132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.m */,
 				1FB81324132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.h */,
 				1FB81325132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.m */,
+				1FA68DA314DE9D3D005519B9 /* CPTestErrorHandlingDelegate.h */,
+				1FA68DA414DE9D3D005519B9 /* CPTestErrorHandlingDelegate.m */,
 				1F9F839F13B731F3006E939D /* Expression.h */,
 				1F9F83A013B731F3006E939D /* Expression.m */,
 				1F9F83A413B732AC006E939D /* Term.h */,
@@ -468,6 +478,8 @@
 				1F0E894B1306795600537D04 /* CPToken.m */,
 				1F4683901306B71C00407491 /* CPEOFToken.h */,
 				1F4683911306B71D00407491 /* CPEOFToken.m */,
+				1FA68D9E14DE98C4005519B9 /* CPErrorToken.h */,
+				1FA68D9F14DE98C4005519B9 /* CPErrorToken.m */,
 				1F46838C1306B45400407491 /* CPKeywordToken.h */,
 				1F46838D1306B45500407491 /* CPKeywordToken.m */,
 				1F4683981306C22800407491 /* CPNumberToken.h */,
@@ -598,6 +610,8 @@
 				1F9F83A613B732AC006E939D /* Term.h in Headers */,
 				1F9F83AC13B7CABA006E939D /* CPRHSItem.h in Headers */,
 				1FC00D5014544EDC00DC8D35 /* CPRHSItemResult.h in Headers */,
+				1FA68DA014DE98C4005519B9 /* CPErrorToken.h in Headers */,
+				1FA68DA514DE9D3D005519B9 /* CPTestErrorHandlingDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -845,6 +859,8 @@
 				1F9F83A713B732AC006E939D /* Term.m in Sources */,
 				1F9F83AD13B7CABA006E939D /* CPRHSItem.m in Sources */,
 				1FC00D5114544EDC00DC8D35 /* CPRHSItemResult.m in Sources */,
+				1FA68DA114DE98C4005519B9 /* CPErrorToken.m in Sources */,
+				1FA68DA614DE9D3D005519B9 /* CPTestErrorHandlingDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

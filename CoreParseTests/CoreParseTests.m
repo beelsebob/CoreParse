@@ -13,6 +13,7 @@
 #import "CPTestEvaluatorDelegate.h"
 #import "CPTestWhiteSpaceIgnoringDelegate.h"
 #import "CPTestMapCSSTokenisingDelegate.h"
+#import "CPTestErrorHandlingDelegate.h"
 
 #import "Expression.h"
 
@@ -144,7 +145,7 @@
     STAssertEqualObjects(tokenStream, expectedTokenStream, @"Incorrect tokenisation of integers", nil);
 
     tokenStream = [tokeniser tokenise:@"1234abcd"];
-    expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPNumberToken tokenWithNumber:[NSNumber numberWithInteger:1234]], nil]];
+    expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPNumberToken tokenWithNumber:[NSNumber numberWithInteger:1234]], [CPErrorToken errorWithMessage:nil], nil]];
     STAssertEqualObjects(tokenStream, expectedTokenStream, @"Incorrect tokenisation of integers with additional cruft", nil);
 }
 
@@ -157,7 +158,7 @@
     STAssertEqualObjects(tokenStream, expectedTokenStream, @"Incorrect tokenisation of floats", nil);
     
     tokenStream = [tokeniser tokenise:@"1234"];
-    expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray array]];
+    expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObject:[CPErrorToken errorWithMessage:nil]]];
     STAssertEqualObjects(tokenStream, expectedTokenStream, @"Tokenising floats recognises integers as well", nil);
 }
 
@@ -171,7 +172,7 @@
     STAssertEqualObjects(tokenStream, expectedTokenStream, @"Incorrect tokenisation of numbers", nil);
     
     tokenStream = [tokeniser tokenise:@"1234abcd"];
-    expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPNumberToken tokenWithNumber:[NSNumber numberWithInteger:1234]], nil]];
+    expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPNumberToken tokenWithNumber:[NSNumber numberWithInteger:1234]], [CPErrorToken errorWithMessage:nil], nil]];
     STAssertEqualObjects(tokenStream, expectedTokenStream, @"Incorrect tokenisation of numbers with additional cruft", nil);
 }
 
@@ -273,8 +274,22 @@
     tokeniser = [[[CPTokeniser alloc] init] autorelease];
     [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapeSequence:nil maximumLength:1 name:@"Character"]];
     tokenStream = [tokeniser tokenise:@"'a''bc'"];
-    expectdTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@"a" quotedWith:@"'" name:@"Character"], nil]];
+    expectdTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@"a" quotedWith:@"'" name:@"Character"], [CPErrorToken errorWithMessage:nil], nil]];
     STAssertEqualObjects(tokenStream, expectdTokenStream, @"Failed to correctly tokenise characters", nil);
+}
+
+- (void)testTokeniserError
+{
+    CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" name:@"Comment"]];
+    CPTokenStream *tokenStream = [tokeniser tokenise:@"/* abcde ghi */ abc /* def */"];
+    CPTokenStream *expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@" abcde ghi " quotedWith:@"/*" name:@"Comment"], [CPErrorToken errorWithMessage:nil], nil]];
+    STAssertEqualObjects(tokenStream, expectedTokenStream, @"Inserting error token and bailing failed", nil);
+    
+    [tokeniser setDelegate:[[[CPTestErrorHandlingDelegate alloc] init] autorelease]];
+    tokenStream = [tokeniser tokenise:@"/* abcde ghi */ abc /* def */"];
+    expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPQuotedToken content:@" abcde ghi " quotedWith:@"/*" name:@"Comment"], [CPErrorToken errorWithMessage:nil], [CPQuotedToken content:@" def " quotedWith:@"/*" name:@"Comment"], [CPEOFToken eof], nil]];
+    STAssertEqualObjects(tokenStream, expectedTokenStream, @"Inserting error token and continuing according to delegate failed.", nil);
 }
 
 - (void)testMapCSSTokenisation
