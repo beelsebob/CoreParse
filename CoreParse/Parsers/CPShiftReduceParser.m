@@ -151,7 +151,14 @@
 
 - (void)error:(CPTokenStream *)tokenStream
 {
-    NSLog(@"Parse error on input %@", tokenStream);
+    if ([[self delegate] respondsToSelector:@selector(parser:didEncounterErrorOnInput:)])
+    {
+        [[self delegate] parser:self didEncounterErrorOnInput:tokenStream];
+    }
+    else
+    {
+        NSLog(@"Parse error on input %@", tokenStream);
+    }
 }
 
 - (CPShiftReduceAction *)actionForState:(NSUInteger)state token:(CPToken *)token

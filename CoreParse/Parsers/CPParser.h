@@ -52,6 +52,16 @@
  */
 - (id)parser:(CPParser *)parser didProduceSyntaxTree:(CPSyntaxTree *)syntaxTree;
 
+@optional
+
+/**
+ * Called when the parser encounters a token for which it can not shift, reduce or accept.
+ * 
+ * @param parser      The parser which produced the syntax tree.
+ * @param inputStream The input stream containing the token the parser could not cope with.
+ */
+- (void)parser:(CPParser *)parser didEncounterErrorOnInput:(CPTokenStream *)inputStream;
+
 @end
 
 /**

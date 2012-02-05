@@ -714,5 +714,20 @@
     
     [self tearDownMapCSS];
 }
+
+- (void)testParserErrors
+{
+    CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"a"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"b"]];
+    CPTokenStream *tokenStream = [tokeniser tokenise:@"baab"];
+    NSString *starGrammarString = @"A ::= 'b''a'*;";
+    CPGrammar *starGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:starGrammarString];
+    CPParser *starParser = [CPLALR1Parser parserWithGrammar:starGrammar];
+    CPTestErrorHandlingDelegate *errorDelegate = [[[CPTestErrorHandlingDelegate alloc] init] autorelease];
+    [starParser setDelegate:errorDelegate];
+    [starParser parse:tokenStream];
+    STAssertTrue([errorDelegate hasEncounteredError], @"Error did not get reported to delegate", nil);
+}
     
 @end

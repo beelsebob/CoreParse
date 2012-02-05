@@ -10,6 +10,8 @@
 
 @implementation CPTestErrorHandlingDelegate
 
+@synthesize hasEncounteredError;
+
 - (BOOL)tokeniser:(CPTokeniser *)tokeniser shouldConsumeToken:(CPToken *)token
 {
     return YES;
@@ -25,6 +27,16 @@
     *errorMessage = @"Found something that wasn't a comment";
     NSRange nextSlashStar = [input rangeOfString:@"/*" options:NSLiteralSearch range:NSMakeRange(position, [input length] - position)];
     return nextSlashStar.location;
+}
+
+- (id)parser:(CPParser *)parser didProduceSyntaxTree:(CPSyntaxTree *)syntaxTree
+{
+    return syntaxTree;
+}
+
+- (void)parser:(CPParser *)parser didEncounterErrorOnInput:(CPTokenStream *)inputStream
+{
+    hasEncounteredError = YES;
 }
 
 @end
