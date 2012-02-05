@@ -12,6 +12,7 @@
 #import "CPSyntaxTree.h"
 
 #import "CPTokenStream.h"
+#import "CPRecoveryAction.h"
 
 @class CPParser;
 
@@ -59,8 +60,10 @@
  * 
  * @param parser      The parser which produced the syntax tree.
  * @param inputStream The input stream containing the token the parser could not cope with.
+ * @return An action to take to recover from the parse error or nil.  If the action is nil, and the problematic token is a CPErrorToken
+ *         the parse stack is unwound a step for the parent rule to deal with the error.
  */
-- (void)parser:(CPParser *)parser didEncounterErrorOnInput:(CPTokenStream *)inputStream;
+- (CPRecoveryAction *)parser:(CPParser *)parser didEncounterErrorOnInput:(CPTokenStream *)inputStream;
 
 @end
 

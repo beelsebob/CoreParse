@@ -8,6 +8,8 @@
 
 #import "CPShiftReduceParserProtectedMethods.h"
 
+#import "CPErrorToken.h"
+
 #import "CPShiftReduceAction.h"
 #import "CPShiftReduceState.h"
 
@@ -20,7 +22,7 @@
 - (CPShiftReduceAction *)actionForState:(NSUInteger)state token:(CPToken *)token;
 - (NSUInteger)gotoForState:(NSUInteger)state rule:(CPRule *)rule;
 
-- (void)error:(CPTokenStream *)tokenStream;
+- (CPRecoveryAction *)error:(CPTokenStream *)tokenStream;
 
 @end
 
@@ -87,77 +89,117 @@
 - (id)parse:(CPTokenStream *)tokenStream
 {
     NSMutableArray *stateStack = [NSMutableArray arrayWithObject:[CPShiftReduceState shiftReduceStateWithObject:nil state:0]];
-    CPToken *nextToken = [tokenStream popToken];
+    CPToken *nextToken = [[tokenStream peekToken] retain];
+    BOOL hasErrorToken = NO;
     while (1)
     {
-        CPShiftReduceAction *action = [self actionForState:[(CPShiftReduceState *)[stateStack lastObject] state] token:nextToken];
-        
-        if ([action isShiftAction])
+        @autoreleasepool
         {
-            [stateStack addObject:[CPShiftReduceState shiftReduceStateWithObject:nextToken state:[action newState]]];
-            nextToken = [tokenStream popToken];
-        }
-        else if ([action isReduceAction])
-        {
-            CPRule *reductionRule = [action reductionRule];
-            NSUInteger numElements = [[reductionRule rightHandSideElements] count];
-            NSMutableArray *components = [NSMutableArray arrayWithCapacity:numElements];
-            NSRange stateStackRange = NSMakeRange([stateStack count] - numElements, numElements);
-            [stateStack enumerateObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:stateStackRange]
-                                          options:NSEnumerationReverse
-                                       usingBlock:^(CPShiftReduceState *state, NSUInteger idx, BOOL *stop)
-             {
-                 id o = [state object];
-                 if ([o isKindOfClass:[CPRHSItemResult class]])
-                 {
-                     o = [(CPRHSItemResult *)o contents];
-                 }
-                 [components insertObject:o atIndex:0];
-             }];
-            [stateStack removeObjectsInRange:stateStackRange];
-                        
-            CPSyntaxTree *tree = [CPSyntaxTree syntaxTreeWithRule:reductionRule children:components];
-            id result = nil;
+            CPShiftReduceAction *action = [self actionForState:[(CPShiftReduceState *)[stateStack lastObject] state] token:nextToken];
             
-            Class c = [reductionRule representitiveClass];
-            if (nil != c)
+            if ([action isShiftAction])
             {
-                result = [(id<CPParseResult>)[c alloc] initWithSyntaxTree:tree];
-            }
-            
-            if (nil == result)
-            {
-                result = tree;
-                if ([[self delegate] respondsToSelector:@selector(parser:didProduceSyntaxTree:)])
+                [stateStack addObject:[CPShiftReduceState shiftReduceStateWithObject:nextToken state:[action newState]]];
+                if (!hasErrorToken)
                 {
-                    result = [[self delegate] parser:self didProduceSyntaxTree:tree];
+                    [tokenStream popToken];
+                }
+                [nextToken release];
+                nextToken = [[tokenStream peekToken] retain];
+                hasErrorToken = NO;
+            }
+            else if ([action isReduceAction])
+            {
+                CPRule *reductionRule = [action reductionRule];
+                NSUInteger numElements = [[reductionRule rightHandSideElements] count];
+                NSMutableArray *components = [NSMutableArray arrayWithCapacity:numElements];
+                NSRange stateStackRange = NSMakeRange([stateStack count] - numElements, numElements);
+                [stateStack enumerateObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:stateStackRange]
+                                              options:NSEnumerationReverse
+                                           usingBlock:^(CPShiftReduceState *state, NSUInteger idx, BOOL *stop)
+                 {
+                     id o = [state object];
+                     if ([o isKindOfClass:[CPRHSItemResult class]])
+                     {
+                         o = [(CPRHSItemResult *)o contents];
+                     }
+                     [components insertObject:o atIndex:0];
+                 }];
+                [stateStack removeObjectsInRange:stateStackRange];
+                
+                CPSyntaxTree *tree = [CPSyntaxTree syntaxTreeWithRule:reductionRule children:components];
+                id result = nil;
+                
+                Class c = [reductionRule representitiveClass];
+                if (nil != c)
+                {
+                    result = [(id<CPParseResult>)[c alloc] initWithSyntaxTree:tree];
+                }
+                
+                if (nil == result)
+                {
+                    result = tree;
+                    if ([[self delegate] respondsToSelector:@selector(parser:didProduceSyntaxTree:)])
+                    {
+                        result = [[self delegate] parser:self didProduceSyntaxTree:tree];
+                    }
+                }
+                
+                NSUInteger newState = [self gotoForState:[(CPShiftReduceState *)[stateStack lastObject] state] rule:reductionRule];
+                [stateStack addObject:[CPShiftReduceState shiftReduceStateWithObject:result state:newState]];
+            }
+            else if ([action isAccept])
+            {
+                return [(CPShiftReduceState *)[stateStack lastObject] object];
+            }
+            else
+            {
+                CPRecoveryAction *recoveryAction = [self error:tokenStream];
+                if (nil == recoveryAction)
+                {
+                    if ([nextToken isKindOfClass:[CPErrorToken class]] && [stateStack count] > 0)
+                    {
+                        [stateStack removeLastObject];
+                    }
+                    else
+                    {
+                        return nil;
+                    }
+                }
+                else
+                {
+                    switch ([recoveryAction recoveryType])
+                    {
+                        case CPRecoveryTypeAddToken:
+                            [nextToken release];
+                            nextToken = [[recoveryAction additionalToken] retain];
+                            hasErrorToken = YES;
+                            break;
+                        case CPRecoveryTypeRemoveToken:
+                            [tokenStream popToken];
+                            [nextToken release];
+                            nextToken = [[tokenStream peekToken] retain];
+                            hasErrorToken = NO;
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
-            
-            NSUInteger newState = [self gotoForState:[(CPShiftReduceState *)[stateStack lastObject] state] rule:reductionRule];
-            [stateStack addObject:[CPShiftReduceState shiftReduceStateWithObject:result state:newState]];
-        }
-        else if ([action isAccept])
-        {
-            return [(CPShiftReduceState *)[stateStack lastObject] object];
-        }
-        else
-        {
-            [self error:tokenStream];
-            return nil;
         }
     }
 }
 
-- (void)error:(CPTokenStream *)tokenStream
+- (CPRecoveryAction *)error:(CPTokenStream *)tokenStream
 {
     if ([[self delegate] respondsToSelector:@selector(parser:didEncounterErrorOnInput:)])
     {
-        [[self delegate] parser:self didEncounterErrorOnInput:tokenStream];
+        return [[self delegate] parser:self didEncounterErrorOnInput:tokenStream];
     }
     else
     {
         NSLog(@"Parse error on input %@", tokenStream);
+        return nil;
     }
 }
 

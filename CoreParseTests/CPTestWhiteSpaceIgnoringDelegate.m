@@ -25,4 +25,11 @@
     return [NSArray arrayWithObject:token];
 }
 
+- (NSUInteger)tokeniser:(CPTokeniser *)tokeniser didNotFindTokenOnInput:(NSString *)input position:(NSUInteger)position error:(NSString **)errorMessage
+{
+    *errorMessage = @"Found something that wasn't a numeric expression";
+    NSRange nextSafeStuff = [input rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"1234567890+*()"] options:NSLiteralSearch range:NSMakeRange(position, [input length] - position)];
+    return nextSafeStuff.location;
+}
+
 @end

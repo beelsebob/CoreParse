@@ -70,17 +70,14 @@ typedef enum
 
 - (CPToken *)peekToken
 {
-    BOOL lockAquired = [readWriteLock tryLockWhenCondition:CPTokenStreamAvailable];
+    [readWriteLock lockWhenCondition:CPTokenStreamAvailable];
     CPToken *token = nil;
     
-    if (lockAquired)
+    if ([tokens count] > 0)
     {
-        if ([tokens count] > 0)
-        {
-            token = [[[tokens objectAtIndex:0] retain] autorelease];
-        }
-        [readWriteLock unlockWithCondition:CPTokenStreamAvailable];
+        token = [[[tokens objectAtIndex:0] retain] autorelease];
     }
+    [readWriteLock unlockWithCondition:CPTokenStreamAvailable];
     
     return token;
 }

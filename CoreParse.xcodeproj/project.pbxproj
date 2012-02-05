@@ -73,6 +73,10 @@
 		1F530B921322814000F52EB5 /* CPRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B901322813F00F52EB5 /* CPRule.m */; };
 		1F6D44901348CC9500E982C7 /* CPLALR1Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F6D448E1348CC9500E982C7 /* CPLALR1Parser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F6D44911348CC9600E982C7 /* CPLALR1Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D448F1348CC9500E982C7 /* CPLALR1Parser.m */; };
+		1F893A1F14DEEBFC00316FF7 /* CPRecoveryAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F893A1D14DEEBFC00316FF7 /* CPRecoveryAction.h */; };
+		1F893A2014DEEBFC00316FF7 /* CPRecoveryAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F893A1E14DEEBFC00316FF7 /* CPRecoveryAction.m */; };
+		1F893A2314DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F893A2114DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.h */; };
+		1F893A2414DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F893A2214DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.m */; };
 		1F928180145C11050033BC34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE77D551375AE6F00879A41 /* Foundation.framework */; };
 		1F92818E145C11050033BC34 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F92818D145C11050033BC34 /* SenTestingKit.framework */; };
 		1F928190145C11050033BC34 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F92818F145C11050033BC34 /* UIKit.framework */; };
@@ -241,6 +245,10 @@
 		1F530B901322813F00F52EB5 /* CPRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRule.m; sourceTree = "<group>"; };
 		1F6D448E1348CC9500E982C7 /* CPLALR1Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLALR1Parser.h; sourceTree = "<group>"; };
 		1F6D448F1348CC9500E982C7 /* CPLALR1Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLALR1Parser.m; sourceTree = "<group>"; };
+		1F893A1D14DEEBFC00316FF7 /* CPRecoveryAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRecoveryAction.h; sourceTree = "<group>"; };
+		1F893A1E14DEEBFC00316FF7 /* CPRecoveryAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRecoveryAction.m; sourceTree = "<group>"; };
+		1F893A2114DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTestErrorEvaluatorDelegate.h; sourceTree = "<group>"; };
+		1F893A2214DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTestErrorEvaluatorDelegate.m; sourceTree = "<group>"; };
 		1F92817F145C11050033BC34 /* libCoreParse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoreParse.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F92818C145C11050033BC34 /* CoreParseTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreParseTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F92818D145C11050033BC34 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -397,6 +405,8 @@
 				1F0E8911130462F300537D04 /* Supporting Files */,
 				1FB3EB22132BA02C00ACC453 /* CPTestEvaluatorDelegate.h */,
 				1FB3EB23132BA02C00ACC453 /* CPTestEvaluatorDelegate.m */,
+				1F893A2114DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.h */,
+				1F893A2214DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.m */,
 				1FB81320132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.h */,
 				1FB81321132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.m */,
 				1FB81324132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.h */,
@@ -539,6 +549,7 @@
 				1F530B7C13215A6F00F52EB5 /* CPParser.h */,
 				1F530B7D13215A6F00F52EB5 /* CPParser.m */,
 				1F3881DE1322AD8E000C8876 /* CPShiftReduceParsers */,
+				1F893A1C14DEEBD900316FF7 /* Error Recovery */,
 			);
 			path = Parsers;
 			sourceTree = "<group>";
@@ -550,6 +561,15 @@
 				1F530B8613216A1A00F52EB5 /* CPSyntaxTree.m */,
 			);
 			path = "Syntax Tree";
+			sourceTree = "<group>";
+		};
+		1F893A1C14DEEBD900316FF7 /* Error Recovery */ = {
+			isa = PBXGroup;
+			children = (
+				1F893A1D14DEEBFC00316FF7 /* CPRecoveryAction.h */,
+				1F893A1E14DEEBFC00316FF7 /* CPRecoveryAction.m */,
+			);
+			path = "Error Recovery";
 			sourceTree = "<group>";
 		};
 		1FC18284139BA4460027F597 /* CompanionGuides */ = {
@@ -612,6 +632,8 @@
 				1FC00D5014544EDC00DC8D35 /* CPRHSItemResult.h in Headers */,
 				1FA68DA014DE98C4005519B9 /* CPErrorToken.h in Headers */,
 				1FA68DA514DE9D3D005519B9 /* CPTestErrorHandlingDelegate.h in Headers */,
+				1F893A1F14DEEBFC00316FF7 /* CPRecoveryAction.h in Headers */,
+				1F893A2314DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -861,6 +883,8 @@
 				1FC00D5114544EDC00DC8D35 /* CPRHSItemResult.m in Sources */,
 				1FA68DA114DE98C4005519B9 /* CPErrorToken.m in Sources */,
 				1FA68DA614DE9D3D005519B9 /* CPTestErrorHandlingDelegate.m in Sources */,
+				1F893A2014DEEBFC00316FF7 /* CPRecoveryAction.m in Sources */,
+				1F893A2414DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

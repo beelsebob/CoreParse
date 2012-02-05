@@ -11,6 +11,7 @@
 #import "CoreParse.h"
 
 #import "CPTestEvaluatorDelegate.h"
+#import "CPTestErrorEvaluatorDelegate.h"
 #import "CPTestWhiteSpaceIgnoringDelegate.h"
 #import "CPTestMapCSSTokenisingDelegate.h"
 #import "CPTestErrorHandlingDelegate.h"
@@ -720,14 +721,51 @@
     CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"a"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"b"]];
-    CPTokenStream *tokenStream = [tokeniser tokenise:@"baab"];
     NSString *starGrammarString = @"A ::= 'b''a'*;";
     CPGrammar *starGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:starGrammarString];
     CPParser *starParser = [CPLALR1Parser parserWithGrammar:starGrammar];
+    
+    CPTokenStream *faultyTokenStream = [tokeniser tokenise:@"baab"];
+    CPTokenStream *corretTokenStream = [tokeniser tokenise:@"baa"];
     CPTestErrorHandlingDelegate *errorDelegate = [[[CPTestErrorHandlingDelegate alloc] init] autorelease];
     [starParser setDelegate:errorDelegate];
-    [starParser parse:tokenStream];
+    CPSyntaxTree *faultyTree = [starParser parse:faultyTokenStream];
     STAssertTrue([errorDelegate hasEncounteredError], @"Error did not get reported to delegate", nil);
-}
     
+    CPSyntaxTree *correctTree = [starParser parse:corretTokenStream];
+    STAssertEqualObjects(faultyTree, correctTree, @"Error in input stream was not correctly dealt with", nil);
+}
+
+- (void)testErrorRecovery
+{
+    CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
+    [tokeniser addTokenRecogniser:[CPNumberRecogniser integerRecogniser]];
+    [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"+"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"*"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"("]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@")"]];
+    [tokeniser setDelegate:[[[CPTestWhiteSpaceIgnoringDelegate alloc] init] autorelease]];
+    CPTokenStream *tokenStream = [tokeniser tokenise:@"5 + + (2 * error + 3) * 8"];
+    
+    NSString *testGrammar =
+      @"0 e ::= <t>;"
+      @"1 e ::= <e> '+' <t>;"
+      @"1 e ::= 'Error' '+' <t>;"
+      @"1 e ::= <e> '+' 'Error';"
+      @"2 t ::= <f>;"
+      @"3 t ::= <t> '*' <f>;"
+      @"3 t ::= 'Error' '*' <f>;"
+      @"3 t ::= <t> '*' 'Error';"
+      @"4 f ::= 'Number';"
+      @"5 f ::= '(' <e> ')';";
+    CPGrammar *grammar = [CPGrammar grammarWithStart:@"e" backusNaurForm:testGrammar];
+    
+    CPParser *parser = [CPSLRParser parserWithGrammar:grammar];
+    [parser setDelegate:[[[CPTestErrorEvaluatorDelegate alloc] init] autorelease]];
+    NSNumber *result = [parser parse:tokenStream];
+    
+    STAssertEquals([result intValue], 45, @"Parsed expression had incorrect value", nil);
+}
+
 @end

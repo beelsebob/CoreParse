@@ -34,9 +34,10 @@
     return syntaxTree;
 }
 
-- (void)parser:(CPParser *)parser didEncounterErrorOnInput:(CPTokenStream *)inputStream
+- (CPRecoveryAction *)parser:(CPParser *)parser didEncounterErrorOnInput:(CPTokenStream *)inputStream
 {
     hasEncounteredError = YES;
+    return [CPRecoveryAction recoveryActionDeletingCurrentToken];
 }
 
 @end

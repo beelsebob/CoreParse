@@ -31,6 +31,8 @@
 #import "CPRule.h"
 #import "CPGrammar.h"
 
+#import "CPRecoveryAction.h"
+
 #import "CPParser.h"
 #import "CPSLRParser.h"
 #import "CPLR1Parser.h"
