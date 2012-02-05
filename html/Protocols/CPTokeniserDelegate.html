@@ -38,6 +38,8 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
+	<option value="//api/name/tokeniser:didNotFindTokenOnInput:position:error:">&nbsp;&nbsp;&nbsp;&nbsp;- tokeniser:didNotFindTokenOnInput:position:error:</option>
+	
 	<option value="//api/name/tokeniser:shouldConsumeToken:">&nbsp;&nbsp;&nbsp;&nbsp;- tokeniser:shouldConsumeToken:</option>
 	
 	<option value="//api/name/tokeniser:willProduceToken:">&nbsp;&nbsp;&nbsp;&nbsp;- tokeniser:willProduceToken:</option>
@@ -69,6 +71,8 @@
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/tokeniser:didNotFindTokenOnInput:position:error:">tokeniser:didNotFindTokenOnInput:position:error:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/tokeniser:shouldConsumeToken:">tokeniser:shouldConsumeToken:</a></span></li>
 	
@@ -141,6 +145,14 @@
 	</span>
 	
 	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/tokeniser:didNotFindTokenOnInput:position:error:">&ndash;&nbsp;tokeniser:didNotFindTokenOnInput:position:error:</a></code>
+		<span class="tooltip"><p>This method is called when no recogniser matches a token at the current position in the input stream.  You must provide a new location in the input stream to start
+tokenising from again, or NSNotFound to stop the tokeniser.  You may optionally provide an error message to attach to a <a href="../Classes/CPErrorToken.html">CPErrorToken</a>.</p></span>
+	</span>
+	
+	
 </li>
 						</ul>
 						
@@ -157,6 +169,75 @@
 					<div class="section section-methods">
 						<a title="Instance Methods" name="instance_methods"></a>
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/tokeniser:didNotFindTokenOnInput:position:error:" title="tokeniser:didNotFindTokenOnInput:position:error:"></a>
+	<h3 class="subsubtitle method-title">tokeniser:didNotFindTokenOnInput:position:error:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>This method is called when no recogniser matches a token at the current position in the input stream.  You must provide a new location in the input stream to start
+tokenising from again, or NSNotFound to stop the tokeniser.  You may optionally provide an error message to attach to a <a href="../Classes/CPErrorToken.html">CPErrorToken</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (NSUInteger)tokeniser:(CPTokeniser *)<em>tokeniser</em> didNotFindTokenOnInput:(NSString *)<em>input</em> position:(NSUInteger)<em>position</em> error:(NSString **)<em>errorMessage</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>tokeniser</em></dt>
+			<dd><p>The <a href="../Classes/CPTokeniser.html">CPTokeniser</a> that could not match any token in the input stream.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>input</em></dt>
+			<dd><p>The input given to the tokeniser.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>position</em></dt>
+			<dd><p>The position in the input stream at which the tokeniser failed.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>errorMessage</em></dt>
+			<dd><p>A pointer to which you can write to provide an error message to output in an error token.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Return a new position in the input to begin tokenising from.  Return NSNotFound to request that the tokeniser stops.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>This method is called when no recogniser matches a token at the current position in the input stream.  You must provide a new location in the input stream to start
+tokenising from again, or NSNotFound to stop the tokeniser.  You may optionally provide an error message to attach to a <a href="../Classes/CPErrorToken.html">CPErrorToken</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPTokeniser.h</code><br />
+	</div>				
+	
+	
+</div>
 						
 						<div class="section-method">
 	<a name="//api/name/tokeniser:shouldConsumeToken:" title="tokeniser:shouldConsumeToken:"></a>
@@ -287,7 +368,7 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2011 Beelsebob. All rights reserved. (Last updated: 2011-11-05)</span><br />
+						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-02-05)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.4 (build 701)</a>.</span></p>
 						
