@@ -5,6 +5,9 @@ CoreParse is a parsing library for Mac OS X and iOS.  It supports a wide range o
 
 For full documentation see http://beelsebob.github.com/CoreParse.
 
+WARNING: CPTokenisers now do error handling, check your code has not broken.
+----------------------------------------------------------------------------
+
 Parsing Guide
 =============
 
