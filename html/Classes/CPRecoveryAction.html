@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>CPParser Class Reference</title>
+		<title>CPRecoveryAction Class Reference</title>
 		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
@@ -11,7 +11,7 @@
 	<body>
 		<header id="top_header">
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">CPParser Class Reference</h1>
+				<h1 class="hideInXcode">CPRecoveryAction Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -34,25 +34,27 @@
 	
 	<option value="properties">Properties</option>
 	
-	<option value="//api/name/delegate">&nbsp;&nbsp;&nbsp;&nbsp;delegate</option>
+	<option value="//api/name/additionalToken">&nbsp;&nbsp;&nbsp;&nbsp;additionalToken</option>
 	
-	<option value="//api/name/grammar">&nbsp;&nbsp;&nbsp;&nbsp;grammar</option>
+	<option value="//api/name/recoveryType">&nbsp;&nbsp;&nbsp;&nbsp;recoveryType</option>
 	
 	
 	
 	
 	<option value="class_methods">Class Methods</option>
 	
-	<option value="//api/name/parserWithGrammar:">&nbsp;&nbsp;&nbsp;&nbsp;+ parserWithGrammar:</option>
+	<option value="//api/name/recoveryActionDeletingCurrentToken">&nbsp;&nbsp;&nbsp;&nbsp;+ recoveryActionDeletingCurrentToken</option>
+	
+	<option value="//api/name/recoveryActionWithAdditionalToken:">&nbsp;&nbsp;&nbsp;&nbsp;+ recoveryActionWithAdditionalToken:</option>
 	
 	
 	
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/initWithGrammar:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithGrammar:</option>
+	<option value="//api/name/initWithAdditionalToken:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithAdditionalToken:</option>
 	
-	<option value="//api/name/parse:">&nbsp;&nbsp;&nbsp;&nbsp;- parse:</option>
+	<option value="//api/name/initWithDeleteAction">&nbsp;&nbsp;&nbsp;&nbsp;- initWithDeleteAction</option>
 	
 	
 	
@@ -70,14 +72,6 @@
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Creating and Initialising a Parser">Creating and Initialising a Parser</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Managing the Delegate">Managing the Delegate</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Finding out about the parsed Grammar">Finding out about the parsed Grammar</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Parsing a Token Stream.">Parsing a Token Stream.</a></span></li>
-	
 </ul></li>
 
 
@@ -86,9 +80,9 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/delegate">delegate</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/additionalToken">additionalToken</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/grammar">grammar</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/recoveryType">recoveryType</a></span></li>
 	
 </ul></li>
 
@@ -96,7 +90,9 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/parserWithGrammar:">parserWithGrammar:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/recoveryActionDeletingCurrentToken">recoveryActionDeletingCurrentToken</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/recoveryActionWithAdditionalToken:">recoveryActionWithAdditionalToken:</a></span></li>
 	
 </ul></li>
 
@@ -104,9 +100,9 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithGrammar:">initWithGrammar:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithAdditionalToken:">initWithAdditionalToken:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/parse:">parse:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithDeleteAction">initWithDeleteAction</a></span></li>
 	
 </ul></li>
 
@@ -115,7 +111,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="CPParser Class Reference" name="top"></a>
+				<a title="CPRecoveryAction Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -124,7 +120,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">CPParser Class Reference</h1>
+						<h1 class="title title-header">CPRecoveryAction Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -135,7 +131,7 @@
 	<td class="specification-value">NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">CPParser.h<br />CPParser.m</td>
+	<td class="specification-value">CPRecoveryAction.h<br />CPRecoveryAction.m</td>
 </tr>
 						</tbody></table></div>
 					
@@ -145,9 +141,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>The <a href="CPParser.html">CPParser</a> class allows you to parse token streams.</p>
-
-<p>Parsers are built by constructing a <a href="#//api/name/grammar">grammar</a>, and then using it to create a parser.  The parser <a href="#//api/name/delegate">delegate</a> may be used to monitor and replace output from the parser.</p><div class="warning"><p>Note that <a href="CPParser.html">CPParser</a> is an abstract superclass.  Use one of its subclasses to construct your parser.</p></div>
+						<p>Represents an action to take to recover from an error.</p>
 					</div>
 					
 					
@@ -159,66 +153,49 @@
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
-						<a title="Creating and Initialising a Parser" name="task_Creating and Initialising a Parser"></a>
-						<h3 class="subsubtitle task-title">Creating and Initialising a Parser</h3>
+						
+						
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/parserWithGrammar:">+&nbsp;parserWithGrammar:</a></code>
-		<span class="tooltip"><p>Creates a parser for a certain <a href="#//api/name/grammar">grammar</a>.</p></span>
+		<code><a href="#//api/name/recoveryType">&nbsp;&nbsp;recoveryType</a></code>
+		<span class="tooltip"><p>The type of recovery action to take.  May be CPRecoveryTypeAddToken or CPRecoveryTypeRemoveToken.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/additionalToken">&nbsp;&nbsp;additionalToken</a></code>
+		<span class="tooltip"><p>The token to insert in the token streem if a CPRecoveryTypeAddToken action is taken.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/recoveryActionWithAdditionalToken:">+&nbsp;recoveryActionWithAdditionalToken:</a></code>
+		<span class="tooltip"><p>Allocates an initialises a new <a href="CPRecoveryAction.html">CPRecoveryAction</a> asking the parser to add a new token to the token stream.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithGrammar:">&ndash;&nbsp;initWithGrammar:</a></code>
-		<span class="tooltip"><p>Initialises a parser for a certain <a href="#//api/name/grammar">grammar</a>.</p></span>
+		<code><a href="#//api/name/recoveryActionDeletingCurrentToken">+&nbsp;recoveryActionDeletingCurrentToken</a></code>
+		<span class="tooltip"><p>Allocates an initialises a new <a href="CPRecoveryAction.html">CPRecoveryAction</a> asking the parser to delete an offending token from the token stream.</p></span>
 	</span>
 	
 	
-</li>
-						</ul>
-						
-						
-						<a title="Managing the Delegate" name="task_Managing the Delegate"></a>
-						<h3 class="subsubtitle task-title">Managing the Delegate</h3>
-
-						<ul class="task-list">
-							<li>
+</li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
-		<span class="tooltip"><p>The parser&rsquo;s <a href="#//api/name/delegate">delegate</a>.</p></span>
+		<code><a href="#//api/name/initWithAdditionalToken:">&ndash;&nbsp;initWithAdditionalToken:</a></code>
+		<span class="tooltip"><p>Initialises a <a href="CPRecoveryAction.html">CPRecoveryAction</a> asking the parser to add a new token to the token stream.</p></span>
 	</span>
-	<span class="task-item-suffix">property</span>
 	
-</li>
-						</ul>
-						
-						
-						<a title="Finding out about the parsed Grammar" name="task_Finding out about the parsed Grammar"></a>
-						<h3 class="subsubtitle task-title">Finding out about the parsed Grammar</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/grammar">&nbsp;&nbsp;grammar</a></code>
-		<span class="tooltip"><p>The parser&rsquo;s <a href="#//api/name/grammar">grammar</a>.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
 	
-</li>
-						</ul>
-						
-						
-						<a title="Parsing a Token Stream." name="task_Parsing a Token Stream."></a>
-						<h3 class="subsubtitle task-title">Parsing a Token Stream.</h3>
-
-						<ul class="task-list">
-							<li>
+</li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/parse:">&ndash;&nbsp;parse:</a></code>
-		<span class="tooltip"><p>Parses an input token stream.</p></span>
+		<code><a href="#//api/name/initWithDeleteAction">&ndash;&nbsp;initWithDeleteAction</a></code>
+		<span class="tooltip"><p>Initialises a <a href="CPRecoveryAction.html">CPRecoveryAction</a> asking the parser to delete an offending token from the token stream.</p></span>
 	</span>
 	
 	
@@ -236,17 +213,17 @@
 						<h2 class="subtitle subtitle-methods">Properties</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/delegate" title="delegate"></a>
-	<h3 class="subsubtitle method-title">delegate</h3>
+	<a name="//api/name/additionalToken" title="additionalToken"></a>
+	<h3 class="subsubtitle method-title">additionalToken</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The parser&rsquo;s <a href="#//api/name/delegate">delegate</a>.</p>
+		<p>The token to insert in the token streem if a CPRecoveryTypeAddToken action is taken.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (readwrite, assign) id&lt;CPParserDelegate&gt; delegate</code></div>
+	<div class="method-subsection method-declaration"><code>@property (readwrite, retain) CPToken *additionalToken</code></div>
 	
 	
 	
@@ -255,7 +232,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The parser&rsquo;s <a href="#//api/name/delegate">delegate</a>.</p>
+		<p>The token to insert in the token streem if a CPRecoveryTypeAddToken action is taken.</p>
 	</div>
 	
 	
@@ -266,24 +243,24 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CPParser.h</code><br />
+		<code class="declared-in-ref">CPRecoveryAction.h</code><br />
 	</div>				
 	
 	
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/grammar" title="grammar"></a>
-	<h3 class="subsubtitle method-title">grammar</h3>
+	<a name="//api/name/recoveryType" title="recoveryType"></a>
+	<h3 class="subsubtitle method-title">recoveryType</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The parser&rsquo;s <a href="#//api/name/grammar">grammar</a>.</p>
+		<p>The type of recovery action to take.  May be CPRecoveryTypeAddToken or CPRecoveryTypeRemoveToken.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (readonly, retain) CPGrammar *grammar</code></div>
+	<div class="method-subsection method-declaration"><code>@property (readwrite, assign) CPRecoveryType recoveryType</code></div>
 	
 	
 	
@@ -292,7 +269,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The parser&rsquo;s <a href="#//api/name/grammar">grammar</a>.</p>
+		<p>The type of recovery action to take.  May be CPRecoveryTypeAddToken or CPRecoveryTypeRemoveToken.</p>
 	</div>
 	
 	
@@ -303,7 +280,7 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CPParser.h</code><br />
+		<code class="declared-in-ref">CPRecoveryAction.h</code><br />
 	</div>				
 	
 	
@@ -318,41 +295,31 @@
 						<h2 class="subtitle subtitle-methods">Class Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/parserWithGrammar:" title="parserWithGrammar:"></a>
-	<h3 class="subsubtitle method-title">parserWithGrammar:</h3>
+	<a name="//api/name/recoveryActionDeletingCurrentToken" title="recoveryActionDeletingCurrentToken"></a>
+	<h3 class="subsubtitle method-title">recoveryActionDeletingCurrentToken</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Creates a parser for a certain <a href="#//api/name/grammar">grammar</a>.</p>
+		<p>Allocates an initialises a new <a href="CPRecoveryAction.html">CPRecoveryAction</a> asking the parser to delete an offending token from the token stream.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>+ (id)parserWithGrammar:(CPGrammar *)<em>grammar</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (id)recoveryActionDeletingCurrentToken</code></div>
 	
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>grammar</em></dt>
-			<dd><p>The <a href="#//api/name/grammar">grammar</a> on which to base the parser.</p></dd>
-		</dl>
-		
-	</div>
 	
 	
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>Returns a parser that parses the input <a href="#//api/name/grammar">grammar</a>, or nil if no such parser could be created.</p>
+		<p>A new recovery action.</p>
 	</div>
 	
 	
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Creates a parser for a certain <a href="#//api/name/grammar">grammar</a>.</p>
+		<p>Allocates an initialises a new <a href="CPRecoveryAction.html">CPRecoveryAction</a> asking the parser to delete an offending token from the token stream.</p>
 	</div>
 	
 	
@@ -363,7 +330,59 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CPParser.h</code><br />
+		<code class="declared-in-ref">CPRecoveryAction.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/recoveryActionWithAdditionalToken:" title="recoveryActionWithAdditionalToken:"></a>
+	<h3 class="subsubtitle method-title">recoveryActionWithAdditionalToken:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Allocates an initialises a new <a href="CPRecoveryAction.html">CPRecoveryAction</a> asking the parser to add a new token to the token stream.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (id)recoveryActionWithAdditionalToken:(CPToken *)<em>token</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>token</em></dt>
+			<dd><p>The token to add to the stream.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A new recovery action.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Allocates an initialises a new <a href="CPRecoveryAction.html">CPRecoveryAction</a> asking the parser to add a new token to the token stream.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPRecoveryAction.h</code><br />
 	</div>				
 	
 	
@@ -378,25 +397,25 @@
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/initWithGrammar:" title="initWithGrammar:"></a>
-	<h3 class="subsubtitle method-title">initWithGrammar:</h3>
+	<a name="//api/name/initWithAdditionalToken:" title="initWithAdditionalToken:"></a>
+	<h3 class="subsubtitle method-title">initWithAdditionalToken:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Initialises a parser for a certain <a href="#//api/name/grammar">grammar</a>.</p>
+		<p>Initialises a <a href="CPRecoveryAction.html">CPRecoveryAction</a> asking the parser to add a new token to the token stream.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (id)initWithGrammar:(CPGrammar *)<em>grammar</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (id)initWithAdditionalToken:(CPToken *)<em>token</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>grammar</em></dt>
-			<dd><p>The <a href="#//api/name/grammar">grammar</a> on which to base the parser.</p></dd>
+			<dt><em>token</em></dt>
+			<dd><p>The token to add to the stream.</p></dd>
 		</dl>
 		
 	</div>
@@ -405,14 +424,14 @@
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>Returns a parser that parses the input <a href="#//api/name/grammar">grammar</a>, or nil if no such parser could be created.</p>
+		<p>An initialised recovery action.</p>
 	</div>
 	
 	
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Initialises a parser for a certain <a href="#//api/name/grammar">grammar</a>.</p>
+		<p>Initialises a <a href="CPRecoveryAction.html">CPRecoveryAction</a> asking the parser to add a new token to the token stream.</p>
 	</div>
 	
 	
@@ -423,50 +442,38 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CPParser.h</code><br />
+		<code class="declared-in-ref">CPRecoveryAction.h</code><br />
 	</div>				
 	
 	
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/parse:" title="parse:"></a>
-	<h3 class="subsubtitle method-title">parse:</h3>
+	<a name="//api/name/initWithDeleteAction" title="initWithDeleteAction"></a>
+	<h3 class="subsubtitle method-title">initWithDeleteAction</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Parses an input token stream.</p>
+		<p>Initialises a <a href="CPRecoveryAction.html">CPRecoveryAction</a> asking the parser to delete an offending token from the token stream.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (id)parse:(CPTokenStream *)<em>tokenStream</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (id)initWithDeleteAction</code></div>
 	
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>tokenStream</em></dt>
-			<dd><p>The token stream to parse.</p></dd>
-		</dl>
-		
-	</div>
 	
 	
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>Returns the parsed syntax tree for the whole stream or <code>nil</code> if the token stream could not be parsed.</p>
+		<p>An initialised recovery action.</p>
 	</div>
 	
 	
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Parses an input token stream.</p>
-
-<p>Currently if errors are generated, <code>nil</code> is returned and the error Logged using NSLog.  This behaviour may change in the future to return the error in a more usable form.</p>
+		<p>Initialises a <a href="CPRecoveryAction.html">CPRecoveryAction</a> asking the parser to delete an offending token from the token stream.</p>
 	</div>
 	
 	
@@ -477,7 +484,7 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CPParser.h</code><br />
+		<code class="declared-in-ref">CPRecoveryAction.h</code><br />
 	</div>				
 	
 	

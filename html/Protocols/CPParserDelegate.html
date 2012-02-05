@@ -172,7 +172,7 @@ the resultant value of evaluating the expression.  This would allow you to parse
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)parser:(CPParser *)<em>parser</em> didEncounterErrorOnInput:(CPTokenStream *)<em>inputStream</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (CPRecoveryAction *)parser:(CPParser *)<em>parser</em> didEncounterErrorOnInput:(CPTokenStream *)<em>inputStream</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -191,6 +191,12 @@ the resultant value of evaluating the expression.  This would allow you to parse
 	</div>
 	
 	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An action to take to recover from the parse error or nil.  If the action is nil, and the problematic token is a <a href="../Classes/CPErrorToken.html">CPErrorToken</a>
+the parse stack is unwound a step for the parent rule to deal with the error.</p>
+	</div>
 	
 	
 	
