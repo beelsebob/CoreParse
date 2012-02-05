@@ -293,6 +293,26 @@
     STAssertEqualObjects(tokenStream, expectedTokenStream, @"Inserting error token and continuing according to delegate failed.", nil);
 }
 
+- (void)testTokenLineColumnNumbers
+{
+    CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
+    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" name:@"Comment"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"long"]];
+    [tokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniser]];
+    [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
+    CPTokenStream *tokenStream = [tokeniser tokenise:@"/* blah\nblah blah\n blah */ long jam\n\nlong ham"];
+    NSUInteger tokenLines[]   = {0, 2, 2, 2 , 2 , 2 , 4, 4, 4, 4};
+    NSUInteger tokenColumns[] = {0, 8, 9, 13, 14, 17, 0, 4, 5, 8};
+    NSUInteger tokenNumber = 0;
+    CPToken *token = nil;
+    while ((token = [tokenStream popToken]))
+    {
+        STAssertEquals([token lineNumber  ], tokenLines  [tokenNumber], @"Line number for token %lu is incorrect", tokenNumber, nil);
+        STAssertEquals([token columnNumber], tokenColumns[tokenNumber], @"Column number for toen %lu is incorrect", tokenNumber, nil);
+        tokenNumber++;
+    }
+}
+
 - (void)testMapCSSTokenisation
 {
     [self setUpMapCSS];

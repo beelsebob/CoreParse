@@ -19,6 +19,7 @@
 @property (readwrite, retain) NSMutableArray *tokenRecognisers;
 
 - (void)addToken:(CPToken *)tok toStream:(CPTokenStream *)stream;
+- (void)advanceLineNumber:(NSUInteger *)ln columnNumber:(NSUInteger *)cn withInput:(NSString *)input range:(NSRange)range;
 
 @end
 
@@ -102,6 +103,8 @@
 - (void)tokenise:(NSString *)input into:(CPTokenStream *)stream
 {
     NSUInteger currentTokenOffset = 0;
+    NSUInteger currentLineNumber = 0;
+    NSUInteger currentColumnNumber = 0;
     NSUInteger inputLength = [input length];
     NSArray *recs = [self tokenRecognisers];
     
@@ -114,11 +117,15 @@
             CPToken *tok = [recogniser recogniseTokenInString:input currentTokenPosition:&currentTokenOffset];
             if (nil != tok)
             {
+                [tok setLineNumber:currentLineNumber];
+                [tok setColumnNumber:currentColumnNumber];
+                
                 if ([delegate respondsToSelector:@selector(tokeniser:shouldConsumeToken:)])
                 {
                     if ([delegate tokeniser:self shouldConsumeToken:tok])
                     {
                         [self addToken:tok toStream:stream];
+                        [self advanceLineNumber:&currentLineNumber columnNumber:&currentColumnNumber withInput:input range:NSMakeRange(lastTokenOffset, currentTokenOffset - lastTokenOffset)];
                         recognised = YES;
                         break;
                     }
@@ -130,6 +137,7 @@
                 else
                 {
                     [self addToken:tok toStream:stream];
+                    [self advanceLineNumber:&currentLineNumber columnNumber:&currentColumnNumber withInput:input range:NSMakeRange(lastTokenOffset, currentTokenOffset - lastTokenOffset)];
                     recognised = YES;
                     break;
                 }
@@ -158,7 +166,10 @@
     }
     if (inputLength <= currentTokenOffset)
     {
-        [stream pushToken:[CPEOFToken eof]];
+        CPEOFToken *token = [CPEOFToken eof];
+        [token setLineNumber:currentLineNumber];
+        [token setColumnNumber:currentColumnNumber];
+        [stream pushToken:token];
     }
     [stream closeTokenStream];
 }
@@ -175,6 +186,29 @@
         toks = [NSArray arrayWithObject:tok];
     }
     [stream pushTokens:toks];
+}
+
+- (void)advanceLineNumber:(NSUInteger *)ln columnNumber:(NSUInteger *)cn withInput:(NSString *)input range:(NSRange)range
+{
+    NSRange searchRange = range;
+    NSUInteger rangeEnd = range.location + range.length;
+    NSRange foundRange = [input rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"\n\r"] options:NSLiteralSearch range:searchRange];
+    NSUInteger lastNewLineLocation = NSNotFound;
+    while (foundRange.location != NSNotFound)
+    {
+        *ln += foundRange.length;
+        lastNewLineLocation = foundRange.location + foundRange.length;
+        searchRange = NSMakeRange(lastNewLineLocation, rangeEnd - lastNewLineLocation);
+        foundRange = [input rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"\n\r"] options:NSLiteralSearch range:searchRange];
+    }
+    if (lastNewLineLocation != NSNotFound)
+    {
+        *cn = rangeEnd - lastNewLineLocation;
+    }
+    else
+    {
+        *cn += range.length;
+    }
 }
 
 @end

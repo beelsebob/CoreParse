@@ -22,4 +22,14 @@
  */
 @property (readonly) NSString *name;
 
+/**
+ * The line on which the token can be found.
+ */
+@property (readwrite, assign) NSUInteger lineNumber;
+
+/**
+ * The column on which the token can be found.
+ */
+@property (readwrite, assign) NSUInteger columnNumber;
+
 @end

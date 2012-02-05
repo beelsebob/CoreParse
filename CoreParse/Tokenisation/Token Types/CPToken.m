@@ -10,6 +10,9 @@
 
 @implementation CPToken
 
+@synthesize lineNumber;
+@synthesize columnNumber;
+
 - (NSString *)name
 {
     [NSException raise:@"Abstract method called exception" format:@"CPToken is abstract, and should not have name called."];
