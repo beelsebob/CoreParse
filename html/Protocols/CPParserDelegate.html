@@ -38,6 +38,8 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
+	<option value="//api/name/parser:didEncounterErrorOnInput:">&nbsp;&nbsp;&nbsp;&nbsp;- parser:didEncounterErrorOnInput:</option>
+	
 	<option value="//api/name/parser:didProduceSyntaxTree:">&nbsp;&nbsp;&nbsp;&nbsp;- parser:didProduceSyntaxTree:</option>
 	
 	
@@ -67,6 +69,8 @@
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/parser:didEncounterErrorOnInput:">parser:didEncounterErrorOnInput:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/parser:didProduceSyntaxTree:">parser:didProduceSyntaxTree:</a></span></li>
 	
@@ -133,6 +137,13 @@ the resultant value of evaluating the expression.  This would allow you to parse
 	</span>
 	
 	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/parser:didEncounterErrorOnInput:">&ndash;&nbsp;parser:didEncounterErrorOnInput:</a></code>
+		<span class="tooltip"><p>Called when the parser encounters a token for which it can not shift, reduce or accept.</p></span>
+	</span>
+	
+	
 </li>
 						</ul>
 						
@@ -149,6 +160,58 @@ the resultant value of evaluating the expression.  This would allow you to parse
 					<div class="section section-methods">
 						<a title="Instance Methods" name="instance_methods"></a>
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/parser:didEncounterErrorOnInput:" title="parser:didEncounterErrorOnInput:"></a>
+	<h3 class="subsubtitle method-title">parser:didEncounterErrorOnInput:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Called when the parser encounters a token for which it can not shift, reduce or accept.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)parser:(CPParser *)<em>parser</em> didEncounterErrorOnInput:(CPTokenStream *)<em>inputStream</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>parser</em></dt>
+			<dd><p>The parser which produced the syntax tree.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>inputStream</em></dt>
+			<dd><p>The input stream containing the token the parser could not cope with.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Called when the parser encounters a token for which it can not shift, reduce or accept.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPParser.h</code><br />
+	</div>				
+	
+	
+</div>
 						
 						<div class="section-method">
 	<a name="//api/name/parser:didProduceSyntaxTree:" title="parser:didProduceSyntaxTree:"></a>
