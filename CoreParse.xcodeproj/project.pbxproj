@@ -141,6 +141,7 @@
 		1FB3EB31132BB31700ACC453 /* CPLR1Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB2F132BB30A00ACC453 /* CPLR1Item.m */; };
 		1FB3EB3A132D096900ACC453 /* CPGrammarSymbol.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB38132D096700ACC453 /* CPGrammarSymbol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FB3EB3B132D096900ACC453 /* CPGrammarSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB39132D096800ACC453 /* CPGrammarSymbol.m */; };
+		1FB719A414E00FE300BD033C /* CPErrorToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA68D9F14DE98C4005519B9 /* CPErrorToken.m */; };
 		1FB81322132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB81320132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.h */; };
 		1FB81323132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB81321132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.m */; };
 		1FB81326132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB81324132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.h */; };
@@ -913,6 +914,7 @@
 				1F9281AF145C11A60033BC34 /* CPNumberToken.m in Sources */,
 				1F9281B0145C11A60033BC34 /* CPWhiteSpaceToken.m in Sources */,
 				1F9281B1145C11A60033BC34 /* CPIdentifierToken.m in Sources */,
+				1FB719A414E00FE300BD033C /* CPErrorToken.m in Sources */,
 				1F9281B2145C11A60033BC34 /* CPQuotedToken.m in Sources */,
 				1F9281B3145C11A60033BC34 /* CPGrammar.m in Sources */,
 				1F9281B4145C11A60033BC34 /* CPGrammarPrivate.m in Sources */,
