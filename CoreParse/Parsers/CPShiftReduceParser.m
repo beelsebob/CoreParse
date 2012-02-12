@@ -20,9 +20,10 @@
 @interface CPShiftReduceParser ()
 
 - (CPShiftReduceAction *)actionForState:(NSUInteger)state token:(CPToken *)token;
+- (NSSet *)acceptableTokenNamesForState:(NSUInteger)state;
 - (NSUInteger)gotoForState:(NSUInteger)state rule:(CPRule *)rule;
 
-- (CPRecoveryAction *)error:(CPTokenStream *)tokenStream;
+- (CPRecoveryAction *)error:(CPTokenStream *)tokenStream expecting:(NSSet *)acceptableTokens;
 
 @end
 
@@ -154,7 +155,7 @@
             }
             else
             {
-                CPRecoveryAction *recoveryAction = [self error:tokenStream];
+                CPRecoveryAction *recoveryAction = [self error:tokenStream expecting:[self acceptableTokenNamesForState:[(CPShiftReduceState *)[stateStack lastObject] state]]];
                 if (nil == recoveryAction)
                 {
                     if ([nextToken isKindOfClass:[CPErrorToken class]] && [stateStack count] > 0)
@@ -190,9 +191,13 @@
     }
 }
 
-- (CPRecoveryAction *)error:(CPTokenStream *)tokenStream
+- (CPRecoveryAction *)error:(CPTokenStream *)tokenStream expecting:(NSSet *)acceptableTokens
 {
-    if ([[self delegate] respondsToSelector:@selector(parser:didEncounterErrorOnInput:)])
+    if ([[self delegate] respondsToSelector:@selector(parser:didEncounterErrorOnInput:expecting:)])
+    {
+        return [[self delegate] parser:self didEncounterErrorOnInput:tokenStream expecting:acceptableTokens];
+    }
+    else if ([[self delegate] respondsToSelector:@selector(parser:didEncounterErrorOnInput:)])
     {
         return [[self delegate] parser:self didEncounterErrorOnInput:tokenStream];
     }
@@ -206,6 +211,11 @@
 - (CPShiftReduceAction *)actionForState:(NSUInteger)state token:(CPToken *)token
 {
     return [[self actionTable] actionForState:state token:token];
+}
+
+- (NSSet *)acceptableTokenNamesForState:(NSUInteger)state
+{
+    return [[self actionTable] acceptableTokenNamesForState:state];
 }
 
 - (NSUInteger)gotoForState:(NSUInteger)state rule:(CPRule *)rule

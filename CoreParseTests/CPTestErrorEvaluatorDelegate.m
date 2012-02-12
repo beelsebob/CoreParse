@@ -41,7 +41,7 @@
     }
 }
 
-- (CPRecoveryAction *)parser:(CPParser *)parser didEncounterErrorOnInput:(CPTokenStream *)inputStream
+- (CPRecoveryAction *)parser:(CPParser *)parser didEncounterErrorOnInput:(CPTokenStream *)inputStream expecting:(NSSet *)acceptableTokens
 {
     return [CPRecoveryAction recoveryActionWithAdditionalToken:[CPErrorToken errorWithMessage:@"Expected expression"]];
 }

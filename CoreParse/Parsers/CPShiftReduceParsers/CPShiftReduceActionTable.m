@@ -87,6 +87,19 @@
     return [table[state] objectForKey:token.name];
 }
 
+- (NSSet *)acceptableTokenNamesForState:(NSUInteger)state
+{
+    NSMutableSet *toks = [NSMutableSet set];
+    for (NSString *tok in table[state])
+    {
+        if (nil != [table[state] objectForKey:tok])
+        {
+            [toks addObject:tok];
+        }
+    }
+    return [[toks copy] autorelease];
+}
+
 - (NSString *)description
 {
     if (capacity > 0)

@@ -58,12 +58,24 @@
 /**
  * Called when the parser encounters a token for which it can not shift, reduce or accept.
  * 
- * @param parser      The parser which produced the syntax tree.
- * @param inputStream The input stream containing the token the parser could not cope with.
+ * @param parser           The parser which produced the syntax tree.
+ * @param inputStream      The input stream containing the token the parser could not cope with.
+ * @return An action to take to recover from the parse error or nil.  If the action is nil, and the problematic token is a CPErrorToken
+ *         the parse stack is unwound a step for the parent rule to deal with the error.
+ * @bug Warning this method is deprecated, use -parser:didEncounterErrorOnInput:expecting: instead.
+ */
+- (CPRecoveryAction *)parser:(CPParser *)parser didEncounterErrorOnInput:(CPTokenStream *)inputStream;
+
+/**
+ * Called when the parser encounters a token for which it can not shift, reduce or accept.
+ * 
+ * @param parser           The parser which produced the syntax tree.
+ * @param inputStream      The input stream containing the token the parser could not cope with.
+ * @param acceptableTokens A set of token names that would have allowed the parser to continue in its current state.
  * @return An action to take to recover from the parse error or nil.  If the action is nil, and the problematic token is a CPErrorToken
  *         the parse stack is unwound a step for the parent rule to deal with the error.
  */
-- (CPRecoveryAction *)parser:(CPParser *)parser didEncounterErrorOnInput:(CPTokenStream *)inputStream;
+- (CPRecoveryAction *)parser:(CPParser *)parser didEncounterErrorOnInput:(CPTokenStream *)inputStream expecting:(NSSet *)acceptableTokens;
 
 @end
 

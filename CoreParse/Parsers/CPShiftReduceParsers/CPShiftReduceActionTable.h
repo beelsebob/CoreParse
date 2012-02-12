@@ -21,6 +21,7 @@
 - (BOOL)setAction:(CPShiftReduceAction *)action forState:(NSUInteger)state name:(NSString *)token;
 
 - (CPShiftReduceAction *)actionForState:(NSUInteger)state token:(CPToken *)token;
+- (NSSet *)acceptableTokenNamesForState:(NSUInteger)state;
 
 - (NSString *)descriptionWithGrammar:(CPGrammar *)g;
 
