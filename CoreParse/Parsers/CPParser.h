@@ -40,6 +40,8 @@
  */
 @protocol CPParserDelegate <NSObject>
 
+@optional
+
 /**
  * Should return an object to replace a produced syntax tree with.
  * 
@@ -52,8 +54,6 @@
  * @return An object value to replace the syntax tree with.
  */
 - (id)parser:(CPParser *)parser didProduceSyntaxTree:(CPSyntaxTree *)syntaxTree;
-
-@optional
 
 /**
  * Called when the parser encounters a token for which it can not shift, reduce or accept.
