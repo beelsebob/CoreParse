@@ -45,6 +45,8 @@
 	
 	<option value="//api/name/recoveryActionDeletingCurrentToken">&nbsp;&nbsp;&nbsp;&nbsp;+ recoveryActionDeletingCurrentToken</option>
 	
+	<option value="//api/name/recoveryActionStop">&nbsp;&nbsp;&nbsp;&nbsp;+ recoveryActionStop</option>
+	
 	<option value="//api/name/recoveryActionWithAdditionalToken:">&nbsp;&nbsp;&nbsp;&nbsp;+ recoveryActionWithAdditionalToken:</option>
 	
 	
@@ -55,6 +57,8 @@
 	<option value="//api/name/initWithAdditionalToken:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithAdditionalToken:</option>
 	
 	<option value="//api/name/initWithDeleteAction">&nbsp;&nbsp;&nbsp;&nbsp;- initWithDeleteAction</option>
+	
+	<option value="//api/name/initWithStopAction">&nbsp;&nbsp;&nbsp;&nbsp;- initWithStopAction</option>
 	
 	
 	
@@ -92,6 +96,8 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/recoveryActionDeletingCurrentToken">recoveryActionDeletingCurrentToken</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/recoveryActionStop">recoveryActionStop</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/recoveryActionWithAdditionalToken:">recoveryActionWithAdditionalToken:</a></span></li>
 	
 </ul></li>
@@ -103,6 +109,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithAdditionalToken:">initWithAdditionalToken:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithDeleteAction">initWithDeleteAction</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithStopAction">initWithStopAction</a></span></li>
 	
 </ul></li>
 
@@ -187,6 +195,13 @@
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/recoveryActionStop">+&nbsp;recoveryActionStop</a></code>
+		<span class="tooltip"><p>Allocates and initialise a new CPRecovery action asking the parser to stop immediately.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/initWithAdditionalToken:">&ndash;&nbsp;initWithAdditionalToken:</a></code>
 		<span class="tooltip"><p>Initialises a <a href="CPRecoveryAction.html">CPRecoveryAction</a> asking the parser to add a new token to the token stream.</p></span>
 	</span>
@@ -196,6 +211,13 @@
 	<span class="tooltip">
 		<code><a href="#//api/name/initWithDeleteAction">&ndash;&nbsp;initWithDeleteAction</a></code>
 		<span class="tooltip"><p>Initialises a <a href="CPRecoveryAction.html">CPRecoveryAction</a> asking the parser to delete an offending token from the token stream.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithStopAction">&ndash;&nbsp;initWithStopAction</a></code>
+		<span class="tooltip"><p>Initialises a <a href="CPRecoveryAction.html">CPRecoveryAction</a> asking the parser to stop immediately.</p></span>
 	</span>
 	
 	
@@ -320,6 +342,43 @@
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Allocates an initialises a new <a href="CPRecoveryAction.html">CPRecoveryAction</a> asking the parser to delete an offending token from the token stream.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPRecoveryAction.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/recoveryActionStop" title="recoveryActionStop"></a>
+	<h3 class="subsubtitle method-title">recoveryActionStop</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Allocates and initialise a new CPRecovery action asking the parser to stop immediately.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (id)recoveryActionStop</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Allocates and initialise a new CPRecovery action asking the parser to stop immediately.</p>
 	</div>
 	
 	
@@ -490,6 +549,43 @@
 	
 </div>
 						
+						<div class="section-method">
+	<a name="//api/name/initWithStopAction" title="initWithStopAction"></a>
+	<h3 class="subsubtitle method-title">initWithStopAction</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Initialises a <a href="CPRecoveryAction.html">CPRecoveryAction</a> asking the parser to stop immediately.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithStopAction</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Initialises a <a href="CPRecoveryAction.html">CPRecoveryAction</a> asking the parser to stop immediately.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPRecoveryAction.h</code><br />
+	</div>				
+	
+	
+</div>
+						
 					</div>
 					
 					
@@ -503,7 +599,7 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-02-12)</span><br />
+						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-03-03)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.4 (build 701)</a>.</span></p>
 						
