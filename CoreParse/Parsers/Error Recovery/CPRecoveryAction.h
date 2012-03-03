@@ -13,7 +13,8 @@
 typedef enum
 {
     CPRecoveryTypeAddToken    = 0,
-    CPRecoveryTypeRemoveToken
+    CPRecoveryTypeRemoveToken    ,
+    CPRecoveryTypeBail
 } CPRecoveryType;
 
 /**
@@ -47,6 +48,11 @@ typedef enum
 + (id)recoveryActionDeletingCurrentToken;
 
 /**
+ * Allocates and initialise a new CPRecovery action asking the parser to stop immediately.
+ */
++ (id)recoveryActionStop;
+
+/**
  * Initialises a CPRecoveryAction asking the parser to add a new token to the token stream.
  *
  * @param token The token to add to the stream.
@@ -60,5 +66,10 @@ typedef enum
  * @return An initialised recovery action.
  */
 - (id)initWithDeleteAction;
+
+/**
+ * Initialises a CPRecoveryAction asking the parser to stop immediately.
+ */
+- (id)initWithStopAction;
 
 @end

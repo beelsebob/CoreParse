@@ -73,7 +73,7 @@
 		1F530B921322814000F52EB5 /* CPRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B901322813F00F52EB5 /* CPRule.m */; };
 		1F6D44901348CC9500E982C7 /* CPLALR1Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F6D448E1348CC9500E982C7 /* CPLALR1Parser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F6D44911348CC9600E982C7 /* CPLALR1Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D448F1348CC9500E982C7 /* CPLALR1Parser.m */; };
-		1F893A1F14DEEBFC00316FF7 /* CPRecoveryAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F893A1D14DEEBFC00316FF7 /* CPRecoveryAction.h */; };
+		1F893A1F14DEEBFC00316FF7 /* CPRecoveryAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F893A1D14DEEBFC00316FF7 /* CPRecoveryAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F893A2014DEEBFC00316FF7 /* CPRecoveryAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F893A1E14DEEBFC00316FF7 /* CPRecoveryAction.m */; };
 		1F893A2314DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F893A2114DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.h */; };
 		1F893A2414DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F893A2214DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.m */; };
@@ -129,7 +129,7 @@
 		1F9F83A713B732AC006E939D /* Term.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83A513B732AC006E939D /* Term.m */; };
 		1F9F83AC13B7CABA006E939D /* CPRHSItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9F83AA13B7CAB9006E939D /* CPRHSItem.h */; };
 		1F9F83AD13B7CABA006E939D /* CPRHSItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83AB13B7CABA006E939D /* CPRHSItem.m */; };
-		1FA68DA014DE98C4005519B9 /* CPErrorToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA68D9E14DE98C4005519B9 /* CPErrorToken.h */; };
+		1FA68DA014DE98C4005519B9 /* CPErrorToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA68D9E14DE98C4005519B9 /* CPErrorToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FA68DA114DE98C4005519B9 /* CPErrorToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA68D9F14DE98C4005519B9 /* CPErrorToken.m */; };
 		1FA68DA514DE9D3D005519B9 /* CPTestErrorHandlingDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA68DA314DE9D3D005519B9 /* CPTestErrorHandlingDelegate.h */; };
 		1FA68DA614DE9D3D005519B9 /* CPTestErrorHandlingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA68DA414DE9D3D005519B9 /* CPTestErrorHandlingDelegate.m */; };
@@ -614,6 +614,8 @@
 				1FB3EB3A132D096900ACC453 /* CPGrammarSymbol.h in Headers */,
 				1F45A2E413422E1300092D78 /* CPJSONParser.h in Headers */,
 				1F3881DC1322ACE7000C8876 /* CPShiftReduceParser.h in Headers */,
+				1FA68DA014DE98C4005519B9 /* CPErrorToken.h in Headers */,
+				1F893A1F14DEEBFC00316FF7 /* CPRecoveryAction.h in Headers */,
 				1F3881E11322ADC9000C8876 /* CPShiftReduceAction.h in Headers */,
 				1F3881E51322AEE8000C8876 /* CPShiftReduceState.h in Headers */,
 				1F3881ED1322B66B000C8876 /* CPShiftReduceActionTable.h in Headers */,
@@ -631,9 +633,7 @@
 				1F9F83A613B732AC006E939D /* Term.h in Headers */,
 				1F9F83AC13B7CABA006E939D /* CPRHSItem.h in Headers */,
 				1FC00D5014544EDC00DC8D35 /* CPRHSItemResult.h in Headers */,
-				1FA68DA014DE98C4005519B9 /* CPErrorToken.h in Headers */,
 				1FA68DA514DE9D3D005519B9 /* CPTestErrorHandlingDelegate.h in Headers */,
-				1F893A1F14DEEBFC00316FF7 /* CPRecoveryAction.h in Headers */,
 				1F893A2314DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

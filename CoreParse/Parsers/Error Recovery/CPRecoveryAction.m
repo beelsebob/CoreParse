@@ -23,6 +23,11 @@
     return [[[self alloc] initWithDeleteAction] autorelease];
 }
 
++ (id)recoveryActionStop
+{
+    return [[[self alloc] initWithStopAction] autorelease];
+}
+
 - (id)initWithAdditionalToken:(CPToken *)token
 {
     self = [super init];
@@ -43,6 +48,18 @@
     if (nil != self)
     {
         [self setRecoveryType:CPRecoveryTypeRemoveToken];
+    }
+    
+    return self;
+}
+
+- (id)initWithStopAction
+{
+    self = [super init];
+    
+    if (nil != self)
+    {
+        [self setRecoveryType:CPRecoveryTypeBail];
     }
     
     return self;
