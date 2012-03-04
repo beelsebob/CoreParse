@@ -119,6 +119,7 @@
             {
                 [tok setLineNumber:currentLineNumber];
                 [tok setColumnNumber:currentColumnNumber];
+                [tok setCharacterNumber:lastTokenOffset];
                 
                 if ([delegate respondsToSelector:@selector(tokeniser:shouldConsumeToken:)])
                 {
@@ -169,6 +170,7 @@
         CPEOFToken *token = [CPEOFToken eof];
         [token setLineNumber:currentLineNumber];
         [token setColumnNumber:currentColumnNumber];
+        [token setCharacterNumber:inputLength];
         [stream pushToken:token];
     }
     [stream closeTokenStream];

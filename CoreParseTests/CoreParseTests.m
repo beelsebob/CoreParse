@@ -301,14 +301,16 @@
     [tokeniser addTokenRecogniser:[CPIdentifierRecogniser identifierRecogniser]];
     [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
     CPTokenStream *tokenStream = [tokeniser tokenise:@"/* blah\nblah blah\n blah */ long jam\n\nlong ham"];
-    NSUInteger tokenLines[]   = {0, 2, 2, 2 , 2 , 2 , 4, 4, 4, 4};
-    NSUInteger tokenColumns[] = {0, 8, 9, 13, 14, 17, 0, 4, 5, 8};
+    NSUInteger tokenLines[]     = {0, 2 , 2 , 2 , 2 , 2 , 4 , 4 , 4 , 4 };
+    NSUInteger tokenColumns[]   = {0, 8 , 9 , 13, 14, 17, 0 , 4 , 5 , 8 };
+    NSUInteger tokenPositions[] = {0, 26, 27, 31, 32, 35, 37, 41, 42, 45};
     NSUInteger tokenNumber = 0;
     CPToken *token = nil;
     while ((token = [tokenStream popToken]))
     {
-        STAssertEquals([token lineNumber  ], tokenLines  [tokenNumber], @"Line number for token %lu is incorrect", tokenNumber, nil);
-        STAssertEquals([token columnNumber], tokenColumns[tokenNumber], @"Column number for toen %lu is incorrect", tokenNumber, nil);
+        STAssertEquals([token lineNumber     ], tokenLines  [tokenNumber]  , @"Line number for token %lu is incorrect", tokenNumber, nil);
+        STAssertEquals([token columnNumber   ], tokenColumns[tokenNumber]  , @"Column number for token %lu is incorrect", tokenNumber, nil);
+        STAssertEquals([token characterNumber], tokenPositions[tokenNumber], @"Character nmber for token %lu is incorrect", tokenNumber, nil);
         tokenNumber++;
     }
 }

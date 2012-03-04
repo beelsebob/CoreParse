@@ -32,4 +32,9 @@
  */
 @property (readwrite, assign) NSUInteger columnNumber;
 
+/**
+ * The index in the input string of the first character in this token.
+ */
+@property (readwrite, assign) NSUInteger characterNumber;
+
 @end
