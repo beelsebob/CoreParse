@@ -50,6 +50,7 @@
                     BOOL success = [[self actionTable] setAction:[CPShiftReduceAction acceptAction] forState:idx name:@"EOF"];
                     if (!success)
                     {
+                        NSLog(@"Could not insert shift in action table for state %lu, token %@", (unsigned long)idx, @"EOF");
                         return NO;
                     }
                 }
@@ -58,6 +59,7 @@
                     BOOL success = [[self actionTable] setAction:[CPShiftReduceAction reduceAction:[item rule]] forState:idx name:[[item terminal] name]];
                     if (!success)
                     {
+                        NSLog(@"Could not insert reduce in action table for state %lu, token %@", (unsigned long)idx, [[item terminal] name]);
                         return NO;
                     }
                 }
@@ -80,6 +82,7 @@
                 BOOL success = [[self actionTable] setAction:[CPShiftReduceAction shiftAction:ix] forState:idx name:[next name]];
                 if (!success)
                 {
+                    NSLog(@"Could not insert shift in action table for state %lu, token %@", (unsigned long)idx, [next name]);
                     return NO;
                 }
             }
@@ -103,6 +106,7 @@
             BOOL success = [[self gotoTable] setGoto:gotoIndex forState:idx nonTerminalNamed:nonTerminalName];
             if (!success)
             {
+                NSLog(@"Could not insert into goto table for state %lu, token %@", (unsigned long)idx, nonTerminalName);
                 return NO;
             }
         }

@@ -124,9 +124,7 @@
 		1F9281CC145C18220033BC34 /* Expression.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83A013B731F3006E939D /* Expression.m */; };
 		1F9281CD145C18220033BC34 /* Term.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83A513B732AC006E939D /* Term.m */; };
 		1F9F83A113B731F3006E939D /* Expression.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9F839F13B731F3006E939D /* Expression.h */; };
-		1F9F83A213B731F3006E939D /* Expression.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83A013B731F3006E939D /* Expression.m */; };
 		1F9F83A613B732AC006E939D /* Term.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9F83A413B732AC006E939D /* Term.h */; };
-		1F9F83A713B732AC006E939D /* Term.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83A513B732AC006E939D /* Term.m */; };
 		1F9F83AC13B7CABA006E939D /* CPRHSItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9F83AA13B7CAB9006E939D /* CPRHSItem.h */; };
 		1F9F83AD13B7CABA006E939D /* CPRHSItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83AB13B7CABA006E939D /* CPRHSItem.m */; };
 		1FA68DA014DE98C4005519B9 /* CPErrorToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA68D9E14DE98C4005519B9 /* CPErrorToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -878,8 +876,6 @@
 				1F6D44911348CC9600E982C7 /* CPLALR1Parser.m in Sources */,
 				1FC1827E139ADC800027F597 /* CPGrammarPrivate.m in Sources */,
 				1FC18283139AE3810027F597 /* CPGrammarInternal.m in Sources */,
-				1F9F83A213B731F3006E939D /* Expression.m in Sources */,
-				1F9F83A713B732AC006E939D /* Term.m in Sources */,
 				1F9F83AD13B7CABA006E939D /* CPRHSItem.m in Sources */,
 				1FC00D5114544EDC00DC8D35 /* CPRHSItemResult.m in Sources */,
 				1FA68DA114DE98C4005519B9 /* CPErrorToken.m in Sources */,
