@@ -92,7 +92,9 @@
     {
         if ([[tokenString substringWithRange:NSMakeRange(*tokenPosition, kwLength)] isEqualToString:kw])
         {
-            if (remainingChars == kwLength || nil == invalidFollowingCharacters || [tokenString rangeOfCharacterFromSet:invalidFollowingCharacters options:0x0 range:NSMakeRange(*tokenPosition + kwLength, 1)].location == NSNotFound)
+            if (remainingChars == kwLength ||
+                nil == invalidFollowingCharacters ||
+                [tokenString rangeOfCharacterFromSet:invalidFollowingCharacters options:0x0 range:NSMakeRange(*tokenPosition + kwLength, 1)].location == NSNotFound)
             {
                 *tokenPosition = *tokenPosition + kwLength;
                 return [CPKeywordToken tokenWithKeyword:kw];
