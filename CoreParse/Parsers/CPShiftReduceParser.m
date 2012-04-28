@@ -219,7 +219,8 @@
     }
     else
     {
-        NSLog(@"Parse error on input %@", tokenStream);
+        CPToken *t = [tokenStream peekToken];
+        NSLog(@"%d:%d: parse error.  Expected %@, found %@", [t lineNumber], [t columnNumber], acceptableTokens, t);
         return nil;
     }
 }
