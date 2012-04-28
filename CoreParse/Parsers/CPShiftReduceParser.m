@@ -220,7 +220,7 @@
     else
     {
         CPToken *t = [tokenStream peekToken];
-        NSLog(@"%d:%d: parse error.  Expected %@, found %@", [t lineNumber], [t columnNumber], acceptableTokens, t);
+        NSLog(@"%ld:%ld: parse error.  Expected %@, found %@", (long)[t lineNumber] + 1, (long)[t columnNumber] + 1, acceptableTokens, t);
         return nil;
     }
 }

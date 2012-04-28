@@ -159,8 +159,11 @@
             }
             else
             {
-                [self addToken:[CPErrorToken errorWithMessage:[NSString stringWithFormat:@"The tokeniser encountered an invalid input \"%@\", and could not handle it.  Implement -tokeniser:didNotFindTokenAtInputPosition:error: to make this do something more useful", [input substringWithRange:NSMakeRange(currentTokenOffset, MIN((NSUInteger)10, [input length] - currentTokenOffset))]]]
-                                                     toStream:stream];
+                CPErrorToken *t = [CPErrorToken errorWithMessage:[NSString stringWithFormat:@"The tokeniser encountered an invalid input \"%@\", and could not handle it.  Implement -tokeniser:didNotFindTokenAtInputPosition:error: to make this do something more useful", [input substringWithRange:NSMakeRange(currentTokenOffset, MIN((NSUInteger)10, [input length] - currentTokenOffset))]]];
+                [t setLineNumber:currentLineNumber];
+                [t setColumnNumber:currentColumnNumber];
+                [t setCharacterNumber:currentTokenOffset];
+                [self addToken:t toStream:stream];
                 break;
             }
         }
