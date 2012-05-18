@@ -45,3 +45,19 @@
         STAssertTrue(0==strcmp([n objCType], @encode(NSInteger)), @"Type expectation failure. Wanted %s, got %s.", @encode(NSInteger), [n objCType]); \
         STAssertEqualsWithAccuracy([n integerValue], ((NSInteger)expectation), ((NSInteger)accuracy), @"Number fails expectation."); \
     } while (0);
+#define CPSTAssertFloatingNumberEquals(token, expectation) \
+    do { \
+        CPNumberToken * t = (CPNumberToken *)token; \
+        _CPSTAssertKindOfClass_Unsafe(t, CPNumberToken); \
+        NSNumber * n = [t number]; \
+        STAssertTrue(0==strcmp([n objCType], @encode(double)), @"Type expectation failure. Wanted %s, got %s.", @encode(double), [n objCType]); \
+        STAssertEquals([n doubleValue], ((double)expectation), @"Number fails expectation."); \
+    } while (0);
+#define CPSTAssertFloatingNumberEqualsWithAccuracy(token, expectation, accuracy) \
+    do { \
+        CPNumberToken * t = (CPNumberToken *)token; \
+        _CPSTAssertKindOfClass_Unsafe(t, CPNumberToken); \
+        NSNumber * n = [t number]; \
+        STAssertTrue(0==strcmp([n objCType], @encode(double)), @"Type expectation failure. Wanted %s, got %s.", @encode(double), [n objCType]); \
+        STAssertEqualsWithAccuracy([n doubleValue], ((double)expectation), ((double)accuracy), @"Number fails expectation."); \
+    } while (0);
