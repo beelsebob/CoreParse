@@ -284,6 +284,7 @@
 		1FC18286139BA47D0027F597 /* CoreParse-template.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "CoreParse-template.md"; sourceTree = "<group>"; };
 		1FE77D551375AE6F00879A41 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1FE77D821375EA8F00879A41 /* CoreParse Documentation */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "CoreParse Documentation"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA2B1DF41566B311002FDBD7 /* CPSenTestKitAssertions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPSenTestKitAssertions.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -381,6 +382,7 @@
 				1F530B7B132155BB00F52EB5 /* Parsers */,
 				1F45A2E113422DD800092D78 /* Built In Parsers */,
 				1F0E8900130462F300537D04 /* Supporting Files */,
+				DA2B1DF41566B311002FDBD7 /* CPSenTestKitAssertions.h */,
 				1F38820B132432A1000C8876 /* NSSetFunctional.h */,
 				1F38820C132432AA000C8876 /* NSSetFunctional.m */,
 			);
