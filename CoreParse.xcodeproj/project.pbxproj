@@ -152,6 +152,8 @@
 		1FC18282139AE3810027F597 /* CPGrammarInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC18280139AE3800027F597 /* CPGrammarInternal.h */; };
 		1FC18283139AE3810027F597 /* CPGrammarInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC18281139AE3810027F597 /* CPGrammarInternal.m */; };
 		1FC18287139BA47D0027F597 /* CoreParse-template.md in Resources */ = {isa = PBXBuildFile; fileRef = 1FC18286139BA47D0027F597 /* CoreParse-template.md */; };
+		DA2B1DF81566B704002FDBD7 /* CPSTAssertionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2B1DF71566B704002FDBD7 /* CPSTAssertionsTests.m */; };
+		DA2B1DF91566B704002FDBD7 /* CPSTAssertionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2B1DF71566B704002FDBD7 /* CPSTAssertionsTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -284,6 +286,9 @@
 		1FC18286139BA47D0027F597 /* CoreParse-template.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "CoreParse-template.md"; sourceTree = "<group>"; };
 		1FE77D551375AE6F00879A41 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1FE77D821375EA8F00879A41 /* CoreParse Documentation */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "CoreParse Documentation"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA2B1DF41566B311002FDBD7 /* CPSenTestKitAssertions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPSenTestKitAssertions.h; sourceTree = "<group>"; };
+		DA2B1DF61566B704002FDBD7 /* CPSTAssertionsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSTAssertionsTests.h; sourceTree = "<group>"; };
+		DA2B1DF71566B704002FDBD7 /* CPSTAssertionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSTAssertionsTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -381,6 +386,7 @@
 				1F530B7B132155BB00F52EB5 /* Parsers */,
 				1F45A2E113422DD800092D78 /* Built In Parsers */,
 				1F0E8900130462F300537D04 /* Supporting Files */,
+				DA2B1DF41566B311002FDBD7 /* CPSenTestKitAssertions.h */,
 				1F38820B132432A1000C8876 /* NSSetFunctional.h */,
 				1F38820C132432AA000C8876 /* NSSetFunctional.m */,
 			);
@@ -402,6 +408,8 @@
 			children = (
 				1F0E8917130462F300537D04 /* CoreParseTests.h */,
 				1F0E8919130462F300537D04 /* CoreParseTests.m */,
+				DA2B1DF61566B704002FDBD7 /* CPSTAssertionsTests.h */,
+				DA2B1DF71566B704002FDBD7 /* CPSTAssertionsTests.m */,
 				1F0E8911130462F300537D04 /* Supporting Files */,
 				1FB3EB22132BA02C00ACC453 /* CPTestEvaluatorDelegate.h */,
 				1FB3EB23132BA02C00ACC453 /* CPTestEvaluatorDelegate.m */,
@@ -891,6 +899,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F0E891A130462F300537D04 /* CoreParseTests.m in Sources */,
+				DA2B1DF81566B704002FDBD7 /* CPSTAssertionsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -948,6 +957,7 @@
 				1F9281CC145C18220033BC34 /* Expression.m in Sources */,
 				1F9281CD145C18220033BC34 /* Term.m in Sources */,
 				1F9281C8145C17580033BC34 /* CoreParseTests.m in Sources */,
+				DA2B1DF91566B704002FDBD7 /* CPSTAssertionsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
