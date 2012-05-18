@@ -27,6 +27,12 @@
     CPSTAssertKindOfClass([ts popToken], CPEOFToken);
 }
 
+- (void)testTokenizerIdentifierAssertion
+{
+    CPIdentifierToken * t = [CPIdentifierToken tokenWithIdentifier:@"foobar"];
+    CPSTAssertIdentifierEquals(t, @"foobar");
+}
+
 - (void)testTokenizerNumberAssertions
 {
     CPTokeniser * qTokenizer = [[CPTokeniser alloc] init];

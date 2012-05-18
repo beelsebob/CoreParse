@@ -29,6 +29,12 @@
         _CPSTAssertKindOfClass_Unsafe(t, CPKeywordToken); \
         STAssertEqualObjects([t keyword], expectation, @"Keyword doesn't match expectation."); \
     } while (0)
+#define CPSTAssertIdentifierEquals(token, expectation) \
+    do { \
+        CPIdentifierToken * _t = (CPIdentifierToken *)token; \
+        _CPSTAssertKindOfClass_Unsafe(_t, CPIdentifierToken); \
+        STAssertEqualObjects([_t identifier], expectation, @"Identifier doesn't match expectation."); \
+    } while (0)
 #define CPSTAssertIntegerNumberEquals(token, expectation) \
     do { \
         CPNumberToken * t = (CPNumberToken *)token; /* this escapes the potential multiple invocations of popToken */ \
