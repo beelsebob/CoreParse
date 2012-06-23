@@ -132,7 +132,7 @@
         for (NSUInteger state = 0; state < capacity; state++)
         {
             NSDictionary *row = table[state];
-            [s appendFormat:@"%5d | ", idx];
+            [s appendFormat:@"%5ld | ", (long)idx];
             for (NSString *key in orderedKeys)
             {
                 CPShiftReduceAction *action = [row objectForKey:key];
@@ -193,7 +193,7 @@
         for (NSUInteger state = 0; state < capacity; state++)
         {
             NSDictionary *row = table[state];
-            [s appendFormat:@"%5d | ", idx];
+            [s appendFormat:@"%5ld | ", (long)idx];
             for (NSString *key in orderedKeys)
             {
                 CPShiftReduceAction *action = [row objectForKey:key];

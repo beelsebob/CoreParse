@@ -38,7 +38,7 @@
     NSUInteger idx = 0;
     for (CPRule *r in ordered)
     {
-        [s appendFormat:@"%3d %@\n", idx, r];
+        [s appendFormat:@"%3ld %@\n", (long)idx, r];
         idx++;
     }
     
@@ -273,7 +273,7 @@
     NSMutableDictionary *namedRules = [NSMutableDictionary dictionaryWithCapacity:[rhsElements count]];
     for (CPRHSItem *item in rhsElements)
     {
-        [namedRules setObject:[self symbolNameNotInSet:symbolNames basedOnName:[NSString stringWithFormat:@"RHS%d", name]] forKey:item];
+        [namedRules setObject:[self symbolNameNotInSet:symbolNames basedOnName:[NSString stringWithFormat:@"RHS%ld", (long)name]] forKey:item];
         name++;
     }
     return namedRules;

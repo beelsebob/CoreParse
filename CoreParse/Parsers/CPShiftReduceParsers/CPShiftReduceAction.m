@@ -190,7 +190,7 @@ ActionDetails;
     switch (type)
     {
         case kActionTypeShift:
-            return [NSString stringWithFormat:@"s%d", details.shift];
+            return [NSString stringWithFormat:@"s%ld", (long)details.shift];
         case kActionTypeReduce:
             return [NSString stringWithFormat:@"r%@", [details.reductionRule name]];
         case kActionTypeAccept:
@@ -203,9 +203,9 @@ ActionDetails;
     switch (type)
     {
         case kActionTypeShift:
-            return [NSString stringWithFormat:@"s%d", details.shift];
+            return [NSString stringWithFormat:@"s%ld", (long)details.shift];
         case kActionTypeReduce:
-            return [NSString stringWithFormat:@"r%d", [g indexOfRule:details.reductionRule]];
+            return [NSString stringWithFormat:@"r%ld", (long)[g indexOfRule:details.reductionRule]];
         case kActionTypeAccept:
             return @"acc";
     }

@@ -756,7 +756,7 @@
 		1F0E88EC130462F300537D04 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "In The Beginning...";
 			};
 			buildConfigurationList = 1F0E88EF130462F300537D04 /* Build configuration list for PBXProject "CoreParse" */;
@@ -1014,6 +1014,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -1051,6 +1052,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
