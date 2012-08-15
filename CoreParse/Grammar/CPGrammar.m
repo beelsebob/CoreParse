@@ -101,7 +101,7 @@
         case 11:
         {
             CPRHSItem *i = [[[CPRHSItem alloc] init] autorelease];
-            [i setContents:[NSArray arrayWithObject:[children objectAtIndex:0]]];
+            [i setAlternatives:[NSArray arrayWithObject:[NSArray arrayWithObject:[children objectAtIndex:0]]]];
             NSString *symbol = [(CPKeywordToken *)[children objectAtIndex:1] keyword];
             if ([symbol isEqualToString:@"*"])
             {
@@ -125,7 +125,7 @@
         case 13:
         {
             CPRHSItem *i = [[[CPRHSItem alloc] init] autorelease];
-            [i setContents:[children objectAtIndex:1]];
+            [i setAlternatives:[children objectAtIndex:1]];
             [i setRepeats:NO];
             [i setMayNotExist:NO];
             return i;
@@ -231,7 +231,7 @@
     CPRule *rightHandSideItem2 = [CPRule ruleWithName:@"rightHandSideItem" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"unit"], [CPGrammarSymbol nonTerminalWithName:@"repeatSymbol"], nil] tag:11];
     
     CPRule *unit1 = [CPRule ruleWithName:@"unit" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol nonTerminalWithName:@"grammarSymbol"]] tag:12];
-    CPRule *unit2 = [CPRule ruleWithName:@"unit" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"("], [CPGrammarSymbol nonTerminalWithName:@"sumset"], [CPGrammarSymbol terminalWithName:@")"], nil] tag:13];
+    CPRule *unit2 = [CPRule ruleWithName:@"unit" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"("], [CPGrammarSymbol nonTerminalWithName:@"rightHandSide"], [CPGrammarSymbol terminalWithName:@")"], nil] tag:13];
     
     CPRule *repeatSymbol1 = [CPRule ruleWithName:@"repeatSymbol" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol terminalWithName:@"*"]] tag:14];
     CPRule *repeatSymbol2 = [CPRule ruleWithName:@"repeatSymbol" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol terminalWithName:@"+"]] tag:15];
@@ -249,8 +249,9 @@
     [parser setDelegate:del];
     
     NSMutableArray *initRules = [parser parse:tokenStream];
-        
-    return [self initWithStart:initStart rules:[self tidyRightHandSides:initRules]];
+    
+    NSArray *newRules = [self tidyRightHandSides:initRules];
+    return [self initWithStart:initStart rules:newRules];
 }
 
 - (id)init

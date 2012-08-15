@@ -41,8 +41,7 @@
                 break;
             }
             default:
-                [self release];
-                self = nil;
+                [self setContents:[[children mutableCopy] autorelease]];
                 break;
         }
     }

@@ -260,7 +260,10 @@
         if ([element isKindOfClass:itemClass])
         {
             [ret addObject:element];
-            [ret unionSet:[self collectRHSElementsForNewRules:[(CPRHSItem *)element contents]]];
+            for (NSArray *contents in [(CPRHSItem *)element alternatives])
+            {
+                [ret unionSet:[self collectRHSElementsForNewRules:contents]];
+            }
         }
     }
     return ret;
@@ -287,39 +290,59 @@
     for (CPRHSItem *item in newRules)
     {
         NSString *ruleName = [newRules objectForKey:item];
-        CPRule *rule;
-        if ([item mayNotExist])
-        {
-            rule = [[[CPRule alloc] initWithName:ruleName rightHandSideElements:[NSArray array]] autorelease];
-            [rule setTag:0];
-        }
-        else
-        {
-            rule = [[[CPRule alloc] initWithName:ruleName rightHandSideElements:[item contents]] autorelease];
-            [rule setTag:1];
-        }
-        [rule setRepresentitiveClass:rhsItemClass];
-        [rules addObject:rule];
         
-        if ([item repeats])
-        {
-            rule = [[[CPRule alloc] initWithName:ruleName rightHandSideElements:[[item contents] arrayByAddingObject:[CPGrammarSymbol nonTerminalWithName:ruleName]]] autorelease];
-            [rule setTag:2];
-        }
-        else if ([item mayNotExist])
-        {
-            rule = [[[CPRule alloc] initWithName:ruleName rightHandSideElements:[item contents]] autorelease];
-            [rule setTag:1];
-        }
-        else
-        {
-            rule = nil;
-        }
+        // We never generate a CPRHSItem which both repeats/mayNotExist, and has alternatives
+        // Cases where this happens are represented as two CPRHSItems, one inside another
+        // Because of this, we can deal with the two cases completely seperately.
         
-        if (nil != rule)
+        if ([[item alternatives] count] == 1)
         {
+            CPRule *rule;
+            if ([item mayNotExist])
+            {
+                rule = [[[CPRule alloc] initWithName:ruleName rightHandSideElements:[NSArray array]] autorelease];
+                [rule setTag:0];
+            }
+            else
+            {
+                rule = [[[CPRule alloc] initWithName:ruleName rightHandSideElements:[[item alternatives] objectAtIndex:0]] autorelease];
+                [rule setTag:1];
+            }
             [rule setRepresentitiveClass:rhsItemClass];
             [rules addObject:rule];
+            
+            if ([item repeats])
+            {
+                rule = [[[CPRule alloc] initWithName:ruleName rightHandSideElements:[[[item alternatives] objectAtIndex:0] arrayByAddingObject:[CPGrammarSymbol nonTerminalWithName:ruleName]]] autorelease];
+                [rule setTag:2];
+            }
+            else if ([item mayNotExist])
+            {
+                rule = [[[CPRule alloc] initWithName:ruleName rightHandSideElements:[[item alternatives] objectAtIndex:0]] autorelease];
+                [rule setTag:1];
+            }
+            else
+            {
+                rule = nil;
+            }
+            
+            if (nil != rule)
+            {
+                [rule setRepresentitiveClass:rhsItemClass];
+                [rules addObject:rule];
+            }
+        }
+        else
+        {
+            NSUInteger i = 0;
+            for (NSArray *contents in [item alternatives])
+            {
+                CPRule *rule = [[[CPRule alloc] initWithName:ruleName rightHandSideElements:contents] autorelease];
+                [rule setTag:3 + i];
+                [rule setRepresentitiveClass:rhsItemClass];
+                [rules addObject:rule];
+                i++;
+            }
         }
     }
     

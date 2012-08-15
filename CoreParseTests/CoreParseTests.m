@@ -654,6 +654,7 @@
     CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"a"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"b"]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"c"]];
     CPTokenStream *tokenStream = [tokeniser tokenise:@"baaa"];
     NSString *starGrammarString = @"A ::= 'b''a'*;";
     CPGrammar *starGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:starGrammarString];
@@ -674,6 +675,11 @@
     CPGrammar *parenGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:parenGrammarString];
     CPParser *parenParser = [CPLALR1Parser parserWithGrammar:parenGrammar];
     CPSyntaxTree *parenTree = [parenParser parse:tokenStream];
+    NSString *parenWithOrGrammarString = @"A ::= 'b'('a' | 'c')*'b';";
+    CPGrammar *parenWithOrGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:parenWithOrGrammarString];
+    CPParser *parenWithOrParser = [CPLALR1Parser parserWithGrammar:parenWithOrGrammar];
+    tokenStream = [tokeniser tokenise:@"bacab"];
+    CPSyntaxTree *parenWithOrTree = [parenWithOrParser parse:tokenStream];
     
     STAssertNotNil(starTree, @"EBNF star parser produced nil result", nil);
     NSArray *as = [[starTree children] objectAtIndex:1];
@@ -714,6 +720,16 @@
         ![[(CPKeywordToken *)[(NSArray *)[as objectAtIndex:2] objectAtIndex:0] keyword] isEqualToString:@"a"])
     {
         STFail(@"EBNF paren parser did not correctly parse its result", nil);
+    }
+    STAssertNotNil(parenWithOrTree, @"EBNF paran parser with or produced nil result", nil);
+    as = [[parenWithOrTree children] objectAtIndex:1];
+    if (![[(CPKeywordToken *)[[parenTree children] objectAtIndex:0] keyword] isEqualToString:@"b"] ||
+        [as count] != 3 ||
+        ![[(CPKeywordToken *)[(NSArray *)[as objectAtIndex:0] objectAtIndex:0] keyword] isEqualToString:@"a"] ||
+        ![[(CPKeywordToken *)[(NSArray *)[as objectAtIndex:1] objectAtIndex:0] keyword] isEqualToString:@"c"] ||
+        ![[(CPKeywordToken *)[(NSArray *)[as objectAtIndex:2] objectAtIndex:0] keyword] isEqualToString:@"a"])
+    {
+        STFail(@"EBNF paren parser with or did not correctly parse its result", nil);
     }
 }
 

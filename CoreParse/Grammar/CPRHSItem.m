@@ -10,13 +10,13 @@
 
 @implementation CPRHSItem
 
-@synthesize contents;
+@synthesize alternatives;
 @synthesize repeats;
 @synthesize mayNotExist;
 
 - (NSUInteger)hash
 {
-    return [[self contents] hash] << 2 + ([self repeats] ? 0x2 : 0x0) + ([self mayNotExist] ? 0x1 : 0x0);
+    return [[self alternatives] hash] << 2 + ([self repeats] ? 0x2 : 0x0) + ([self mayNotExist] ? 0x1 : 0x0);
 }
 
 - (BOOL)isEqual:(id)object
@@ -24,7 +24,7 @@
     if ([object isKindOfClass:[CPRHSItem class]])
     {
         CPRHSItem *i = (CPRHSItem *)object;
-        return [[self contents] isEqualToArray:[i contents]] && [self repeats] == [i repeats] && [self mayNotExist] == [i mayNotExist];
+        return [[self alternatives] isEqualToArray:[i alternatives]] && [self repeats] == [i repeats] && [self mayNotExist] == [i mayNotExist];
     }
     return NO;
 }
@@ -32,7 +32,7 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     CPRHSItem *other = [[CPRHSItem allocWithZone:zone] init];
-    [other setContents:[self contents]];
+    [other setAlternatives:[self alternatives]];
     [other setRepeats:[self repeats]];
     [other setMayNotExist:[self mayNotExist]];
     return other;
