@@ -89,7 +89,7 @@
  *     11 rightHandSideItem ::= &lt;unit&gt; &lt;repeatSymbol&gt;;
  *
  *     12 unit              ::= &lt;gramarSymbol&gt;;<br />
- *     13 unit              ::= "(" &lt;sumset&gt; ")";
+ *     13 unit              ::= "(" &lt;rightHandSide&gt; ")";
  *
  *     14 repeatSymbol      ::= "*";<br />
  *     15 repeatSymbol      ::= "+";<br />

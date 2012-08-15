@@ -146,6 +146,16 @@
     }
 }
 
+- (CPRecoveryAction *)parser:(CPParser *)parser didEncounterErrorOnInput:(CPTokenStream *)inputStream expecting:(NSSet *)acceptableTokens
+{
+    CPToken *t = [inputStream peekToken];
+    NSLog(@"=== Core Parse Error ===");
+    NSLog(@"Could not parse BNF for grammar.");
+    NSLog(@"%ld:%ld: Found %@", (long)[t lineNumber] + 1, (long)[t columnNumber] + 1, t);
+    NSLog(@"Expected %@", acceptableTokens);
+    return [CPRecoveryAction recoveryActionStop];
+}
+
 - (BOOL)tokeniser:(CPTokeniser *)tokeniser shouldConsumeToken:(CPToken *)token
 {
     return YES;
