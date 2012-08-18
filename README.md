@@ -71,7 +71,7 @@ We can now invoke our tokeniser.
 Parsing
 -------
 
-We construct parsers by specifying their grammar.  We can construct a grammar simply using a simple BNF like language:
+We construct parsers by specifying their grammar.  We can construct a grammar simply using a simple BNF like language.  Note the syntax tag@<NonTerminal> can be read simply as <NonTerminal>, the tag can be used later to quickly extract values from the parsed result:
 
     NSString *expressionGrammar =
         @"Expression ::= term@<Term>   | expr@<Expression> op@<AddOp> term@<Term>;"
