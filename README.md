@@ -19,7 +19,7 @@ You may wonder why and/or when you should use CoreParse.  There are already a nu
   * While I have no explicitly benchmarked, I would expect parsers produced by lex/yacc or flex/bison to be faster than CoreParse ones.
   * CoreParse does not _require_ you to compile your parser before you start (though it is recommended).
   * CoreParse provides allows you to specify grammars right in your Objective-C source, rather than needing another language, which intermixes C/Obj-C.
-  * CoreParse does not use global state, multiple parser instances can be run in parallel.
+  * CoreParse does not use global state, multiple parser instances can be run in parallel (or the same parser instance can parse multiple token streams in parallel).
 
 Parsing Guide
 =============
