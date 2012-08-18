@@ -54,6 +54,8 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
+	<option value="//api/name/childAtIndex:">&nbsp;&nbsp;&nbsp;&nbsp;- childAtIndex:</option>
+	
 	<option value="//api/name/initWithRule:children:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithRule:children:</option>
 	
 	<option value="//api/name/initWithRule:children:tagValues:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithRule:children:tagValues:</option>
@@ -109,6 +111,8 @@
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/childAtIndex:">childAtIndex:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithRule:children:">initWithRule:children:</a></span></li>
 	
@@ -232,6 +236,13 @@
 	<span class="tooltip">
 		<code><a href="#//api/name/valueForTag:">&ndash;&nbsp;valueForTag:</a></code>
 		<span class="tooltip"><p>Returns the value of a specific tag.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/childAtIndex:">&ndash;&nbsp;childAtIndex:</a></code>
+		<span class="tooltip"><p>Returns the child at a specific index.</p></span>
 	</span>
 	
 	
@@ -513,6 +524,58 @@
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
+	<a name="//api/name/childAtIndex:" title="childAtIndex:"></a>
+	<h3 class="subsubtitle method-title">childAtIndex:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns the child at a specific index.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)childAtIndex:(NSUInteger)<em>idx</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>idx</em></dt>
+			<dd><p>The index of the child you want to retrieve.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The child at that index.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns the child at a specific index.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPSyntaxTree.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/initWithRule:children:" title="initWithRule:children:"></a>
 	<h3 class="subsubtitle method-title">initWithRule:children:</h3>
 	
@@ -677,7 +740,7 @@
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>the sub syntax tree associated with that tag.</p>
+		<p>The sub syntax tree associated with that tag.</p>
 	</div>
 	
 	
