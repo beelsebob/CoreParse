@@ -92,39 +92,29 @@ typedef enum
  * The grammar used for parsing the BNF can be expressed as follows:
  * 
  * <pre>
- * 0  ruleset                 ::= &lt;ruleset&gt; &lt;rule&gt;;
- * 1  ruleset                 ::= &lt;rule&gt;;
- * 
- * 2  rule                    ::= "Number" &lt;unNumbered&gt;;
- * 3  rule                    ::= &lt;unNumbered&gt;;
- * 
- * 4  unNumbered              ::= "Identifier" "::=" &lt;rightHandSide&gt; ";";
- * 
- * 5  rightHandSide           ::= &lt;rightHandSide> "|" &lt;sumset&gt;;
- * 6  rightHandSide           ::= &lt;rightHandSide> "|";
- * 7  rightHandSide           ::= &lt;sumset>;
- * 
- * 8  sumset                  ::= &lt;sumset&gt; &lt;taggedRightHandSideItem&gt;;
- * 9  sumset                  ::= &lt;taggedRightHandSideItem&gt;;
- * 
- * 10 taggedRightHandSideItem ::= &lt;rightHandSideItem&gt;;
- * 11 taggedRightHandSideItem ::= "Identifier" "@" &lt;rightHandSideItem&gt;;
- * 
- * 12 rightHandSideItem       ::= &lt;unit&gt;;
- * 13 rightHandSideItem       ::= &lt;unit&gt; &lt;repeatSymbol&gt;;
- * 
- * 14 unit                    ::= &lt;gramarSymbol&gt;;
- * 15 unit                    ::= "(" &lt;rightHandSide&gt; ")";
- * 
- * 16 repeatSymbol            ::= "*";
- * 17 repeatSymbol            ::= "+";
- * 18 repeatSymbol            ::= "?";
- * 
- * 19 grammarSymbol           ::= &lt;nonTerminal&gt;;
- * 20 grammarSymbol           ::= &lt;terminal&gt;;
- * 
- * 21 nonTerminal             ::= "&lt;" "Identifier" "&gt;";
- * 22 terminal                ::= "String";
+ * ruleset                 ::= &lt;rule&gt;+;
+ *
+ * rule                    ::= "Number"? &lt;unNumbered&gt;;
+ *
+ * unNumbered              ::= "Identifier" "::=" &lt;rightHandSide&gt; ";";
+ *
+ * rightHandSide           ::= (&lt;sumset&gt; "|")* &lt;sumset&gt;?;
+ *
+ * sumset                  ::= &lt;taggedRightHandSideItem&gt;+;
+ *
+ * taggedRightHandSideItem ::= ("Identifier" "@")? &lt;rightHandSideItem&gt;;
+ *
+ * rightHandSideItem       ::= &lt;unit&gt; &lt;repeatSymbol&gt;?;
+ *
+ * unit                    ::= &lt;gramarSymbol&gt; | "(" &lt;rightHandSide&gt; ")";
+ *
+ * repeatSymbol            ::= "*" | "+" | "?";
+ *
+ * grammarSymbol           ::= &lt;nonTerminal&gt; | &lt;terminal&gt;;
+ *
+ * nonTerminal             ::= "&lt;" "Identifier" "&gt;";
+ *
+ * terminal                ::= "String";
  * </pre>
  *
  * @param start The non-terminal that all parses must reduce to.
@@ -149,39 +139,29 @@ typedef enum
  * The grammar used for parsing the BNF can be expressed as follows:
  *
  * <pre>
- * 0  ruleset                 ::= &lt;ruleset&gt; &lt;rule&gt;;
- * 1  ruleset                 ::= &lt;rule&gt;;
+ * ruleset                 ::= &lt;rule&gt;+;
  *
- * 2  rule                    ::= "Number" &lt;unNumbered&gt;;
- * 3  rule                    ::= &lt;unNumbered&gt;;
+ * rule                    ::= "Number"? &lt;unNumbered&gt;;
  *
- * 4  unNumbered              ::= "Identifier" "::=" &lt;rightHandSide&gt; ";";
+ * unNumbered              ::= "Identifier" "::=" &lt;rightHandSide&gt; ";";
  *
- * 5  rightHandSide           ::= &lt;rightHandSide> "|" &lt;sumset&gt;;
- * 6  rightHandSide           ::= &lt;rightHandSide> "|";
- * 7  rightHandSide           ::= &lt;sumset>;
+ * rightHandSide           ::= (&lt;sumset&gt; "|")* &lt;sumset&gt;?;
  *
- * 8  sumset                  ::= &lt;sumset&gt; &lt;taggedRightHandSideItem&gt;;
- * 9  sumset                  ::= &lt;taggedRightHandSideItem&gt;;
+ * sumset                  ::= &lt;taggedRightHandSideItem&gt;+;
  *
- * 10 taggedRightHandSideItem ::= &lt;rightHandSideItem&gt;;
- * 11 taggedRightHandSideItem ::= "Identifier" "@" &lt;rightHandSideItem&gt;;
+ * taggedRightHandSideItem ::= ("Identifier" "@")? &lt;rightHandSideItem&gt;;
  *
- * 12 rightHandSideItem       ::= &lt;unit&gt;;
- * 13 rightHandSideItem       ::= &lt;unit&gt; &lt;repeatSymbol&gt;;
+ * rightHandSideItem       ::= &lt;unit&gt; &lt;repeatSymbol&gt;?;
  *
- * 14 unit                    ::= &lt;gramarSymbol&gt;;
- * 15 unit                    ::= "(" &lt;rightHandSide&gt; ")";
+ * unit                    ::= &lt;gramarSymbol&gt; | "(" &lt;rightHandSide&gt; ")";
  *
- * 16 repeatSymbol            ::= "*";
- * 17 repeatSymbol            ::= "+";
- * 18 repeatSymbol            ::= "?";
+ * repeatSymbol            ::= "*" | "+" | "?";
  *
- * 19 grammarSymbol           ::= &lt;nonTerminal&gt;;
- * 20 grammarSymbol           ::= &lt;terminal&gt;;
+ * grammarSymbol           ::= &lt;nonTerminal&gt; | &lt;terminal&gt;;
  *
- * 21 nonTerminal             ::= "&lt;" "Identifier" "&gt;";
- * 22 terminal                ::= "String";
+ * nonTerminal             ::= "&lt;" "Identifier" "&gt;";
+ *
+ * terminal                ::= "String";
  * </pre>
  *
  * @param start The non-terminal that all parses must reduce to.
