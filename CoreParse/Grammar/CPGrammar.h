@@ -124,7 +124,7 @@ typedef enum
  * 20 grammarSymbol           ::= &lt;terminal&gt;;
  * 
  * 21 nonTerminal             ::= "&lt;" "Identifier" "&gt;";
- * 22 terminal                ::= String;
+ * 22 terminal                ::= "String";
  * </pre>
  *
  * @param start The non-terminal that all parses must reduce to.
