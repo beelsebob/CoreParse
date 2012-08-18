@@ -90,6 +90,9 @@
 
 /**
  * Returns the value of a specific tag.
+ *
+ * @param tagName The name of the tag you want the value of.
+ * @return the sub syntax tree associated with that tag.
  */
 - (id)valueForTag:(NSString *)tagName;
 
