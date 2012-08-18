@@ -40,6 +40,8 @@
 
 @implementation CPBNFParserDelegate
 
+@synthesize err = _err;
+
 - (id)parser:(CPParser *)parser didProduceSyntaxTree:(CPSyntaxTree *)syntaxTree
 {
     NSArray *children = [syntaxTree children];

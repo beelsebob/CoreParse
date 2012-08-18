@@ -14,6 +14,8 @@
 
 @synthesize contents = _contents;
 @synthesize tagName = _tagName;
+@synthesize shouldCollapse = _shouldCollapse;
+@synthesize tagValues = _tagValues;
 
 - (id)initWithSyntaxTree:(CPSyntaxTree *)syntaxTree
 {
