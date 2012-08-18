@@ -98,16 +98,13 @@ When a rule is matched by the parser, the `initWithSyntaxTree:` method will be c
             {
                 [self setValue:[t value]];
             }
+            else if ([[syntaxTree valueForTag:@"op"] isEqualToString:@"+"])
+            {
+                [self setValue:[e value] + [t value]];
+            }
             else
             {
-                if ([[syntaxTree valueForTag:@"op"] isEqualToString:@"+"])
-                {
-                    [self setValue:[e value] + [t value]];
-                }
-                else
-                {
-                    [self setValue:[e value] - [t value]];
-                }
+                [self setValue:[e value] - [t value]];
             }
         }
         
