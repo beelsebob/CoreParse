@@ -43,6 +43,8 @@
 	
 	<option value="//api/name/grammarWithStart:backusNaurForm:">&nbsp;&nbsp;&nbsp;&nbsp;+ grammarWithStart:backusNaurForm:</option>
 	
+	<option value="//api/name/grammarWithStart:backusNaurForm:error:">&nbsp;&nbsp;&nbsp;&nbsp;+ grammarWithStart:backusNaurForm:error:</option>
+	
 	<option value="//api/name/grammarWithStart:rules:">&nbsp;&nbsp;&nbsp;&nbsp;+ grammarWithStart:rules:</option>
 	
 	
@@ -57,6 +59,8 @@
 	<option value="//api/name/allRules">&nbsp;&nbsp;&nbsp;&nbsp;- allRules</option>
 	
 	<option value="//api/name/initWithStart:backusNaurForm:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithStart:backusNaurForm:</option>
+	
+	<option value="//api/name/initWithStart:backusNaurForm:error:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithStart:backusNaurForm:error:</option>
 	
 	<option value="//api/name/initWithStart:rules:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithStart:rules:</option>
 	
@@ -102,6 +106,8 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/grammarWithStart:backusNaurForm:">grammarWithStart:backusNaurForm:</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/grammarWithStart:backusNaurForm:error:">grammarWithStart:backusNaurForm:error:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/grammarWithStart:rules:">grammarWithStart:rules:</a></span></li>
 	
 </ul></li>
@@ -117,6 +123,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/allRules">allRules</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithStart:backusNaurForm:">initWithStart:backusNaurForm:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithStart:backusNaurForm:error:">initWithStart:backusNaurForm:error:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithStart:rules:">initWithStart:rules:</a></span></li>
 	
@@ -194,6 +202,13 @@
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/grammarWithStart:backusNaurForm:error:">+&nbsp;grammarWithStart:backusNaurForm:error:</a></code>
+		<span class="tooltip"><p>Creates a grammar based on a starting non-terminal and some backus naur form.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/initWithStart:rules:">&ndash;&nbsp;initWithStart:rules:</a></code>
 		<span class="tooltip"><p>Initialises a grammar based on a starting non-terminal and a list of <a href="#//api/name/rules">rules</a>.</p></span>
 	</span>
@@ -202,6 +217,13 @@
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/initWithStart:backusNaurForm:">&ndash;&nbsp;initWithStart:backusNaurForm:</a></code>
+		<span class="tooltip"><p>Initialises a grammar based on a starting non-terminal and some backus naur form.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithStart:backusNaurForm:error:">&ndash;&nbsp;initWithStart:backusNaurForm:error:</a></code>
 		<span class="tooltip"><p>Initialises a grammar based on a starting non-terminal and some backus naur form.</p></span>
 	</span>
 	
@@ -357,7 +379,7 @@
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Creates a grammar based on a starting non-terminal and some backus naur form.</p>
 
-<p>see <a href="#//api/name/initWithStart:backusNaurForm:">initWithStart:backusNaurForm:</a> for a <a href="#//api/name/description">description</a> of the syntax used for BNF.</p>
+<p>see <a href="#//api/name/initWithStart:backusNaurForm:">initWithStart:backusNaurForm:</a> for a <a href="#//api/name/description">description</a> of the syntax used for BNF.</p><div class="bug"><p><strong>Bug:</strong> Warning this method is deprecated, use <a href="#//api/name/grammarWithStart:backusNaurForm:error:">grammarWithStart:backusNaurForm:error:</a> instead.</p></div>
 	</div>
 	
 	
@@ -368,7 +390,78 @@
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/grammarWithStart:backusNaurForm:">+ grammarWithStart:backusNaurForm:</a></p></code></li>
+			<li><code><p><a href="#//api/name/grammarWithStart:backusNaurForm:error:">+ grammarWithStart:backusNaurForm:error:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPGrammar.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/grammarWithStart:backusNaurForm:error:" title="grammarWithStart:backusNaurForm:error:"></a>
+	<h3 class="subsubtitle method-title">grammarWithStart:backusNaurForm:error:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Creates a grammar based on a starting non-terminal and some backus naur form.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (id)grammarWithStart:(NSString *)<em>start</em> backusNaurForm:(NSString *)<em>bnf</em> error:(NSError **)<em>error</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>start</em></dt>
+			<dd><p>The non-terminal that all parses must reduce to.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>bnf</em></dt>
+			<dd><p>BNF for the grammar.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>A pointer to an error object which will be filled if the method returns nil.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Returns a CPGrammar based on the BNF and starting non-terminal.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Creates a grammar based on a starting non-terminal and some backus naur form.</p>
+
+<p>see <a href="#//api/name/initWithStart:backusNaurForm:">initWithStart:backusNaurForm:</a> for a <a href="#//api/name/description">description</a> of the syntax used for BNF.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
 			
 			<li><code><p><a href="#//api/name/initWithStart:backusNaurForm:">&ndash; initWithStart:backusNaurForm:</a></p></code></li>
 			
@@ -672,6 +765,117 @@ You may also parenthesise sub<a href="#//api/name/rules">rules</a>.</p>
 18 grammarSymbol     ::= &lt;terminal&gt;;</p>
 
 <p>19 nonTerminal       ::= &ldquo;&lt;&rdquo; &ldquo;Identifier&rdquo; &ldquo;&gt;&rdquo;;<br />
+20 terminal          ::= String;</p><div class="bug"><p><strong>Bug:</strong> Warning this method is deprecated, use <a href="#//api/name/initWithStart:backusNaurForm:error:">initWithStart:backusNaurForm:error:</a> instead.</p></div>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/initWithStart:backusNaurForm:error:">&ndash; initWithStart:backusNaurForm:error:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPGrammar.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithStart:backusNaurForm:error:" title="initWithStart:backusNaurForm:error:"></a>
+	<h3 class="subsubtitle method-title">initWithStart:backusNaurForm:error:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Initialises a grammar based on a starting non-terminal and some backus naur form.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithStart:(NSString *)<em>start</em> backusNaurForm:(NSString *)<em>bnf</em> error:(NSError **)<em>error</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>start</em></dt>
+			<dd><p>The non-terminal that all parses must reduce to.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>bnf</em></dt>
+			<dd><p>BNF for the grammar.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>A pointer to an error object which will be filled if the method returns nil.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Returns a CPGrammar based on the BNF and starting non-terminal.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Initialises a grammar based on a starting non-terminal and some backus naur form.</p>
+
+<p>The BNF is expressed using <a href="#//api/name/rules">rules</a> in the form <code>nonTerminal ::= &lt;subNonTerminal&gt; "subTerminal" &lt;subNonTerminal&gt;;</code>.  Rules may optionally be prefixed with a number indicating their tag.
+This allows you to quickly construct grammars in a readable form.
+You may also use EBNF to construct grammars.  This allows you to use the symbols &ldquo;*&rdquo;, &ldquo;+&rdquo;, and &ldquo;?&rdquo; to indicate that a construction may appear 0 or more; 1 or more; and 0 or 1 times respectively.
+You may also parenthesise sub<a href="#//api/name/rules">rules</a>.</p>
+
+<p>When you use any of the above EBNF constructs or parentheses, the parser will return the contents in an NSArray.</p>
+
+<p>The grammar used for parsing the BNF can be expressed as follows:</p>
+
+<p>0  ruleset           ::= &lt;ruleset&gt; &lt;rule&gt;;<br />
+1  ruleset           ::= &lt;rule&gt;;</p>
+
+<p>2  rule              ::= &ldquo;Number&rdquo; &lt;unNumbered&gt;;<br />
+3  rule              ::= &lt;unNumbered&gt;;</p>
+
+<p>4  unNumbered        ::= &ldquo;Identifier&rdquo; &ldquo;::=&rdquo; &lt;rightHandSide&gt; &ldquo;;&rdquo;;</p>
+
+<p>5  rightHandSide     ::= &lt;rightHandSide> &ldquo;|&rdquo; &lt;sumset&gt;;<br />
+6  rightHandSide     ::= &lt;rightHandSide> &ldquo;|&rdquo;;<br />
+7  rightHandSide     ::= &lt;sumset>;</p>
+
+<p>8  sumset            ::= &lt;sumset&gt; &lt;rightHandSideItem&gt;;<br />
+9  sumset            ::= &lt;rightHandSideItem&gt;;</p>
+
+<p>10 rightHandSideItem ::= &lt;unit&gt;;<br />
+11 rightHandSideItem ::= &lt;unit&gt; &lt;repeatSymbol&gt;;</p>
+
+<p>12 unit              ::= &lt;gramarSymbol&gt;;<br />
+13 unit              ::= &ldquo;(&rdquo; &lt;rightHandSide&gt; &ldquo;)&rdquo;;</p>
+
+<p>14 repeatSymbol      ::= &ldquo;*&rdquo;;<br />
+15 repeatSymbol      ::= &ldquo;+&rdquo;;<br />
+16 repeatSymbol      ::= &ldquo;?&rdquo;;</p>
+
+<p>17 grammarSymbol     ::= &lt;nonTerminal&gt;;<br />
+18 grammarSymbol     ::= &lt;terminal&gt;;</p>
+
+<p>19 nonTerminal       ::= &ldquo;&lt;&rdquo; &ldquo;Identifier&rdquo; &ldquo;&gt;&rdquo;;<br />
 20 terminal          ::= String;</p>
 	</div>
 	
@@ -833,7 +1037,7 @@ You may also parenthesise sub<a href="#//api/name/rules">rules</a>.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-08-15)</span><br />
+						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-08-18)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						

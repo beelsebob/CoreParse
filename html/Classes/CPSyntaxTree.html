@@ -38,6 +38,8 @@
 	
 	<option value="//api/name/rule">&nbsp;&nbsp;&nbsp;&nbsp;rule</option>
 	
+	<option value="//api/name/tagValues">&nbsp;&nbsp;&nbsp;&nbsp;tagValues</option>
+	
 	
 	
 	
@@ -45,12 +47,18 @@
 	
 	<option value="//api/name/syntaxTreeWithRule:children:">&nbsp;&nbsp;&nbsp;&nbsp;+ syntaxTreeWithRule:children:</option>
 	
+	<option value="//api/name/syntaxTreeWithRule:children:tagValues:">&nbsp;&nbsp;&nbsp;&nbsp;+ syntaxTreeWithRule:children:tagValues:</option>
+	
 	
 	
 	
 	<option value="instance_methods">Instance Methods</option>
 	
 	<option value="//api/name/initWithRule:children:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithRule:children:</option>
+	
+	<option value="//api/name/initWithRule:children:tagValues:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithRule:children:tagValues:</option>
+	
+	<option value="//api/name/valueForTag:">&nbsp;&nbsp;&nbsp;&nbsp;- valueForTag:</option>
 	
 	
 	
@@ -84,6 +92,8 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/rule">rule</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/tagValues">tagValues</a></span></li>
+	
 </ul></li>
 
 
@@ -92,6 +102,8 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/syntaxTreeWithRule:children:">syntaxTreeWithRule:children:</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/syntaxTreeWithRule:children:tagValues:">syntaxTreeWithRule:children:tagValues:</a></span></li>
+	
 </ul></li>
 
 
@@ -99,6 +111,10 @@
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithRule:children:">initWithRule:children:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithRule:children:tagValues:">initWithRule:children:tagValues:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/valueForTag:">valueForTag:</a></span></li>
 	
 </ul></li>
 
@@ -169,6 +185,20 @@
 	</span>
 	
 	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/syntaxTreeWithRule:children:tagValues:">+&nbsp;syntaxTreeWithRule:children:tagValues:</a></code>
+		<span class="tooltip"><p>Creates a syntax tree based on a <a href="#//api/name/rule">rule</a> and some child trees.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithRule:children:tagValues:">&ndash;&nbsp;initWithRule:children:tagValues:</a></code>
+		<span class="tooltip"><p>Initialises a syntax tree based on a <a href="#//api/name/rule">rule</a> and some child trees.</p></span>
+	</span>
+	
+	
 </li>
 						</ul>
 						
@@ -190,6 +220,20 @@
 		<span class="tooltip"><p>The children that match the right hand side of the matched <a href="#//api/name/rule">rule</a>.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/tagValues">&nbsp;&nbsp;tagValues</a></code>
+		<span class="tooltip"><p>The values of any tags found on the right hand side of the <a href="#//api/name/rule">rule</a>.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/valueForTag:">&ndash;&nbsp;valueForTag:</a></code>
+		<span class="tooltip"><p>Returns the value of a specific tag.</p></span>
+	</span>
+	
 	
 </li>
 						</ul>
@@ -278,6 +322,43 @@
 	
 </div>
 						
+						<div class="section-method">
+	<a name="//api/name/tagValues" title="tagValues"></a>
+	<h3 class="subsubtitle method-title">tagValues</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The values of any tags found on the right hand side of the <a href="#//api/name/rule">rule</a>.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (readonly, copy) NSDictionary *tagValues</code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The values of any tags found on the right hand side of the <a href="#//api/name/rule">rule</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPSyntaxTree.h</code><br />
+	</div>				
+	
+	
+</div>
+						
 					</div>
 					
 					
@@ -326,6 +407,77 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
+		<p>Creates a syntax tree based on a <a href="#//api/name/rule">rule</a> and some child trees.</p><div class="bug"><p><strong>Bug:</strong> Warning this method is deprecated, use <a href="#//api/name/syntaxTreeWithRule:children:tagValues:">syntaxTreeWithRule:children:tagValues:</a> instead.</p></div>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p>syntaxTreeWithRule:children:<a href="#//api/name/tagValues">@property tagValues</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPSyntaxTree.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/syntaxTreeWithRule:children:tagValues:" title="syntaxTreeWithRule:children:tagValues:"></a>
+	<h3 class="subsubtitle method-title">syntaxTreeWithRule:children:tagValues:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Creates a syntax tree based on a <a href="#//api/name/rule">rule</a> and some child trees.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>+ (id)syntaxTreeWithRule:(CPRule *)<em>nonTerminal</em> children:(NSArray *)<em>children</em> tagValues:(NSDictionary *)<em>tagValues</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>nonTerminal</em></dt>
+			<dd><p>The <a href="#//api/name/rule">rule</a> that was matched to create this tree node.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>children</em></dt>
+			<dd><p>The child trees that represent the components of the right hand side of the <a href="#//api/name/rule">rule</a>.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>tagValues</em></dt>
+			<dd><p>The values of each tag beneath the <a href="#//api/name/rule">rule</a>.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Returns a syntax tree with apropriate <a href="#//api/name/children">children</a>, and matching a specified <a href="#//api/name/rule">rule</a>.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
 		<p>Creates a syntax tree based on a <a href="#//api/name/rule">rule</a> and some child trees.</p>
 	</div>
 	
@@ -337,7 +489,7 @@
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/initWithRule:children:">&ndash; initWithRule:children:</a></p></code></li>
+			<li><code><p><a href="#//api/name/initWithRule:children:tagValues:">&ndash; initWithRule:children:tagValues:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -400,6 +552,77 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
+		<p>Initialises a syntax tree based on a <a href="#//api/name/rule">rule</a> and some child trees.</p><div class="bug"><p><strong>Bug:</strong> Warning this method is deprecated, use <a href="#//api/name/initWithRule:children:tagValues:">initWithRule:children:tagValues:</a> instead.</p></div>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/initWithRule:children:tagValues:">&ndash; initWithRule:children:tagValues:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPSyntaxTree.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithRule:children:tagValues:" title="initWithRule:children:tagValues:"></a>
+	<h3 class="subsubtitle method-title">initWithRule:children:tagValues:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Initialises a syntax tree based on a <a href="#//api/name/rule">rule</a> and some child trees.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithRule:(CPRule *)<em>nonTerminal</em> children:(NSArray *)<em>children</em> tagValues:(NSDictionary *)<em>tagValues</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>nonTerminal</em></dt>
+			<dd><p>The <a href="#//api/name/rule">rule</a> that was matched to create this tree node.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>children</em></dt>
+			<dd><p>The child trees that represent the components of the right hand side of the <a href="#//api/name/rule">rule</a>.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>tagValues</em></dt>
+			<dd><p>The values of each tag beneath the <a href="#//api/name/rule">rule</a>.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>Returns a syntax tree with apropriate <a href="#//api/name/children">children</a>, and matching a specified <a href="#//api/name/rule">rule</a>.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
 		<p>Initialises a syntax tree based on a <a href="#//api/name/rule">rule</a> and some child trees.</p>
 	</div>
 	
@@ -411,10 +634,47 @@
 		<h4 class="method-subtitle">See Also</h4>
 		<ul>
 			
-			<li><code><p><a href="#//api/name/syntaxTreeWithRule:children:">+ syntaxTreeWithRule:children:</a></p></code></li>
+			<li><code><p>syntaxTreeWithRule:children:<a href="#//api/name/tagValues">@property tagValues</a></p></code></li>
 			
 		</ul>
 	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPSyntaxTree.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/valueForTag:" title="valueForTag:"></a>
+	<h3 class="subsubtitle method-title">valueForTag:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns the value of a specific tag.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)valueForTag:(NSString *)<em>tagName</em></code></div>
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns the value of a specific tag.</p>
+	</div>
+	
+	
+	
+	
 	
 	
 	
@@ -439,7 +699,7 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-08-15)</span><br />
+						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-08-18)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						
