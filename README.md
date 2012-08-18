@@ -5,8 +5,21 @@ CoreParse is a parsing library for Mac OS X and iOS.  It supports a wide range o
 
 For full documentation see http://beelsebob.github.com/CoreParse.
 
-WARNING: CPTokenisers now do error handling, check your code has not broken.
-----------------------------------------------------------------------------
+Why Should You use CoreParse
+----------------------------
+
+You may wonder why and/or when you should use CoreParse.  There are already a number of parsers available in the wild, why should you use this one?
+
+* Compared to ParseKit:
+  * CoreParse supports more languages (LR(1) languages cover all LL(1) languages and more).  In practice, LALR(1) grammars cover most useful languages.
+  * CoreParse produces faster parsers.
+  * CoreParse parsers and tokenisers can be archived using NSKeyedArchivers to save regenerating them each time your application runs.
+  * CoreParse's parsing algorithm is not recursive, meaning it could theoretically deal with much larger hierarchies of language structure without blowing the stack.
+* Compared to lex/yacc or flex/bison:
+  * While I have no explicitly benchmarked, I would expect parsers produced by lex/yacc or flex/bison to be faster than CoreParse ones.
+  * CoreParse does not _require_ you to compile your parser before you start (though it is recommended).
+  * CoreParse provides allows you to specify grammars right in your Objective-C source, rather than needing another language, which intermixes C/Obj-C.
+  * CoreParse does not use glabal state, multiple parser instances can be run in parallel.
 
 Parsing Guide
 =============
@@ -61,9 +74,9 @@ Parsing
 We construct parsers by specifying their grammar.  We can construct a grammar simply using a simple BNF like language:
 
     NSString *expressionGrammar =
-        @"Expression ::= <Term>   | <Expression> <AddOp> <Term>;"
-        @"Term       ::= <Factor> | <Term>       <MulOp> <Factor>;"
-        @"Factor     ::= 'Number' | '(' <Expression> ')';"
+        @"Expression ::= term@<Term>   | expr@<Expression> op@<AddOp> term@<Term>;"
+        @"Term       ::= fact@<Factor> | term@<Term>       op@<MulOp> fact@<Factor>;"
+        @"Factor     ::= num@'Number' | '(' expr@<Expression> ')';"
         @"AddOp      ::= '+' | '-';"
         @"MulOp      ::= '*' | '/';";
     CPGrammar *grammar = [CPGrammar grammarWithStart:@"Expression" backusNaurForm:expressionGrammar];
@@ -78,21 +91,23 @@ When a rule is matched by the parser, the `initWithSyntaxTree:` method will be c
         
         if (nil != self)
         {
-            NSArray *components = [syntaxTree children];
-            if ([components count] == 1)
+            Term       *t = [syntaxTree valueForTag:@"term"];
+            Expression *e = [syntaxTree valueForTag:@"expr"];
+            
+            if (nil == e)
             {
-                [self setValue:[(Term *)[components objectAtIndex:0] value]];
+                [self setValue:[t value]];
             }
             else
             {
-                NSString *op = [components objectAtIndex:1];
+                NSString *o = [syntaxTree valueForTag:@"op"];
                 if ([op isEqualToString:@"+"])
                 {
-                    [self setValue:[(Expression *)[components objectAtIndex:0] value] + [(Term *)[components objectAtIndex:2] value]];
+                    [self setValue:[e value] + [t value]];
                 }
                 else
                 {
-                    [self setValue:[(Expression *)[components objectAtIndex:0] value] - [(Term *)[components objectAtIndex:2] value]];
+                    [self setValue:[e value] - [t value]];
                 }
             }
         }
@@ -114,3 +129,15 @@ We can now parse the token stream we produced earlier:
 Which outputs:
 
     80.2
+
+Best Practices
+--------------
+
+CoreParse offers three types of parser Ð SLR, LR(1) and LALR(1):
+* SLR parsers cover the smallest set of languages, and are faster to generate than LALR(1) parsers.
+* LR(1) parsers consume a lot of RAM, and are slow, but cover the largest set of languages.
+* LALR(1) parsers are as fast as SLR parsers to run, but slower to generate, they cover almost as many languages as LR(1) parsers.
+
+It is recommended that you start with an SLR parser (unless you know better), and when a parser cannot be generated for your grammar, move onto an LALR(1) parser.  LR(1) parsers are not really recommended at all, though may be useful in extreme circumstances.
+
+It is recommended that if you have a significant grammar that requires an LALR(1) parser, you should use NSKeyedArchiving to archive the parser to a file.  You should then read this file, and unarchive it when your application runs to save generating the parser every time it runs, as parser generation can take some time.
