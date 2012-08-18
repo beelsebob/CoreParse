@@ -92,8 +92,16 @@
  * Returns the value of a specific tag.
  *
  * @param tagName The name of the tag you want the value of.
- * @return the sub syntax tree associated with that tag.
+ * @return The sub syntax tree associated with that tag.
  */
 - (id)valueForTag:(NSString *)tagName;
+
+/**
+ * Returns the child at a specific index.
+ * 
+ * @param idx The index of the child you want to retrieve.
+ * @return The child at that index.
+ */
+- (id)childAtIndex:(NSUInteger)idx;
 
 @end

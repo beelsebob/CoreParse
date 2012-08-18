@@ -119,7 +119,7 @@ We must also implement the delegate's method for dealing with AddOps and MulOps:
 
     - (id)parser:(CPParser *)parser didProduceSyntaxTree:(CPSyntaxTree *)syntaxTree
     {
-        return [(CPQuotedToken *)[[syntaxTree children] objectAtIndex:0] content];
+        return [(CPQuotedToken *)[syntaxTree childAtIndex:0] content];
     }
 
 We can now parse the token stream we produced earlier:

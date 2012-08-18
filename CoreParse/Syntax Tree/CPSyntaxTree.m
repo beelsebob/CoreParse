@@ -69,6 +69,11 @@
     return [tagValues objectForKey:tagName];
 }
 
+- (id)childAtIndex:(NSUInteger)idx
+{
+    return [children objectAtIndex:idx];
+}
+
 - (NSUInteger)hash
 {
     return [[self rule] hash];
