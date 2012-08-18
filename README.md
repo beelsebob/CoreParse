@@ -133,7 +133,7 @@ Which outputs:
 Best Practices
 --------------
 
-CoreParse offers three types of parser Ð SLR, LR(1) and LALR(1):
+CoreParse offers three types of parser - SLR, LR(1) and LALR(1):
 * SLR parsers cover the smallest set of languages, and are faster to generate than LALR(1) parsers.
 * LR(1) parsers consume a lot of RAM, and are slow, but cover the largest set of languages.
 * LALR(1) parsers are as fast as SLR parsers to run, but slower to generate, they cover almost as many languages as LR(1) parsers.
