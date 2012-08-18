@@ -100,8 +100,7 @@ When a rule is matched by the parser, the `initWithSyntaxTree:` method will be c
             }
             else
             {
-                NSString *o = [syntaxTree valueForTag:@"op"];
-                if ([op isEqualToString:@"+"])
+                if ([[syntaxTree valueForTag:@"op"] isEqualToString:@"+"])
                 {
                     [self setValue:[e value] + [t value]];
                 }
