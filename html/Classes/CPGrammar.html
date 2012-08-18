@@ -736,36 +736,42 @@ You may also parenthesise sub<a href="#//api/name/rules">rules</a>.</p>
 
 <p>The grammar used for parsing the BNF can be expressed as follows:</p>
 
-<p>0  ruleset           ::= &lt;ruleset&gt; &lt;rule&gt;;<br />
-1  ruleset           ::= &lt;rule&gt;;</p>
+<pre>
+0  ruleset                 ::= &lt;ruleset&gt; &lt;rule&gt;;
+1  ruleset                 ::= &lt;rule&gt;;
 
-<p>2  rule              ::= &ldquo;Number&rdquo; &lt;unNumbered&gt;;<br />
-3  rule              ::= &lt;unNumbered&gt;;</p>
+2  rule                    ::= "Number" &lt;unNumbered&gt;;
+3  rule                    ::= &lt;unNumbered&gt;;
 
-<p>4  unNumbered        ::= &ldquo;Identifier&rdquo; &ldquo;::=&rdquo; &lt;rightHandSide&gt; &ldquo;;&rdquo;;</p>
+4  unNumbered              ::= "Identifier" "::=" &lt;rightHandSide&gt; ";";
 
-<p>5  rightHandSide     ::= &lt;rightHandSide> &ldquo;|&rdquo; &lt;sumset&gt;;<br />
-6  rightHandSide     ::= &lt;rightHandSide> &ldquo;|&rdquo;;<br />
-7  rightHandSide     ::= &lt;sumset>;</p>
+5  rightHandSide           ::= &lt;rightHandSide> "|" &lt;sumset&gt;;
+6  rightHandSide           ::= &lt;rightHandSide> "|";
+7  rightHandSide           ::= &lt;sumset>;
 
-<p>8  sumset            ::= &lt;sumset&gt; &lt;rightHandSideItem&gt;;<br />
-9  sumset            ::= &lt;rightHandSideItem&gt;;</p>
+8  sumset                  ::= &lt;sumset&gt; &lt;rightHandSideItem&gt;;
+9  sumset                  ::= &lt;taggedRightHandSideItem&gt;;
 
-<p>10 rightHandSideItem ::= &lt;unit&gt;;<br />
-11 rightHandSideItem ::= &lt;unit&gt; &lt;repeatSymbol&gt;;</p>
+10 taggedRightHandSideItem ::= &lt;rightHandSideItem&gt;;
+11 taggedRightHandSideItem ::= "Identifier" "@" &lt;rightHandSideItem&gt;;
 
-<p>12 unit              ::= &lt;gramarSymbol&gt;;<br />
-13 unit              ::= &ldquo;(&rdquo; &lt;rightHandSide&gt; &ldquo;)&rdquo;;</p>
+12 rightHandSideItem       ::= &lt;unit&gt;;
+13 rightHandSideItem       ::= &lt;unit&gt; &lt;repeatSymbol&gt;;
 
-<p>14 repeatSymbol      ::= &ldquo;*&rdquo;;<br />
-15 repeatSymbol      ::= &ldquo;+&rdquo;;<br />
-16 repeatSymbol      ::= &ldquo;?&rdquo;;</p>
+14 unit                    ::= &lt;gramarSymbol&gt;;
+15 unit                    ::= "(" &lt;rightHandSide&gt; ")";
 
-<p>17 grammarSymbol     ::= &lt;nonTerminal&gt;;<br />
-18 grammarSymbol     ::= &lt;terminal&gt;;</p>
+16 repeatSymbol            ::= "*";
+17 repeatSymbol            ::= "+";
+18 repeatSymbol            ::= "?";
 
-<p>19 nonTerminal       ::= &ldquo;&lt;&rdquo; &ldquo;Identifier&rdquo; &ldquo;&gt;&rdquo;;<br />
-20 terminal          ::= String;</p><div class="bug"><p><strong>Bug:</strong> Warning this method is deprecated, use <a href="#//api/name/initWithStart:backusNaurForm:error:">initWithStart:backusNaurForm:error:</a> instead.</p></div>
+19 grammarSymbol           ::= &lt;nonTerminal&gt;;
+20 grammarSymbol           ::= &lt;terminal&gt;;
+
+21 nonTerminal             ::= "&lt;" "Identifier" "&gt;";
+22 terminal                ::= String;
+</pre>
+<div class="bug"><p><strong>Bug:</strong> Warning this method is deprecated, use <a href="#//api/name/initWithStart:backusNaurForm:error:">initWithStart:backusNaurForm:error:</a> instead.</p></div>
 	</div>
 	
 	
@@ -847,36 +853,42 @@ You may also parenthesise sub<a href="#//api/name/rules">rules</a>.</p>
 
 <p>The grammar used for parsing the BNF can be expressed as follows:</p>
 
-<p>0  ruleset           ::= &lt;ruleset&gt; &lt;rule&gt;;<br />
-1  ruleset           ::= &lt;rule&gt;;</p>
+<pre>
+0  ruleset                 ::= &lt;ruleset&gt; &lt;rule&gt;;
+1  ruleset                 ::= &lt;rule&gt;;
 
-<p>2  rule              ::= &ldquo;Number&rdquo; &lt;unNumbered&gt;;<br />
-3  rule              ::= &lt;unNumbered&gt;;</p>
+2  rule                    ::= "Number" &lt;unNumbered&gt;;
+3  rule                    ::= &lt;unNumbered&gt;;
 
-<p>4  unNumbered        ::= &ldquo;Identifier&rdquo; &ldquo;::=&rdquo; &lt;rightHandSide&gt; &ldquo;;&rdquo;;</p>
+4  unNumbered              ::= "Identifier" "::=" &lt;rightHandSide&gt; ";";
 
-<p>5  rightHandSide     ::= &lt;rightHandSide> &ldquo;|&rdquo; &lt;sumset&gt;;<br />
-6  rightHandSide     ::= &lt;rightHandSide> &ldquo;|&rdquo;;<br />
-7  rightHandSide     ::= &lt;sumset>;</p>
+5  rightHandSide           ::= &lt;rightHandSide> "|" &lt;sumset&gt;;
+6  rightHandSide           ::= &lt;rightHandSide> "|";
+7  rightHandSide           ::= &lt;sumset>;
 
-<p>8  sumset            ::= &lt;sumset&gt; &lt;rightHandSideItem&gt;;<br />
-9  sumset            ::= &lt;rightHandSideItem&gt;;</p>
+8  sumset                  ::= &lt;sumset&gt; &lt;rightHandSideItem&gt;;
+9  sumset                  ::= &lt;taggedRightHandSideItem&gt;;
 
-<p>10 rightHandSideItem ::= &lt;unit&gt;;<br />
-11 rightHandSideItem ::= &lt;unit&gt; &lt;repeatSymbol&gt;;</p>
+10 taggedRightHandSideItem ::= &lt;rightHandSideItem&gt;;
+11 taggedRightHandSideItem ::= "Identifier" "@" &lt;rightHandSideItem&gt;;
 
-<p>12 unit              ::= &lt;gramarSymbol&gt;;<br />
-13 unit              ::= &ldquo;(&rdquo; &lt;rightHandSide&gt; &ldquo;)&rdquo;;</p>
+12 rightHandSideItem       ::= &lt;unit&gt;;
+13 rightHandSideItem       ::= &lt;unit&gt; &lt;repeatSymbol&gt;;
 
-<p>14 repeatSymbol      ::= &ldquo;*&rdquo;;<br />
-15 repeatSymbol      ::= &ldquo;+&rdquo;;<br />
-16 repeatSymbol      ::= &ldquo;?&rdquo;;</p>
+14 unit                    ::= &lt;gramarSymbol&gt;;
+15 unit                    ::= "(" &lt;rightHandSide&gt; ")";
 
-<p>17 grammarSymbol     ::= &lt;nonTerminal&gt;;<br />
-18 grammarSymbol     ::= &lt;terminal&gt;;</p>
+16 repeatSymbol            ::= "*";
+17 repeatSymbol            ::= "+";
+18 repeatSymbol            ::= "?";
 
-<p>19 nonTerminal       ::= &ldquo;&lt;&rdquo; &ldquo;Identifier&rdquo; &ldquo;&gt;&rdquo;;<br />
-20 terminal          ::= String;</p>
+19 grammarSymbol           ::= &lt;nonTerminal&gt;;
+20 grammarSymbol           ::= &lt;terminal&gt;;
+
+21 nonTerminal             ::= "&lt;" "Identifier" "&gt;";
+22 terminal                ::= String;
+</pre>
+
 	</div>
 	
 	
