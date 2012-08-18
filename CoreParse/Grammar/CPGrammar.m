@@ -33,6 +33,9 @@
 #import <objc/runtime.h>
 
 @interface CPBNFParserDelegate : NSObject <CPTokeniserDelegate,CPParserDelegate>
+
+@property (readwrite, retain, nonatomic) NSError *err;
+
 @end
 
 @implementation CPBNFParserDelegate
@@ -100,6 +103,27 @@
             return [children objectAtIndex:0];
         case 11:
         {
+            id i = [children objectAtIndex:2];
+            if ([i isKindOfClass:[CPRHSItem class]])
+            {
+                [(CPRHSItem *)i setTag:[[children objectAtIndex:0] identifier]];
+                return i;
+            }
+            else
+            {
+                CPRHSItem *newI = [[[CPRHSItem alloc] init] autorelease];
+                [newI setAlternatives:[NSArray arrayWithObject:[NSArray arrayWithObject:i]]];
+                [newI setRepeats:NO];
+                [newI setMayNotExist:NO];
+                [newI setTag:[[children objectAtIndex:0] identifier]];
+                [newI setShouldCollapse:YES];
+                return newI;
+            }
+        }
+        case 12:
+            return [children objectAtIndex:0];
+        case 13:
+        {
             CPRHSItem *i = [[[CPRHSItem alloc] init] autorelease];
             [i setAlternatives:[NSArray arrayWithObject:[NSArray arrayWithObject:[children objectAtIndex:0]]]];
             NSString *symbol = [(CPKeywordToken *)[children objectAtIndex:1] keyword];
@@ -120,9 +144,9 @@
             }
             return i;
         }
-        case 12:
+        case 14:
             return [children objectAtIndex:0];
-        case 13:
+        case 15:
         {
             CPRHSItem *i = [[[CPRHSItem alloc] init] autorelease];
             [i setAlternatives:[children objectAtIndex:1]];
@@ -130,16 +154,16 @@
             [i setMayNotExist:NO];
             return i;
         }
-        case 14:
-        case 15:
         case 16:
         case 17:
         case 18:
-            return [children objectAtIndex:0];
-            return [children objectAtIndex:0];
         case 19:
-            return [CPGrammarSymbol nonTerminalWithName:[(CPIdentifierToken *)[children objectAtIndex:1] identifier]];
         case 20:
+            return [children objectAtIndex:0];
+            return [children objectAtIndex:0];
+        case 21:
+            return [CPGrammarSymbol nonTerminalWithName:[(CPIdentifierToken *)[children objectAtIndex:1] identifier]];
+        case 22:
             return [CPGrammarSymbol terminalWithName:[(CPQuotedToken *)[children objectAtIndex:0] content]];
         default:
             return syntaxTree;
@@ -149,10 +173,11 @@
 - (CPRecoveryAction *)parser:(CPParser *)parser didEncounterErrorOnInput:(CPTokenStream *)inputStream expecting:(NSSet *)acceptableTokens
 {
     CPToken *t = [inputStream peekToken];
-    NSLog(@"=== Core Parse Error ===");
-    NSLog(@"Could not parse BNF for grammar.");
-    NSLog(@"%ld:%ld: Found %@", (long)[t lineNumber] + 1, (long)[t columnNumber] + 1, t);
-    NSLog(@"Expected %@", acceptableTokens);
+    [self setErr:[NSError errorWithDomain:CPEBNFParserErrorDomain
+                                     code:CPErrorCodeCouldNotParseEBNF
+                                 userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                           [NSString stringWithFormat:@"Could not parse EBNF for grammar.  %ld:%ld: Found %@, Expected %@.", (long)[t lineNumber] + 1, (long)[t columnNumber] + 1, t, acceptableTokens], NSLocalizedDescriptionKey,
+                                           nil]]];
     return [CPRecoveryAction recoveryActionStop];
 }
 
@@ -200,11 +225,29 @@
     return [[[self alloc] initWithStart:start backusNaurForm:bnf] autorelease];
 }
 
++ (id)grammarWithStart:(NSString *)start backusNaurForm:(NSString *)bnf error:(NSError **)error
+{
+    return [[[self alloc] initWithStart:start backusNaurForm:bnf error:error] autorelease];
+}
+
 - (id)initWithStart:(NSString *)initStart backusNaurForm:(NSString *)bnf
+{
+    NSError *err = nil;
+    self = [self initWithStart:initStart backusNaurForm:bnf error:&err];
+    if (nil == self)
+    {
+        NSLog(@"=== Core Parse Error ===");
+        NSLog(@"%@", err);
+    }
+    return self;
+}
+
+- (id)initWithStart:(NSString *)initStart backusNaurForm:(NSString *)bnf error:(NSError **)error
 {
     CPBNFParserDelegate *del = [[[CPBNFParserDelegate alloc] init] autorelease];
     CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"::="]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"@"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"<"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@">"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"("]];
@@ -234,33 +277,43 @@
     CPRule *rightHandSide2 = [CPRule ruleWithName:@"rightHandSide" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"rightHandSide"], [CPGrammarSymbol terminalWithName:@"|"], nil] tag:6];
     CPRule *rightHandSide3 = [CPRule ruleWithName:@"rightHandSide" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"sumset"], nil] tag:7];
     
-    CPRule *sumset1 = [CPRule ruleWithName:@"sumset" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"sumset"], [CPGrammarSymbol nonTerminalWithName:@"rightHandSideItem"], nil] tag:8];
-    CPRule *sumset2 = [CPRule ruleWithName:@"sumset" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"rightHandSideItem"], nil] tag:9];
+    CPRule *sumset1 = [CPRule ruleWithName:@"sumset" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"sumset"], [CPGrammarSymbol nonTerminalWithName:@"taggedRightHandSideItem"], nil] tag:8];
+    CPRule *sumset2 = [CPRule ruleWithName:@"sumset" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"taggedRightHandSideItem"], nil] tag:9];
     
-    CPRule *rightHandSideItem1 = [CPRule ruleWithName:@"rightHandSideItem" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol nonTerminalWithName:@"unit"]] tag:10];
-    CPRule *rightHandSideItem2 = [CPRule ruleWithName:@"rightHandSideItem" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"unit"], [CPGrammarSymbol nonTerminalWithName:@"repeatSymbol"], nil] tag:11];
+    CPRule *taggedRightHandSideItem1 = [CPRule ruleWithName:@"taggedRightHandSideItem" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"rightHandSideItem"], nil] tag:10];
+    CPRule *taggedRightHandSideItem2 = [CPRule ruleWithName:@"taggedRightHandSideItem" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"Identifier"], [CPGrammarSymbol terminalWithName:@"@"], [CPGrammarSymbol nonTerminalWithName:@"rightHandSideItem"], nil] tag:11];
     
-    CPRule *unit1 = [CPRule ruleWithName:@"unit" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol nonTerminalWithName:@"grammarSymbol"]] tag:12];
-    CPRule *unit2 = [CPRule ruleWithName:@"unit" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"("], [CPGrammarSymbol nonTerminalWithName:@"rightHandSide"], [CPGrammarSymbol terminalWithName:@")"], nil] tag:13];
+    CPRule *rightHandSideItem1 = [CPRule ruleWithName:@"rightHandSideItem" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol nonTerminalWithName:@"unit"]] tag:12];
+    CPRule *rightHandSideItem2 = [CPRule ruleWithName:@"rightHandSideItem" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"unit"], [CPGrammarSymbol nonTerminalWithName:@"repeatSymbol"], nil] tag:13];
     
-    CPRule *repeatSymbol1 = [CPRule ruleWithName:@"repeatSymbol" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol terminalWithName:@"*"]] tag:14];
-    CPRule *repeatSymbol2 = [CPRule ruleWithName:@"repeatSymbol" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol terminalWithName:@"+"]] tag:15];
-    CPRule *repeatSymbol3 = [CPRule ruleWithName:@"repeatSymbol" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol terminalWithName:@"?"]] tag:16];
+    CPRule *unit1 = [CPRule ruleWithName:@"unit" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol nonTerminalWithName:@"grammarSymbol"]] tag:14];
+    CPRule *unit2 = [CPRule ruleWithName:@"unit" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"("], [CPGrammarSymbol nonTerminalWithName:@"rightHandSide"], [CPGrammarSymbol terminalWithName:@")"], nil] tag:15];
     
-    CPRule *grammarSymbol1 = [CPRule ruleWithName:@"grammarSymbol" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"nonterminal"], nil] tag:17];
-    CPRule *grammarSymbol2 = [CPRule ruleWithName:@"grammarSymbol" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"terminal"], nil] tag:18];
+    CPRule *repeatSymbol1 = [CPRule ruleWithName:@"repeatSymbol" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol terminalWithName:@"*"]] tag:16];
+    CPRule *repeatSymbol2 = [CPRule ruleWithName:@"repeatSymbol" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol terminalWithName:@"+"]] tag:17];
+    CPRule *repeatSymbol3 = [CPRule ruleWithName:@"repeatSymbol" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol terminalWithName:@"?"]] tag:18];
     
-    CPRule *nonterminal = [CPRule ruleWithName:@"nonterminal" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"<"], [CPGrammarSymbol terminalWithName:@"Identifier"], [CPGrammarSymbol terminalWithName:@">"], nil] tag:19];
+    CPRule *grammarSymbol1 = [CPRule ruleWithName:@"grammarSymbol" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"nonterminal"], nil] tag:19];
+    CPRule *grammarSymbol2 = [CPRule ruleWithName:@"grammarSymbol" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"terminal"], nil] tag:20];
     
-    CPRule *terminal = [CPRule ruleWithName:@"terminal" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"String"], nil] tag:20];
+    CPRule *nonterminal = [CPRule ruleWithName:@"nonterminal" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"<"], [CPGrammarSymbol terminalWithName:@"Identifier"], [CPGrammarSymbol terminalWithName:@">"], nil] tag:21];
     
-    CPGrammar *bnfGrammar = [CPGrammar grammarWithStart:@"ruleset" rules:[NSArray arrayWithObjects:ruleset1, ruleset2, rule1, rule2, unNumbered, rightHandSide1, rightHandSide2, rightHandSide3, sumset1, sumset2, rightHandSideItem1, rightHandSideItem2, unit1, unit2, repeatSymbol1, repeatSymbol2, repeatSymbol3, grammarSymbol1, grammarSymbol2, nonterminal, terminal, nil]];
+    CPRule *terminal = [CPRule ruleWithName:@"terminal" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"String"], nil] tag:22];
+    
+    CPGrammar *bnfGrammar = [CPGrammar grammarWithStart:@"ruleset" rules:[NSArray arrayWithObjects:ruleset1, ruleset2, rule1, rule2, unNumbered, rightHandSide1, rightHandSide2, rightHandSide3, sumset1, sumset2, taggedRightHandSideItem1, taggedRightHandSideItem2, rightHandSideItem1, rightHandSideItem2, unit1, unit2, repeatSymbol1, repeatSymbol2, repeatSymbol3, grammarSymbol1, grammarSymbol2, nonterminal, terminal, nil]];
     CPParser *parser = [CPLALR1Parser parserWithGrammar:bnfGrammar];
     [parser setDelegate:del];
     
     NSMutableArray *initRules = [parser parse:tokenStream];
     
+    if ([del err] != nil)
+    {
+        *error = [[[del err] copy] autorelease];
+        return nil;
+    }
+    
     NSArray *newRules = [self tidyRightHandSides:initRules];
+    
     return [self initWithStart:initStart rules:newRules];
 }
 

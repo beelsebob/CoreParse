@@ -64,7 +64,7 @@
  *         the parse stack is unwound a step for the parent rule to deal with the error.
  * @bug Warning this method is deprecated, use -parser:didEncounterErrorOnInput:expecting: instead.
  */
-- (CPRecoveryAction *)parser:(CPParser *)parser didEncounterErrorOnInput:(CPTokenStream *)inputStream;
+- (CPRecoveryAction *)parser:(CPParser *)parser didEncounterErrorOnInput:(CPTokenStream *)inputStream __attribute__((deprecated("use -parser:didEncounterErrorOnInput:expecting: instead.")));
 
 /**
  * Called when the parser encounters a token for which it can not shift, reduce or accept.

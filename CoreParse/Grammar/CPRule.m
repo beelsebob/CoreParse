@@ -7,12 +7,15 @@
 //
 
 #import "CPRule.h"
+#import "CPRule+Internal.h"
 
 #import "CPGrammarSymbol.h"
 
 @implementation CPRule
 {
     NSMutableArray *rightHandSide;
+    BOOL _shouldCollapse;
+    NSString *_tagName;
 }
 
 @synthesize name;
@@ -139,10 +142,42 @@
     if ([object isKindOfClass:[CPRule class]])
     {
         CPRule *other = (CPRule *)object;
-        return [other tag] == tag && [[other name] isEqualToString:name] && [[other rightHandSideElements] isEqualToArray:rightHandSide];
+        return ([other tag] == tag &&
+                [[other name] isEqualToString:name] &&
+                [[other rightHandSideElements] isEqualToArray:rightHandSide] &&
+                (_tagName == nil || [[other tagName] isEqualToString:_tagName]));
     }
     
     return NO;
 }
 
 @end
+
+@implementation CPRule (Internal)
+
+- (BOOL)shouldCollapse
+{
+    return _shouldCollapse;
+}
+
+- (void)setShouldCollapse:(BOOL)shouldCollapse
+{
+    _shouldCollapse = shouldCollapse;
+}
+
+- (NSString *)tagName
+{
+    return [[_tagName retain] autorelease];
+}
+
+- (void)setTagName:(NSString *)tagName
+{
+    if (_tagName != tagName)
+    {
+        [_tagName release];
+        _tagName = [tagName copy];
+    }
+}
+
+@end
+

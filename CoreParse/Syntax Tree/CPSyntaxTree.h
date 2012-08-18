@@ -28,9 +28,10 @@
  * @param children    The child trees that represent the components of the right hand side of the rule.
  * @return Returns a syntax tree with apropriate children, and matching a specified rule.
  *
- * @see initWithRule:children:
+ * @bug Warning this method is deprecated, use -syntaxTreeWithRule:children:tagValues: instead.
+ * @see syntaxTreeWithRule:children:tagValues
  */
-+ (id)syntaxTreeWithRule:(CPRule *)nonTerminal children:(NSArray *)children;
++ (id)syntaxTreeWithRule:(CPRule *)nonTerminal children:(NSArray *)children __attribute__((deprecated("use +syntaxTreeWithRule:children:tagValues: instead.")));
 
 /**
  * Initialises a syntax tree based on a rule and some child trees.
@@ -39,9 +40,34 @@
  * @param children    The child trees that represent the components of the right hand side of the rule.
  * @return Returns a syntax tree with apropriate children, and matching a specified rule.
  *
- * @see syntaxTreeWithRule:children:
+ * @bug Warning this method is deprecated, use -initWithRule:children:tagValues: instead.
+ * @see initWithRule:children:tagValues:
  */
-- (id)initWithRule:(CPRule *)nonTerminal children:(NSArray *)children;
+- (id)initWithRule:(CPRule *)nonTerminal children:(NSArray *)children __attribute__((deprecated("use +initWithRule:children:tagValues: instead.")));
+
+/**
+ * Creates a syntax tree based on a rule and some child trees.
+ *
+ * @param nonTerminal The rule that was matched to create this tree node.
+ * @param children    The child trees that represent the components of the right hand side of the rule.
+ * @param tagValues   The values of each tag beneath the rule.
+ * @return Returns a syntax tree with apropriate children, and matching a specified rule.
+ *
+ * @see initWithRule:children:tagValues:
+ */
++ (id)syntaxTreeWithRule:(CPRule *)nonTerminal children:(NSArray *)children tagValues:(NSDictionary *)tagValues;
+
+/**
+ * Initialises a syntax tree based on a rule and some child trees.
+ *
+ * @param nonTerminal The rule that was matched to create this tree node.
+ * @param children    The child trees that represent the components of the right hand side of the rule.
+ * @param tagValues   The values of each tag beneath the rule.
+ * @return Returns a syntax tree with apropriate children, and matching a specified rule.
+ *
+ * @see syntaxTreeWithRule:children:tagValues
+ */
+- (id)initWithRule:(CPRule *)nonTerminal children:(NSArray *)children tagValues:(NSDictionary *)tagValues;
 
 ///---------------------------------------------------------------------------------------
 /// @name Configuring a Syntax Tree
@@ -56,5 +82,15 @@
  * The children that match the right hand side of the matched rule.
  */
 @property (readonly,copy) NSArray *children;
+
+/**
+ * The values of any tags found on the right hand side of the rule.
+ */
+@property (readonly,copy) NSDictionary *tagValues;
+
+/**
+ * Returns the value of a specific tag.
+ */
+- (id)valueForTag:(NSString *)tagName;
 
 @end

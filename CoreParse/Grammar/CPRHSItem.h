@@ -10,9 +10,13 @@
 
 @interface CPRHSItem : NSObject <NSCopying>
 
-@property (readwrite,copy) NSArray *alternatives;
+@property (readwrite,copy  ) NSArray *alternatives;
 
 @property (readwrite,assign) BOOL repeats;
 @property (readwrite,assign) BOOL mayNotExist;
+
+@property (readwrite,copy  ) NSString *tag;
+
+@property (readwrite,assign) BOOL shouldCollapse;
 
 @end

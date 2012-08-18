@@ -117,7 +117,8 @@
                           @"declaration   ::= '{' <style>+ '}' | '{' '}';"
                           @"style         ::= <styledef> ';';"
                           @"styledef      ::= <key> ':' <unquoted>;"
-                          @"unquoted      ::= 'Number' | 'Identifier';"];
+                          @"unquoted      ::= 'Number' | 'Identifier';"
+                                               error:NULL];
     mapCssParser = [[CPLALR1Parser alloc] initWithGrammar:grammar];
 }
 
@@ -420,11 +421,11 @@
     parser = [CPLR1Parser parserWithGrammar:grammar];
     CPSyntaxTree *tree = [parser parse:tokenStream];
     
-    CPSyntaxTree *bTree = [CPSyntaxTree syntaxTreeWithRule:b2 children:[NSArray arrayWithObject:[CPKeywordToken tokenWithKeyword:@"b"]]];
-    CPSyntaxTree *abTree = [CPSyntaxTree syntaxTreeWithRule:b1 children:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"a"], bTree, nil]];
-    CPSyntaxTree *aabTree = [CPSyntaxTree syntaxTreeWithRule:b1 children:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"a"], abTree, nil]];
-    CPSyntaxTree *aaabTree = [CPSyntaxTree syntaxTreeWithRule:b1 children:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"a"], aabTree, nil]];
-    CPSyntaxTree *sTree = [CPSyntaxTree syntaxTreeWithRule:s children:[NSArray arrayWithObjects:aaabTree, abTree, nil]];
+    CPSyntaxTree *bTree = [CPSyntaxTree syntaxTreeWithRule:b2 children:[NSArray arrayWithObject:[CPKeywordToken tokenWithKeyword:@"b"]] tagValues:[NSDictionary dictionary]];
+    CPSyntaxTree *abTree = [CPSyntaxTree syntaxTreeWithRule:b1 children:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"a"], bTree, nil] tagValues:[NSDictionary dictionary]];
+    CPSyntaxTree *aabTree = [CPSyntaxTree syntaxTreeWithRule:b1 children:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"a"], abTree, nil] tagValues:[NSDictionary dictionary]];
+    CPSyntaxTree *aaabTree = [CPSyntaxTree syntaxTreeWithRule:b1 children:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"a"], aabTree, nil] tagValues:[NSDictionary dictionary]];
+    CPSyntaxTree *sTree = [CPSyntaxTree syntaxTreeWithRule:s children:[NSArray arrayWithObjects:aaabTree, abTree, nil] tagValues:[NSDictionary dictionary]];
     
     STAssertEqualObjects(tree, sTree, @"Parsing LR(1) grammar failed when using LR(1) parser", nil);
 }
@@ -448,12 +449,12 @@
     CPLALR1Parser *parser = [CPLALR1Parser parserWithGrammar:grammar];
     CPSyntaxTree *tree = [parser parse:tokenStream];
     
-    CPSyntaxTree *tenTree  = [CPSyntaxTree syntaxTreeWithRule:lN children:[NSArray arrayWithObject:[CPNumberToken tokenWithNumber:[NSNumber numberWithInt:10]]]];
-    CPSyntaxTree *fiveTree = [CPSyntaxTree syntaxTreeWithRule:lN children:[NSArray arrayWithObject:[CPNumberToken tokenWithNumber:[NSNumber numberWithInt:5]]]];
-    CPSyntaxTree *tenRTree = [CPSyntaxTree syntaxTreeWithRule:rL children:[NSArray arrayWithObject:tenTree]];
-    CPSyntaxTree *starTenTree = [CPSyntaxTree syntaxTreeWithRule:lM children:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"*"], tenRTree, nil]];
-    CPSyntaxTree *fiveRTree = [CPSyntaxTree syntaxTreeWithRule:rL children:[NSArray arrayWithObject:fiveTree]];
-    CPSyntaxTree *wholeTree = [CPSyntaxTree syntaxTreeWithRule:sL children:[NSArray arrayWithObjects:starTenTree, [CPKeywordToken tokenWithKeyword:@"="], fiveRTree, nil]];
+    CPSyntaxTree *tenTree  = [CPSyntaxTree syntaxTreeWithRule:lN children:[NSArray arrayWithObject:[CPNumberToken tokenWithNumber:[NSNumber numberWithInt:10]]] tagValues:[NSDictionary dictionary]];
+    CPSyntaxTree *fiveTree = [CPSyntaxTree syntaxTreeWithRule:lN children:[NSArray arrayWithObject:[CPNumberToken tokenWithNumber:[NSNumber numberWithInt:5]]] tagValues:[NSDictionary dictionary]];
+    CPSyntaxTree *tenRTree = [CPSyntaxTree syntaxTreeWithRule:rL children:[NSArray arrayWithObject:tenTree] tagValues:[NSDictionary dictionary]];
+    CPSyntaxTree *starTenTree = [CPSyntaxTree syntaxTreeWithRule:lM children:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"*"], tenRTree, nil] tagValues:[NSDictionary dictionary]];
+    CPSyntaxTree *fiveRTree = [CPSyntaxTree syntaxTreeWithRule:rL children:[NSArray arrayWithObject:fiveTree] tagValues:[NSDictionary dictionary]];
+    CPSyntaxTree *wholeTree = [CPSyntaxTree syntaxTreeWithRule:sL children:[NSArray arrayWithObjects:starTenTree, [CPKeywordToken tokenWithKeyword:@"="], fiveRTree, nil] tagValues:[NSDictionary dictionary]];
     
     STAssertEqualObjects(tree, wholeTree, @"Parsing LALR(1) grammar failed", nil);
     
@@ -491,11 +492,11 @@
     parser = [CPLALR1Parser parserWithGrammar:grammar];
     tree = [parser parse:tokenStream];
     
-    CPSyntaxTree *bTree = [CPSyntaxTree syntaxTreeWithRule:b2 children:[NSArray arrayWithObject:[CPKeywordToken tokenWithKeyword:@"b"]]];
-    CPSyntaxTree *abTree = [CPSyntaxTree syntaxTreeWithRule:b1 children:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"a"], bTree, nil]];
-    CPSyntaxTree *aabTree = [CPSyntaxTree syntaxTreeWithRule:b1 children:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"a"], abTree, nil]];
-    CPSyntaxTree *aaabTree = [CPSyntaxTree syntaxTreeWithRule:b1 children:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"a"], aabTree, nil]];
-    CPSyntaxTree *sTree = [CPSyntaxTree syntaxTreeWithRule:s children:[NSArray arrayWithObjects:aaabTree, abTree, nil]];
+    CPSyntaxTree *bTree = [CPSyntaxTree syntaxTreeWithRule:b2 children:[NSArray arrayWithObject:[CPKeywordToken tokenWithKeyword:@"b"]] tagValues:[NSDictionary dictionary]];
+    CPSyntaxTree *abTree = [CPSyntaxTree syntaxTreeWithRule:b1 children:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"a"], bTree, nil] tagValues:[NSDictionary dictionary]];
+    CPSyntaxTree *aabTree = [CPSyntaxTree syntaxTreeWithRule:b1 children:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"a"], abTree, nil] tagValues:[NSDictionary dictionary]];
+    CPSyntaxTree *aaabTree = [CPSyntaxTree syntaxTreeWithRule:b1 children:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"a"], aabTree, nil] tagValues:[NSDictionary dictionary]];
+    CPSyntaxTree *sTree = [CPSyntaxTree syntaxTreeWithRule:s children:[NSArray arrayWithObjects:aaabTree, abTree, nil] tagValues:[NSDictionary dictionary]];
     
     STAssertEqualObjects(tree, sTree, @"Parsing LR(1) grammar failed when using LALR(1) parser", nil);
 }
@@ -529,7 +530,7 @@
         @"3 t ::= <t> '*' <f>;"
         @"4 f ::= 'Number';"
         @"5 f ::= '(' <e> ')';";
-    CPGrammar *grammar1 = [CPGrammar grammarWithStart:@"e" backusNaurForm:testGrammar];
+    CPGrammar *grammar1 = [CPGrammar grammarWithStart:@"e" backusNaurForm:testGrammar error:NULL];
     
     STAssertEqualObjects(grammar, grammar1, @"Crating grammar from BNF failed", nil);
         
@@ -557,7 +558,7 @@
         @"f ::= \"Number\";"
         @"f ::= '(' <e> ')';";
     
-    STAssertEqualObjects([CPGrammar grammarWithStart:@"e" backusNaurForm:testGrammar1], [CPGrammar grammarWithStart:@"e" backusNaurForm:testGrammar2], @"Grammars using double and single quotes were not equal", nil);
+    STAssertEqualObjects([CPGrammar grammarWithStart:@"e" backusNaurForm:testGrammar1 error:NULL], [CPGrammar grammarWithStart:@"e" backusNaurForm:testGrammar2 error:NULL], @"Grammars using double and single quotes were not equal", nil);
 }
 
 - (void)testMapCSSTokenisationPt
@@ -616,7 +617,7 @@
     NSString *testGrammar =
         @"Expression ::= <Term> | <Expression> '+' <Term>;"
         @"Term       ::= 'Number';";
-    CPGrammar *grammar = [CPGrammar grammarWithStart:@"Expression" backusNaurForm:testGrammar];
+    CPGrammar *grammar = [CPGrammar grammarWithStart:@"Expression" backusNaurForm:testGrammar error:NULL];
     CPParser *parser = [CPSLRParser parserWithGrammar:grammar];
     Expression *e = [parser parse:tokenStream];
     
@@ -651,35 +652,51 @@
 
 - (void)testEBNF
 {
+    NSError *err = nil;
     CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"a"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"b"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"c"]];
     CPTokenStream *tokenStream = [tokeniser tokenise:@"baaa"];
     NSString *starGrammarString = @"A ::= 'b''a'*;";
-    CPGrammar *starGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:starGrammarString];
+    CPGrammar *starGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:starGrammarString error:&err];
+    STAssertNil(err, @"Error was not nil after creating valid grammar.");
     CPParser *starParser = [CPLALR1Parser parserWithGrammar:starGrammar];
     CPSyntaxTree *starTree = [starParser parse:tokenStream];
     tokenStream = [tokeniser tokenise:@"baaa"];
+    NSString *taggedStarGrammarString = @"A ::= b@'b' a@'a'*;";
+    CPGrammar *taggedStarGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:taggedStarGrammarString error:&err];
+    STAssertNil(err, @"Error was not nil after creating valid grammar.");
+    CPParser *taggedStarParser = [CPLALR1Parser parserWithGrammar:taggedStarGrammar];
+    CPSyntaxTree *taggedStarTree = [taggedStarParser parse:tokenStream];
+    tokenStream = [tokeniser tokenise:@"baaa"];
     NSString *plusGrammarString = @"A ::= 'b''a'+;";
-    CPGrammar *plusGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:plusGrammarString];
+    CPGrammar *plusGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:plusGrammarString error:&err];
+    STAssertNil(err, @"Error was not nil after creating valid grammar.");
     CPParser *plusParser = [CPLALR1Parser parserWithGrammar:plusGrammar];
     CPSyntaxTree *plusTree = [plusParser parse:tokenStream];
     tokenStream = [tokeniser tokenise:@"baaa"];
     NSString *queryGrammarString = @"A ::= 'b''a''a''a''a'?;";
-    CPGrammar *queryGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:queryGrammarString];
+    CPGrammar *queryGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:queryGrammarString error:&err];
+    STAssertNil(err, @"Error was not nil after creating valid grammar.");
     CPParser *queryParser = [CPLALR1Parser parserWithGrammar:queryGrammar];
     CPSyntaxTree *queryTree = [queryParser parse:tokenStream];
     tokenStream = [tokeniser tokenise:@"baaab"];
     NSString *parenGrammarString = @"A ::= 'b'('a')*'b';";
-    CPGrammar *parenGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:parenGrammarString];
+    CPGrammar *parenGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:parenGrammarString error:&err];
+    STAssertNil(err, @"Error was not nil after creating valid grammar.");
     CPParser *parenParser = [CPLALR1Parser parserWithGrammar:parenGrammar];
     CPSyntaxTree *parenTree = [parenParser parse:tokenStream];
     NSString *parenWithOrGrammarString = @"A ::= 'b'('a' | 'c')*'b';";
-    CPGrammar *parenWithOrGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:parenWithOrGrammarString];
+    CPGrammar *parenWithOrGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:parenWithOrGrammarString error:&err];
+    STAssertNil(err, @"Error was not nil after creating valid grammar.");
     CPParser *parenWithOrParser = [CPLALR1Parser parserWithGrammar:parenWithOrGrammar];
     tokenStream = [tokeniser tokenise:@"bacab"];
     CPSyntaxTree *parenWithOrTree = [parenWithOrParser parse:tokenStream];
+    NSString *faultyGrammar = @"A ::= ::= )( ::=;";
+    CPGrammar *errorTestGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:faultyGrammar error:&err];
+    STAssertNotNil(err, @"Error was nil after trying to create faulty grammar.");
+    STAssertNil(errorTestGrammar, @"Error test grammar was not nil despite being faulty.");
     
     STAssertNotNil(starTree, @"EBNF star parser produced nil result", nil);
     NSArray *as = [[starTree children] objectAtIndex:1];
@@ -690,6 +707,18 @@
         ![[(CPKeywordToken *)[as objectAtIndex:2] keyword] isEqualToString:@"a"])
     {
         STFail(@"EBNF star parser did not correctly parse its result", nil);
+    }
+    STAssertNotNil(taggedStarTree, @"EBNF tagged star parser produced nil result", nil);
+    as = [[taggedStarTree children] objectAtIndex:1];
+    if (![[(CPKeywordToken *)[[taggedStarTree children] objectAtIndex:0] keyword] isEqualToString:@"b"] ||
+        [as count] != 3 ||
+        ![[(CPKeywordToken *)[as objectAtIndex:0] keyword] isEqualToString:@"a"] ||
+        ![[(CPKeywordToken *)[as objectAtIndex:1] keyword] isEqualToString:@"a"] ||
+        ![[(CPKeywordToken *)[as objectAtIndex:2] keyword] isEqualToString:@"a"] ||
+        ![[[taggedStarTree valueForTag:@"b"] keyword] isEqualToString:@"b"] ||
+        ![[taggedStarTree valueForTag:@"a"] isEqualToArray:as])
+    {
+        STFail(@"EBNF tagged star parser did not correctly parse its result", nil);
     }
     STAssertNotNil(plusTree, @"EBNF plus parser produced nil result", nil);
     as = [[plusTree children] objectAtIndex:1];
@@ -760,7 +789,7 @@
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"a"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"b"]];
     NSString *starGrammarString = @"A ::= 'b''a'*;";
-    CPGrammar *starGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:starGrammarString];
+    CPGrammar *starGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:starGrammarString error:NULL];
     CPParser *starParser = [CPLALR1Parser parserWithGrammar:starGrammar];
     
     CPTokenStream *faultyTokenStream = [tokeniser tokenise:@"baab"];
@@ -797,7 +826,7 @@
       @"3 t ::= <t> '*' 'Error';"
       @"4 f ::= 'Number';"
       @"5 f ::= '(' <e> ')';";
-    CPGrammar *grammar = [CPGrammar grammarWithStart:@"e" backusNaurForm:testGrammar];
+    CPGrammar *grammar = [CPGrammar grammarWithStart:@"e" backusNaurForm:testGrammar error:NULL];
     
     CPParser *parser = [CPSLRParser parserWithGrammar:grammar];
     [parser setDelegate:[[[CPTestErrorEvaluatorDelegate alloc] init] autorelease]];

@@ -11,6 +11,13 @@
 #import "CPGrammarSymbol.h"
 #import "CPRule.h"
 
+#define CPEBNFParserErrorDomain @"CPEBNFParserErrorDomain"
+
+typedef enum
+{
+    CPErrorCodeCouldNotParseEBNF = 1,
+} CPErrorCode;
+
 /**
  * The CPGrammar class represents a context free grammar.  Grammars can be used later to construct parsers.
  */
@@ -41,10 +48,24 @@
  * @param bnf   BNF for the grammar.
  * @return Returns a CPGrammar based on the BNF and starting non-terminal.
  *
- * @see grammarWithStart:backusNaurForm:
+ * @bug Warning this method is deprecated, use -grammarWithStart:backusNaurForm:error: instead.
+ * @see grammarWithStart:backusNaurForm:error:
+ */
++ (id)grammarWithStart:(NSString *)start backusNaurForm:(NSString *)bnf __attribute__((deprecated("will simply print any errors that occur, use +grammarWithStart:backusNaurForm:error: instead")));
+
+/**
+ * Creates a grammar based on a starting non-terminal and some backus naur form.
+ *
+ * see initWithStart:backusNaurForm: for a description of the syntax used for BNF.
+ *
+ * @param start The non-terminal that all parses must reduce to.
+ * @param bnf   BNF for the grammar.
+ * @param error A pointer to an error object which will be filled if the method returns nil.
+ * @return Returns a CPGrammar based on the BNF and starting non-terminal.
+ *
  * @see initWithStart:backusNaurForm:
  */
-+ (id)grammarWithStart:(NSString *)start backusNaurForm:(NSString *)bnf;
++ (id)grammarWithStart:(NSString *)start backusNaurForm:(NSString *)bnf error:(NSError **)error;
 
 /**
  * Initialises a grammar based on a starting non-terminal and a list of rules.
@@ -105,10 +126,63 @@
  * @param bnf   BNF for the grammar.
  * @return Returns a CPGrammar based on the BNF and starting non-terminal.
  *
+ * @bug Warning this method is deprecated, use -initWithStart:backusNaurForm:error: instead.
+ * @see initWithStart:backusNaurForm:error:
+ */
+- (id)initWithStart:(NSString *)start backusNaurForm:(NSString *)bnf __attribute__((deprecated("will simply print any errors that occur, use -initWithStart:backusNaurForm:error: instead")));
+
+/**
+ * Initialises a grammar based on a starting non-terminal and some backus naur form.
+ *
+ * The BNF is expressed using rules in the form `nonTerminal ::= <subNonTerminal> "subTerminal" <subNonTerminal>;`.  Rules may optionally be prefixed with a number indicating their tag.
+ * This allows you to quickly construct grammars in a readable form.
+ * You may also use EBNF to construct grammars.  This allows you to use the symbols "*", "+", and "?" to indicate that a construction may appear 0 or more; 1 or more; and 0 or 1 times respectively.
+ * You may also parenthesise subrules.
+ *
+ * When you use any of the above EBNF constructs or parentheses, the parser will return the contents in an NSArray.
+ *
+ * The grammar used for parsing the BNF can be expressed as follows:
+ *
+ *     0  ruleset           ::= &lt;ruleset&gt; &lt;rule&gt;;<br />
+ *     1  ruleset           ::= &lt;rule&gt;;
+ *
+ *     2  rule              ::= "Number" &lt;unNumbered&gt;;<br />
+ *     3  rule              ::= &lt;unNumbered&gt;;
+ *
+ *     4  unNumbered        ::= "Identifier" "::=" &lt;rightHandSide&gt; ";";
+ *
+ *     5  rightHandSide     ::= &lt;rightHandSide> "|" &lt;sumset&gt;;<br />
+ *     6  rightHandSide     ::= &lt;rightHandSide> "|";<br />
+ *     7  rightHandSide     ::= &lt;sumset>;
+ *
+ *     8  sumset            ::= &lt;sumset&gt; &lt;rightHandSideItem&gt;;<br />
+ *     9  sumset            ::= &lt;rightHandSideItem&gt;;
+ *
+ *     10 rightHandSideItem ::= &lt;unit&gt;;<br />
+ *     11 rightHandSideItem ::= &lt;unit&gt; &lt;repeatSymbol&gt;;
+ *
+ *     12 unit              ::= &lt;gramarSymbol&gt;;<br />
+ *     13 unit              ::= "(" &lt;rightHandSide&gt; ")";
+ *
+ *     14 repeatSymbol      ::= "*";<br />
+ *     15 repeatSymbol      ::= "+";<br />
+ *     16 repeatSymbol      ::= "?";
+ *
+ *     17 grammarSymbol     ::= &lt;nonTerminal&gt;;<br />
+ *     18 grammarSymbol     ::= &lt;terminal&gt;;
+ *
+ *     19 nonTerminal       ::= "&lt;" "Identifier" "&gt;";<br />
+ *     20 terminal          ::= String;
+ *
+ * @param start The non-terminal that all parses must reduce to.
+ * @param bnf   BNF for the grammar.
+ * @param error A pointer to an error object which will be filled if the method returns nil.
+ * @return Returns a CPGrammar based on the BNF and starting non-terminal.
+ *
  * @see initWithStart:rules:
  * @see grammarWithStart:backusNaurForm:
  */
-- (id)initWithStart:(NSString *)start backusNaurForm:(NSString *)bnf;
+- (id)initWithStart:(NSString *)start backusNaurForm:(NSString *)bnf error:(NSError **)error;
 
 ///---------------------------------------------------------------------------------------
 /// @name Configuring a Grammar

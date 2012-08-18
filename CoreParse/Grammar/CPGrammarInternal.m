@@ -9,6 +9,8 @@
 #import "CPGrammarInternal.h"
 #import "CPGrammarPrivate.h"
 
+#import "CPRule+Internal.h"
+
 #import "CPItem.h"
 #import "CPLR1Item.h"
 
@@ -298,6 +300,7 @@
         if ([[item alternatives] count] == 1)
         {
             CPRule *rule;
+            
             if ([item mayNotExist])
             {
                 rule = [[[CPRule alloc] initWithName:ruleName rightHandSideElements:[NSArray array]] autorelease];
@@ -308,6 +311,8 @@
                 rule = [[[CPRule alloc] initWithName:ruleName rightHandSideElements:[[item alternatives] objectAtIndex:0]] autorelease];
                 [rule setTag:1];
             }
+            [rule setShouldCollapse:[item shouldCollapse]];
+            [rule setTagName:[item tag]];
             [rule setRepresentitiveClass:rhsItemClass];
             [rules addObject:rule];
             
@@ -328,6 +333,8 @@
             
             if (nil != rule)
             {
+                [rule setShouldCollapse:[item shouldCollapse]];
+                [rule setTagName:[item tag]];
                 [rule setRepresentitiveClass:rhsItemClass];
                 [rules addObject:rule];
             }
@@ -340,6 +347,8 @@
                 CPRule *rule = [[[CPRule alloc] initWithName:ruleName rightHandSideElements:contents] autorelease];
                 [rule setTag:3 + i];
                 [rule setRepresentitiveClass:rhsItemClass];
+                [rule setShouldCollapse:[item shouldCollapse]];
+                [rule setTagName:[item tag]];
                 [rules addObject:rule];
                 i++;
             }

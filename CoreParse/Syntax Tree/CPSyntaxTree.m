@@ -12,6 +12,7 @@
 
 @property (readwrite,retain) CPRule *rule;
 @property (readwrite,copy) NSArray *children;
+@property (readwrite,copy) NSDictionary *tagValues;
 
 @end
 
@@ -19,13 +20,24 @@
 
 @synthesize rule;
 @synthesize children;
+@synthesize tagValues;
 
 + (id)syntaxTreeWithRule:(CPRule *)rule children:(NSArray *)children
 {
-    return [[[self alloc] initWithRule:rule children:children] autorelease];
+    return [[[self alloc] initWithRule:rule children:children tagValues:[NSDictionary dictionary]] autorelease];
 }
 
 - (id)initWithRule:(CPRule *)initRule children:(NSArray *)initChildren;
+{
+    return [self initWithRule:initRule children:initChildren tagValues:[NSDictionary dictionary]];
+}
+
++ (id)syntaxTreeWithRule:(CPRule *)rule children:(NSArray *)children tagValues:(NSDictionary *)tagValues;
+{
+    return [[[self alloc] initWithRule:rule children:children tagValues:tagValues] autorelease];
+}
+
+- (id)initWithRule:(CPRule *)initRule children:(NSArray *)initChildren tagValues:(NSDictionary *)initTagValues
 {
     self = [super init];
     
@@ -33,6 +45,7 @@
     {
         [self setRule:initRule];
         [self setChildren:initChildren];
+        [self setTagValues:initTagValues];
     }
     
     return self;
@@ -40,7 +53,7 @@
 
 - (id)init
 {
-    return [self initWithRule:nil children:[NSArray array]];
+    return [self initWithRule:nil children:[NSArray array] tagValues:[NSDictionary dictionary]];
 }
 
 - (void)dealloc
@@ -49,6 +62,11 @@
     [children release];
     
     [super dealloc];
+}
+
+- (id)valueForTag:(NSString *)tagName
+{
+    return [tagValues objectForKey:tagName];
 }
 
 - (NSUInteger)hash

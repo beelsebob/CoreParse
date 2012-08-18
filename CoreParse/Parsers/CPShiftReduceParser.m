@@ -119,6 +119,7 @@
                     NSUInteger numElements = [[reductionRule rightHandSideElements] count];
                     NSMutableArray *components = [NSMutableArray arrayWithCapacity:numElements];
                     NSRange stateStackRange = NSMakeRange([stateStack count] - numElements, numElements);
+                    NSMutableDictionary *tagValues = [NSMutableDictionary dictionary];
                     [stateStack enumerateObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:stateStackRange]
                                                   options:NSEnumerationReverse
                                                usingBlock:^(CPShiftReduceState *state, NSUInteger idx, BOOL *stop)
@@ -126,13 +127,37 @@
                          id o = [state object];
                          if ([o isKindOfClass:[CPRHSItemResult class]])
                          {
-                             o = [(CPRHSItemResult *)o contents];
+                             CPRHSItemResult *r = o;
+                             
+                             if ([o shouldCollapse])
+                             {
+                                 NSArray *comps = [r contents];
+                                 [components insertObjects:comps atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [comps count])]];
+                                 
+                                 if ([r tagName] != nil && [comps count] == 1)
+                                 {
+                                     [tagValues setObject:[comps objectAtIndex:0] forKey:[r tagName]];
+                                 }
+                             }
+                             else
+                             {
+                                 [components insertObject:[r contents] atIndex:0];
+                                 if ([r tagName] != nil)
+                                 {
+                                     [tagValues setObject:[r contents] forKey:[r tagName]];
+                                 }
+                             }
+                             
+                             [tagValues addEntriesFromDictionary:[r tagValues]];
                          }
-                         [components insertObject:o atIndex:0];
+                         else
+                         {
+                             [components insertObject:o atIndex:0];
+                         }
                      }];
                     [stateStack removeObjectsInRange:stateStackRange];
                     
-                    CPSyntaxTree *tree = [CPSyntaxTree syntaxTreeWithRule:reductionRule children:components];
+                    CPSyntaxTree *tree = [CPSyntaxTree syntaxTreeWithRule:reductionRule children:components tagValues:tagValues];
                     id result = nil;
                     
                     Class c = [reductionRule representitiveClass];
