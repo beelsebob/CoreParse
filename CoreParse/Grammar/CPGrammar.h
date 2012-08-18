@@ -104,7 +104,7 @@ typedef enum
  * 6  rightHandSide           ::= &lt;rightHandSide> "|";
  * 7  rightHandSide           ::= &lt;sumset>;
  * 
- * 8  sumset                  ::= &lt;sumset&gt; &lt;rightHandSideItem&gt;;
+ * 8  sumset                  ::= &lt;sumset&gt; &lt;taggedRightHandSideItem&gt;;
  * 9  sumset                  ::= &lt;taggedRightHandSideItem&gt;;
  * 
  * 10 taggedRightHandSideItem ::= &lt;rightHandSideItem&gt;;
@@ -161,7 +161,7 @@ typedef enum
  * 6  rightHandSide           ::= &lt;rightHandSide> "|";
  * 7  rightHandSide           ::= &lt;sumset>;
  *
- * 8  sumset                  ::= &lt;sumset&gt; &lt;rightHandSideItem&gt;;
+ * 8  sumset                  ::= &lt;sumset&gt; &lt;taggedRightHandSideItem&gt;;
  * 9  sumset                  ::= &lt;taggedRightHandSideItem&gt;;
  *
  * 10 taggedRightHandSideItem ::= &lt;rightHandSideItem&gt;;
