@@ -15,6 +15,7 @@
 #import "CPLR1Item.h"
 
 #import "CPRHSItem.h"
+#import "CPRHSItem+Private.h"
 #import "CPRHSItemResult.h"
 
 #import "NSSetFunctional.h"
@@ -240,8 +241,15 @@
     return testName;
 }
 
-- (NSArray *)tidyRightHandSides:(NSArray *)oldRules
+- (NSArray *)tidyRightHandSides:(NSArray *)oldRules error:(NSError **)error
 {
+    NSError *invalidRuleError = [self checkRulesForErrors:oldRules];
+    if (nil != invalidRuleError)
+    {
+        *error = invalidRuleError;
+        return nil;
+    }
+    
     NSMutableSet *rhsElements = [NSMutableSet set];
     for (CPRule *r in oldRules)
     {
@@ -251,6 +259,54 @@
     NSDictionary *names = [self nameNewRules:rhsElements withRules:oldRules];
     
     return [self addRHSRules:names toRules:oldRules];
+}
+
+- (NSError *)checkRulesForErrors:(NSArray *)rules
+{
+    NSError *error = nil;
+    Class itemClass = [CPRHSItem class];
+    for (CPRule *rule in rules)
+    {
+        NSArray *rightHandSide = [rule rightHandSideElements];
+        NSMutableSet *tagNames = [NSMutableSet set];
+        for (id element in rightHandSide)
+        {
+            if ([element isKindOfClass:itemClass])
+            {
+                NSSet *newTagNames = [(CPRHSItem *)element tagNamesWithError:&error];
+                if (nil != error)
+                {
+                    return error;
+                }
+                NSMutableSet *duplicateTags = [[tagNames mutableCopy] autorelease];
+                [duplicateTags intersectSet:newTagNames];
+                if ([duplicateTags count] > 0)
+                {
+                    return [NSError errorWithDomain:CPEBNFParserErrorDomain
+                                               code:CPErrorCodeDuplicateTag
+                                           userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                     [NSString stringWithFormat:@"Duplicate tag names %@ in same part of alternative is not allowed in \"%@\".", duplicateTags, rule], NSLocalizedDescriptionKey,
+                                                     nil]];
+                }
+                [tagNames unionSet:newTagNames];
+                NSString *tagName = [(CPRHSItem *)element tag];
+                if (nil != tagName)
+                {
+                    if ([tagNames containsObject:tagName])
+                    {
+                        return [NSError errorWithDomain:CPEBNFParserErrorDomain
+                                                   code:CPErrorCodeDuplicateTag
+                                               userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                         [NSString stringWithFormat:@"Duplicate tag names (%@) in same part of alternative is not allowed in \"%@\".", tagName, rule], NSLocalizedDescriptionKey,
+                                                         nil]];
+                    }
+                    [tagNames addObject:tagName];
+                }
+            }
+        }
+    }
+    
+    return nil;
 }
 
 - (NSSet *)collectRHSElementsForNewRules:(NSArray *)rightHandSide

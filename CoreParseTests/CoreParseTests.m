@@ -698,6 +698,13 @@
     STAssertNotNil(err, @"Error was nil after trying to create faulty grammar.");
     STAssertNil(errorTestGrammar, @"Error test grammar was not nil despite being faulty.");
     
+    faultyGrammar = @"A ::= b@'b' b@'a'*;";
+    errorTestGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:taggedStarGrammarString error:&err];
+    STAssertNotNil(err, @"Error was nil after using the same tag twice in a grammar rule.");
+    faultyGrammar = @"A ::= b@'b' (a@'a')*;";
+    errorTestGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:taggedStarGrammarString error:&err];
+    STAssertNotNil(err, @"Error was nil after using a tag within a repeating section of a grammar rule.");
+    
     STAssertNotNil(starTree, @"EBNF star parser produced nil result", nil);
     NSArray *as = [[starTree children] objectAtIndex:1];
     if (![[(CPKeywordToken *)[[starTree children] objectAtIndex:0] keyword] isEqualToString:@"b"] ||

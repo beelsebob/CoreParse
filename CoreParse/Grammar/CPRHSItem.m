@@ -8,6 +8,9 @@
 
 #import "CPRHSItem.h"
 
+#import "CPRHSItem+Private.h"
+#import "CPGrammar.h"
+
 @implementation CPRHSItem
 
 @synthesize alternatives = _alternatives;
@@ -28,8 +31,8 @@
             [self repeats] == [object repeats] &&
             [self mayNotExist] == [object mayNotExist] &&
             [self shouldCollapse] == [object shouldCollapse] &&
-            (([self tag] == nil && [object tag] == nil) ||
-             [[self tag] isEqualToString:[object tag]]));
+            (([self tag] == nil && [(CPRHSItem *)object tag] == nil) ||
+             [[self tag] isEqualToString:[(CPRHSItem *)object tag]]));
 }
 
 - (id)copyWithZone:(NSZone *)zone
@@ -88,6 +91,71 @@
     }
     [desc appendString:[self repeats] ? ([self mayNotExist] ? @"*" : @"+") : ([self mayNotExist] ? @"?" : @"")];
     return desc;
+}
+
+@end
+
+@implementation CPRHSItem (Private)
+
+- (NSSet *)tagNamesWithError:(NSError **)err
+{
+    Class itemClass = [CPRHSItem class];
+    NSMutableSet *tagNames = [NSMutableSet set];
+    
+    for (NSArray *components in [self alternatives])
+    {
+        NSMutableSet *tagNamesInAlternative = [NSMutableSet set];
+        for (id comp in components)
+        {
+            if ([comp isKindOfClass:itemClass])
+            {
+                NSSet *newTagNames = [(CPRHSItem *)comp tagNamesWithError:err];
+                if (nil != *err)
+                {
+                    return nil;
+                }
+                NSMutableSet *duplicateTags = [[tagNamesInAlternative mutableCopy] autorelease];
+                [duplicateTags intersectSet:newTagNames];
+                if ([duplicateTags count] > 0)
+                {
+                    *err = [NSError errorWithDomain:CPEBNFParserErrorDomain
+                                               code:CPErrorCodeDuplicateTag
+                                           userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                     [NSString stringWithFormat:@"Duplicate tag names %@ in same part of alternative is not allowed in \"%@\".", duplicateTags, self], NSLocalizedDescriptionKey,
+                                                     nil]];
+                    return nil;
+                }
+                [tagNamesInAlternative unionSet:newTagNames];
+                NSString *tagName = [(CPRHSItem *)comp tag];
+                if (nil != tagName)
+                {
+                    if ([tagNamesInAlternative containsObject:tagName])
+                    {
+                        *err = [NSError errorWithDomain:CPEBNFParserErrorDomain
+                                                   code:CPErrorCodeDuplicateTag
+                                               userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                         [NSString stringWithFormat:@"Duplicate tag names (%@) in same part of alternative is not allowed in \"%@\".", tagName, self], NSLocalizedDescriptionKey,
+                                                         nil]];
+                        return nil;
+                    }
+                    [tagNamesInAlternative addObject:tagName];
+                }
+            }
+        }
+        [tagNames unionSet:tagNamesInAlternative];
+    }
+    
+    if ([tagNames count] > 0 && [self repeats])
+    {
+        *err = [NSError errorWithDomain:CPEBNFParserErrorDomain
+                                   code:CPErrorCodeDuplicateTag
+                               userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                         [NSString stringWithFormat:@"Tag names are not allowed within repeating section of rule \"%@\".", self], NSLocalizedDescriptionKey,
+                                         nil]];
+        return nil;
+    }
+    
+    return tagNames;
 }
 
 @end
