@@ -26,7 +26,7 @@ Parsing Guide
 
 CoreParse is a powerful framework for tokenising and parsing.  This document explains how to create a tokeniser and parser from scratch, and how to use those parsers to create your model data structures for you.  We will follow the same example throughout this document.  This will deal with parsing a simple numerical expression and computing the result.
 
-gavineadie has implemented this entire example, to see full working source see https://github.com/gavineadie/ParseTest/.
+gavineadie has implemented this entire example, to see full working source see https://github.com/beelsebob/ParseTest/.
 
 Tokenisation
 ------------
@@ -75,13 +75,23 @@ We construct parsers by specifying their grammar.  We can construct a grammar si
 
     NSString *expressionGrammar =
         @"Expression ::= term@<Term>   | expr@<Expression> op@<AddOp> term@<Term>;"
-        @"Term       ::= fact@<Factor> | term@<Term>       op@<MulOp> fact@<Factor>;"
+        @"Term       ::= fact@<Factor> | fact@<Factor>     op@<MulOp> term@<Term>;"
         @"Factor     ::= num@'Number' | '(' expr@<Expression> ')';"
         @"AddOp      ::= '+' | '-';"
         @"MulOp      ::= '*' | '/';";
-    CPGrammar *grammar = [CPGrammar grammarWithStart:@"Expression" backusNaurForm:expressionGrammar];
-    CPParser *parser = [CPLALR1Parser parserWithGrammar:grammar];
-    [parser setDelegate:self];
+    NSError *err;
+    CPGrammar *grammar = [CPGrammar grammarWithStart:@"Expression" backusNaurForm:expressionGrammar error:&err];
+    if (nil == grammar)
+    {
+        NSLog(@"Error creating grammar:");
+        NSLog(@"%@", err);
+    }
+    else
+    {
+        CPParser *parser = [CPLALR1Parser parserWithGrammar:grammar];
+        [parser setDelegate:self];
+        ...
+    }
 
 When a rule is matched by the parser, the `initWithSyntaxTree:` method will be called on a new instance of the apropriate class.  If no such class exists the parser delegate's `parser:didProduceSyntaxTree:` method is called.  To deal with this cleanly, we implement 3 classes: Expression; Term; and Factor.  AddOp and MulOp non-terminals are dealt with by the parser delegate.  Here we see the initWithSyntaxTree: method for the Expression class, these methods are similar for Term and Factor:
     
@@ -115,7 +125,7 @@ We must also implement the delegate's method for dealing with AddOps and MulOps:
 
     - (id)parser:(CPParser *)parser didProduceSyntaxTree:(CPSyntaxTree *)syntaxTree
     {
-        return [(CPQuotedToken *)[syntaxTree childAtIndex:0] content];
+        return [(CPKeywordToken *)[syntaxTree childAtIndex:0] keyword];
     }
 
 We can now parse the token stream we produced earlier:
