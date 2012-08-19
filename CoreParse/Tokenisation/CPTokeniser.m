@@ -120,6 +120,7 @@
                 [tok setLineNumber:currentLineNumber];
                 [tok setColumnNumber:currentColumnNumber];
                 [tok setCharacterNumber:lastTokenOffset];
+                [tok setLength:currentTokenOffset - lastTokenOffset];
                 
                 if ([delegate respondsToSelector:@selector(tokeniser:shouldConsumeToken:)])
                 {

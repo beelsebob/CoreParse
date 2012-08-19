@@ -37,4 +37,9 @@
  */
 @property (readwrite, assign) NSUInteger characterNumber;
 
+/**
+ * The character length of the token.
+ */
+@property (readwrite, assign) NSUInteger length;
+
 @end
