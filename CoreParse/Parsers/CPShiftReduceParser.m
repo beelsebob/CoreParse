@@ -169,7 +169,7 @@
                     if (nil == result)
                     {
                         result = tree;
-                        if ([[self delegate] respondsToSelector:@selector(parser:didProduceSyntaxTree:)])
+                        if (delegateRespondsTo.didProduceSyntaxTree)
                         {
                             result = [[self delegate] parser:self didProduceSyntaxTree:tree];
                         }
@@ -234,11 +234,11 @@
 
 - (CPRecoveryAction *)error:(CPTokenStream *)tokenStream expecting:(NSSet *)acceptableTokens
 {
-    if ([[self delegate] respondsToSelector:@selector(parser:didEncounterErrorOnInput:expecting:)])
+    if (delegateRespondsTo.didEncounterErrorOnInputExpecting)
     {
         return [[self delegate] parser:self didEncounterErrorOnInput:tokenStream expecting:acceptableTokens];
     }
-    else if ([[self delegate] respondsToSelector:@selector(parser:didEncounterErrorOnInput:)])
+    else if (delegateRespondsTo.didEncounterErrorOnInput)
     {
         return [[self delegate] parser:self didEncounterErrorOnInput:tokenStream];
     }

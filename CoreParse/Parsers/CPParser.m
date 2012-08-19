@@ -56,4 +56,14 @@
     return nil;
 }
 
+- (void)setDelegate:(id<CPParserDelegate>)aDelegate
+{
+    if (delegate != aDelegate) 
+    {
+        delegateRespondsTo.didProduceSyntaxTree = [delegate respondsToSelector:@selector(parser:didProduceSyntaxTree:)];
+        delegateRespondsTo.didEncounterErrorOnInput = [delegate respondsToSelector:@selector(parser:didEncounterErrorOnInput:)];
+        delegateRespondsTo.didEncounterErrorOnInputExpecting = [delegate respondsToSelector:@selector(parser:didEncounterErrorOnInput:expecting:)];
+    }
+}
+
 @end
