@@ -21,6 +21,16 @@ You may wonder why and/or when you should use CoreParse.  There are already a nu
   * CoreParse provides allows you to specify grammars right in your Objective-C source, rather than needing another language, which intermixes C/Obj-C.
   * CoreParse does not use global state, multiple parser instances can be run in parallel (or the same parser instance can parse multiple token streams in parallel).
 
+Where is CoreParse Already Used?
+--------------------------------
+
+CoreParse is already used in a major way in at least two projects:
+
+* Matt Mower uses it in his [statec](https://github.com/mmower/statec) project to parse his state machine specifications.
+* I use it in [OpenStreetPad](https://github.com/beelsebob/OpenStreetPad/) to parse MapCSS.
+
+If you know of any other places it's been used, please feel free to get in touch.
+
 Parsing Guide
 =============
 
@@ -35,102 +45,116 @@ CoreParse's tokenisation class is CPTokeniser.  To specify how tokens are constr
 
 Our example language will involve several symbols, numbers, whitespace, and comments.  We add these to the tokeniser:
 
-    CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
-    [tokeniser addTokenRecogniser:[CPNumberRecogniser numberRecogniser]];
-    [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
-    [tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" name:@"Comment"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"+"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"-"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"*"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"/"]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"("]];
-    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@")"]];
+```objective-c
+CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
+[tokeniser addTokenRecogniser:[CPNumberRecogniser numberRecogniser]];
+[tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
+[tokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" name:@"Comment"]];
+[tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"+"]];
+[tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"-"]];
+[tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"*"]];
+[tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"/"]];
+[tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"("]];
+[tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@")"]];
+```
 
 Note that the comment tokeniser is added before the keyword recogniser for the divide symbol.  This gives it higher precidence, and means that the first slash of a comment will not be recognised as a division.
 
 Next, we add ourself as a delegate to the tokeniser.  We implement the tokeniser delegate methods in such a way that whitespace tokens and comments, although consumed, will not appear in the tokeniser's output:
 
-    - (BOOL)tokeniser:(CPTokeniser *)tokeniser shouldConsumeToken:(CPToken *)token
+```objective-c
+- (BOOL)tokeniser:(CPTokeniser *)tokeniser shouldConsumeToken:(CPToken *)token
+{
+    return YES;
+}
+
+- (NSArray *)tokeniser:(CPTokeniser *)tokeniser willProduceToken:(CPToken *)token
+{
+    if ([token isKindOfClass:[CPWhiteSpaceToken class]] || [[token name] isEqualToString:@"Comment"])
     {
-        return YES;
+        return [NSArray array];
     }
-    
-    - (NSArray *)tokeniser:(CPTokeniser *)tokeniser willProduceToken:(CPToken *)token
-    {
-        if ([token isKindOfClass:[CPWhiteSpaceToken class]] || [[token name] isEqualToString:@"Comment"])
-        {
-            return [NSArray array];
-        }
-        return [NSArray arrayWithObject:token];
-    }
+    return [NSArray arrayWithObject:token];
+}
+```
 
 We can now invoke our tokeniser.
 
-    CPTokenStream *tokenStream = [tokeniser tokenise:@"5 + (2.0 / 5.0 + 9) * 8"];
+```objective-c
+CPTokenStream *tokenStream = [tokeniser tokenise:@"5 + (2.0 / 5.0 + 9) * 8"];
+```
 
 Parsing
 -------
 
 We construct parsers by specifying their grammar.  We can construct a grammar simply using a simple BNF like language.  Note the syntax tag@<NonTerminal> can be read simply as <NonTerminal>, the tag can be used later to quickly extract values from the parsed result:
 
-    NSString *expressionGrammar =
-        @"Expression ::= term@<Term>   | expr@<Expression> op@<AddOp> term@<Term>;"
-        @"Term       ::= fact@<Factor> | fact@<Factor>     op@<MulOp> term@<Term>;"
-        @"Factor     ::= num@'Number' | '(' expr@<Expression> ')';"
-        @"AddOp      ::= '+' | '-';"
-        @"MulOp      ::= '*' | '/';";
-    NSError *err;
-    CPGrammar *grammar = [CPGrammar grammarWithStart:@"Expression" backusNaurForm:expressionGrammar error:&err];
-    if (nil == grammar)
-    {
-        NSLog(@"Error creating grammar:");
-        NSLog(@"%@", err);
-    }
-    else
-    {
-        CPParser *parser = [CPLALR1Parser parserWithGrammar:grammar];
-        [parser setDelegate:self];
-        ...
-    }
+```objective-c
+NSString *expressionGrammar =
+    @"Expression ::= term@<Term>   | expr@<Expression> op@<AddOp> term@<Term>;"
+    @"Term       ::= fact@<Factor> | fact@<Factor>     op@<MulOp> term@<Term>;"
+    @"Factor     ::= num@'Number' | '(' expr@<Expression> ')';"
+    @"AddOp      ::= '+' | '-';"
+    @"MulOp      ::= '*' | '/';";
+NSError *err;
+CPGrammar *grammar = [CPGrammar grammarWithStart:@"Expression" backusNaurForm:expressionGrammar error:&err];
+if (nil == grammar)
+{
+    NSLog(@"Error creating grammar:");
+    NSLog(@"%@", err);
+}
+else
+{
+    CPParser *parser = [CPLALR1Parser parserWithGrammar:grammar];
+    [parser setDelegate:self];
+    ...
+}
+```
 
 When a rule is matched by the parser, the `initWithSyntaxTree:` method will be called on a new instance of the apropriate class.  If no such class exists the parser delegate's `parser:didProduceSyntaxTree:` method is called.  To deal with this cleanly, we implement 3 classes: Expression; Term; and Factor.  AddOp and MulOp non-terminals are dealt with by the parser delegate.  Here we see the initWithSyntaxTree: method for the Expression class, these methods are similar for Term and Factor:
     
-    - (id)initWithSyntaxTree:(CPSyntaxTree *)syntaxTree
+```objective-c
+- (id)initWithSyntaxTree:(CPSyntaxTree *)syntaxTree
+{
+    self = [self init];
+    
+    if (nil != self)
     {
-        self = [self init];
+        Term       *t = [syntaxTree valueForTag:@"term"];
+        Expression *e = [syntaxTree valueForTag:@"expr"];
         
-        if (nil != self)
+        if (nil == e)
         {
-            Term       *t = [syntaxTree valueForTag:@"term"];
-            Expression *e = [syntaxTree valueForTag:@"expr"];
-            
-            if (nil == e)
-            {
-                [self setValue:[t value]];
-            }
-            else if ([[syntaxTree valueForTag:@"op"] isEqualToString:@"+"])
-            {
-                [self setValue:[e value] + [t value]];
-            }
-            else
-            {
-                [self setValue:[e value] - [t value]];
-            }
+            [self setValue:[t value]];
         }
-        
-        return self;
+        else if ([[syntaxTree valueForTag:@"op"] isEqualToString:@"+"])
+        {
+            [self setValue:[e value] + [t value]];
+        }
+        else
+        {
+            [self setValue:[e value] - [t value]];
+        }
     }
+    
+    return self;
+}
+```
 
 We must also implement the delegate's method for dealing with AddOps and MulOps:
 
-    - (id)parser:(CPParser *)parser didProduceSyntaxTree:(CPSyntaxTree *)syntaxTree
-    {
-        return [(CPKeywordToken *)[syntaxTree childAtIndex:0] keyword];
-    }
+```objective-c
+- (id)parser:(CPParser *)parser didProduceSyntaxTree:(CPSyntaxTree *)syntaxTree
+{
+    return [(CPKeywordToken *)[syntaxTree childAtIndex:0] keyword];
+}
+```
 
 We can now parse the token stream we produced earlier:
 
-    NSLog(@"%f", [(Expression *)[parser parse:tokenStream] value]);
+```objective-c
+NSLog(@"%f", [(Expression *)[parser parse:tokenStream] value]);
+```
 
 Which outputs:
 
