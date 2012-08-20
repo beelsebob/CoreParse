@@ -12,6 +12,7 @@
 
 #import "CPLR1Item.h"
 #import "NSSetFunctional.h"
+#import "NSArray+Functional.h"
 
 #import "CPShiftReduceAction.h"
 
@@ -29,6 +30,7 @@
 {
     CPGrammar *aug = [[self grammar] augmentedGrammar];
     NSArray *kernels = [self kernelsForGrammar:aug];
+    NSArray *lr0Kernels = [kernels map:^ NSSet * (NSSet *s) { return [s map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }]; }];
     NSUInteger itemCount = [kernels count];
     NSArray *allNonTerminalNames = [[self grammar] allNonTerminalNames];
     NSString *startSymbol = [aug start];
@@ -70,9 +72,9 @@
                 NSSet *lr0G = [g map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }];
                 NSUInteger indx = 0;
                 NSUInteger ix = NSNotFound;
-                for (NSSet *lr1Kernel in kernels)
+                for (NSSet *lr0Kernel in lr0Kernels)
                 {
-                    if ([[lr1Kernel map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }] isEqualToSet:lr0G])
+                    if ([lr0Kernel isEqualToSet:lr0G])
                     {
                         ix = indx;
                         break;
@@ -94,9 +96,9 @@
             NSSet *lr0G = [g map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }];
             NSUInteger indx = 0;
             NSUInteger gotoIndex = NSNotFound;
-            for (NSSet *lr1Kernel in kernels)
+            for (NSSet *lr0Kernel in lr0Kernels)
             {
-                if ([[lr1Kernel map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }] isEqualToSet:lr0G])
+                if ([lr0Kernel isEqualToSet:lr0G])
                 {
                     gotoIndex = indx;
                     break;
