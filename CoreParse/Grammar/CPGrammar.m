@@ -314,7 +314,11 @@
         return nil;
     }
     
-    NSArray *newRules = [self tidyRightHandSides:initRules];
+    NSArray *newRules = [self tidyRightHandSides:initRules error:error];
+    if (nil == newRules)
+    {
+        return nil;
+    }
     
     return [self initWithStart:initStart rules:newRules];
 }

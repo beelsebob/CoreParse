@@ -1,17 +1,16 @@
 //
-//  NSSetFunctional.m
+//  NSArray+Functional.m
 //  CoreParse
 //
-//  Created by Tom Davie on 06/03/2011.
-//  Copyright 2011 In The Beginning... All rights reserved.
+//  Created by Tom Davie on 20/08/2012.
+//  Copyright (c) 2012 In The Beginning... All rights reserved.
 //
 
-#import "NSSetFunctional.h"
+#import "NSArray+Functional.h"
 
+@implementation NSArray (Functional)
 
-@implementation NSSet(Functional)
-
-- (NSSet *)map:(id(^)(id obj))block
+- (NSArray *)map:(id(^)(id obj))block
 {
     NSUInteger c = [self count];
     id *resultingObjects = malloc(c * sizeof(id));
@@ -27,9 +26,9 @@
         }
     }
     
-    NSSet *s = [NSSet setWithObjects:resultingObjects count:nonNilCount];
+    NSArray *a = [NSArray arrayWithObjects:resultingObjects count:nonNilCount];
     free(resultingObjects);
-    return s;
+    return a;
 }
 
 @end

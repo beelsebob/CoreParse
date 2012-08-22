@@ -8,6 +8,8 @@
 
 #import "CPItem.h"
 
+#import "NSObject+IsCoreParseObject.h"
+
 @interface CPItem ()
 
 @property (readwrite,retain) CPRule *rule;
@@ -31,8 +33,8 @@
     
     if (nil != self)
     {
-        [self setRule:initRule];
-        [self setPosition:initPosition];
+        rule = [initRule retain];
+        position = initPosition;
     }
     
     return self;
@@ -40,7 +42,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    return [[CPItem allocWithZone:zone] initWithRule:[self rule] position:[self position]];
+    return [[CPItem allocWithZone:zone] initWithRule:rule position:position];
 }
 
 - (void)dealloc
@@ -76,14 +78,14 @@
     return [c autorelease];
 }
 
+- (BOOL)isCPItem
+{
+    return YES;
+}
+
 - (BOOL)isEqual:(id)object
 {
-    if ([object isKindOfClass:[CPItem class]])
-    {
-        CPItem *other = (CPItem *)object;
-        return [other position] == position && [other rule] == rule;
-    }
-    return NO;
+    return [object isCPItem] && ((CPItem *)object)->position == position && ((CPItem *)object)->rule == rule;
 }
 
 - (NSUInteger)hash

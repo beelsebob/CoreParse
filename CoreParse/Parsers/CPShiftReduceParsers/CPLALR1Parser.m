@@ -12,6 +12,7 @@
 
 #import "CPLR1Item.h"
 #import "NSSetFunctional.h"
+#import "NSArray+Functional.h"
 
 #import "CPShiftReduceAction.h"
 
@@ -29,6 +30,7 @@
 {
     CPGrammar *aug = [[self grammar] augmentedGrammar];
     NSArray *kernels = [self kernelsForGrammar:aug];
+    NSArray *lr0Kernels = [kernels map:^ NSSet * (NSSet *s) { return [s map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }]; }];
     NSUInteger itemCount = [kernels count];
     NSArray *allNonTerminalNames = [[self grammar] allNonTerminalNames];
     NSString *startSymbol = [aug start];
@@ -39,75 +41,81 @@
     NSUInteger idx = 0;
     for (NSSet *kernel in kernels)
     {
-        NSSet *itemsSet = [aug lr1Closure:kernel];
-        for (CPLR1Item *item in itemsSet)
+        @autoreleasepool
         {
-            CPGrammarSymbol *next = [item nextSymbol];
-            if (nil == next)
+            NSSet *itemsSet = [aug lr1Closure:kernel];
+            for (CPLR1Item *item in itemsSet)
             {
-                if ([[[item rule] name] isEqualToString:startSymbol])
+                @autoreleasepool
                 {
-                    BOOL success = [[self actionTable] setAction:[CPShiftReduceAction acceptAction] forState:idx name:@"EOF"];
-                    if (!success)
+                    CPGrammarSymbol *next = [item nextSymbol];
+                    if (nil == next)
                     {
-                        NSLog(@"Could not insert shift in action table for state %lu, token %@", (unsigned long)idx, @"EOF");
-                        return NO;
+                        if ([[[item rule] name] isEqualToString:startSymbol])
+                        {
+                            BOOL success = [[self actionTable] setAction:[CPShiftReduceAction acceptAction] forState:idx name:@"EOF"];
+                            if (!success)
+                            {
+                                NSLog(@"Could not insert shift in action table for state %lu, token %@", (unsigned long)idx, @"EOF");
+                                return NO;
+                            }
+                        }
+                        else
+                        {
+                            BOOL success = [[self actionTable] setAction:[CPShiftReduceAction reduceAction:[item rule]] forState:idx name:[[item terminal] name]];
+                            if (!success)
+                            {
+                                NSLog(@"Could not insert reduce in action table for state %lu, token %@", (unsigned long)idx, [[item terminal] name]);
+                                return NO;
+                            }
+                        }
                     }
-                }
-                else
-                {
-                    BOOL success = [[self actionTable] setAction:[CPShiftReduceAction reduceAction:[item rule]] forState:idx name:[[item terminal] name]];
-                    if (!success)
+                    else if ([next isTerminal])
                     {
-                        NSLog(@"Could not insert reduce in action table for state %lu, token %@", (unsigned long)idx, [[item terminal] name]);
-                        return NO;
+                        NSSet *g = [aug lr0GotoKernelWithItems:itemsSet symbol:next];
+                        NSSet *lr0G = [g map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }];
+                        NSUInteger indx = 0;
+                        NSUInteger ix = NSNotFound;
+                        for (NSSet *lr0Kernel in lr0Kernels)
+                        {
+                            if ([lr0Kernel isEqualToSet:lr0G])
+                            {
+                                ix = indx;
+                                break;
+                            }
+                            indx++;
+                        }
+                        BOOL success = [[self actionTable] setAction:[CPShiftReduceAction shiftAction:ix] forState:idx name:[next name]];
+                        if (!success)
+                        {
+                            NSLog(@"Could not insert shift in action table for state %lu, token %@", (unsigned long)idx, [next name]);
+                            return NO;
+                        }
                     }
                 }
             }
-            else if ([next isTerminal])
+            
+            for (NSString *nonTerminalName in allNonTerminalNames)
             {
-                NSSet *g = [aug lr0GotoKernelWithItems:itemsSet symbol:next];
+                NSSet *g = [aug lr0GotoKernelWithItems:itemsSet symbol:[CPGrammarSymbol nonTerminalWithName:nonTerminalName]];
                 NSSet *lr0G = [g map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }];
                 NSUInteger indx = 0;
-                NSUInteger ix = NSNotFound;
-                for (NSSet *lr1Kernel in kernels)
+                NSUInteger gotoIndex = NSNotFound;
+                for (NSSet *lr0Kernel in lr0Kernels)
                 {
-                    if ([[lr1Kernel map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }] isEqualToSet:lr0G])
+                    if ([lr0Kernel isEqualToSet:lr0G])
                     {
-                        ix = indx;
+                        gotoIndex = indx;
                         break;
                     }
                     indx++;
                 }
-                BOOL success = [[self actionTable] setAction:[CPShiftReduceAction shiftAction:ix] forState:idx name:[next name]];
+                BOOL success = [[self gotoTable] setGoto:gotoIndex forState:idx nonTerminalNamed:nonTerminalName];
                 if (!success)
                 {
-                    NSLog(@"Could not insert shift in action table for state %lu, token %@", (unsigned long)idx, [next name]);
+                    NSLog(@"Could not insert into goto table for state %lu, token %@", (unsigned long)idx, nonTerminalName);
                     return NO;
                 }
-            }
-        }
-        
-        for (NSString *nonTerminalName in allNonTerminalNames)
-        {
-            NSSet *g = [aug lr0GotoKernelWithItems:itemsSet symbol:[CPGrammarSymbol nonTerminalWithName:nonTerminalName]];
-            NSSet *lr0G = [g map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }];
-            NSUInteger indx = 0;
-            NSUInteger gotoIndex = NSNotFound;
-            for (NSSet *lr1Kernel in kernels)
-            {
-                if ([[lr1Kernel map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }] isEqualToSet:lr0G])
-                {
-                    gotoIndex = indx;
-                    break;
-                }
-                indx++;
-            }
-            BOOL success = [[self gotoTable] setGoto:gotoIndex forState:idx nonTerminalNamed:nonTerminalName];
-            if (!success)
-            {
-                NSLog(@"Could not insert into goto table for state %lu, token %@", (unsigned long)idx, nonTerminalName);
-                return NO;
             }
         }
         
