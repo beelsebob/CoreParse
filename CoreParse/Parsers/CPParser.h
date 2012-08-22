@@ -124,7 +124,7 @@
 /**
  * The parser's delegate.
  */
-@property (readwrite,assign) id<CPParserDelegate> delegate;
+@property (readwrite,assign, nonatomic) id<CPParserDelegate> delegate;
 
 ///---------------------------------------------------------------------------------------
 /// @name Finding out about the parsed Grammar 

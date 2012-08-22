@@ -778,7 +778,7 @@
 		1F0E88EC130462F300537D04 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "In The Beginning...";
 			};
 			buildConfigurationList = 1F0E88EF130462F300537D04 /* Build configuration list for PBXProject "CoreParse" */;

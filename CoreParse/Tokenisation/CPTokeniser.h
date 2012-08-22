@@ -82,7 +82,7 @@
 /**
  * The object that acts as a delegate to the receiving CPTokeniser.
  */
-@property (readwrite, assign) id<CPTokeniserDelegate> delegate;
+@property (readwrite, assign, nonatomic) id<CPTokeniserDelegate> delegate;
 
 ///---------------------------------------------------------------------------------------
 /// @name Managing recognised tokens
