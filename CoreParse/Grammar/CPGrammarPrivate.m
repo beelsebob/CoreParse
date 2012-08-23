@@ -124,13 +124,12 @@ static char followCacheKey;
 {
     NSMutableSet *symbols = [NSMutableSet set];
     
-    Class grammarSymbolClass = [CPGrammarSymbol class];
     for (CPRule *rule in rules)
     {
         [symbols addObject:[rule name]];
         for (id sym in [rule rightHandSideElements])
         {
-            if ([sym isKindOfClass:grammarSymbolClass])
+            if ([sym isGrammarSymbol])
             {
                 [symbols addObject:[sym name]];
             }

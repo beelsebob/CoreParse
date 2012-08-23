@@ -51,3 +51,9 @@
 @property (readwrite,copy) NSNumber *number;
 
 @end
+
+@interface NSObject (CPIsNumberToken)
+
+- (BOOL)isNumberToken;
+
+@end

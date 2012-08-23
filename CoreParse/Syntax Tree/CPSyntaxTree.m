@@ -79,14 +79,16 @@
     return [[self rule] hash];
 }
 
+- (BOOL)isSyntaxTree
+{
+    return YES;
+}
+
 - (BOOL)isEqual:(id)object
 {
-    if ([object isKindOfClass:[CPSyntaxTree class]])
-    {
-        CPSyntaxTree *other = (CPSyntaxTree *)object;
-        return [other rule] == [self rule] && [[other children] isEqualToArray:[self children]];
-    }
-    return NO;
+    return ([object isSyntaxTree] &&
+            ((CPSyntaxTree *)object)->rule == rule &&
+            [((CPSyntaxTree *)object)->children isEqualToArray:children]);
 }
 
 - (NSString *)description
@@ -98,6 +100,15 @@
     }
     [desc replaceCharactersInRange:NSMakeRange([desc length] - 1, 1) withString:@")"];
     return desc;
+}
+
+@end
+
+@implementation NSObject(CPIsSyntaxTree)
+
+- (BOOL)isSyntaxTree
+{
+    return NO;
 }
 
 @end

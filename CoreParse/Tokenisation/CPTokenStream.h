@@ -93,3 +93,9 @@
 - (void)closeTokenStream;
 
 @end
+
+@interface NSObject (CPIsTokenStream)
+
+- (BOOL)isTokenStream;
+
+@end

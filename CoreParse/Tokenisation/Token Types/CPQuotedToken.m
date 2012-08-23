@@ -68,13 +68,25 @@
     return [[self content] hash];
 }
 
+- (BOOL)isQuotedToken
+{
+    return YES;
+}
+
 - (BOOL)isEqual:(id)object
 {
-    if ([object isKindOfClass:[CPQuotedToken class]])
-    {
-        CPQuotedToken *other = (CPQuotedToken *)object;
-        return [[other content] isEqualToString:[self content]] && [[other name] isEqualToString:[self name]] && [[other quoteType] isEqualToString:[self quoteType]];
-    }
+    return ([object isQuotedToken] &&
+            [((CPQuotedToken *)object)->content isEqualToString:content] &&
+            [((CPQuotedToken *)object)->name isEqualToString:name] &&
+            [((CPQuotedToken *)object)->quoteType isEqualToString:quoteType]);
+}
+
+@end
+
+@implementation NSObject (CPIsQuotedToken)
+
+- (BOOL)isQuotedToken
+{
     return NO;
 }
 

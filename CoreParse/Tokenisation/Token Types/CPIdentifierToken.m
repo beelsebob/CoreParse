@@ -8,7 +8,6 @@
 
 #import "CPIdentifierToken.h"
 
-
 @implementation CPIdentifierToken
 {
     NSString *identifier;
@@ -41,6 +40,7 @@
 - (void)dealloc
 {
     [identifier release];
+    
     [super dealloc];
 }
 
@@ -59,13 +59,23 @@
     return [[self identifier] hash];
 }
 
+- (BOOL)isIdentifierToken
+{
+    return YES;
+}
+
 - (BOOL)isEqual:(id)object
 {
-    if ([object isKindOfClass:[CPIdentifierToken class]])
-    {
-        CPIdentifierToken *other = (CPIdentifierToken *)object;
-        return [[other identifier] isEqualToString:[self identifier]];
-    }
+    return ([object isIdentifierToken] &&
+            [((CPIdentifierToken *)object)->identifier isEqualToString:identifier]);
+}
+
+@end
+
+@implementation NSObject(CPIsIdentifierToken)
+
+- (BOOL)isIdentifierToken
+{
     return NO;
 }
 

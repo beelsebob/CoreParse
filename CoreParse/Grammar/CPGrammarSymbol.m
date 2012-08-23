@@ -8,7 +8,6 @@
 
 #import "CPGrammarSymbol.h"
 
-
 @implementation CPGrammarSymbol
 
 @synthesize name;
@@ -64,14 +63,16 @@
     [aCoder encodeBool:[self isTerminal] forKey:CPGrammarSymbolTerminalKey];
 }
 
+- (BOOL)isGrammarSymbol
+{
+    return YES;
+}
+
 - (BOOL)isEqual:(id)object
 {
-    if ([object isKindOfClass:[CPGrammarSymbol class]])
-    {
-        CPGrammarSymbol *other = (CPGrammarSymbol *)object;
-        return [other isTerminal] == [self isTerminal] && [[other name] isEqualToString:[self name]];
-    }
-    return NO;
+    return ([object isGrammarSymbol] &&
+            ((CPGrammarSymbol *)object)->terminal == terminal &&
+            [((CPGrammarSymbol *)object)->name isEqualToString:name]);
 }
 
 - (NSUInteger)hash
@@ -96,6 +97,15 @@
     [name release];
     
     [super dealloc];
+}
+
+@end
+
+@implementation NSObject (CPGrammarSymbol)
+
+- (BOOL)isGrammarSymbol
+{
+    return NO;
 }
 
 @end

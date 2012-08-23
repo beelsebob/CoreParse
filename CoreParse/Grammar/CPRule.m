@@ -137,18 +137,18 @@
     return [name hash] << 16 + [self tag] ;
 }
 
+- (BOOL)isRule
+{
+    return YES;
+}
+
 - (BOOL)isEqual:(id)object
 {
-    if ([object isKindOfClass:[CPRule class]])
-    {
-        CPRule *other = (CPRule *)object;
-        return ([other tag] == tag &&
-                [[other name] isEqualToString:name] &&
-                [[other rightHandSideElements] isEqualToArray:rightHandSide] &&
-                (_tagName == nil || [[other tagName] isEqualToString:_tagName]));
-    }
-    
-    return NO;
+    return ([object isRule] &&
+            ((CPRule *)object)->tag == tag &&
+            [((CPRule *)object)->name isEqualToString:name] &&
+            [((CPRule *)object)->rightHandSide isEqualToArray:rightHandSide] &&
+            (_tagName == nil || [((CPRule *)object)->_tagName isEqualToString:_tagName]));
 }
 
 @end
@@ -181,3 +181,11 @@
 
 @end
 
+@implementation NSObject (CPIsRule)
+
+- (BOOL)isRule
+{
+    return NO;
+}
+
+@end

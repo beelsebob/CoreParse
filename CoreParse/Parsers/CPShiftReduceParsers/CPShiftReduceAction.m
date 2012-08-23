@@ -166,9 +166,14 @@ ActionDetails;
     return type;
 }
 
+- (BOOL)isShiftReduceAction
+{
+    return YES;
+}
+
 - (BOOL)isEqual:(id)object
 {
-    if ([object isKindOfClass:[CPShiftReduceAction class]] && ((CPShiftReduceAction *)object)->type == type)
+    if ([object isShiftReduceAction] && ((CPShiftReduceAction *)object)->type == type)
     {
         CPShiftReduceAction *other = (CPShiftReduceAction *)object;
         switch (type)
@@ -211,5 +216,13 @@ ActionDetails;
     }
 }
 
+@end
+
+@implementation NSObject(CPIsShiftReduceAction)
+
+- (BOOL)isShiftReduceAction
+{
+    return NO;
+}
 
 @end

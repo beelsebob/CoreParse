@@ -9,10 +9,6 @@
 #import "CPNumberToken.h"
 
 @implementation CPNumberToken
-{
-@private
-    NSNumber *number;
-}
 
 @synthesize number;
 
@@ -59,14 +55,23 @@
     return [[self number] hash];
 }
 
+- (BOOL)isNumberToken
+{
+    return YES;
+}
+
 - (BOOL)isEqual:(id)object
 {
-    if ([object isKindOfClass:[CPNumberToken class]])
-    {
-        CPNumberToken *other = (CPNumberToken *)object;
-        return [[other number] isEqualToNumber:[self number]];
-    }
-    
+    return ([object isNumberToken] &&
+            [((CPNumberToken *)object)->number isEqualToNumber:number]);
+}
+
+@end
+
+@implementation NSObject (CPIsNumberToken)
+
+- (BOOL)isNumberToken
+{
     return NO;
 }
 

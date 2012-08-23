@@ -9,10 +9,6 @@
 #import "CPWhiteSpaceToken.h"
 
 @implementation CPWhiteSpaceToken
-{
-@private
-    NSString *whiteSpace;
-}
 
 @synthesize whiteSpace;
 
@@ -40,6 +36,8 @@
 
 - (void)dealloc
 {
+    [whiteSpace release];
+    
     [super dealloc];
 }
 
@@ -53,9 +51,23 @@
     return 1;
 }
 
+- (BOOL)isWhiteSpaceToken
+{
+    return YES;
+}
+
 - (BOOL)isEqual:(id)object
 {
-    return [object isKindOfClass:[CPWhiteSpaceToken class]];
+    return [object isWhiteSpaceToken];
+}
+
+@end
+
+@implementation NSObject (CPIsWhiteSpaceToken)
+
+- (BOOL)isWhiteSpaceToken
+{
+    return NO;
 }
 
 @end

@@ -60,3 +60,9 @@
 @property (readwrite,copy) NSString *quoteType;
 
 @end
+
+@interface NSObject (CPIsQuotedToken)
+
+- (BOOL)isQuotedToken;
+
+@end

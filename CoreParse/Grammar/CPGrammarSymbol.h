@@ -68,3 +68,9 @@
 @property (readwrite, assign, getter=isTerminal) BOOL terminal;
 
 @end
+
+@interface NSObject (CPGrammarSymbol)
+
+- (BOOL)isGrammarSymbol;
+
+@end

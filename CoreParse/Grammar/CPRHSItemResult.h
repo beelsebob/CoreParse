@@ -18,3 +18,9 @@
 @property (readwrite, copy  ) NSDictionary *tagValues;
 
 @end
+
+@interface NSObject (CPIsRHSItemResult)
+
+- (BOOL)isRHSItemResult;
+
+@end

@@ -37,3 +37,9 @@
 - (id)initWithMesage:(NSString *)errorMessage;
 
 @end
+
+@interface NSObject (CPErrorToken)
+
+- (BOOL)isErrorToken;
+
+@end

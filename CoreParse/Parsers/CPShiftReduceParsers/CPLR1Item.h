@@ -20,3 +20,9 @@
 - (id)initWithRule:(CPRule *)rule position:(NSUInteger)position terminal:(CPGrammarSymbol *)terminal;
 
 @end
+
+@interface NSObject (CPIsLR1Item)
+
+- (BOOL)isLR1Item;
+
+@end

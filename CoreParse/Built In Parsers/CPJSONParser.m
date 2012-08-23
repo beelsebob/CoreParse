@@ -127,7 +127,7 @@
 
 - (NSArray *)tokeniser:(CPTokeniser *)tokeniser willProduceToken:(CPToken *)token
 {
-    if ([token isKindOfClass:[CPWhiteSpaceToken class]])
+    if ([token isWhiteSpaceToken])
     {
         return [NSArray array];
     }

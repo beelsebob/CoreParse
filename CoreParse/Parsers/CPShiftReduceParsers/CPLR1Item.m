@@ -52,24 +52,35 @@
     [super dealloc];
 }
 
+- (BOOL)isLR1Item
+{
+    return YES;
+}
+
 - (BOOL)isEqual:(id)object
 {
-    if ([object isKindOfClass:[CPLR1Item class]])
-    {
-        CPLR1Item *other = (CPLR1Item *)object;
-        return [super isEqual:object] && [[other terminal] isEqual:[self terminal]];
-    }
-    return NO;
+    return ([object isLR1Item] &&
+            [super isEqualToItem:(CPLR1Item *)object] &&
+            [((CPLR1Item *)object)->terminal isEqual:terminal]);
 }
 
 - (NSUInteger)hash
 {
-    return [[self rule] hash] << 16 + [[self terminal] hash] + [self position];
+    return [[self rule] hash] << 16 + [terminal hash] + [self position];
 }
 
 - (NSString *)description
 {
     return [[super description] stringByAppendingFormat:@", %@", [[self terminal] name]];
+}
+
+@end
+
+@implementation NSObject(CPIsLR1Item)
+
+- (BOOL)isLR1Item
+{
+    return NO;
 }
 
 @end

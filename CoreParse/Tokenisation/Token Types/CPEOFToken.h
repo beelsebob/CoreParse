@@ -25,3 +25,9 @@
 + (id)eof;
 
 @end
+
+@interface NSObject (CPIsEOFToken)
+
+- (BOOL)isEOFToken;
+
+@end

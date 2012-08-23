@@ -25,4 +25,12 @@
 
 - (id)itemByMovingDotRight;
 
+- (BOOL)isEqualToItem:(CPItem *)item;
+
+@end
+
+@interface NSObject (CPIsItem)
+
+- (BOOL)isItem;
+
 @end

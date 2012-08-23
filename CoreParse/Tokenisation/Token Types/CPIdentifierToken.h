@@ -51,3 +51,10 @@
 @property (readwrite,copy) NSString *identifier;
 
 @end
+
+@interface NSObject (CPIsIdentifierToken)
+
+- (BOOL)isIdentifierToken;
+
+@end
+

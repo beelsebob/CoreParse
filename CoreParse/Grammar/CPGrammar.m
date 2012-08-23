@@ -106,7 +106,7 @@
         case 11:
         {
             id i = [children objectAtIndex:2];
-            if ([i isKindOfClass:[CPRHSItem class]])
+            if ([i isRHSItem])
             {
                 [(CPRHSItem *)i setTag:[[children objectAtIndex:0] identifier]];
                 return i;
@@ -190,7 +190,7 @@
 
 - (NSArray *)tokeniser:(CPTokeniser *)tokeniser willProduceToken:(CPToken *)token
 {
-    if ([token isKindOfClass:[CPWhiteSpaceToken class]])
+    if ([token isWhiteSpaceToken])
     {
         return [NSArray array];
     }
@@ -390,15 +390,16 @@
     return [[self start] hash] << 16 + [[self rules] hash];
 }
 
+- (BOOL)isGrammar
+{
+    return YES;
+}
+
 - (BOOL)isEqual:(id)object
 {
-    if ([object isKindOfClass:[CPGrammar class]])
-    {
-        CPGrammar *other = (CPGrammar *)object;
-        return [[other start] isEqualToString:[self start]] && [[other rules] isEqualToArray:[self rules]];
-    }
-    
-    return NO;
+    return ([object isGrammar] &&
+            [((CPGrammar *)object)->start isEqualToString:start] &&
+            [[(CPGrammar *)object rules] isEqualToArray:[self rules]]);
 }
 
 @end

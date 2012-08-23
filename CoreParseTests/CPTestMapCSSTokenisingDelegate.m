@@ -50,15 +50,15 @@
     {
         inRange = YES;
     }
-    else if (inRange && ![token isKindOfClass:[CPNumberToken class]] && ![name isEqualToString:@"-"])
+    else if (inRange && ![token isNumberToken] && ![name isEqualToString:@"-"])
     {
         inRange = NO;
     }
-    else if (inRange && [token isKindOfClass:[CPNumberToken class]])
+    else if (inRange && [token isNumberToken])
     {
         return [[(CPNumberToken *)token number] floatValue] >= 0;
     }
-    else if ([token isKindOfClass:[CPKeywordToken class]])
+    else if ([token isKeywordToken])
     {
         return 0 == nestingDepth || [symbolsSet characterIsMember:[name characterAtIndex:0]] || [name isEqualToString:@"eval"] || [name isEqualToString:@"url"] || [name isEqualToString:@"set"] || [name isEqualToString:@"pt"] || [name isEqualToString:@"px"];
     }
@@ -69,7 +69,7 @@
 - (NSArray *)tokeniser:(CPTokeniser *)tokeniser willProduceToken:(CPToken *)token
 {
     NSString *name = [token name];
-    if ([token isKindOfClass:[CPWhiteSpaceToken class]])
+    if ([token isWhiteSpaceToken])
     {
         if (justTokenisedObject)
         {

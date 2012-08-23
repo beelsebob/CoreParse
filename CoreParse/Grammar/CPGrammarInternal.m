@@ -264,14 +264,13 @@
 - (NSError *)checkRulesForErrors:(NSArray *)rules
 {
     NSError *error = nil;
-    Class itemClass = [CPRHSItem class];
     for (CPRule *rule in rules)
     {
         NSArray *rightHandSide = [rule rightHandSideElements];
         NSMutableSet *tagNames = [NSMutableSet set];
         for (id element in rightHandSide)
         {
-            if ([element isKindOfClass:itemClass])
+            if ([element isRHSItem])
             {
                 NSSet *newTagNames = [(CPRHSItem *)element tagNamesWithError:&error];
                 if (nil != error)
@@ -312,10 +311,9 @@
 - (NSSet *)collectRHSElementsForNewRules:(NSArray *)rightHandSide
 {
     NSMutableSet *ret = [NSMutableSet set];
-    Class itemClass = [CPRHSItem class];
     for (id element in rightHandSide)
     {
-        if ([element isKindOfClass:itemClass])
+        if ([element isRHSItem])
         {
             [ret addObject:element];
             for (NSArray *contents in [(CPRHSItem *)element alternatives])
@@ -411,21 +409,13 @@
         }
     }
     
-    Class itemClass = [CPRHSItem class];
     for (CPRule *rule in rules)
     {
         NSArray *rhsElements = [rule rightHandSideElements];
         NSMutableArray *newRightHandSideElements = [NSMutableArray arrayWithCapacity:[rhsElements count]];
         for (id element in rhsElements)
         {
-            if ([element isKindOfClass:itemClass])
-            {
-                [newRightHandSideElements addObject:[CPGrammarSymbol nonTerminalWithName:[newRules objectForKey:element]]];
-            }
-            else
-            {
-                [newRightHandSideElements addObject:element];
-            }
+            [newRightHandSideElements addObject:[element isRHSItem] ? [CPGrammarSymbol nonTerminalWithName:[newRules objectForKey:element]] : element];
         }
         [rule setRightHandSideElements:newRightHandSideElements];
     }

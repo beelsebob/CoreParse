@@ -55,14 +55,23 @@
     return [[self keyword] hash];
 }
 
+- (BOOL)isKeywordToken
+{
+    return YES;
+}
+
 - (BOOL)isEqual:(id)object
 {
-    if ([object isKindOfClass:[CPKeywordToken class]])
-    {
-        CPKeywordToken *other = (CPKeywordToken *)object;
-        return [[other keyword] isEqualToString:[self keyword]];
-    }
-    
+    return ([object isKeywordToken] &&
+            [((CPKeywordToken *)object)->keyword isEqualToString:keyword]);
+}
+
+@end
+
+@implementation NSObject (CPIsKeywordToken)
+
+- (BOOL)isKeywordToken
+{
     return NO;
 }
 

@@ -8,7 +8,6 @@
 
 #import "CPEOFToken.h"
 
-
 @implementation CPEOFToken
 
 + (id)eof
@@ -26,9 +25,23 @@
     return 0;
 }
 
+- (BOOL)isEOFToken
+{
+    return YES;
+}
+
 - (BOOL)isEqual:(id)object
 {
-    return [object isKindOfClass:[CPEOFToken class]];
+    return [object isEOFToken];
+}
+
+@end
+
+@implementation NSObject (CPIsEOFToken)
+
+- (BOOL)isEOFToken
+{
+    return NO;
 }
 
 @end

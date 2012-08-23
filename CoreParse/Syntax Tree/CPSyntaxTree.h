@@ -105,3 +105,9 @@
 - (id)childAtIndex:(NSUInteger)idx;
 
 @end
+
+@interface NSObject (CPIsSyntaxTree)
+
+- (BOOL)isSyntaxTree;
+
+@end

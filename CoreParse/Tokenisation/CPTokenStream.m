@@ -155,13 +155,23 @@ typedef enum
     return [[self tokens] hash];
 }
 
+- (BOOL)isTokenStream
+{
+    return YES;
+}
+
 - (BOOL)isEqual:(id)object
 {
-    if ([object isKindOfClass:[CPTokenStream class]])
-    {
-        CPTokenStream *other = (CPTokenStream *)object;
-        return [[other tokens] isEqualToArray:[self tokens]];
-    }
+    return ([object isTokenStream] &&
+            [((CPTokenStream *)object)->tokens isEqualToArray:tokens]);
+}
+
+@end
+
+@implementation NSObject (CPIsTokenStream)
+
+- (BOOL)isTokenStream
+{
     return NO;
 }
 

@@ -125,7 +125,7 @@
                                                usingBlock:^(CPShiftReduceState *state, NSUInteger idx, BOOL *stop)
                      {
                          id o = [state object];
-                         if ([o isKindOfClass:[CPRHSItemResult class]])
+                         if ([o isRHSItemResult])
                          {
                              CPRHSItemResult *r = o;
                              
@@ -187,7 +187,7 @@
                     CPRecoveryAction *recoveryAction = [self error:tokenStream expecting:[self acceptableTokenNamesForState:[(CPShiftReduceState *)[stateStack lastObject] state]]];
                     if (nil == recoveryAction)
                     {
-                        if ([nextToken isKindOfClass:[CPErrorToken class]] && [stateStack count] > 0)
+                        if ([nextToken isErrorToken] && [stateStack count] > 0)
                         {
                             [stateStack removeLastObject];
                         }

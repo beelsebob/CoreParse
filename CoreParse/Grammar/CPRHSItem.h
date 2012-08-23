@@ -20,3 +20,9 @@
 @property (readwrite,assign) BOOL shouldCollapse;
 
 @end
+
+@interface NSObject (CPIsRHSItem)
+
+- (BOOL)isRHSItem;
+
+@end

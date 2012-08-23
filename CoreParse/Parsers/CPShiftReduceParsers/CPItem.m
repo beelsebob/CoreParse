@@ -8,8 +8,6 @@
 
 #import "CPItem.h"
 
-#import "NSObject+IsCoreParseObject.h"
-
 @interface CPItem ()
 
 @property (readwrite,retain) CPRule *rule;
@@ -78,14 +76,19 @@
     return [c autorelease];
 }
 
-- (BOOL)isCPItem
+- (BOOL)isItem
 {
     return YES;
 }
 
 - (BOOL)isEqual:(id)object
 {
-    return [object isCPItem] && ((CPItem *)object)->position == position && ((CPItem *)object)->rule == rule;
+    return [object isItem] && ((CPItem *)object)->position == position && ((CPItem *)object)->rule == rule;
+}
+
+- (BOOL)isEqualToItem:(CPItem *)item
+{
+    return item->position == position && item->rule == rule;
 }
 
 - (NSUInteger)hash
@@ -112,6 +115,15 @@
         [desc appendString:@"•"];
     }
     return desc;
+}
+
+@end
+
+@implementation NSObject (CPIsItem)
+
+- (BOOL)isItem
+{
+    return NO;
 }
 
 @end

@@ -38,3 +38,9 @@
 @property (readwrite, assign) NSUInteger characterNumber;
 
 @end
+
+@interface NSObject (CPIsToken)
+
+- (BOOL)isToken;
+
+@end

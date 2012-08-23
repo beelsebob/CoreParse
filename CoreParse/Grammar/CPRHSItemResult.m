@@ -67,4 +67,18 @@
     [super dealloc];
 }
 
+- (BOOL)isRHSItemResult
+{
+    return YES;
+}
+
+@end
+
+@implementation NSObject(CPIsRHSItemResult)
+
+- (BOOL)isRHSItemResult
+{
+    return NO;
+}
+
 @end

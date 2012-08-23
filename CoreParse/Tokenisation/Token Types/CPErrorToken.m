@@ -46,9 +46,23 @@
     return 0;
 }
 
+- (BOOL)isErrorToken
+{
+    return YES;
+}
+
 - (BOOL)isEqual:(id)object
 {
-    return [object isKindOfClass:[CPErrorToken class]];
+    return [object isErrorToken];
+}
+
+@end
+
+@implementation NSObject (CPIsErrorToken)
+
+- (BOOL)isErrorToken
+{
+    return NO;
 }
 
 @end

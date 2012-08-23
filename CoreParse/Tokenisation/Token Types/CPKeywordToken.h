@@ -53,3 +53,9 @@
 @property (readwrite,copy) NSString *keyword;
 
 @end
+
+@interface NSObject (CPIsKeywordToken)
+
+- (BOOL)isKeywordToken;
+
+@end

@@ -51,3 +51,9 @@
 @property (readwrite,copy) NSString *whiteSpace;
 
 @end
+
+@interface NSObject (CPIsWhiteSpaceToken)
+
+- (BOOL)isWhiteSpaceToken;
+
+@end

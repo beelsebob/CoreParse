@@ -22,14 +22,14 @@
             return [c objectAtIndex:0];
         case 1:
         {
-            int v1 = [[c objectAtIndex:0] isKindOfClass:[CPErrorToken class]] ? 0.0 : [[c objectAtIndex:0] intValue];
-            int v2 = [[c objectAtIndex:2] isKindOfClass:[CPErrorToken class]] ? 0.0 : [[c objectAtIndex:2] intValue];
+            int v1 = [[c objectAtIndex:0] isErrorToken] ? 0.0 : [[c objectAtIndex:0] intValue];
+            int v2 = [[c objectAtIndex:2] isErrorToken] ? 0.0 : [[c objectAtIndex:2] intValue];
             return [NSNumber numberWithInt:v1 + v2];
         }
         case 3:
         {
-            int v1 = [[c objectAtIndex:0] isKindOfClass:[CPErrorToken class]] ? 1.0 : [[c objectAtIndex:0] intValue];
-            int v2 = [[c objectAtIndex:2] isKindOfClass:[CPErrorToken class]] ? 1.0 : [[c objectAtIndex:2] intValue];
+            int v1 = [[c objectAtIndex:0] isErrorToken] ? 1.0 : [[c objectAtIndex:0] intValue];
+            int v2 = [[c objectAtIndex:2] isErrorToken] ? 1.0 : [[c objectAtIndex:2] intValue];
             return [NSNumber numberWithInt:v1 * v2];
         }
         case 4:

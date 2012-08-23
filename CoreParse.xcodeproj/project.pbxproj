@@ -128,8 +128,6 @@
 		1F9F83A613B732AC006E939D /* Term.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9F83A413B732AC006E939D /* Term.h */; };
 		1F9F83AC13B7CABA006E939D /* CPRHSItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9F83AA13B7CAB9006E939D /* CPRHSItem.h */; };
 		1F9F83AD13B7CABA006E939D /* CPRHSItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83AB13B7CABA006E939D /* CPRHSItem.m */; };
-		1FA6430215E2B9790004FCD3 /* NSObject+IsCoreParseObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA6430015E2B9790004FCD3 /* NSObject+IsCoreParseObject.h */; };
-		1FA6430315E2B9790004FCD3 /* NSObject+IsCoreParseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA6430115E2B9790004FCD3 /* NSObject+IsCoreParseObject.m */; };
 		1FA6430715E2C5130004FCD3 /* NSArray+Functional.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA6430515E2C5130004FCD3 /* NSArray+Functional.h */; };
 		1FA6430815E2C5130004FCD3 /* NSArray+Functional.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA6430615E2C5130004FCD3 /* NSArray+Functional.m */; };
 		1FA68DA014DE98C4005519B9 /* CPErrorToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA68D9E14DE98C4005519B9 /* CPErrorToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -274,8 +272,6 @@
 		1F9F83A513B732AC006E939D /* Term.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Term.m; sourceTree = "<group>"; };
 		1F9F83AA13B7CAB9006E939D /* CPRHSItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRHSItem.h; sourceTree = "<group>"; };
 		1F9F83AB13B7CABA006E939D /* CPRHSItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRHSItem.m; sourceTree = "<group>"; };
-		1FA6430015E2B9790004FCD3 /* NSObject+IsCoreParseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+IsCoreParseObject.h"; sourceTree = "<group>"; };
-		1FA6430115E2B9790004FCD3 /* NSObject+IsCoreParseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+IsCoreParseObject.m"; sourceTree = "<group>"; };
 		1FA6430515E2C5130004FCD3 /* NSArray+Functional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Functional.h"; sourceTree = "<group>"; };
 		1FA6430615E2C5130004FCD3 /* NSArray+Functional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Functional.m"; sourceTree = "<group>"; };
 		1FA68D9E14DE98C4005519B9 /* CPErrorToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPErrorToken.h; sourceTree = "<group>"; };
@@ -410,8 +406,6 @@
 				1F38820C132432AA000C8876 /* NSSetFunctional.m */,
 				1FA6430515E2C5130004FCD3 /* NSArray+Functional.h */,
 				1FA6430615E2C5130004FCD3 /* NSArray+Functional.m */,
-				1FA6430015E2B9790004FCD3 /* NSObject+IsCoreParseObject.h */,
-				1FA6430115E2B9790004FCD3 /* NSObject+IsCoreParseObject.m */,
 			);
 			path = CoreParse;
 			sourceTree = "<group>";
@@ -669,7 +663,6 @@
 				1F893A2314DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.h in Headers */,
 				1FA866B715DFAEBC005350EE /* CPRule+Internal.h in Headers */,
 				1FA866C015E18F68005350EE /* CPRHSItem+Private.h in Headers */,
-				1FA6430215E2B9790004FCD3 /* NSObject+IsCoreParseObject.h in Headers */,
 				1FA6430715E2C5130004FCD3 /* NSArray+Functional.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -920,7 +913,6 @@
 				1FA68DA614DE9D3D005519B9 /* CPTestErrorHandlingDelegate.m in Sources */,
 				1F893A2014DEEBFC00316FF7 /* CPRecoveryAction.m in Sources */,
 				1F893A2414DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.m in Sources */,
-				1FA6430315E2B9790004FCD3 /* NSObject+IsCoreParseObject.m in Sources */,
 				1FA6430815E2C5130004FCD3 /* NSArray+Functional.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

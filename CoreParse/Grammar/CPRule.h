@@ -136,3 +136,9 @@
 @property (readwrite, assign) Class representitiveClass;
 
 @end
+
+@interface NSObject (CPIsRule)
+
+- (BOOL)isRule;
+
+@end

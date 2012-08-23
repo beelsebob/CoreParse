@@ -31,3 +31,9 @@
 - (NSString *)descriptionWithGrammar:(CPGrammar *)g;
 
 @end
+
+@interface NSObject (CPIsShiftReduceAction)
+
+- (BOOL)isShiftReduceAction;
+
+@end

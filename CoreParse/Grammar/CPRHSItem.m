@@ -24,9 +24,14 @@
     return [[self alternatives] hash] << 2 + ([self repeats] ? 0x2 : 0x0) + ([self mayNotExist] ? 0x1 : 0x0);
 }
 
+- (BOOL)isRHSItem
+{
+    return YES;
+}
+
 - (BOOL)isEqual:(id)object
 {
-    return ([object isKindOfClass:[CPRHSItem class]] &&
+    return ([object isRHSItem] &&
             [[self alternatives] isEqualToArray:[object alternatives]] &&
             [self repeats] == [object repeats] &&
             [self mayNotExist] == [object mayNotExist] &&
@@ -99,7 +104,6 @@
 
 - (NSSet *)tagNamesWithError:(NSError **)err
 {
-    Class itemClass = [CPRHSItem class];
     NSMutableSet *tagNames = [NSMutableSet set];
     
     for (NSArray *components in [self alternatives])
@@ -107,7 +111,7 @@
         NSMutableSet *tagNamesInAlternative = [NSMutableSet set];
         for (id comp in components)
         {
-            if ([comp isKindOfClass:itemClass])
+            if ([comp isRHSItem])
             {
                 NSSet *newTagNames = [(CPRHSItem *)comp tagNamesWithError:err];
                 if (nil != *err)
@@ -156,6 +160,15 @@
     }
     
     return tagNames;
+}
+
+@end
+
+@implementation NSObject (CPIsRHSItem)
+
+- (BOOL)isRHSItem
+{
+    return NO;
 }
 
 @end
