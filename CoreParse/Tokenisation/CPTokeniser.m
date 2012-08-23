@@ -11,10 +11,15 @@
 #import "CPEOFToken.h"
 #import "CPErrorToken.h"
 
-@interface CPTokeniser ()
+typedef struct
 {
-    NSMutableArray *tokenRecognisers;
-}
+    unsigned int shouldConsumeToken:1;
+    unsigned int willProduceToken:1;
+    unsigned int didNotFindTokenOnInputPositionError:1;
+    
+} CPTokeniserDelegateResponseCache;
+
+@interface CPTokeniser ()
 
 @property (readwrite, retain) NSMutableArray *tokenRecognisers;
 
@@ -24,6 +29,9 @@
 @end
 
 @implementation CPTokeniser
+{
+    CPTokeniserDelegateResponseCache delegateRespondsTo;
+}
 
 @synthesize tokenRecognisers;
 @synthesize delegate;

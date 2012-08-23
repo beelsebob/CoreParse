@@ -79,6 +79,14 @@
 
 @end
 
+typedef struct
+{
+    unsigned int didProduceSyntaxTree:1;
+    unsigned int didEncounterErrorOnInput:1;
+    unsigned int didEncounterErrorOnInputExpecting:1;
+    
+} CPParserDelegateResponseCache;
+
 /**
  * The CPParser class allows you to parse token streams.
  *
@@ -88,13 +96,8 @@
  */
 @interface CPParser : NSObject
 {
-    struct
-    {
-        unsigned int didProduceSyntaxTree:1;
-        unsigned int didEncounterErrorOnInput:1;
-        unsigned int didEncounterErrorOnInputExpecting:1;
-        
-    } delegateRespondsTo;
+@protected
+    CPParserDelegateResponseCache delegateRespondsTo;
 }
 
 ///---------------------------------------------------------------------------------------
