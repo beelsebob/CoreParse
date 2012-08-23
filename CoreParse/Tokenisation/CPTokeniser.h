@@ -65,6 +65,15 @@
  * the output stream.
  */
 @interface CPTokeniser : NSObject <NSCoding>
+{
+    struct
+    {
+        unsigned int shouldConsumeToken:1;
+        unsigned int willProduceToken:1;
+        unsigned int didNotFindTokenOnInputPositionError:1;
+        
+    } delegateRespondsTo;
+}
 
 ///---------------------------------------------------------------------------------------
 /// @name Managing the Delegate
@@ -73,7 +82,7 @@
 /**
  * The object that acts as a delegate to the receiving CPTokeniser.
  */
-@property (readwrite, assign) id<CPTokeniserDelegate> delegate;
+@property (readwrite, assign, nonatomic) id<CPTokeniserDelegate> delegate;
 
 ///---------------------------------------------------------------------------------------
 /// @name Managing recognised tokens

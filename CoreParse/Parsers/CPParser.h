@@ -87,6 +87,15 @@
  * @warning Note that CPParser is an abstract superclass.  Use one of its subclasses to construct your parser.
  */
 @interface CPParser : NSObject
+{
+    struct
+    {
+        unsigned int didProduceSyntaxTree:1;
+        unsigned int didEncounterErrorOnInput:1;
+        unsigned int didEncounterErrorOnInputExpecting:1;
+        
+    } delegateRespondsTo;
+}
 
 ///---------------------------------------------------------------------------------------
 /// @name Creating and Initialising a Parser
@@ -115,7 +124,7 @@
 /**
  * The parser's delegate.
  */
-@property (readwrite,assign) id<CPParserDelegate> delegate;
+@property (readwrite,assign, nonatomic) id<CPParserDelegate> delegate;
 
 ///---------------------------------------------------------------------------------------
 /// @name Finding out about the parsed Grammar 

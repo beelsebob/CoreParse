@@ -120,8 +120,9 @@
                 [tok setLineNumber:currentLineNumber];
                 [tok setColumnNumber:currentColumnNumber];
                 [tok setCharacterNumber:lastTokenOffset];
+                [tok setLength:currentTokenOffset - lastTokenOffset];
                 
-                if ([delegate respondsToSelector:@selector(tokeniser:shouldConsumeToken:)])
+                if (delegateRespondsTo.shouldConsumeToken)
                 {
                     if ([delegate tokeniser:self shouldConsumeToken:tok])
                     {
@@ -147,7 +148,7 @@
         
         if (!recognised)
         {
-            if ([delegate respondsToSelector:@selector(tokeniser:didNotFindTokenOnInput:position:error:)])
+            if (delegateRespondsTo.didNotFindTokenOnInputPositionError)
             {
                 NSString *err = nil;
                 currentTokenOffset = [delegate tokeniser:self didNotFindTokenOnInput:input position:currentTokenOffset error:&err];
@@ -182,7 +183,7 @@
 - (void)addToken:(CPToken *)tok toStream:(CPTokenStream *)stream
 {
     NSArray *toks;
-    if ([delegate respondsToSelector:@selector(tokeniser:willProduceToken:)])
+    if (delegateRespondsTo.willProduceToken)
     {
         toks = [delegate tokeniser:self willProduceToken:tok];
     }
@@ -213,6 +214,18 @@
     else
     {
         *cn += range.length;
+    }
+}
+
+- (void)setDelegate:(id<CPTokeniserDelegate>)aDelegate
+{
+    if (delegate != aDelegate) 
+    {
+        delegate = aDelegate;
+        
+        delegateRespondsTo.shouldConsumeToken = [delegate respondsToSelector:@selector(tokeniser:shouldConsumeToken:)];
+        delegateRespondsTo.willProduceToken = [delegate respondsToSelector:@selector(tokeniser:willProduceToken:)];
+        delegateRespondsTo.didNotFindTokenOnInputPositionError = [delegate respondsToSelector:@selector(tokeniser:didNotFindTokenOnInput:position:error:)];
     }
 }
 
