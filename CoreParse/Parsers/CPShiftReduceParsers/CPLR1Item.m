@@ -61,7 +61,7 @@
 {
     return ([object isLR1Item] &&
             [super isEqualToItem:(CPLR1Item *)object] &&
-            [((CPLR1Item *)object)->terminal isEqual:terminal]);
+            [((CPLR1Item *)object)->terminal isEqualToGrammarSymbol:terminal]);
 }
 
 - (NSUInteger)hash

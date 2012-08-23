@@ -190,6 +190,24 @@ ActionDetails;
     return NO;
 }
 
+- (BOOL)isEqualToShiftReduceAction:(CPShiftReduceAction *)object
+{
+    if (object != nil && object->type == type)
+    {
+        switch (type)
+        {
+            case kActionTypeShift:
+                return [object newState] == details.shift;
+            case kActionTypeReduce:
+                return [object reductionRule] == details.reductionRule;
+            case kActionTypeAccept:
+                return YES;
+        }
+    }
+    
+    return NO;
+}
+
 - (NSString *)description
 {
     switch (type)

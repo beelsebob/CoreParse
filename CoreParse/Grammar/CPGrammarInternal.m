@@ -82,7 +82,7 @@
 {
     return [[i objectsPassingTest:^ BOOL (CPItem *item, BOOL *stop)
              {
-                 return [symbol isEqual:[item nextSymbol]];
+                 return [symbol isEqualToGrammarSymbol:[item nextSymbol]];
              }]
             map:^ id (CPItem *item)
             {
@@ -161,7 +161,7 @@
 {
     return [[i objectsPassingTest:^ BOOL (CPItem *item, BOOL *stop)
              {
-                 return [symbol isEqual:[item nextSymbol]];
+                 return [symbol isEqualToGrammarSymbol:[item nextSymbol]];
              }]
             map:^ id (CPItem *item)
             {

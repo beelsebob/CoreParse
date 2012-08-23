@@ -88,7 +88,7 @@
 
 - (BOOL)isEqualToItem:(CPItem *)item
 {
-    return item->position == position && item->rule == rule;
+    return item != nil && item->position == position && item->rule == rule;
 }
 
 - (NSUInteger)hash

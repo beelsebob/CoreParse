@@ -75,6 +75,11 @@
             [((CPGrammarSymbol *)object)->name isEqualToString:name]);
 }
 
+- (BOOL)isEqualToGrammarSymbol:(CPGrammarSymbol *)object
+{
+    return (object != nil && object->terminal == terminal && [object->name isEqualToString:name]);
+}
+
 - (NSUInteger)hash
 {
     return [[self name] hash];

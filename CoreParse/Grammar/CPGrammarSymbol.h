@@ -67,6 +67,13 @@
  */
 @property (readwrite, assign, getter=isTerminal) BOOL terminal;
 
+/**
+ * Determines whether the grammar symbol is equal to another.
+ * @param object The other grammar symbol to compare.
+ * @return Whether the two symbols are equal.
+ */
+- (BOOL)isEqualToGrammarSymbol:(CPGrammarSymbol *)object;
+
 @end
 
 @interface NSObject (CPGrammarSymbol)
