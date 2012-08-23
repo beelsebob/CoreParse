@@ -13,6 +13,7 @@
 @synthesize lineNumber;
 @synthesize columnNumber;
 @synthesize characterNumber;
+@synthesize length;
 
 - (NSString *)name
 {
