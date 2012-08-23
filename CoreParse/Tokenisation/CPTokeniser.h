@@ -18,6 +18,8 @@
  */
 @protocol CPTokeniserDelegate <NSObject>
 
+@required
+
 /** 
  * Determines whether a CPTokeniser should produce a token and consume the associated input string.
  * 
@@ -29,16 +31,32 @@
  */
 - (BOOL)tokeniser:(CPTokeniser *)tokeniser shouldConsumeToken:(CPToken *)token;
 
+@optional
+
 /**
  * Allows you to replace a taken in the tokeniser's output stream.
+ *
+ * Only one of this and tokeniser:willProduceToken: will be called.  The tokeniser will attempt to call this method second.
  *
  * @param tokeniser The CPTokeniser that will produce the token.
  * @param token The CPToken that the tokeniser has recognised.
  * @return Return an array of CPToken objects to place in the output token stream.
+ *
+ * @bug Warning this method is deprecated, use -tokeniser:requestsToken:pushedOntoStream: instead.
+ * @see tokeniser:requestsToken:pushedOntoStream:
  */
-- (NSArray *)tokeniser:(CPTokeniser *)tokeniser willProduceToken:(CPToken *)token;
+- (NSArray *)tokeniser:(CPTokeniser *)tokeniser willProduceToken:(CPToken *)token __attribute__((deprecated("Use tokeniser:requestsToken:pushedOntoStream: instead")));
 
-@optional
+/**
+ * Requests that you push a token onto a tokeniser's output stream.  This allows you to replace the token with any others you choose, or not output the token at all.
+ *
+ * Only one of this and tokeniser:willProduceToken: will be called.  The tokeniser will attempt to call this method first.
+ *
+ * @param tokeniser The CPTokeniser that produced the token.
+ * @param token The CPToken that the tokeniser has recognised.
+ * @param stream The CPTokenStream the token should be pushed onto (if required).
+ */
+- (void)tokeniser:(CPTokeniser *)tokeniser requestsToken:(CPToken *)token pushedOntoStream:(CPTokenStream *)stream;
 
 /**
  * This method is called when no recogniser matches a token at the current position in the input stream.  You must provide a new location in the input stream to start

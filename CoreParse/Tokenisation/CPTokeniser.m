@@ -14,6 +14,7 @@
 typedef struct
 {
     unsigned int shouldConsumeToken:1;
+    unsigned int requestsPush:1;
     unsigned int willProduceToken:1;
     unsigned int didNotFindTokenOnInputPositionError:1;
     
@@ -190,16 +191,18 @@ typedef struct
 
 - (void)addToken:(CPToken *)tok toStream:(CPTokenStream *)stream
 {
-    NSArray *toks;
-    if (delegateRespondsTo.willProduceToken)
+    if (delegateRespondsTo.requestsPush)
     {
-        toks = [delegate tokeniser:self willProduceToken:tok];
+        [delegate tokeniser:self requestsToken:tok pushedOntoStream:stream];
+    }
+    else if (delegateRespondsTo.willProduceToken)
+    {
+        [stream pushTokens:[delegate tokeniser:self willProduceToken:tok]];
     }
     else
     {
-        toks = [NSArray arrayWithObject:tok];
+        [stream pushToken:tok];
     }
-    [stream pushTokens:toks];
 }
 
 - (void)advanceLineNumber:(NSUInteger *)ln columnNumber:(NSUInteger *)cn withInput:(NSString *)input range:(NSRange)range
@@ -232,6 +235,7 @@ typedef struct
         delegate = aDelegate;
         
         delegateRespondsTo.shouldConsumeToken = [delegate respondsToSelector:@selector(tokeniser:shouldConsumeToken:)];
+        delegateRespondsTo.requestsPush = [delegate respondsToSelector:@selector(tokeniser:requestsToken:pushedOntoStream:)];
         delegateRespondsTo.willProduceToken = [delegate respondsToSelector:@selector(tokeniser:willProduceToken:)];
         delegateRespondsTo.didNotFindTokenOnInputPositionError = [delegate respondsToSelector:@selector(tokeniser:didNotFindTokenOnInput:position:error:)];
     }

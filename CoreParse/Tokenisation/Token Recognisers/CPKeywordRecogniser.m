@@ -85,19 +85,18 @@
 
 - (CPToken *)recogniseTokenInString:(NSString *)tokenString currentTokenPosition:(NSUInteger *)tokenPosition
 {
-    NSString *kw = [self keyword];
-    NSUInteger kwLength = [kw length];
+    NSUInteger kwLength = [keyword length];
     NSUInteger remainingChars = [tokenString length] - *tokenPosition;
     if (remainingChars >= kwLength)
     {
-        if ([[tokenString substringWithRange:NSMakeRange(*tokenPosition, kwLength)] isEqualToString:kw])
+        if ([tokenString rangeOfString:keyword options:NSAnchoredSearch | NSLiteralSearch range:NSMakeRange(*tokenPosition, kwLength)].location != NSNotFound)
         {
             if (remainingChars == kwLength ||
                 nil == invalidFollowingCharacters ||
-                [tokenString rangeOfCharacterFromSet:invalidFollowingCharacters options:0x0 range:NSMakeRange(*tokenPosition + kwLength, 1)].location == NSNotFound)
+                [tokenString rangeOfCharacterFromSet:invalidFollowingCharacters options:NSAnchoredSearch range:NSMakeRange(*tokenPosition + kwLength, 1)].location == NSNotFound)
             {
                 *tokenPosition = *tokenPosition + kwLength;
-                return [CPKeywordToken tokenWithKeyword:kw];
+                return [CPKeywordToken tokenWithKeyword:keyword];
             }
         }
     }

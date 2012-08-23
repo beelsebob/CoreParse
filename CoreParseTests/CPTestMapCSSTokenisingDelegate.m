@@ -66,34 +66,26 @@
     return YES;
 }
 
-- (NSArray *)tokeniser:(CPTokeniser *)tokeniser willProduceToken:(CPToken *)token
+- (void)tokeniser:(CPTokeniser *)tokeniser requestsToken:(CPToken *)token pushedOntoStream:(CPTokenStream *)stream
 {
-    NSString *name = [token name];
     if ([token isWhiteSpaceToken])
     {
         if (justTokenisedObject)
         {
-            return [NSArray arrayWithObject:token];
+            [stream pushToken:token];
         }
-        else
+    }
+    else
+    {
+        NSString *name = [token name];
+        justTokenisedObject = ([name isEqualToString:@"node"] || [name isEqualToString:@"way" ] || [name isEqualToString:@"relation"] ||
+                               [name isEqualToString:@"area"] || [name isEqualToString:@"line"] || [name isEqualToString:@"canvas"] || [name isEqualToString:@"*"]);
+        
+        if (![name isEqualToString:@"Comment"])
         {
-            return [NSArray array];
+            [stream pushToken:token];
         }
     }
-    
-    justTokenisedObject = NO;
-    if ([name isEqualToString:@"Comment"])
-    {
-        return [NSArray array];
-    }
-
-    if ([name isEqualToString:@"node"] || [name isEqualToString:@"way" ] || [name isEqualToString:@"relation"] ||
-        [name isEqualToString:@"area"] || [name isEqualToString:@"line"] || [name isEqualToString:@"canvas"] || [name isEqualToString:@"*"])
-    {
-        justTokenisedObject = YES;
-    }
-
-    return [NSArray arrayWithObject:token];
 }
 
 @end

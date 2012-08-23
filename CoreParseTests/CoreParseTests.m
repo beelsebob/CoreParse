@@ -311,7 +311,7 @@
     {
         STAssertEquals([token lineNumber     ], tokenLines  [tokenNumber]  , @"Line number for token %lu is incorrect", tokenNumber, nil);
         STAssertEquals([token columnNumber   ], tokenColumns[tokenNumber]  , @"Column number for token %lu is incorrect", tokenNumber, nil);
-        STAssertEquals([token characterNumber], tokenPositions[tokenNumber], @"Character nmber for token %lu is incorrect", tokenNumber, nil);
+        STAssertEquals([token characterNumber], tokenPositions[tokenNumber], @"Character number for token %lu is incorrect", tokenNumber, nil);
         tokenNumber++;
     }
 }
