@@ -40,6 +40,8 @@
 	
 	<option value="//api/name/tokeniser:didNotFindTokenOnInput:position:error:">&nbsp;&nbsp;&nbsp;&nbsp;- tokeniser:didNotFindTokenOnInput:position:error:</option>
 	
+	<option value="//api/name/tokeniser:requestsToken:pushedOntoStream:">&nbsp;&nbsp;&nbsp;&nbsp;- tokeniser:requestsToken:pushedOntoStream:</option>
+	
 	<option value="//api/name/tokeniser:shouldConsumeToken:">&nbsp;&nbsp;&nbsp;&nbsp;- tokeniser:shouldConsumeToken:</option>
 	
 	<option value="//api/name/tokeniser:willProduceToken:">&nbsp;&nbsp;&nbsp;&nbsp;- tokeniser:willProduceToken:</option>
@@ -73,6 +75,8 @@
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/tokeniser:didNotFindTokenOnInput:position:error:">tokeniser:didNotFindTokenOnInput:position:error:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/tokeniser:requestsToken:pushedOntoStream:">tokeniser:requestsToken:pushedOntoStream:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/tokeniser:shouldConsumeToken:">tokeniser:shouldConsumeToken:</a></span></li>
 	
@@ -144,7 +148,14 @@
 		<span class="tooltip"><p>Allows you to replace a taken in the tokeniser&rsquo;s output stream.</p></span>
 	</span>
 	
-	<span class="task-item-suffix">required method</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/tokeniser:requestsToken:pushedOntoStream:">&ndash;&nbsp;tokeniser:requestsToken:pushedOntoStream:</a></code>
+		<span class="tooltip"><p>Requests that you push a token onto a tokeniser&rsquo;s output stream.  This allows you to replace the token with any others you choose, or not output the token at all.</p></span>
+	</span>
+	
+	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/tokeniser:didNotFindTokenOnInput:position:error:">&ndash;&nbsp;tokeniser:didNotFindTokenOnInput:position:error:</a></code>
@@ -223,6 +234,65 @@ tokenising from again, or NSNotFound to stop the tokeniser.  You may optionally 
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>This method is called when no recogniser matches a token at the current position in the input stream.  You must provide a new location in the input stream to start
 tokenising from again, or NSNotFound to stop the tokeniser.  You may optionally provide an error message to attach to a <a href="../Classes/CPErrorToken.html">CPErrorToken</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CPTokeniser.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/tokeniser:requestsToken:pushedOntoStream:" title="tokeniser:requestsToken:pushedOntoStream:"></a>
+	<h3 class="subsubtitle method-title">tokeniser:requestsToken:pushedOntoStream:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Requests that you push a token onto a tokeniser&rsquo;s output stream.  This allows you to replace the token with any others you choose, or not output the token at all.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)tokeniser:(CPTokeniser *)<em>tokeniser</em> requestsToken:(CPToken *)<em>token</em> pushedOntoStream:(CPTokenStream *)<em>stream</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>tokeniser</em></dt>
+			<dd><p>The <a href="../Classes/CPTokeniser.html">CPTokeniser</a> that produced the token.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>token</em></dt>
+			<dd><p>The <a href="../Classes/CPToken.html">CPToken</a> that the tokeniser has recognised.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>stream</em></dt>
+			<dd><p>The <a href="../Classes/CPTokenStream.html">CPTokenStream</a> the token should be pushed onto (if required).</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Requests that you push a token onto a tokeniser&rsquo;s output stream.  This allows you to replace the token with any others you choose, or not output the token at all.</p>
+
+<p>Only one of this and <a href="#//api/name/tokeniser:willProduceToken:">tokeniser:willProduceToken:</a> will be called.  The tokeniser will attempt to call this method first.</p>
 	</div>
 	
 	
@@ -339,11 +409,22 @@ tokenising from again, or NSNotFound to stop the tokeniser.  You may optionally 
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Allows you to replace a taken in the tokeniser&rsquo;s output stream.</p>
+
+<p>Only one of this and tokeniser:willProduceToken: will be called.  The tokeniser will attempt to call this method second.</p><div class="bug"><p><strong>Bug:</strong> Warning this method is deprecated, use <a href="#//api/name/tokeniser:requestsToken:pushedOntoStream:">tokeniser:requestsToken:pushedOntoStream:</a> instead.</p></div>
 	</div>
 	
 	
 	
 	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/tokeniser:requestsToken:pushedOntoStream:">&ndash; tokeniser:requestsToken:pushedOntoStream:</a></p></code></li>
+			
+		</ul>
+	</div>
 	
 	
 	
@@ -368,7 +449,7 @@ tokenising from again, or NSNotFound to stop the tokeniser.  You may optionally 
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-08-18)</span><br />
+						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-08-24)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						
