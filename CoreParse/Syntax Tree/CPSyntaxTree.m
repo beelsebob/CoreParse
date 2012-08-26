@@ -60,6 +60,7 @@
 {
     [rule release];
     [children release];
+    [tagValues release];
     
     [super dealloc];
 }

@@ -122,11 +122,14 @@
                 [duplicateTags intersectSet:newTagNames];
                 if ([duplicateTags count] > 0)
                 {
-                    *err = [NSError errorWithDomain:CPEBNFParserErrorDomain
-                                               code:CPErrorCodeDuplicateTag
-                                           userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                     [NSString stringWithFormat:@"Duplicate tag names %@ in same part of alternative is not allowed in \"%@\".", duplicateTags, self], NSLocalizedDescriptionKey,
-                                                     nil]];
+                    if (NULL != err)
+                    {
+                        *err = [NSError errorWithDomain:CPEBNFParserErrorDomain
+                                                   code:CPErrorCodeDuplicateTag
+                                               userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                         [NSString stringWithFormat:@"Duplicate tag names %@ in same part of alternative is not allowed in \"%@\".", duplicateTags, self], NSLocalizedDescriptionKey,
+                                                         nil]];
+                    }
                     return nil;
                 }
                 [tagNamesInAlternative unionSet:newTagNames];
@@ -135,11 +138,14 @@
                 {
                     if ([tagNamesInAlternative containsObject:tagName])
                     {
-                        *err = [NSError errorWithDomain:CPEBNFParserErrorDomain
-                                                   code:CPErrorCodeDuplicateTag
-                                               userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                         [NSString stringWithFormat:@"Duplicate tag names (%@) in same part of alternative is not allowed in \"%@\".", tagName, self], NSLocalizedDescriptionKey,
-                                                         nil]];
+                        if (NULL != err)
+                        {
+                            *err = [NSError errorWithDomain:CPEBNFParserErrorDomain
+                                                       code:CPErrorCodeDuplicateTag
+                                                   userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                             [NSString stringWithFormat:@"Duplicate tag names (%@) in same part of alternative is not allowed in \"%@\".", tagName, self], NSLocalizedDescriptionKey,
+                                                             nil]];
+                        }
                         return nil;
                     }
                     [tagNamesInAlternative addObject:tagName];
@@ -151,11 +157,14 @@
     
     if ([tagNames count] > 0 && [self repeats])
     {
-        *err = [NSError errorWithDomain:CPEBNFParserErrorDomain
-                                   code:CPErrorCodeDuplicateTag
-                               userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                         [NSString stringWithFormat:@"Tag names are not allowed within repeating section of rule \"%@\".", self], NSLocalizedDescriptionKey,
-                                         nil]];
+        if (NULL != err)
+        {
+            *err = [NSError errorWithDomain:CPEBNFParserErrorDomain
+                                       code:CPErrorCodeDuplicateTag
+                                   userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                             [NSString stringWithFormat:@"Tag names are not allowed within repeating section of rule \"%@\".", self], NSLocalizedDescriptionKey,
+                                             nil]];
+        }
         return nil;
     }
     

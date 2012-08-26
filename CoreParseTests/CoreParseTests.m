@@ -626,9 +626,10 @@
 
 - (void)runMapCSSTokeniser:(CPTokenStream *)result
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    [mapCssTokeniser tokenise:mapCssInput into:result];
-    [pool drain];
+    @autoreleasepool
+    {
+        [mapCssTokeniser tokenise:mapCssInput into:result];
+    }
 }
 
 - (void)testJSONParsing

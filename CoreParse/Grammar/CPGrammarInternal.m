@@ -246,7 +246,10 @@
     NSError *invalidRuleError = [self checkRulesForErrors:oldRules];
     if (nil != invalidRuleError)
     {
-        *error = invalidRuleError;
+        if (NULL != error)
+        {
+            *error = invalidRuleError;
+        }
         return nil;
     }
     
@@ -340,7 +343,7 @@
          
 - (NSArray *)addRHSRules:(NSDictionary *)newRules toRules:(NSArray *)oldRules
 {
-    NSMutableArray *rules = [[NSMutableArray alloc] initWithArray:oldRules];
+    NSMutableArray *rules = [[[NSMutableArray alloc] initWithArray:oldRules] autorelease];
     
     Class rhsItemClass = [CPRHSItemResult class];
     for (CPRHSItem *item in newRules)

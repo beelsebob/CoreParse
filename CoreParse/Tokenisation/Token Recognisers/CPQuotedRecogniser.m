@@ -106,64 +106,78 @@
 
 - (CPToken *)recogniseTokenInString:(NSString *)tokenString currentTokenPosition:(NSUInteger *)tokenPosition
 {
-    NSString *sq = [self startQuote];
-    NSString *eq = [self endQuote];
-    NSString *es = [self escapeSequence];
     NSString *(^er)(NSString *tokenStream, NSUInteger *quotePosition) = [self escapeReplacer];
-    NSUInteger startQuoteLength = [sq length];
-    NSUInteger endQuoteLength = [eq length];
+    NSUInteger startQuoteLength = [startQuote length];
+    NSUInteger endQuoteLength = [endQuote length];
 
-    NSUInteger inputLength = [tokenString length];
-    NSRange searchRange = NSMakeRange(*tokenPosition, MIN(inputLength - *tokenPosition,startQuoteLength + endQuoteLength + maximumLength));
-    NSRange range = [tokenString rangeOfString:sq options:NSLiteralSearch | NSAnchoredSearch range:searchRange];
+    long inputLength = [tokenString length];
+    CFRange searchRange = CFRangeMake(*tokenPosition, MIN(inputLength - *tokenPosition,startQuoteLength + endQuoteLength + maximumLength));
+    CFRange range;
+    BOOL matched = CFStringFindWithOptions((CFStringRef)tokenString, (CFStringRef)startQuote, searchRange, kCFCompareAnchored, &range);
     
-    NSMutableString *outputString = [NSMutableString string];
+    CFMutableStringRef outputString = CFStringCreateMutable(kCFAllocatorDefault, 0);
     
-    if (NSNotFound != range.location)
+    if (matched)
     {
         searchRange.location = searchRange.location + range.length;
         searchRange.length   = searchRange.length   - range.length;
         
-        NSRange endRange    = [tokenString rangeOfString:eq options:NSLiteralSearch range:searchRange];
-        NSRange escapeRange = nil == es  ? NSMakeRange(NSNotFound, 0) : [tokenString rangeOfString:es options:NSLiteralSearch range:searchRange];
+        CFRange endRange;
+        CFRange escapeRange;
+        BOOL matchedEndSequence = CFStringFindWithOptions((CFStringRef)tokenString, (CFStringRef)endQuote, searchRange, 0L, &endRange);
+        BOOL matchedEscapeSequence = nil == escapeSequence ? NO : CFStringFindWithOptions((CFStringRef)tokenString, (CFStringRef)escapeSequence, searchRange, 0L, &escapeRange);
         
-        while (NSNotFound != endRange.location && searchRange.location < inputLength)
+        while (matchedEndSequence && searchRange.location < inputLength)
         {
-            if (endRange.location < escapeRange.location)
+            if (!matchedEscapeSequence || endRange.location < escapeRange.location)
             {
                 *tokenPosition = endRange.location + endRange.length;
-                [outputString appendString:[tokenString substringWithRange:NSMakeRange(searchRange.location, endRange.location - searchRange.location)]];
-                return [CPQuotedToken content:outputString quotedWith:sq name:[self name]];
+                CFStringRef substr = CFStringCreateWithSubstring(kCFAllocatorDefault, (CFStringRef)tokenString, CFRangeMake(searchRange.location, endRange.location - searchRange.location));
+                CFStringAppend(outputString, substr);
+                CFRelease(substr);
+                CPQuotedToken *t = [CPQuotedToken content:(NSString *)outputString quotedWith:startQuote name:[self name]];
+                CFRelease(outputString);
+                return t;
             }
             else
             {
                 NSUInteger quotedPosition = escapeRange.location + escapeRange.length;
-                NSString *escapedStuff = nil;
+                CFStringRef substr = CFStringCreateWithSubstring(kCFAllocatorDefault, (CFStringRef)tokenString, CFRangeMake(searchRange.location, escapeRange.location - searchRange.location));
+                CFStringAppend(outputString, substr);
+                CFRelease(substr);
+                BOOL appended = NO;
                 if (nil != er)
                 {
-                    escapedStuff = er(tokenString, &quotedPosition);
+                    NSString *s = er(tokenString, &quotedPosition);
+                    if (nil != s)
+                    {
+                        appended = YES;
+                        CFStringAppend(outputString, (CFStringRef)s);
+                    }
                 }
-                if (nil == escapedStuff)
+                if (!appended)
                 {
-                    escapedStuff = [tokenString substringWithRange:NSMakeRange(escapeRange.location + escapeRange.length, 1)];
+                    substr = CFStringCreateWithSubstring(kCFAllocatorDefault, (CFStringRef)tokenString, CFRangeMake(escapeRange.location + escapeRange.length, 1));
+                    CFStringAppend(outputString, substr);
+                    CFRelease(substr);
                     quotedPosition += 1;
                 }
-                [outputString appendFormat:@"%@%@", [tokenString substringWithRange:NSMakeRange(searchRange.location, escapeRange.location - searchRange.location)], escapedStuff];
                 searchRange.length   = searchRange.location + searchRange.length - quotedPosition;
                 searchRange.location = quotedPosition;
                 
                 if (endRange.location < searchRange.location)
                 {
-                    endRange    = [tokenString rangeOfString:eq options:NSLiteralSearch range:searchRange];
+                    matchedEndSequence = CFStringFindWithOptions((CFStringRef)tokenString, (CFStringRef)endQuote, searchRange, 0L, &endRange);
                 }
                 if (escapeRange.location < searchRange.location)
                 {
-                    escapeRange = [tokenString rangeOfString:es options:NSLiteralSearch range:searchRange];
+                    matchedEscapeSequence = CFStringFindWithOptions((CFStringRef)tokenString, (CFStringRef)escapeSequence, searchRange, 0L, &escapeRange);
                 }
             }
         }
     }
     
+    CFRelease(outputString);
     return nil;
 }
 

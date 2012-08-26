@@ -310,7 +310,10 @@
     
     if ([del err] != nil)
     {
-        *error = [[[del err] copy] autorelease];
+        if (NULL != error)
+        {
+            *error = [[[del err] copy] autorelease];
+        }
         return nil;
     }
     
