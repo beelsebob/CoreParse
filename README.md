@@ -68,13 +68,12 @@ Next, we add ourself as a delegate to the tokeniser.  We implement the tokeniser
     return YES;
 }
 
-- (NSArray *)tokeniser:(CPTokeniser *)tokeniser willProduceToken:(CPToken *)token
+- (void)tokeniser:(CPTokeniser *)tokeniser requestsToken:(CPToken *)token pushedOntoStream:(CPTokenStream *)stream
 {
-    if ([token isKindOfClass:[CPWhiteSpaceToken class]] || [[token name] isEqualToString:@"Comment"])
+    if (![token isWhiteSpaceToken] && ![[token name] isEqualToString:@"Comment"])
     {
-        return [NSArray array];
+        [stream pushToken:token];
     }
-    return [NSArray arrayWithObject:token];
 }
 ```
 
