@@ -90,6 +90,8 @@ typedef enum
  * 
  * When you use any of the above EBNF constructs or parentheses, the parser will return the contents in an NSArray.
  *
+ * You may use tags to identify sections of rules to be extracted in your result classes or parser delegate.  To do this, use the syntax `nonTerminal ::= foo@<subNonTerminal> bar@"subTerminal";`.  You may use multiple tags to identify the same section of a rule.  For example `range ::= min@'Number' '-' max@'Number' | min@'Number' '-' | '-' max@'Number' | min@max@'Number'`.
+ * 
  * The grammar used for parsing the BNF can be expressed as follows:
  * 
  * <pre>
@@ -136,6 +138,8 @@ typedef enum
  * You may also parenthesise subrules.
  *
  * When you use any of the above EBNF constructs or parentheses, the parser will return the contents in an NSArray.
+ *
+ * You may use tags to identify sections of rules to be extracted in your result classes or parser delegate.  To do this, use the syntax `nonTerminal ::= foo@<subNonTerminal> bar@"subTerminal";`.  You may use multiple tags to identify the same section of a rule.  For example `range ::= min@'Number' '-' max@'Number' | min@'Number' '-' | '-' max@'Number' | min@max@'Number'`.
  *
  * The grammar used for parsing the BNF can be expressed as follows:
  *
