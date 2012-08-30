@@ -14,7 +14,7 @@
 
 @property (readwrite, retain) NSMutableArray *contents;
 @property (readwrite, assign) BOOL shouldCollapse;
-@property (readwrite, copy  ) NSString *tagName;
+@property (readwrite, copy  ) NSSet *tagNames;
 @property (readwrite, copy  ) NSDictionary *tagValues;
 
 @end

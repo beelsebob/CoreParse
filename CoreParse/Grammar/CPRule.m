@@ -15,7 +15,7 @@
 {
     NSMutableArray *rightHandSide;
     BOOL _shouldCollapse;
-    NSString *_tagName;
+    NSSet *_tagNames;
 }
 
 @synthesize name;
@@ -148,7 +148,7 @@
             ((CPRule *)object)->tag == tag &&
             [((CPRule *)object)->name isEqualToString:name] &&
             [((CPRule *)object)->rightHandSide isEqualToArray:rightHandSide] &&
-            (_tagName == nil || [((CPRule *)object)->_tagName isEqualToString:_tagName]));
+            (_tagNames == nil || [((CPRule *)object)->_tagNames isEqualToSet:_tagNames]));
 }
 
 @end
@@ -165,17 +165,17 @@
     _shouldCollapse = shouldCollapse;
 }
 
-- (NSString *)tagName
+- (NSSet *)tagNames
 {
-    return [[_tagName retain] autorelease];
+    return [[_tagNames retain] autorelease];
 }
 
-- (void)setTagName:(NSString *)tagName
+- (void)setTagNames:(NSSet *)tagNames
 {
-    if (_tagName != tagName)
+    if (_tagNames != tagNames)
     {
-        [_tagName release];
-        _tagName = [tagName copy];
+        [_tagNames release];
+        _tagNames = [tagNames copy];
     }
 }
 

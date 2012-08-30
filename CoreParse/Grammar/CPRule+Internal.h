@@ -13,7 +13,7 @@
 - (BOOL)shouldCollapse;
 - (void)setShouldCollapse:(BOOL)shouldCollapse;
 
-- (NSString *)tagName;
-- (void)setTagName:(NSString *)tagName;
+- (NSSet *)tagNames;
+- (void)setTagNames:(NSSet *)tagNames;
 
 @end

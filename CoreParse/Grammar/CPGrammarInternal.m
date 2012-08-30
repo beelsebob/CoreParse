@@ -291,18 +291,20 @@
                                                      nil]];
                 }
                 [tagNames unionSet:newTagNames];
-                NSString *tagName = [(CPRHSItem *)element tag];
-                if (nil != tagName)
+                NSSet *tns = [(CPRHSItem *)element tags];
+                if (nil != tns)
                 {
-                    if ([tagNames containsObject:tagName])
+                    if ([tagNames intersectsSet:tns])
                     {
+                        NSMutableSet *intersection = [[tagNames mutableCopy] autorelease];
+                        [intersection intersectSet:tns];
                         return [NSError errorWithDomain:CPEBNFParserErrorDomain
                                                    code:CPErrorCodeDuplicateTag
                                                userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                         [NSString stringWithFormat:@"Duplicate tag names (%@) in same part of alternative is not allowed in \"%@\".", tagName, rule], NSLocalizedDescriptionKey,
+                                                         [NSString stringWithFormat:@"Duplicate tag names (%@) in same part of alternative is not allowed in \"%@\".", intersection, rule], NSLocalizedDescriptionKey,
                                                          nil]];
                     }
-                    [tagNames addObject:tagName];
+                    [tagNames unionSet:tns];
                 }
             }
         }
@@ -369,7 +371,7 @@
                 [rule setTag:1];
             }
             [rule setShouldCollapse:[item shouldCollapse]];
-            [rule setTagName:[item tag]];
+            [rule setTagNames:[item tags]];
             [rule setRepresentitiveClass:rhsItemClass];
             [rules addObject:rule];
             
@@ -391,7 +393,7 @@
             if (nil != rule)
             {
                 [rule setShouldCollapse:[item shouldCollapse]];
-                [rule setTagName:[item tag]];
+                [rule setTagNames:[item tags]];
                 [rule setRepresentitiveClass:rhsItemClass];
                 [rules addObject:rule];
             }
@@ -405,7 +407,7 @@
                 [rule setTag:3 + i];
                 [rule setRepresentitiveClass:rhsItemClass];
                 [rule setShouldCollapse:[item shouldCollapse]];
-                [rule setTagName:[item tag]];
+                [rule setTagNames:[item tags]];
                 [rules addObject:rule];
                 i++;
             }

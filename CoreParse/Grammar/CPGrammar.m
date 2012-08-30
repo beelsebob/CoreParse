@@ -27,6 +27,7 @@
 #import "CPLR1Item.h"
 
 #import "CPRHSItem.h"
+#import "CPRHSItem+Private.h"
 
 #import "NSSetFunctional.h"
 
@@ -108,7 +109,7 @@
             id i = [children objectAtIndex:2];
             if ([i isRHSItem])
             {
-                [(CPRHSItem *)i setTag:[[children objectAtIndex:0] identifier]];
+                [(CPRHSItem *)i addTag:[[children objectAtIndex:0] identifier]];
                 return i;
             }
             else
@@ -117,7 +118,7 @@
                 [newI setAlternatives:[NSArray arrayWithObject:[NSArray arrayWithObject:i]]];
                 [newI setRepeats:NO];
                 [newI setMayNotExist:NO];
-                [newI setTag:[[children objectAtIndex:0] identifier]];
+                [newI addTag:[[children objectAtIndex:0] identifier]];
                 [newI setShouldCollapse:YES];
                 return newI;
             }
@@ -283,7 +284,7 @@
     CPRule *sumset2 = [CPRule ruleWithName:@"sumset" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"taggedRightHandSideItem"], nil] tag:9];
     
     CPRule *taggedRightHandSideItem1 = [CPRule ruleWithName:@"taggedRightHandSideItem" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"rightHandSideItem"], nil] tag:10];
-    CPRule *taggedRightHandSideItem2 = [CPRule ruleWithName:@"taggedRightHandSideItem" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"Identifier"], [CPGrammarSymbol terminalWithName:@"@"], [CPGrammarSymbol nonTerminalWithName:@"rightHandSideItem"], nil] tag:11];
+    CPRule *taggedRightHandSideItem2 = [CPRule ruleWithName:@"taggedRightHandSideItem" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol terminalWithName:@"Identifier"], [CPGrammarSymbol terminalWithName:@"@"], [CPGrammarSymbol nonTerminalWithName:@"taggedRightHandSideItem"], nil] tag:11];
     
     CPRule *rightHandSideItem1 = [CPRule ruleWithName:@"rightHandSideItem" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol nonTerminalWithName:@"unit"]] tag:12];
     CPRule *rightHandSideItem2 = [CPRule ruleWithName:@"rightHandSideItem" rightHandSideElements:[NSArray arrayWithObjects:[CPGrammarSymbol nonTerminalWithName:@"unit"], [CPGrammarSymbol nonTerminalWithName:@"repeatSymbol"], nil] tag:13];

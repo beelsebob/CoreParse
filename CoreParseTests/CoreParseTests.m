@@ -683,7 +683,7 @@
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"a"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"b"]];
     CPTokenStream *tokenStream = [tokeniser tokenise:@"baaa"];
-    NSString *taggedStarGrammarString = @"A ::= b@'b' a@'a'*;";
+    NSString *taggedStarGrammarString = @"A ::= c@b@'b' a@'a'*;";
     CPGrammar *taggedStarGrammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:taggedStarGrammarString error:&err];
     STAssertNil(err, @"Error was not nil after creating valid grammar.");
     CPParser *taggedStarParser = [CPLALR1Parser parserWithGrammar:taggedStarGrammar];
@@ -696,6 +696,7 @@
         ![[(CPKeywordToken *)[as objectAtIndex:1] keyword] isEqualToString:@"a"] ||
         ![[(CPKeywordToken *)[as objectAtIndex:2] keyword] isEqualToString:@"a"] ||
         ![[[taggedStarTree valueForTag:@"b"] keyword] isEqualToString:@"b"] ||
+        ![[[taggedStarTree valueForTag:@"c"] keyword] isEqualToString:@"b"] ||
         ![[taggedStarTree valueForTag:@"a"] isEqualToArray:as])
     {
         STFail(@"EBNF tagged star parser did not correctly parse its result", nil);

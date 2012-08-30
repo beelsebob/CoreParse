@@ -12,11 +12,13 @@
 #import "CPGrammar.h"
 
 @implementation CPRHSItem
+{
+    NSMutableSet *_tags;
+}
 
 @synthesize alternatives = _alternatives;
 @synthesize repeats = _repeats;
 @synthesize mayNotExist = _mayNotExist;
-@synthesize tag = _tag;
 @synthesize shouldCollapse = _shouldCollapse;
 
 - (NSUInteger)hash
@@ -36,8 +38,7 @@
             [self repeats] == [object repeats] &&
             [self mayNotExist] == [object mayNotExist] &&
             [self shouldCollapse] == [object shouldCollapse] &&
-            (([self tag] == nil && [(CPRHSItem *)object tag] == nil) ||
-             [[self tag] isEqualToString:[(CPRHSItem *)object tag]]));
+            ([self tags] == nil || [[self tags] isEqualToSet:[(CPRHSItem *)object tags]]));
 }
 
 - (id)copyWithZone:(NSZone *)zone
@@ -46,7 +47,7 @@
     [other setAlternatives:[self alternatives]];
     [other setRepeats:[self repeats]];
     [other setMayNotExist:[self mayNotExist]];
-    [other setTag:[self tag]];
+    [other setTags:[self tags]];
     [other setShouldCollapse:[self shouldCollapse]];
     return other;
 }
@@ -54,7 +55,7 @@
 - (void)dealloc
 {
     [_alternatives release];
-    [_tag release];
+    [_tags release];
     
     [super dealloc];
 }
@@ -98,9 +99,32 @@
     return desc;
 }
 
+- (NSSet *)tags
+{
+    return [[_tags retain] autorelease];
+}
+
+- (void)setTags:(NSSet *)tags
+{
+    if (tags != _tags)
+    {
+        [_tags release];
+        _tags = [tags mutableCopy];
+    }
+}
+
 @end
 
 @implementation CPRHSItem (Private)
+
+- (void)addTag:(NSString *)tagName
+{
+    if (nil == _tags)
+    {
+        [self setTags:[NSSet set]];
+    }
+    [_tags addObject:tagName];
+}
 
 - (NSSet *)tagNamesWithError:(NSError **)err
 {
@@ -133,22 +157,24 @@
                     return nil;
                 }
                 [tagNamesInAlternative unionSet:newTagNames];
-                NSString *tagName = [(CPRHSItem *)comp tag];
-                if (nil != tagName)
+                NSSet *tns = [(CPRHSItem *)comp tags];
+                if (nil != tns)
                 {
-                    if ([tagNamesInAlternative containsObject:tagName])
+                    if ([tagNamesInAlternative intersectsSet:tns])
                     {
                         if (NULL != err)
                         {
+                            NSMutableSet *intersection = [[tagNamesInAlternative mutableCopy] autorelease];
+                            [intersection intersectSet:tns];
                             *err = [NSError errorWithDomain:CPEBNFParserErrorDomain
                                                        code:CPErrorCodeDuplicateTag
                                                    userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                             [NSString stringWithFormat:@"Duplicate tag names (%@) in same part of alternative is not allowed in \"%@\".", tagName, self], NSLocalizedDescriptionKey,
+                                                             [NSString stringWithFormat:@"Duplicate tag names (%@) in same part of alternative is not allowed in \"%@\".", intersection, self], NSLocalizedDescriptionKey,
                                                              nil]];
                         }
                         return nil;
                     }
-                    [tagNamesInAlternative addObject:tagName];
+                    [tagNamesInAlternative unionSet:tns];
                 }
             }
         }

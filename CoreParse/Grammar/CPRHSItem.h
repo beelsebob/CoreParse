@@ -15,7 +15,7 @@
 @property (readwrite,assign) BOOL repeats;
 @property (readwrite,assign) BOOL mayNotExist;
 
-@property (readwrite,copy  ) NSString *tag;
+@property (readwrite,copy  ) NSSet *tags;
 
 @property (readwrite,assign) BOOL shouldCollapse;
 

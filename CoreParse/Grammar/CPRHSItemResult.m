@@ -13,7 +13,7 @@
 @implementation CPRHSItemResult
 
 @synthesize contents = _contents;
-@synthesize tagName = _tagName;
+@synthesize tagNames = _tagNames;
 @synthesize shouldCollapse = _shouldCollapse;
 @synthesize tagValues = _tagValues;
 
@@ -52,7 +52,7 @@
         }
         
         [self setTagValues:[syntaxTree tagValues]];
-        [self setTagName:[r tagName]];
+        [self setTagNames:[r tagNames]];
         [self setShouldCollapse:[r shouldCollapse]];
     }
     
@@ -62,7 +62,7 @@
 - (void)dealloc
 {
     [_contents release];
-    [_tagName release];
+    [_tagNames release];
     
     [super dealloc];
 }

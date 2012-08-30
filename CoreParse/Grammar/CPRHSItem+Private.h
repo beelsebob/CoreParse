@@ -10,6 +10,7 @@
 
 @interface CPRHSItem (Private)
 
+- (void)addTag:(NSString *)tagName;
 - (NSSet *)tagNamesWithError:(NSError **)err;
 
 @end

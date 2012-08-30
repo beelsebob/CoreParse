@@ -134,17 +134,23 @@
                                  NSArray *comps = [r contents];
                                  [components insertObjects:comps atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [comps count])]];
                                  
-                                 if ([r tagName] != nil && [comps count] == 1)
+                                 if ([r tagNames] != nil && [comps count] == 1)
                                  {
-                                     [tagValues setObject:[comps objectAtIndex:0] forKey:[r tagName]];
+                                     for (NSString *tagName in [r tagNames])
+                                     {
+                                         [tagValues setObject:[comps objectAtIndex:0] forKey:tagName];
+                                     }
                                  }
                              }
                              else
                              {
                                  [components insertObject:[r contents] atIndex:0];
-                                 if ([r tagName] != nil)
+                                 if ([r tagNames] != nil)
                                  {
-                                     [tagValues setObject:[r contents] forKey:[r tagName]];
+                                     for (NSString *tagName in [r tagNames])
+                                     {
+                                         [tagValues setObject:[r contents] forKey:tagName];
+                                     }
                                  }
                              }
                              
