@@ -71,6 +71,7 @@
 		1F530B8813216A1A00F52EB5 /* CPSyntaxTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B8613216A1A00F52EB5 /* CPSyntaxTree.m */; };
 		1F530B911322814000F52EB5 /* CPRule.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F530B8F1322813E00F52EB5 /* CPRule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F530B921322814000F52EB5 /* CPRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530B901322813F00F52EB5 /* CPRule.m */; };
+		1F5623A8161652FA00C5EFA8 /* NSArray+Functional.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA6430615E2C5130004FCD3 /* NSArray+Functional.m */; };
 		1F6D44901348CC9500E982C7 /* CPLALR1Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F6D448E1348CC9500E982C7 /* CPLALR1Parser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F6D44911348CC9600E982C7 /* CPLALR1Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D448F1348CC9500E982C7 /* CPLALR1Parser.m */; };
 		1F8374A1154BF9D000DBA298 /* CPRecoveryAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F893A1E14DEEBFC00316FF7 /* CPRecoveryAction.m */; };
@@ -937,6 +938,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F5623A8161652FA00C5EFA8 /* NSArray+Functional.m in Sources */,
 				1F8374A1154BF9D000DBA298 /* CPRecoveryAction.m in Sources */,
 				1F9281A5145C11A60033BC34 /* CPTokeniser.m in Sources */,
 				1F9281A6145C11A60033BC34 /* CPTokenStream.m in Sources */,
