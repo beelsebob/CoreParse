@@ -1248,10 +1248,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = (
-					"x86-64",
 					i386,
-					armv6,
 					armv7,
+					armv7s,
 				);
 				COPY_PHASE_STRIP = YES;
 				DSTROOT = /tmp/iOSCoreParse.dst;
