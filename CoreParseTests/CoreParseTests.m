@@ -889,4 +889,23 @@
     STAssertEquals([result intValue], 45, @"Parsed expression had incorrect value", nil);
 }
 
+- (void)testConformsToProtocol
+{
+    CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
+    [tokeniser addTokenRecogniser:[CPNumberRecogniser integerRecogniser]];
+    [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
+    [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"+"]];
+    [tokeniser setDelegate:[[[CPTestWhiteSpaceIgnoringDelegate alloc] init] autorelease]];
+    CPTokenStream *tokenStream = [tokeniser tokenise:@"5 + 9 + 2 + 7"];
+    
+    NSString *testGrammar =
+    @"Expression2 ::= <Term2> | <Expression2> '+' <Term2>;"
+    @"Term2      ::= 'Number';";
+    CPGrammar *grammar = [CPGrammar grammarWithStart:@"Expression2" backusNaurForm:testGrammar error:NULL];
+    CPParser *parser = [CPSLRParser parserWithGrammar:grammar];
+    Expression *e = [parser parse:tokenStream];
+    
+    STAssertEquals([e value], 23.0f, @"'conformToProtocol' failed", [e value]);
+}
+
 @end
