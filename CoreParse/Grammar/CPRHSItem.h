@@ -19,6 +19,8 @@
 
 @property (readwrite,assign) BOOL shouldCollapse;
 
+- (NSSet *)nonTerminalsUsed;
+
 @end
 
 @interface NSObject (CPIsRHSItem)

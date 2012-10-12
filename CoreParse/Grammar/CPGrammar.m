@@ -315,12 +315,25 @@
         {
             *error = [[[del err] copy] autorelease];
         }
+        [self release];
+        return nil;
+    }
+    
+    NSError *e = [self checkForMissingNonTerminalsInRules:initRules];
+    if (nil != e)
+    {
+        if (NULL != error)
+        {
+            *error = e;
+        }
+        [self release];
         return nil;
     }
     
     NSArray *newRules = [self tidyRightHandSides:initRules error:error];
     if (nil == newRules)
     {
+        [self release];
         return nil;
     }
     
@@ -365,6 +378,46 @@
 - (NSSet *)allRules
 {
         return [NSSet setWithArray:[self rules]];
+}
+
+- (NSError *)checkForMissingNonTerminalsInRules:(NSArray *)rules
+{
+    NSMutableSet *definedNonTerminals = [NSMutableSet setWithCapacity:[rules count]];
+    for (CPRule *rule in rules)
+    {
+        [definedNonTerminals addObject:[rule name]];
+    }
+    
+    for (CPRule *rule in rules)
+    {
+        for (id item in [rule rightHandSideElements])
+        {
+            if ([item isGrammarSymbol] && ![(CPGrammarSymbol *)item isTerminal] && ![definedNonTerminals containsObject:[(CPGrammarSymbol *)item name]])
+            {
+                return [NSError errorWithDomain:CPEBNFParserErrorDomain
+                                           code:CPErrorCodeUndefinedNonTerminal
+                                       userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                 [NSString stringWithFormat:@"Could not find definition of %@, used in %@", [item name], rule], NSLocalizedDescriptionKey,
+                                                 nil]];
+            }
+            else if ([item isRHSItem])
+            {
+                NSSet *usedNonTerminals = [(CPRHSItem *)item nonTerminalsUsed];
+                if (![usedNonTerminals isSubsetOfSet:definedNonTerminals])
+                {
+                    NSMutableSet *mutableUsedNonTerminals = [[usedNonTerminals mutableCopy] autorelease];
+                    [mutableUsedNonTerminals minusSet:definedNonTerminals];
+                    return [NSError errorWithDomain:CPEBNFParserErrorDomain
+                                               code:CPErrorCodeUndefinedNonTerminal
+                                           userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                     [NSString stringWithFormat:@"Could not find definition of %@, used in %@", [mutableUsedNonTerminals anyObject], rule], NSLocalizedDescriptionKey,
+                                                     nil]];
+                }
+            }
+        }
+    }
+    
+    return nil;
 }
 
 - (NSArray *)allNonTerminalNames

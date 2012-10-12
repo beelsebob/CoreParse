@@ -113,6 +113,26 @@
     }
 }
 
+- (NSSet *)nonTerminalsUsed
+{
+    NSMutableSet *nonTerminals = [NSMutableSet set];
+    for (NSArray *alternative in [self alternatives])
+    {
+        for (id item in alternative)
+        {
+            if ([item isGrammarSymbol] && ![(CPGrammarSymbol *)item isTerminal])
+            {
+                [nonTerminals addObject:[(CPGrammarSymbol *)item name]];
+            }
+            else if ([item isRHSItem])
+            {
+                [nonTerminals unionSet:[(CPRHSItem *)item nonTerminalsUsed]];
+            }
+        }
+    }
+    return nonTerminals;
+}
+
 @end
 
 @implementation CPRHSItem (Private)

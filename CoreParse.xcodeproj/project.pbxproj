@@ -1062,7 +1062,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = "";
 				SUPPORTED_PLATFORMS = macosx;
-				VALID_ARCHS = "armv6 i386 x86_64 armv7";
+				VALID_ARCHS = "i386 x86_64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -1098,7 +1098,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = "";
 				SUPPORTED_PLATFORMS = macosx;
-				VALID_ARCHS = "armv6 i386 x86_64 armv7";
+				VALID_ARCHS = "i386 x86_64 armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -1236,12 +1236,13 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = CoreParse;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				VALID_ARCHS = "armv6 armv7";
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -1249,11 +1250,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					i386,
-					armv7,
-					armv7s,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DSTROOT = /tmp/iOSCoreParse.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1266,7 +1263,7 @@
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv6 armv7";
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;
 		};

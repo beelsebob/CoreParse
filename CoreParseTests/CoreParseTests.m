@@ -889,4 +889,15 @@
     STAssertEquals([result intValue], 45, @"Parsed expression had incorrect value", nil);
 }
 
+- (void)testValidGrammar
+{
+    NSString *bnf =
+      @"A ::= <B> <C>;"
+      @"B ::= 'B';";
+    NSError *err = nil;
+    CPGrammar *grammar = [CPGrammar grammarWithStart:@"A" backusNaurForm:bnf error:&err];
+    STAssertNil(grammar, @"Grammar returned for invalid BNF");
+    STAssertNotNil(err, @"No error returned for creating a grammar with invalid BNF");
+}
+
 @end

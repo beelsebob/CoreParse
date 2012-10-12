@@ -15,8 +15,9 @@
 
 typedef enum
 {
-    CPErrorCodeCouldNotParseEBNF = 1,
-    CPErrorCodeDuplicateTag      = 2,
+    CPErrorCodeCouldNotParseEBNF    = 1,
+    CPErrorCodeDuplicateTag         = 2,
+    CPErrorCodeUndefinedNonTerminal = 3,
 } CPErrorCode;
 
 /**
