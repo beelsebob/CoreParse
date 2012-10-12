@@ -86,7 +86,7 @@ CPTokenStream *tokenStream = [tokeniser tokenise:@"5 + (2.0 / 5.0 + 9) * 8"];
 Parsing
 -------
 
-We construct parsers by specifying their grammar.  We can construct a grammar simply using a simple BNF like language.  Note the syntax tag@<NonTerminal> can be read simply as <NonTerminal>, the tag can be used later to quickly extract values from the parsed result:
+We construct parsers by specifying their grammar.  We can construct a grammar simply using a simple BNF like language.  Note the syntax tag@&lt;NonTerminal&gt; can be read simply as &lt;NonTerminal&gt;, the tag can be used later to quickly extract values from the parsed result:
 
 ```objective-c
 NSString *expressionGrammar =
