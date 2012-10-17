@@ -45,7 +45,7 @@
 /**
  * Should return an object to replace a produced syntax tree with.
  * 
- * You should not return `nil` from this method.
+ * You should not return `nil` from this method.  If you do not wish to change the syntax tree, simply return the same value as you are passed.
  * 
  * @warning Note that it is not guarenteed that this method will be called in the same order as the structures appear in your input stream.
  * 
