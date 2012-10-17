@@ -45,4 +45,9 @@
     [super dealloc];
 }
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<CPShiftReduceState: %@ (%ld)", [self object], (long)[self state]];
+}
+
 @end

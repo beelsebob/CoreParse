@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface CPShiftReduceState : NSObject
-{}
 
 @property (readonly,retain) NSObject *object;
 @property (readonly,assign) NSUInteger state;

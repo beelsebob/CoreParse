@@ -129,6 +129,9 @@
 		1F9F83A613B732AC006E939D /* Term.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9F83A413B732AC006E939D /* Term.h */; };
 		1F9F83AC13B7CABA006E939D /* CPRHSItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9F83AA13B7CAB9006E939D /* CPRHSItem.h */; };
 		1F9F83AD13B7CABA006E939D /* CPRHSItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83AB13B7CABA006E939D /* CPRHSItem.m */; };
+		1FA43871162F515C00B92704 /* Expression2.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA4386C162F515C00B92704 /* Expression2.m */; };
+		1FA43872162F515C00B92704 /* RuleBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA4386E162F515C00B92704 /* RuleBase.m */; };
+		1FA43873162F515C00B92704 /* Term2.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA43870162F515C00B92704 /* Term2.m */; };
 		1FA6430715E2C5130004FCD3 /* NSArray+Functional.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA6430515E2C5130004FCD3 /* NSArray+Functional.h */; };
 		1FA6430815E2C5130004FCD3 /* NSArray+Functional.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA6430615E2C5130004FCD3 /* NSArray+Functional.m */; };
 		1FA68DA014DE98C4005519B9 /* CPErrorToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA68D9E14DE98C4005519B9 /* CPErrorToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -273,6 +276,12 @@
 		1F9F83A513B732AC006E939D /* Term.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Term.m; sourceTree = "<group>"; };
 		1F9F83AA13B7CAB9006E939D /* CPRHSItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRHSItem.h; sourceTree = "<group>"; };
 		1F9F83AB13B7CABA006E939D /* CPRHSItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRHSItem.m; sourceTree = "<group>"; };
+		1FA4386B162F515C00B92704 /* Expression2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Expression2.h; sourceTree = "<group>"; };
+		1FA4386C162F515C00B92704 /* Expression2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Expression2.m; sourceTree = "<group>"; };
+		1FA4386D162F515C00B92704 /* RuleBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuleBase.h; sourceTree = "<group>"; };
+		1FA4386E162F515C00B92704 /* RuleBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuleBase.m; sourceTree = "<group>"; };
+		1FA4386F162F515C00B92704 /* Term2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Term2.h; sourceTree = "<group>"; };
+		1FA43870162F515C00B92704 /* Term2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Term2.m; sourceTree = "<group>"; };
 		1FA6430515E2C5130004FCD3 /* NSArray+Functional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Functional.h"; sourceTree = "<group>"; };
 		1FA6430615E2C5130004FCD3 /* NSArray+Functional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Functional.m"; sourceTree = "<group>"; };
 		1FA68D9E14DE98C4005519B9 /* CPErrorToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPErrorToken.h; sourceTree = "<group>"; };
@@ -443,6 +452,12 @@
 				1F9F83A013B731F3006E939D /* Expression.m */,
 				1F9F83A413B732AC006E939D /* Term.h */,
 				1F9F83A513B732AC006E939D /* Term.m */,
+				1FA4386B162F515C00B92704 /* Expression2.h */,
+				1FA4386C162F515C00B92704 /* Expression2.m */,
+				1FA4386D162F515C00B92704 /* RuleBase.h */,
+				1FA4386E162F515C00B92704 /* RuleBase.m */,
+				1FA4386F162F515C00B92704 /* Term2.h */,
+				1FA43870162F515C00B92704 /* Term2.m */,
 			);
 			path = CoreParseTests;
 			sourceTree = "<group>";
@@ -931,6 +946,9 @@
 				1FA798251567DC51003AC8AE /* CPTestWhiteSpaceIgnoringDelegate.m in Sources */,
 				1FA798261567DC58003AC8AE /* CPTestMapCSSTokenisingDelegate.m in Sources */,
 				1FA798271567DC5C003AC8AE /* CPTestErrorHandlingDelegate.m in Sources */,
+				1FA43871162F515C00B92704 /* Expression2.m in Sources */,
+				1FA43872162F515C00B92704 /* RuleBase.m in Sources */,
+				1FA43873162F515C00B92704 /* Term2.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
