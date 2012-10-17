@@ -212,10 +212,11 @@ static CFCharacterSetRef newlineCharset = nil;
 
 - (void)advanceLineNumber:(NSUInteger *)ln columnNumber:(NSUInteger *)cn withInput:(NSString *)input range:(CFRange)range
 {
-    if (newlineCharset == nil)
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^
     {
         newlineCharset = (CFCharacterSetRef)[[NSCharacterSet characterSetWithCharactersInString:@"\n\r"] retain];
-    }
+    });
     
     CFRange searchRange = range;
     NSUInteger rangeEnd = range.location + range.length;
