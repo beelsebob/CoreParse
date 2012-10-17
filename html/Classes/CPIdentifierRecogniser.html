@@ -1,15 +1,21 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
 		<title>CPIdentifierRecogniser Class Reference</title>
-		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
-		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
-		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.1 (build 840)" />
 	</head>
 	<body>
 		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">CoreParse </a></h1>
+				<a id="developerHome" href="../index.html">Beelsebob</a>
+			</div>
+			
 			<div id="title" role="banner">
 				<h1 class="hideInXcode">CPIdentifierRecogniser Class Reference</h1>
 			</div>
@@ -249,8 +255,12 @@
 		<p>Specifies the set of characters the recognised identifiers may contain, other than their first character.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>@property (readwrite, retain) NSCharacterSet *identifierCharacters</code></div>
+
+    
+	
 	
 	
 	
@@ -295,8 +305,12 @@
 		<p>Specifies the set of characters the recognised identifiers may begin with.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>@property (readwrite, retain) NSCharacterSet *initialCharacters</code></div>
+
+    
+	
 	
 	
 	
@@ -349,9 +363,11 @@
 		<p>Creates an identifier recogniser that recognises identifiers starting with any english alphabetic character or underscore, and then containing any number of those characters, hyphens, or numeric characters.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>+ (id)identifierRecogniser</code></div>
-	
+
+    
 	
 	
 	
@@ -359,6 +375,8 @@
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns a CPIdentifierRecogniser that recognises C like identifiers.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -400,9 +418,11 @@
 		<p>Creates an identifier recogniser that recognises identifiers starting with any character in <a href="#//api/name/initialCharacters">initialCharacters</a>, and then containing any number of characters in <a href="#//api/name/identifierCharacters">identifierCharacters</a>.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>+ (id)identifierRecogniserWithInitialCharacters:(NSCharacterSet *)<em>initialCharacters</em> identifierCharacters:(NSCharacterSet *)<em>identifierCharacters</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -425,6 +445,8 @@
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns a CPIdentifierRecogniser that recognises identifiers based on the input character sets.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -474,9 +496,11 @@
 		<p>Initialises an identifier recogniser that recognises identifiers starting with any character in <a href="#//api/name/initialCharacters">initialCharacters</a>, and then containing any number of characters in <a href="#//api/name/identifierCharacters">identifierCharacters</a>.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (id)initWithInitialCharacters:(NSCharacterSet *)<em>initialCharacters</em> identifierCharacters:(NSCharacterSet *)<em>identifierCharacters</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -499,6 +523,8 @@
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns the CPIdentifierRecogniser that recognises identifiers based on the input character sets.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -540,9 +566,11 @@
 		<p>Attempts to recognise a token at tokenPosition in tokenString.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (CPToken *)recogniseTokenInString:(NSString *)<em>tokenString</em> currentTokenPosition:(NSUInteger *)<em>tokenPosition</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -565,6 +593,8 @@
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns the token recognised.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -603,9 +633,9 @@ If no valid token is found <code>nil</code> must be returned instead, and tokenP
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-08-30)</span><br />
+						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-10-17)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						
 					</div>
 				</div>
@@ -693,6 +723,14 @@ If no valid token is found <code>nil</code> must be returned instead, and tokenP
 			}
 			
 			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
 		</script>
 	</body>
 </html>

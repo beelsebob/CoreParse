@@ -1,15 +1,21 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
 		<title>CPTokeniserDelegate Protocol Reference</title>
-		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
-		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
-		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.1 (build 840)" />
 	</head>
 	<body>
 		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">CoreParse </a></h1>
+				<a id="developerHome" href="../index.html">Beelsebob</a>
+			</div>
+			
 			<div id="title" role="banner">
 				<h1 class="hideInXcode">CPTokeniserDelegate Protocol Reference</h1>
 			</div>
@@ -119,7 +125,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>The delegate of a <a href="../Classes/CPTokeniser.html">CPTokeniser</a> must adopt the <a href="CPTokeniserDelegate.html">CPTokeniserDelegate</a> protocol.  This allows for customising if/when a tokeniser should produce a token.</p>
+						<p>The delegate of a <a href="../Classes/CPTokeniser.html">CPTokeniser</a> must adopt the CPTokeniserDelegate protocol.  This allows for customising if/when a tokeniser should produce a token.</p>
 					</div>
 					
 					
@@ -192,9 +198,11 @@ tokenising from again, or NSNotFound to stop the tokeniser.  You may optionally 
 tokenising from again, or NSNotFound to stop the tokeniser.  You may optionally provide an error message to attach to a <a href="../Classes/CPErrorToken.html">CPErrorToken</a>.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (NSUInteger)tokeniser:(CPTokeniser *)<em>tokeniser</em> didNotFindTokenOnInput:(NSString *)<em>input</em> position:(NSUInteger)<em>position</em> error:(NSString **)<em>errorMessage</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -230,6 +238,8 @@ tokenising from again, or NSNotFound to stop the tokeniser.  You may optionally 
 	
 	
 	
+	
+	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>This method is called when no recogniser matches a token at the current position in the input stream.  You must provide a new location in the input stream to start
@@ -260,9 +270,11 @@ tokenising from again, or NSNotFound to stop the tokeniser.  You may optionally 
 		<p>Requests that you push a token onto a tokeniser&rsquo;s output stream.  This allows you to replace the token with any others you choose, or not output the token at all.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (void)tokeniser:(CPTokeniser *)<em>tokeniser</em> requestsToken:(CPToken *)<em>token</em> pushedOntoStream:(CPTokenStream *)<em>stream</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -283,6 +295,8 @@ tokenising from again, or NSNotFound to stop the tokeniser.  You may optionally 
 		</dl>
 		
 	</div>
+	
+	
 	
 	
 	
@@ -319,9 +333,11 @@ tokenising from again, or NSNotFound to stop the tokeniser.  You may optionally 
 		<p>Determines whether a <a href="../Classes/CPTokeniser.html">CPTokeniser</a> should produce a token and consume the associated input string.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (BOOL)tokeniser:(CPTokeniser *)<em>tokeniser</em> shouldConsumeToken:(CPToken *)<em>token</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -344,6 +360,8 @@ tokenising from again, or NSNotFound to stop the tokeniser.  You may optionally 
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Return YES if the tokeniser should consume the token, NO otherwise.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -378,9 +396,11 @@ tokenising from again, or NSNotFound to stop the tokeniser.  You may optionally 
 		<p>Allows you to replace a taken in the tokeniser&rsquo;s output stream.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (NSArray *)tokeniser:(CPTokeniser *)<em>tokeniser</em> willProduceToken:(CPToken *)<em>token</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -403,6 +423,8 @@ tokenising from again, or NSNotFound to stop the tokeniser.  You may optionally 
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Return an array of <a href="../Classes/CPToken.html">CPToken</a> objects to place in the output token stream.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -449,9 +471,9 @@ tokenising from again, or NSNotFound to stop the tokeniser.  You may optionally 
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-08-30)</span><br />
+						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-10-17)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						
 					</div>
 				</div>
@@ -539,6 +561,14 @@ tokenising from again, or NSNotFound to stop the tokeniser.  You may optionally 
 			}
 			
 			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
 		</script>
 	</body>
 </html>

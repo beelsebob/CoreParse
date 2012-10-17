@@ -1,15 +1,21 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
 		<title>CPGrammar Class Reference</title>
-		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
-		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
-		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.1 (build 840)" />
 	</head>
 	<body>
 		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">CoreParse </a></h1>
+				<a id="developerHome" href="../index.html">Beelsebob</a>
+			</div>
+			
 			<div id="title" role="banner">
 				<h1 class="hideInXcode">CPGrammar Class Reference</h1>
 			</div>
@@ -302,8 +308,12 @@
 		<p>The starting symbol for the grammar.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>@property (readwrite, retain) NSString *start</code></div>
+
+    
+	
 	
 	
 	
@@ -347,9 +357,11 @@
 		<p>Creates a grammar based on a starting non-terminal and some backus naur form.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>+ (id)grammarWithStart:(NSString *)<em>start</em> backusNaurForm:(NSString *)<em>bnf</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -372,6 +384,8 @@
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns a CPGrammar based on the BNF and starting non-terminal.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -415,9 +429,11 @@
 		<p>Creates a grammar based on a starting non-terminal and some backus naur form.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>+ (id)grammarWithStart:(NSString *)<em>start</em> backusNaurForm:(NSString *)<em>bnf</em> error:(NSError **)<em>error</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -445,6 +461,8 @@
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns a CPGrammar based on the BNF and starting non-terminal.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -488,9 +506,11 @@
 		<p>Creates a grammar based on a starting non-terminal and a list of <a href="#//api/name/rules">rules</a>.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>+ (id)grammarWithStart:(NSString *)<em>start</em> rules:(NSArray *)<em>rules</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -513,6 +533,8 @@
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns a CPGrammar based on the <a href="#//api/name/rules">rules</a> and starting non-terminal.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -564,9 +586,11 @@
 		<p>Adds a rule to the grammar.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (void)addRule:(CPRule *)<em>rule</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -577,6 +601,8 @@
 		</dl>
 		
 	</div>
+	
+	
 	
 	
 	
@@ -611,9 +637,11 @@
 		<p>All the non-terminals that the grammar can expand.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (NSArray *)allNonTerminalNames</code></div>
-	
+
+    
 	
 	
 	
@@ -621,6 +649,8 @@
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>An array of non-terminal names that are explained by the grammar.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -653,9 +683,11 @@
 		<p>The set of <a href="#//api/name/rules">rules</a> in the grammar.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (NSSet *)allRules</code></div>
-	
+
+    
 	
 	
 	
@@ -663,6 +695,8 @@
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns the set of <a href="#//api/name/rules">rules</a> used to describe the grammar.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -695,9 +729,11 @@
 		<p>Initialises a grammar based on a starting non-terminal and some backus naur form.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (id)initWithStart:(NSString *)<em>start</em> backusNaurForm:(NSString *)<em>bnf</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -720,6 +756,8 @@
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns a CPGrammar based on the BNF and starting non-terminal.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -799,9 +837,11 @@ terminal                ::= "String";
 		<p>Initialises a grammar based on a starting non-terminal and some backus naur form.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (id)initWithStart:(NSString *)<em>start</em> backusNaurForm:(NSString *)<em>bnf</em> error:(NSError **)<em>error</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -829,6 +869,8 @@ terminal                ::= "String";
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns a CPGrammar based on the BNF and starting non-terminal.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -910,9 +952,11 @@ terminal                ::= "String";
 		<p>Initialises a grammar based on a starting non-terminal and a list of <a href="#//api/name/rules">rules</a>.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (id)initWithStart:(NSString *)<em>start</em> rules:(NSArray *)<em>rules</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -935,6 +979,8 @@ terminal                ::= "String";
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns a CPGrammar based on the <a href="#//api/name/rules">rules</a> and starting non-terminal.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -978,9 +1024,11 @@ terminal                ::= "String";
 		<p>The <a href="#//api/name/rules">rules</a> relevant when attempting to match a non-terminal.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (NSArray *)rulesForNonTerminalWithName:(NSString *)<em>nonTerminalName</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -998,6 +1046,8 @@ terminal                ::= "String";
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns all <a href="#//api/name/rules">rules</a> that match a particular non-terminal.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -1033,9 +1083,9 @@ terminal                ::= "String";
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-08-30)</span><br />
+						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-10-17)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						
 					</div>
 				</div>
@@ -1123,6 +1173,14 @@ terminal                ::= "String";
 			}
 			
 			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
 		</script>
 	</body>
 </html>

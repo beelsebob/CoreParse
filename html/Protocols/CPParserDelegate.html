@@ -1,15 +1,21 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
 		<title>CPParserDelegate Protocol Reference</title>
-		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
-		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
-		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.1 (build 840)" />
 	</head>
 	<body>
 		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">CoreParse </a></h1>
+				<a id="developerHome" href="../index.html">Beelsebob</a>
+			</div>
+			
 			<div id="title" role="banner">
 				<h1 class="hideInXcode">CPParserDelegate Protocol Reference</h1>
 			</div>
@@ -115,7 +121,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>The delegate of a <a href="../Classes/CPParser.html">CPParser</a> must adopt the <a href="CPParserDelegate.html">CPParserDelegate</a> protocol.  This allows you to replace the produced syntax trees with data structures of your choice.</p>
+						<p>The delegate of a <a href="../Classes/CPParser.html">CPParser</a> must adopt the CPParserDelegate protocol.  This allows you to replace the produced syntax trees with data structures of your choice.</p>
 
 <p>Significant processing can be performed in a parser delegate.  For example, a parser for numeric expressions could replace each syntax tree with an NSNumber representing
 the resultant value of evaluating the expression.  This would allow you to parse, and compute the result of the expression in one pass.</p>
@@ -182,9 +188,11 @@ the resultant value of evaluating the expression.  This would allow you to parse
 		<p>Called when the parser encounters a token for which it can not shift, reduce or accept.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (CPRecoveryAction *)parser:(CPParser *)<em>parser</em> didEncounterErrorOnInput:(CPTokenStream *)<em>inputStream</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -208,6 +216,8 @@ the resultant value of evaluating the expression.  This would allow you to parse
 		<p>An action to take to recover from the parse error or nil.  If the action is nil, and the problematic token is a <a href="../Classes/CPErrorToken.html">CPErrorToken</a>
 the parse stack is unwound a step for the parent rule to deal with the error.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -240,9 +250,11 @@ the parse stack is unwound a step for the parent rule to deal with the error.</p
 		<p>Called when the parser encounters a token for which it can not shift, reduce or accept.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (CPRecoveryAction *)parser:(CPParser *)<em>parser</em> didEncounterErrorOnInput:(CPTokenStream *)<em>inputStream</em> expecting:(NSSet *)<em>acceptableTokens</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -271,6 +283,8 @@ the parse stack is unwound a step for the parent rule to deal with the error.</p
 		<p>An action to take to recover from the parse error or nil.  If the action is nil, and the problematic token is a <a href="../Classes/CPErrorToken.html">CPErrorToken</a>
 the parse stack is unwound a step for the parent rule to deal with the error.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -303,9 +317,11 @@ the parse stack is unwound a step for the parent rule to deal with the error.</p
 		<p>Should return an object to replace a produced syntax tree with.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (id)parser:(CPParser *)<em>parser</em> didProduceSyntaxTree:(CPSyntaxTree *)<em>syntaxTree</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -331,11 +347,13 @@ the parse stack is unwound a step for the parent rule to deal with the error.</p
 	
 	
 	
+	
+	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Should return an object to replace a produced syntax tree with.</p>
 
-<p>You should not return <code>nil</code> from this method.</p><div class="warning"><p><strong>Warning:</strong> Note that it is not guarenteed that this method will be called in the same order as the structures appear in your input stream.</p></div>
+<p>You should not return <code>nil</code> from this method.  If you do not wish to change the syntax tree, simply return the same value as you are passed.</p><div class="warning"><p><strong>Warning:</strong> Note that it is not guarenteed that this method will be called in the same order as the structures appear in your input stream.</p></div>
 	</div>
 	
 	
@@ -365,9 +383,9 @@ the parse stack is unwound a step for the parent rule to deal with the error.</p
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-08-30)</span><br />
+						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-10-17)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						
 					</div>
 				</div>
@@ -455,6 +473,14 @@ the parse stack is unwound a step for the parent rule to deal with the error.</p
 			}
 			
 			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
 		</script>
 	</body>
 </html>

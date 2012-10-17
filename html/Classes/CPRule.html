@@ -1,15 +1,21 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
 		<title>CPRule Class Reference</title>
-		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
-		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
-		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.1 (build 840)" />
 	</head>
 	<body>
 		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">CoreParse </a></h1>
+				<a id="developerHome" href="../index.html">Beelsebob</a>
+			</div>
+			
 			<div id="title" role="banner">
 				<h1 class="hideInXcode">CPRule Class Reference</h1>
 			</div>
@@ -293,8 +299,12 @@ Also specifies the class to allocate to represent this rule.</p></span>
 		<p>Specifies the name of the non-terminal this rule describes.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>@property (readwrite, retain) NSString *name</code></div>
+
+    
+	
 	
 	
 	
@@ -330,8 +340,12 @@ Also specifies the class to allocate to represent this rule.</p></span>
 		<p>The class used to represent syntax trees based off this rule.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>@property (readwrite, assign) Class representitiveClass</code></div>
+
+    
+	
 	
 	
 	
@@ -367,8 +381,12 @@ Also specifies the class to allocate to represent this rule.</p></span>
 		<p>Specifies the right hand side of the rule.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>@property (readwrite, copy) NSArray *rightHandSideElements</code></div>
+
+    
+	
 	
 	
 	
@@ -406,8 +424,12 @@ Also specifies the class to allocate to represent this rule.</p></span>
 		<p>A tag used to identify the rule in the parser delegate.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>@property (readwrite, assign) NSUInteger tag</code></div>
+
+    
+	
 	
 	
 	
@@ -451,9 +473,11 @@ Also specifies the class to allocate to represent this rule.</p></span>
 		<p>Creates a rule based on a non-terminal <a href="#//api/name/name">name</a> and an array of grammar symbols to make up the right hand side.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>+ (id)ruleWithName:(NSString *)<em>name</em> rightHandSideElements:(NSArray *)<em>rightHandSideElements</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -476,6 +500,8 @@ Also specifies the class to allocate to represent this rule.</p></span>
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns a CPRule based on the right hand side and non-terminal <a href="#//api/name/name">name</a>.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -522,9 +548,11 @@ Also specifies the class to allocate to represent this rule.</p></span>
 Also specifies the class to allocate to represent this rule.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>+ (id)ruleWithName:(NSString *)<em>name</em> rightHandSideElements:(NSArray *)<em>rightHandSideElements</em> representitiveClass:(Class)<em>representitiveClass</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -552,6 +580,8 @@ Also specifies the class to allocate to represent this rule.</p>
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns a CPRule based on the right hand side and non-terminal <a href="#//api/name/name">name</a>.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -599,9 +629,11 @@ Also specifies the class to allocate to represent this rule.</p>
 Also specifies a <a href="#//api/name/tag">tag</a> by which the rule can be identified in a parser delegate</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>+ (id)ruleWithName:(NSString *)<em>name</em> rightHandSideElements:(NSArray *)<em>rightHandSideElements</em> tag:(NSUInteger)<em>tag</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -629,6 +661,8 @@ Also specifies a <a href="#//api/name/tag">tag</a> by which the rule can be iden
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns a CPRule based on the right hand side and non-terminal <a href="#//api/name/name">name</a>.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -683,9 +717,11 @@ Also specifies a <a href="#//api/name/tag">tag</a> by which the rule can be iden
 		<p>Initialises a rule based on a non-terminal <a href="#//api/name/name">name</a> and an array of grammar symbols to make up the right hand side.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (id)initWithName:(NSString *)<em>name</em> rightHandSideElements:(NSArray *)<em>rightHandSideElements</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -708,6 +744,8 @@ Also specifies a <a href="#//api/name/tag">tag</a> by which the rule can be iden
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns a CPRule based on the right hand side and non-terminal <a href="#//api/name/name">name</a>.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -752,9 +790,11 @@ Also specifies a <a href="#//api/name/tag">tag</a> by which the rule can be iden
 Also specifies the class to allocate to represent this rule.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (id)initWithName:(NSString *)<em>name</em> rightHandSideElements:(NSArray *)<em>rightHandSideElements</em> representitiveClass:(Class)<em>representitiveClass</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -782,6 +822,8 @@ Also specifies the class to allocate to represent this rule.</p>
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns a CPRule based on the right hand side and non-terminal <a href="#//api/name/name">name</a>.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -829,9 +871,11 @@ Also specifies the class to allocate to represent this rule.</p>
 Also specifies a <a href="#//api/name/tag">tag</a> by which the rule can be identified in a parser delegate</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (id)initWithName:(NSString *)<em>name</em> rightHandSideElements:(NSArray *)<em>rightHandSideElements</em> tag:(NSUInteger)<em>tag</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -859,6 +903,8 @@ Also specifies a <a href="#//api/name/tag">tag</a> by which the rule can be iden
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns a CPRule based on the right hand side and non-terminal <a href="#//api/name/name">name</a>.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -906,9 +952,9 @@ Also specifies a <a href="#//api/name/tag">tag</a> by which the rule can be iden
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-08-30)</span><br />
+						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-10-17)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						
 					</div>
 				</div>
@@ -996,6 +1042,14 @@ Also specifies a <a href="#//api/name/tag">tag</a> by which the rule can be iden
 			}
 			
 			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
 		</script>
 	</body>
 </html>

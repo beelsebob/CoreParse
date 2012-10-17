@@ -1,15 +1,21 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
 		<title>CPSyntaxTree Class Reference</title>
-		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
-		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
-		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.1 (build 840)" />
 	</head>
 	<body>
 		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">CoreParse </a></h1>
+				<a id="developerHome" href="../index.html">Beelsebob</a>
+			</div>
+			
 			<div id="title" role="banner">
 				<h1 class="hideInXcode">CPSyntaxTree Class Reference</h1>
 			</div>
@@ -269,8 +275,12 @@
 		<p>The children that match the right hand side of the matched <a href="#//api/name/rule">rule</a>.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>@property (readonly, copy) NSArray *children</code></div>
+
+    
+	
 	
 	
 	
@@ -306,8 +316,12 @@
 		<p>The rule matched to create this syntax tree.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>@property (readonly, retain) CPRule *rule</code></div>
+
+    
+	
 	
 	
 	
@@ -343,8 +357,12 @@
 		<p>The values of any tags found on the right hand side of the <a href="#//api/name/rule">rule</a>.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>@property (readonly, copy) NSDictionary *tagValues</code></div>
+
+    
+	
 	
 	
 	
@@ -388,9 +406,11 @@
 		<p>Creates a syntax tree based on a <a href="#//api/name/rule">rule</a> and some child trees.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>+ (id)syntaxTreeWithRule:(CPRule *)<em>nonTerminal</em> children:(NSArray *)<em>children</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -413,6 +433,8 @@
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns a syntax tree with apropriate <a href="#//api/name/children">children</a>, and matching a specified <a href="#//api/name/rule">rule</a>.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -454,9 +476,11 @@
 		<p>Creates a syntax tree based on a <a href="#//api/name/rule">rule</a> and some child trees.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>+ (id)syntaxTreeWithRule:(CPRule *)<em>nonTerminal</em> children:(NSArray *)<em>children</em> tagValues:(NSDictionary *)<em>tagValues</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -484,6 +508,8 @@
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns a syntax tree with apropriate <a href="#//api/name/children">children</a>, and matching a specified <a href="#//api/name/rule">rule</a>.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -533,9 +559,11 @@
 		<p>Returns the child at a specific index.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (id)childAtIndex:(NSUInteger)<em>idx</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -553,6 +581,8 @@
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>The child at that index.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -585,9 +615,11 @@
 		<p>Initialises a syntax tree based on a <a href="#//api/name/rule">rule</a> and some child trees.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (id)initWithRule:(CPRule *)<em>nonTerminal</em> children:(NSArray *)<em>children</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -610,6 +642,8 @@
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns a syntax tree with apropriate <a href="#//api/name/children">children</a>, and matching a specified <a href="#//api/name/rule">rule</a>.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -651,9 +685,11 @@
 		<p>Initialises a syntax tree based on a <a href="#//api/name/rule">rule</a> and some child trees.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (id)initWithRule:(CPRule *)<em>nonTerminal</em> children:(NSArray *)<em>children</em> tagValues:(NSDictionary *)<em>tagValues</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -681,6 +717,8 @@
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns a syntax tree with apropriate <a href="#//api/name/children">children</a>, and matching a specified <a href="#//api/name/rule">rule</a>.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -722,9 +760,11 @@
 		<p>Returns the value of a specific tag.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (id)valueForTag:(NSString *)<em>tagName</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -742,6 +782,8 @@
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>The sub syntax tree associated with that tag.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -777,9 +819,9 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-08-30)</span><br />
+						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-10-17)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						
 					</div>
 				</div>
@@ -867,6 +909,14 @@
 			}
 			
 			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
 		</script>
 	</body>
 </html>

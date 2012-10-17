@@ -1,15 +1,21 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
 		<title>CPTokeniser Class Reference</title>
-		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
-		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
-		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.1 (build 840)" />
 	</head>
 	<body>
 		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">CoreParse </a></h1>
+				<a id="developerHome" href="../index.html">Beelsebob</a>
+			</div>
+			
 			<div id="title" role="banner">
 				<h1 class="hideInXcode">CPTokeniser Class Reference</h1>
 			</div>
@@ -258,8 +264,12 @@ the output stream.</p>
 		<p>The object that acts as a delegate to the receiving CPTokeniser.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>@property (readwrite, assign, nonatomic) id&lt;CPTokeniserDelegate&gt; delegate</code></div>
+
+    
+	
 	
 	
 	
@@ -305,9 +315,11 @@ the output stream.</p>
 		<p>Adds a token recogniser at the end of the priority list of recognisers.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (void)addTokenRecogniser:(id&lt;CPTokenRecogniser&gt;)<em>recogniser</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -318,6 +330,8 @@ the output stream.</p>
 		</dl>
 		
 	</div>
+	
+	
 	
 	
 	
@@ -373,9 +387,11 @@ the output stream.</p>
 		<p>Inserts a given token recogniser at a given priority level in the tokeniser.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (void)insertTokenRecogniser:(id&lt;CPTokenRecogniser&gt;)<em>recogniser</em> atPriority:(NSInteger)<em>priority</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -391,6 +407,8 @@ the output stream.</p>
 		</dl>
 		
 	</div>
+	
+	
 	
 	
 	
@@ -453,9 +471,11 @@ the output stream.</p>
 		<p>Inserts a given token recogniser before another.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (void)insertTokenRecogniser:(id&lt;CPTokenRecogniser&gt;)<em>recogniser</em> beforeRecogniser:(id&lt;CPTokenRecogniser&gt;)<em>other</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -471,6 +491,8 @@ the output stream.</p>
 		</dl>
 		
 	</div>
+	
+	
 	
 	
 	
@@ -528,9 +550,11 @@ the output stream.</p>
 		<p>Removes all occurances of recogniser in the tokeniser&rsquo;s priority list.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (void)removeTokenRecogniser:(id&lt;CPTokenRecogniser&gt;)<em>recogniser</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -541,6 +565,8 @@ the output stream.</p>
 		</dl>
 		
 	</div>
+	
+	
 	
 	
 	
@@ -584,9 +610,11 @@ the output stream.</p>
 		<p>Tokenises an input string by repeatedly using the recognisers in the tokeniser&rsquo;s priority list.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (CPTokenStream *)tokenise:(NSString *)<em>input</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -604,6 +632,8 @@ the output stream.</p>
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>Returns a token stream containing all tokens found in the input string.</p>
 	</div>
+	
+	
 	
 	
 	
@@ -638,9 +668,11 @@ the output stream.</p>
 		<p>Tokenises an input string into a pre-allocated output <a href="../Classes/CPTokenStream.html">CPTokenStream</a>.</p>
 	</div>		
 	
-	
+    
+
 	<div class="method-subsection method-declaration"><code>- (void)tokenise:(NSString *)<em>input</em> into:(CPTokenStream *)<em>tokenStream</em></code></div>
-	
+
+    
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
@@ -656,6 +688,8 @@ the output stream.</p>
 		</dl>
 		
 	</div>
+	
+	
 	
 	
 	
@@ -696,9 +730,9 @@ This method can be useful for multithreading parsers, allowing you to create the
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-08-30)</span><br />
+						<p><span class="copyright">&copy; 2012 Beelsebob. All rights reserved. (Last updated: 2012-10-17)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						
 					</div>
 				</div>
@@ -786,6 +820,14 @@ This method can be useful for multithreading parsers, allowing you to create the
 			}
 			
 			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
 		</script>
 	</body>
 </html>
