@@ -200,7 +200,8 @@ typedef struct
     }
     else if (delegateRespondsTo.willProduceToken)
     {
-        [stream pushTokens:[delegate tokeniser:self willProduceToken:tok]];
+        [stream pushTokens:[delegate performSelector:@selector(tokeniser:willProduceToken:) withObject:self withObject:tok]];
+//        [stream pushTokens:[delegate tokeniser:self willProduceToken:tok]];
     }
     else
     {

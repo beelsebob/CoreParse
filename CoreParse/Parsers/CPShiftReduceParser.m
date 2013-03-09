@@ -169,7 +169,7 @@
                     Class c = [reductionRule representitiveClass];
                     if (nil != c)
                     {
-                        result = [(id<CPParseResult>)[c alloc] initWithSyntaxTree:tree];
+                        result = [[(id<CPParseResult>)[c alloc] initWithSyntaxTree:tree] autorelease];
                     }
                     
                     if (nil == result)
@@ -186,6 +186,7 @@
                 }
                 else if ([action isAccept])
                 {
+                    [nextToken release];
                     return [(CPShiftReduceState *)[stateStack lastObject] object];
                 }
                 else
@@ -199,6 +200,7 @@
                         }
                         else
                         {
+                            [nextToken release];
                             return nil;
                         }
                     }
@@ -246,7 +248,8 @@
     }
     else if (delegateRespondsTo.didEncounterErrorOnInput)
     {
-        return [[self delegate] parser:self didEncounterErrorOnInput:tokenStream];
+        return [[self delegate] performSelector:@selector(parser:didEncounterErrorOnInput:) withObject:self withObject:tokenStream];
+//        return [[self delegate] parser:self didEncounterErrorOnInput:tokenStream];
     }
     else
     {

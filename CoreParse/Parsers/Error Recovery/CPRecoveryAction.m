@@ -65,4 +65,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [additionalToken release];
+    
+    [super dealloc];
+}
+
 @end

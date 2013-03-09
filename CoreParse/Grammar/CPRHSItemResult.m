@@ -63,6 +63,7 @@
 {
     [_contents release];
     [_tagNames release];
+    [_tagValues release];
     
     [super dealloc];
 }
