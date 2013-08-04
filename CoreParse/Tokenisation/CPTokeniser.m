@@ -10,6 +10,7 @@
 
 #import "CPEOFToken.h"
 #import "CPErrorToken.h"
+#import "CPKeywordRecogniser.h"
 
 typedef struct
 {
@@ -78,6 +79,11 @@ typedef struct
 - (void)addTokenRecogniser:(id<CPTokenRecogniser>)recogniser
 {
     [[self tokenRecognisers] addObject:recogniser];
+}
+
+- (void)addTokenRecogniserForKeyword:(NSString *)tokenKeyword
+{
+	[self addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:tokenKeyword]];
 }
 
 - (void)insertTokenRecogniser:(id<CPTokenRecogniser>)recogniser atPriority:(NSInteger)pri
