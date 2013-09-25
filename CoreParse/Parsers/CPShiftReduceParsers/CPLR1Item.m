@@ -66,7 +66,7 @@
 
 - (NSUInteger)hash
 {
-    return [[self rule] hash] << 16 + [terminal hash] + [self position];
+    return ([[self rule] hash] << 16) + [terminal hash] + [self position];
 }
 
 - (NSString *)description
