@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 In The Beginning... All rights reserved.
 //
 
-#import "CoreParse/CoreParse.h"
+#import "CoreParse.h"
 
 @interface CPRule (Internal)
 
