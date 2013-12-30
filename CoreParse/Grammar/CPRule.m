@@ -134,7 +134,7 @@
 
 - (NSUInteger)hash
 {
-    return [name hash] << 16 + [self tag] ;
+    return [name hash] ^ [self tag];
 }
 
 - (BOOL)isRule
