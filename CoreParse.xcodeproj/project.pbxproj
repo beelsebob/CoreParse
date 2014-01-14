@@ -169,6 +169,11 @@
 		1FC18287139BA47D0027F597 /* CoreParse-template.md in Resources */ = {isa = PBXBuildFile; fileRef = 1FC18286139BA47D0027F597 /* CoreParse-template.md */; };
 		DA2B1DF81566B704002FDBD7 /* CPSTAssertionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2B1DF71566B704002FDBD7 /* CPSTAssertionsTests.m */; };
 		DA2B1DF91566B704002FDBD7 /* CPSTAssertionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2B1DF71566B704002FDBD7 /* CPSTAssertionsTests.m */; };
+		EA5FF42E1884CC6600BEEF03 /* CPTestErrorEvaluatorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F893A2214DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.m */; };
+		EA5FF42F1884CC7100BEEF03 /* CPTestErrorHandlingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA68DA414DE9D3D005519B9 /* CPTestErrorHandlingDelegate.m */; };
+		EA5FF4301884FFDC00BEEF03 /* Expression2.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA4386C162F515C00B92704 /* Expression2.m */; };
+		EA5FF4311884FFE200BEEF03 /* RuleBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA4386E162F515C00B92704 /* RuleBase.m */; };
+		EA5FF4321884FFE500BEEF03 /* Term2.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA43870162F515C00B92704 /* Term2.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1001,13 +1006,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA5FF4321884FFE500BEEF03 /* Term2.m in Sources */,
+				EA5FF42F1884CC7100BEEF03 /* CPTestErrorHandlingDelegate.m in Sources */,
 				1F9281C9145C18220033BC34 /* CPTestEvaluatorDelegate.m in Sources */,
 				1F9281CA145C18220033BC34 /* CPTestWhiteSpaceIgnoringDelegate.m in Sources */,
 				1F9281CB145C18220033BC34 /* CPTestMapCSSTokenisingDelegate.m in Sources */,
+				EA5FF4301884FFDC00BEEF03 /* Expression2.m in Sources */,
 				1F9281CC145C18220033BC34 /* Expression.m in Sources */,
+				EA5FF42E1884CC6600BEEF03 /* CPTestErrorEvaluatorDelegate.m in Sources */,
 				1F9281CD145C18220033BC34 /* Term.m in Sources */,
 				1F9281C8145C17580033BC34 /* CoreParseTests.m in Sources */,
 				DA2B1DF91566B704002FDBD7 /* CPSTAssertionsTests.m in Sources */,
+				EA5FF4311884FFE200BEEF03 /* RuleBase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
