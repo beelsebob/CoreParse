@@ -31,7 +31,7 @@
 
 + (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote escapeSequence:(NSString *)escapeSequence maximumLength:(NSUInteger)maximumLength name:(NSString *)name
 {
-    return [[[CPQuotedRecogniser alloc] initWithStartQuote:startQuote endQuote:endQuote escapeSequence:escapeSequence maximumLength:maximumLength name:name] autorelease];
+    return [[CPQuotedRecogniser alloc] initWithStartQuote:startQuote endQuote:endQuote escapeSequence:escapeSequence maximumLength:maximumLength name:name];
 }
 
 - (id)initWithStartQuote:(NSString *)initStartQuote endQuote:(NSString *)initEndQuote escapeSequence:(NSString *)initEscapeSequence maximumLength:(NSUInteger)initMaximumLength name:(NSString *)initName
@@ -93,17 +93,6 @@
     [aCoder encodeObject:[self name]           forKey:CPQuotedRecogniserNameKey];
 }
 
-- (void)dealloc
-{
-    [startQuote release];
-    [endQuote release];
-    [escapeSequence release];
-    [escapeReplacer release];
-    [name release];
-    
-    [super dealloc];
-}
-
 - (CPToken *)recogniseTokenInString:(NSString *)tokenString currentTokenPosition:(NSUInteger *)tokenPosition
 {
     NSString *(^er)(NSString *tokenStream, NSUInteger *quotePosition) = [self escapeReplacer];
@@ -135,7 +124,7 @@
                 CFStringRef substr = CFStringCreateWithSubstring(kCFAllocatorDefault, (CFStringRef)tokenString, CFRangeMake(searchRange.location, endRange.location - searchRange.location));
                 CFStringAppend(outputString, substr);
                 CFRelease(substr);
-                CPQuotedToken *t = [CPQuotedToken content:(NSString *)outputString quotedWith:startQuote name:[self name]];
+                CPQuotedToken *t = [CPQuotedToken content:(__bridge NSString *)outputString quotedWith:startQuote name:[self name]];
                 CFRelease(outputString);
                 return t;
             }

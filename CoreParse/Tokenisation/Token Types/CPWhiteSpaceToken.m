@@ -14,7 +14,7 @@
 
 + (id)whiteSpace:(NSString *)whiteSpace
 {
-    return [[[CPWhiteSpaceToken alloc] initWithWhiteSpace:whiteSpace] autorelease];
+    return [[CPWhiteSpaceToken alloc] initWithWhiteSpace:whiteSpace];
 }
 
 - (id)initWithWhiteSpace:(NSString *)initWhiteSpace
@@ -32,13 +32,6 @@
 - (id)init
 {
     return [self initWithWhiteSpace:@""];
-}
-
-- (void)dealloc
-{
-    [whiteSpace release];
-    
-    [super dealloc];
 }
 
 - (NSString *)name

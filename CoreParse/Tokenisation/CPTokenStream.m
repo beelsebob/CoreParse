@@ -31,7 +31,7 @@ typedef enum
 
 + (id)tokenStreamWithTokens:(NSArray *)tokens
 {
-    return [[[self alloc] initWithTokens:tokens] autorelease];
+    return [[self alloc] initWithTokens:tokens];
 }
 
 - (id)initWithTokens:(NSArray *)initTokens
@@ -40,7 +40,7 @@ typedef enum
     
     if (nil != self)
     {
-        [self setTokens:[[initTokens mutableCopy] autorelease]];
+        [self setTokens:[initTokens mutableCopy]];
     }
     
     return self;
@@ -60,14 +60,6 @@ typedef enum
     return self;
 }
 
-- (void)dealloc
-{
-    [tokens release];
-    [readWriteLock release];
-    
-    [super dealloc];
-}
-
 - (CPToken *)peekToken
 {
     [readWriteLock lockWhenCondition:CPTokenStreamAvailable];
@@ -75,7 +67,7 @@ typedef enum
     
     if ([tokens count] > 0)
     {
-        token = [[[tokens objectAtIndex:0] retain] autorelease];
+        token = [tokens objectAtIndex:0];
     }
     [readWriteLock unlockWithCondition:CPTokenStreamAvailable];
     
@@ -88,7 +80,7 @@ typedef enum
     CPToken *token = nil;
     if ([tokens count] > 0)
     {
-        token = [[[tokens objectAtIndex:0] retain] autorelease];
+        token = [tokens objectAtIndex:0];
         [tokens removeObjectAtIndex:0];
     }
     [self unlockTokenStream];
@@ -98,7 +90,7 @@ typedef enum
 
 - (NSArray *)tokens
 {
-    return [[tokens copy] autorelease];
+    return [tokens copy];
 }
 
 - (void)setTokens:(NSMutableArray *)newTokens
@@ -106,7 +98,6 @@ typedef enum
     [readWriteLock lock];
     if (tokens != newTokens)
     {
-        [tokens release];
         tokens = [newTokens mutableCopy];
     }
     [self unlockTokenStream];

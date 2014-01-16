@@ -39,7 +39,7 @@
 
 + (id)integerRecogniser
 {
-    CPNumberRecogniser *rec = [[[CPNumberRecogniser alloc] init] autorelease];
+    CPNumberRecogniser *rec = [[CPNumberRecogniser alloc] init];
     [rec setRecognisesInts:YES];
     [rec setRecognisesFloats:NO];
     return rec;
@@ -47,7 +47,7 @@
 
 + (id)floatRecogniser
 {
-    CPNumberRecogniser *rec = [[[CPNumberRecogniser alloc] init] autorelease];
+    CPNumberRecogniser *rec = [[CPNumberRecogniser alloc] init];
     [rec setRecognisesInts:NO];
     [rec setRecognisesFloats:YES];
     return rec;
@@ -55,7 +55,7 @@
 
 + (id)numberRecogniser
 {
-    CPNumberRecogniser *rec = [[[CPNumberRecogniser alloc] init] autorelease];
+    CPNumberRecogniser *rec = [[CPNumberRecogniser alloc] init];
     [rec setRecognisesInts:YES];
     [rec setRecognisesFloats:YES];
     return rec;

@@ -14,8 +14,8 @@
 
 @property (readwrite,copy  ) NSArray *rules;
 
-@property (readwrite,retain) NSMutableDictionary *rulesByNonTerminal;
-@property (readwrite,retain) NSMutableDictionary *followCache;
+@property (readwrite,strong) NSMutableDictionary *rulesByNonTerminal;
+@property (readwrite,strong) NSMutableDictionary *followCache;
 
 - (NSArray *)orderedRules;
 

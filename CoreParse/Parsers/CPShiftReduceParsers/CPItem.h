@@ -14,7 +14,7 @@
 @interface CPItem : NSObject <NSCopying>
 {}
 
-@property (readonly,retain) CPRule *rule;
+@property (readonly,strong) CPRule *rule;
 @property (readonly,assign) NSUInteger position;
 
 + (id)itemWithRule:(CPRule *)rule position:(NSUInteger)position;

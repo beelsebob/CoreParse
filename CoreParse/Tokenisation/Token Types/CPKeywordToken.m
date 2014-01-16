@@ -14,7 +14,7 @@
 
 + (id)tokenWithKeyword:(NSString *)keyword
 {
-    return [[[CPKeywordToken alloc] initWithKeyword:keyword] autorelease];
+    return [[CPKeywordToken alloc] initWithKeyword:keyword];
 }
 
 - (id)initWithKeyword:(NSString *)initKeyword
@@ -32,12 +32,6 @@
 - (id)init
 {
     return [self initWithKeyword:@" "];
-}
-
-- (void)dealloc
-{
-    [keyword release];
-    [super dealloc];
 }
 
 - (NSString *)description

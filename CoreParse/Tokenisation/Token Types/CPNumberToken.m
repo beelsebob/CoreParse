@@ -14,7 +14,7 @@
 
 + (id)tokenWithNumber:(NSNumber *)number
 {
-    return [[[CPNumberToken alloc] initWithNumber:number] autorelease];
+    return [[CPNumberToken alloc] initWithNumber:number];
 }
 
 - (id)initWithNumber:(NSNumber *)initNumber
@@ -32,12 +32,6 @@
 - (id)init
 {
     return [self initWithNumber:[NSNumber numberWithInteger:0]];
-}
-
-- (void)dealloc
-{
-    [number release];
-    [super dealloc];
 }
 
 - (NSString *)description

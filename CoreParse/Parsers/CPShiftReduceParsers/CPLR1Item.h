@@ -14,7 +14,7 @@
 @interface CPLR1Item : CPItem
 {}
 
-@property (readonly,retain) CPGrammarSymbol *terminal;
+@property (readonly,strong) CPGrammarSymbol *terminal;
 
 + (id)lr1ItemWithRule:(CPRule *)rule position:(NSUInteger)position terminal:(CPGrammarSymbol *)terminal;
 - (id)initWithRule:(CPRule *)rule position:(NSUInteger)position terminal:(CPGrammarSymbol *)terminal;

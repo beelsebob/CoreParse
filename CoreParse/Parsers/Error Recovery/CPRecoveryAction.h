@@ -30,7 +30,7 @@ typedef enum
 /**
  * The token to insert in the token streem if a CPRecoveryTypeAddToken action is taken.
  */
-@property (readwrite, retain) CPToken *additionalToken;
+@property (readwrite, strong) CPToken *additionalToken;
 
 /**
  * Allocates an initialises a new CPRecoveryAction asking the parser to add a new token to the token stream.

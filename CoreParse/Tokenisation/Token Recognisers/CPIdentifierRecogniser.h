@@ -63,13 +63,13 @@
  * 
  * @see identifierCharacters
  */
-@property (readwrite,retain) NSCharacterSet *initialCharacters;
+@property (readwrite,strong) NSCharacterSet *initialCharacters;
 
 /**
  * Specifies the set of characters the recognised identifiers may contain, other than their first character.
  *
  * @see initialCharacters
  */
-@property (readwrite,retain) NSCharacterSet *identifierCharacters;
+@property (readwrite,strong) NSCharacterSet *identifierCharacters;
 
 @end

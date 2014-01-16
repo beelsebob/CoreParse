@@ -41,7 +41,6 @@
         BOOL succes = [self constructShiftReduceTables];
         if (!succes)
         {
-            [self release];
             return nil;
         }
     }
@@ -73,14 +72,6 @@
     [aCoder encodeObject:[self gotoTable]   forKey:CPShiftReduceParserGotoTableKey];
 }
 
-- (void)dealloc
-{
-    [actionTable release];
-    [gotoTable release];
-    
-    [super dealloc];
-}
-
 - (BOOL)constructShiftReduceTables
 {
     NSLog(@"CPShiftReduceParser is abstract, use one of it's concrete subclasses instead");
@@ -94,137 +85,129 @@
     @try
     {
         NSMutableArray *stateStack = [NSMutableArray arrayWithObject:[CPShiftReduceState shiftReduceStateWithObject:nil state:0]];
-        CPToken *nextToken = [[tokenStream peekToken] retain];
+        CPToken *nextToken = [tokenStream peekToken];
         BOOL hasErrorToken = NO;
         while (1)
         {
-            @autoreleasepool
-            {
-                CPShiftReduceAction *action = [self actionForState:[(CPShiftReduceState *)[stateStack lastObject] state] token:nextToken];
+            CPShiftReduceAction *action = [self actionForState:[(CPShiftReduceState *)[stateStack lastObject] state] token:nextToken];
                 
-                if ([action isShiftAction])
+            if ([action isShiftAction])
+            {
+                [stateStack addObject:[CPShiftReduceState shiftReduceStateWithObject:nextToken state:[action newState]]];
+                if (!hasErrorToken)
                 {
-                    [stateStack addObject:[CPShiftReduceState shiftReduceStateWithObject:nextToken state:[action newState]]];
-                    if (!hasErrorToken)
-                    {
-                        [tokenStream popToken];
-                    }
-                    [nextToken release];
-                    nextToken = [[tokenStream peekToken] retain];
-                    hasErrorToken = NO;
+                    [tokenStream popToken];
                 }
-                else if ([action isReduceAction])
-                {
-                    CPRule *reductionRule = [action reductionRule];
-                    NSUInteger numElements = [[reductionRule rightHandSideElements] count];
-                    NSMutableArray *components = [NSMutableArray arrayWithCapacity:numElements];
-                    NSRange stateStackRange = NSMakeRange([stateStack count] - numElements, numElements);
-                    NSMutableDictionary *tagValues = [NSMutableDictionary dictionary];
-                    [stateStack enumerateObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:stateStackRange]
-                                                  options:NSEnumerationReverse
-                                               usingBlock:^(CPShiftReduceState *state, NSUInteger idx, BOOL *stop)
+                nextToken = [tokenStream peekToken];
+                hasErrorToken = NO;
+            }
+            else if ([action isReduceAction])
+            {
+                CPRule *reductionRule = [action reductionRule];
+                NSUInteger numElements = [[reductionRule rightHandSideElements] count];
+                NSMutableArray *components = [NSMutableArray arrayWithCapacity:numElements];
+                NSRange stateStackRange = NSMakeRange([stateStack count] - numElements, numElements);
+                NSMutableDictionary *tagValues = [NSMutableDictionary dictionary];
+                [stateStack enumerateObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:stateStackRange]
+                                              options:NSEnumerationReverse
+                                           usingBlock:^(CPShiftReduceState *state, NSUInteger idx, BOOL *stop)
+                 {
+                     id o = [state object];
+                     if ([o isRHSItemResult])
                      {
-                         id o = [state object];
-                         if ([o isRHSItemResult])
+                         CPRHSItemResult *r = o;
+                         
+                         if ([o shouldCollapse])
                          {
-                             CPRHSItemResult *r = o;
+                             NSArray *comps = [r contents];
+                             [components insertObjects:comps atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [comps count])]];
                              
-                             if ([o shouldCollapse])
+                             if ([r tagNames] != nil && [comps count] == 1)
                              {
-                                 NSArray *comps = [r contents];
-                                 [components insertObjects:comps atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [comps count])]];
-                                 
-                                 if ([r tagNames] != nil && [comps count] == 1)
+                                 for (NSString *tagName in [r tagNames])
                                  {
-                                     for (NSString *tagName in [r tagNames])
-                                     {
-                                         [tagValues setObject:[comps objectAtIndex:0] forKey:tagName];
-                                     }
+                                     [tagValues setObject:[comps objectAtIndex:0] forKey:tagName];
                                  }
                              }
-                             else
-                             {
-                                 [components insertObject:[r contents] atIndex:0];
-                                 if ([r tagNames] != nil)
-                                 {
-                                     for (NSString *tagName in [r tagNames])
-                                     {
-                                         [tagValues setObject:[r contents] forKey:tagName];
-                                     }
-                                 }
-                             }
-                             
-                             [tagValues addEntriesFromDictionary:[r tagValues]];
                          }
                          else
                          {
-                             [components insertObject:o atIndex:0];
+                             [components insertObject:[r contents] atIndex:0];
+                             if ([r tagNames] != nil)
+                             {
+                                 for (NSString *tagName in [r tagNames])
+                                 {
+                                     [tagValues setObject:[r contents] forKey:tagName];
+                                 }
+                             }
                          }
-                     }];
-                    [stateStack removeObjectsInRange:stateStackRange];
-                    
-                    CPSyntaxTree *tree = [CPSyntaxTree syntaxTreeWithRule:reductionRule children:components tagValues:tagValues];
-                    id result = nil;
-                    
-                    Class c = [reductionRule representitiveClass];
-                    if (nil != c)
-                    {
-                        result = [[(id<CPParseResult>)[c alloc] initWithSyntaxTree:tree] autorelease];
-                    }
-                    
-                    if (nil == result)
-                    {
-                        result = tree;
-                        if (delegateRespondsTo.didProduceSyntaxTree)
-                        {
-                            result = [[self delegate] parser:self didProduceSyntaxTree:tree];
-                        }
-                    }
-                    
-                    NSUInteger newState = [self gotoForState:[(CPShiftReduceState *)[stateStack lastObject] state] rule:reductionRule];
-                    [stateStack addObject:[CPShiftReduceState shiftReduceStateWithObject:result state:newState]];
-                }
-                else if ([action isAccept])
+                         
+                         [tagValues addEntriesFromDictionary:[r tagValues]];
+                     }
+                     else
+                     {
+                         [components insertObject:o atIndex:0];
+                     }
+                 }];
+                [stateStack removeObjectsInRange:stateStackRange];
+                
+                CPSyntaxTree *tree = [CPSyntaxTree syntaxTreeWithRule:reductionRule children:components tagValues:tagValues];
+                id result = nil;
+                
+                Class c = [reductionRule representitiveClass];
+                if (nil != c)
                 {
-                    [nextToken release];
-                    return [(CPShiftReduceState *)[stateStack lastObject] object];
+                    result = [(id<CPParseResult>)[c alloc] initWithSyntaxTree:tree];
                 }
-                else
+                
+                if (nil == result)
                 {
-                    CPRecoveryAction *recoveryAction = [self error:tokenStream expecting:[self acceptableTokenNamesForState:[(CPShiftReduceState *)[stateStack lastObject] state]]];
-                    if (nil == recoveryAction)
+                    result = tree;
+                    if (delegateRespondsTo.didProduceSyntaxTree)
                     {
-                        if ([nextToken isErrorToken] && [stateStack count] > 0)
-                        {
-                            [stateStack removeLastObject];
-                        }
-                        else
-                        {
-                            [nextToken release];
-                            return nil;
-                        }
+                        result = [[self delegate] parser:self didProduceSyntaxTree:tree];
+                    }
+                }
+                
+                NSUInteger newState = [self gotoForState:[(CPShiftReduceState *)[stateStack lastObject] state] rule:reductionRule];
+                [stateStack addObject:[CPShiftReduceState shiftReduceStateWithObject:result state:newState]];
+            }
+            else if ([action isAccept])
+            {
+                return [(CPShiftReduceState *)[stateStack lastObject] object];
+            }
+            else
+            {
+                CPRecoveryAction *recoveryAction = [self error:tokenStream expecting:[self acceptableTokenNamesForState:[(CPShiftReduceState *)[stateStack lastObject] state]]];
+                if (nil == recoveryAction)
+                {
+                    if ([nextToken isErrorToken] && [stateStack count] > 0)
+                    {
+                        [stateStack removeLastObject];
                     }
                     else
                     {
-                        switch ([recoveryAction recoveryType])
-                        {
-                            case CPRecoveryTypeAddToken:
-                                [nextToken release];
-                                nextToken = [[recoveryAction additionalToken] retain];
-                                hasErrorToken = YES;
-                                break;
-                            case CPRecoveryTypeRemoveToken:
-                                [tokenStream popToken];
-                                [nextToken release];
-                                nextToken = [[tokenStream peekToken] retain];
-                                hasErrorToken = NO;
-                                break;
-                            case CPRecoveryTypeBail:
-                                [NSException raise:kCPStopParsingException format:@""];
-                                break;
-                            default:
-                                break;
-                        }
+                        return nil;
+                    }
+                }
+                else
+                {
+                    switch ([recoveryAction recoveryType])
+                    {
+                        case CPRecoveryTypeAddToken:
+                            nextToken = [recoveryAction additionalToken];
+                            hasErrorToken = YES;
+                            break;
+                        case CPRecoveryTypeRemoveToken:
+                            [tokenStream popToken];
+                            nextToken = [tokenStream peekToken];
+                            hasErrorToken = NO;
+                            break;
+                        case CPRecoveryTypeBail:
+                            [NSException raise:kCPStopParsingException format:@""];
+                            break;
+                        default:
+                            break;
                     }
                 }
             }

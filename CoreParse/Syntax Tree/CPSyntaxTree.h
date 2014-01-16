@@ -76,7 +76,7 @@
 /**
  * The rule matched to create this syntax tree.
  */
-@property (readonly,retain) CPRule *rule;
+@property (readonly,strong) CPRule *rule;
 
 /**
  * The children that match the right hand side of the matched rule.

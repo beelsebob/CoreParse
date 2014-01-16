@@ -78,7 +78,6 @@
 		1F893A1F14DEEBFC00316FF7 /* CPRecoveryAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F893A1D14DEEBFC00316FF7 /* CPRecoveryAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F893A2014DEEBFC00316FF7 /* CPRecoveryAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F893A1E14DEEBFC00316FF7 /* CPRecoveryAction.m */; };
 		1F893A2314DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F893A2114DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.h */; };
-		1F893A2414DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F893A2214DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.m */; };
 		1F928180145C11050033BC34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE77D551375AE6F00879A41 /* Foundation.framework */; };
 		1F92818E145C11050033BC34 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F92818D145C11050033BC34 /* SenTestingKit.framework */; };
 		1F928190145C11050033BC34 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F92818F145C11050033BC34 /* UIKit.framework */; };
@@ -137,7 +136,6 @@
 		1FA68DA014DE98C4005519B9 /* CPErrorToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA68D9E14DE98C4005519B9 /* CPErrorToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FA68DA114DE98C4005519B9 /* CPErrorToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA68D9F14DE98C4005519B9 /* CPErrorToken.m */; };
 		1FA68DA514DE9D3D005519B9 /* CPTestErrorHandlingDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA68DA314DE9D3D005519B9 /* CPTestErrorHandlingDelegate.h */; };
-		1FA68DA614DE9D3D005519B9 /* CPTestErrorHandlingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA68DA414DE9D3D005519B9 /* CPTestErrorHandlingDelegate.m */; };
 		1FA798201567DC0E003AC8AE /* Expression.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83A013B731F3006E939D /* Expression.m */; };
 		1FA798221567DC11003AC8AE /* Term.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F83A513B732AC006E939D /* Term.m */; };
 		1FA798231567DC49003AC8AE /* CPTestEvaluatorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB23132BA02C00ACC453 /* CPTestEvaluatorDelegate.m */; };
@@ -148,7 +146,6 @@
 		1FA866B715DFAEBC005350EE /* CPRule+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA866B515DFAEBB005350EE /* CPRule+Internal.h */; };
 		1FA866C015E18F68005350EE /* CPRHSItem+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA866BE15E18F67005350EE /* CPRHSItem+Private.h */; };
 		1FB3EB24132BA02C00ACC453 /* CPTestEvaluatorDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB22132BA02C00ACC453 /* CPTestEvaluatorDelegate.h */; };
-		1FB3EB25132BA02C00ACC453 /* CPTestEvaluatorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB23132BA02C00ACC453 /* CPTestEvaluatorDelegate.m */; };
 		1FB3EB2C132BB2F200ACC453 /* CPLR1Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB2A132BB2E600ACC453 /* CPLR1Parser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FB3EB2D132BB2F200ACC453 /* CPLR1Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB2B132BB2ED00ACC453 /* CPLR1Parser.m */; };
 		1FB3EB30132BB31700ACC453 /* CPLR1Item.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB2E132BB30300ACC453 /* CPLR1Item.h */; };
@@ -157,9 +154,7 @@
 		1FB3EB3B132D096900ACC453 /* CPGrammarSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3EB39132D096800ACC453 /* CPGrammarSymbol.m */; };
 		1FB719A414E00FE300BD033C /* CPErrorToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA68D9F14DE98C4005519B9 /* CPErrorToken.m */; };
 		1FB81322132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB81320132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.h */; };
-		1FB81323132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB81321132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.m */; };
 		1FB81326132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB81324132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.h */; };
-		1FB81327132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB81325132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.m */; };
 		1FC00D5014544EDC00DC8D35 /* CPRHSItemResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC00D4E14544EDC00DC8D35 /* CPRHSItemResult.h */; };
 		1FC00D5114544EDC00DC8D35 /* CPRHSItemResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC00D4F14544EDC00DC8D35 /* CPRHSItemResult.m */; };
 		1FC1827D139ADC800027F597 /* CPGrammarPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC1827B139ADC800027F597 /* CPGrammarPrivate.h */; };
@@ -169,6 +164,49 @@
 		1FC18287139BA47D0027F597 /* CoreParse-template.md in Resources */ = {isa = PBXBuildFile; fileRef = 1FC18286139BA47D0027F597 /* CoreParse-template.md */; };
 		DA2B1DF81566B704002FDBD7 /* CPSTAssertionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2B1DF71566B704002FDBD7 /* CPSTAssertionsTests.m */; };
 		DA2B1DF91566B704002FDBD7 /* CPSTAssertionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2B1DF71566B704002FDBD7 /* CPSTAssertionsTests.m */; };
+		EA457DDD1885C2D4004D8147 /* CPTokeniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8937130463E900537D04 /* CPTokeniser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DDE1885C2DB004D8147 /* CPTokenStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8941130466CF00537D04 /* CPTokenStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DDF1885C2DF004D8147 /* CPTokenRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683881306AA8500407491 /* CPTokenRecogniser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DE01885C2E2004D8147 /* CPKeywordRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683861306AA8500407491 /* CPKeywordRecogniser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DE11885C2E4004D8147 /* CPNumberRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683941306BF6200407491 /* CPNumberRecogniser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DE21885C2EA004D8147 /* CPWhiteSpaceRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683A01306D66300407491 /* CPWhiteSpaceRecogniser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DE31885C2ED004D8147 /* CPIdentifierRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1DFCDF1306E3C300B22855 /* CPIdentifierRecogniser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DE41885C2EF004D8147 /* CPQuotedRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1DFCF11307D2C500B22855 /* CPQuotedRecogniser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DE51885C2F3004D8147 /* CPToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E894A1306795500537D04 /* CPToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DE61885C2F5004D8147 /* CPEOFToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683901306B71C00407491 /* CPEOFToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DE71885C2F7004D8147 /* CPErrorToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA68D9E14DE98C4005519B9 /* CPErrorToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DE81885C2F9004D8147 /* CPKeywordToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F46838C1306B45400407491 /* CPKeywordToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DE91885C2FC004D8147 /* CPNumberToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683981306C22800407491 /* CPNumberToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DEA1885C300004D8147 /* CPWhiteSpaceToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683A41306D7CB00407491 /* CPWhiteSpaceToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DEB1885C302004D8147 /* CPIdentifierToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1DFCE31306E8E800B22855 /* CPIdentifierToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DEC1885C305004D8147 /* CPQuotedToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1DFCED1307D18900B22855 /* CPQuotedToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DED1885C319004D8147 /* CPGrammar.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F50A93C1308604A00C50D7D /* CPGrammar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DEE1885C31E004D8147 /* CPRule.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F530B8F1322813E00F52EB5 /* CPRule.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DEF1885C325004D8147 /* CPSyntaxTree.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F530B8513216A1A00F52EB5 /* CPSyntaxTree.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DF01885C329004D8147 /* CPParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F530B7C13215A6F00F52EB5 /* CPParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DF11885C33F004D8147 /* CPLALR1Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F6D448E1348CC9500E982C7 /* CPLALR1Parser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DF21885C342004D8147 /* CPLR1Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB2A132BB2E600ACC453 /* CPLR1Parser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DF31885C351004D8147 /* CPSLRParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3881FF1323DB49000C8876 /* CPSLRParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DF41885C386004D8147 /* CPShiftReduceParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3881DA1322ACE7000C8876 /* CPShiftReduceParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DF51885C38E004D8147 /* CPRecoveryAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F893A1D14DEEBFC00316FF7 /* CPRecoveryAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DF61885C3B2004D8147 /* CPGrammarSymbol.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB38132D096700ACC453 /* CPGrammarSymbol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DF71885C3B8004D8147 /* CPJSONParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F45A2E213422E1300092D78 /* CPJSONParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DF81885C3D0004D8147 /* CoreParse.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8934130463D000537D04 /* CoreParse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA457DF91885C48B004D8147 /* CPGrammarPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC1827B139ADC800027F597 /* CPGrammarPrivate.h */; };
+		EA457DFA1885C491004D8147 /* CPGrammarInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC18280139AE3800027F597 /* CPGrammarInternal.h */; };
+		EA457DFB1885C497004D8147 /* CPRule+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA866B515DFAEBB005350EE /* CPRule+Internal.h */; };
+		EA457DFC1885C49E004D8147 /* CPRHSItem+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA866BE15E18F67005350EE /* CPRHSItem+Private.h */; };
+		EA457DFD1885C4A3004D8147 /* CPRHSItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9F83AA13B7CAB9006E939D /* CPRHSItem.h */; };
+		EA457DFE1885C4A7004D8147 /* CPRHSItemResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC00D4E14544EDC00DC8D35 /* CPRHSItemResult.h */; };
+		EA457DFF1885C4AF004D8147 /* CPShiftReduceAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3881DF1322ADC9000C8876 /* CPShiftReduceAction.h */; };
+		EA457E001885C4B1004D8147 /* CPShiftReduceState.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3881E31322AEE8000C8876 /* CPShiftReduceState.h */; };
+		EA457E011885C4B6004D8147 /* CPShiftReduceActionTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3881EB1322B669000C8876 /* CPShiftReduceActionTable.h */; };
+		EA457E021885C4B9004D8147 /* CPShiftReduceGotoTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3881EF1322B69E000C8876 /* CPShiftReduceGotoTable.h */; };
+		EA457E031885C4BD004D8147 /* CPItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3882071323F75E000C8876 /* CPItem.h */; };
+		EA457E041885C4C0004D8147 /* CPLR1Item.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB3EB2E132BB30300ACC453 /* CPLR1Item.h */; };
+		EA457E051885C4C4004D8147 /* CPShiftReduceParserProtectedMethods.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3882031323DDD6000C8876 /* CPShiftReduceParserProtectedMethods.h */; };
+		EA457E061885C4DA004D8147 /* NSSetFunctional.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F38820B132432A1000C8876 /* NSSetFunctional.h */; };
+		EA457E071885C4DE004D8147 /* NSArray+Functional.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA6430515E2C5130004FCD3 /* NSArray+Functional.h */; };
 		EA5FF42E1884CC6600BEEF03 /* CPTestErrorEvaluatorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F893A2214DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.m */; };
 		EA5FF42F1884CC7100BEEF03 /* CPTestErrorHandlingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA68DA414DE9D3D005519B9 /* CPTestErrorHandlingDelegate.m */; };
 		EA5FF4301884FFDC00BEEF03 /* Expression2.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA4386C162F515C00B92704 /* Expression2.m */; };
@@ -692,6 +730,49 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA457DF81885C3D0004D8147 /* CoreParse.h in Headers */,
+				EA457DDD1885C2D4004D8147 /* CPTokeniser.h in Headers */,
+				EA457E041885C4C0004D8147 /* CPLR1Item.h in Headers */,
+				EA457E051885C4C4004D8147 /* CPShiftReduceParserProtectedMethods.h in Headers */,
+				EA457DDE1885C2DB004D8147 /* CPTokenStream.h in Headers */,
+				EA457DDF1885C2DF004D8147 /* CPTokenRecogniser.h in Headers */,
+				EA457DFA1885C491004D8147 /* CPGrammarInternal.h in Headers */,
+				EA457DE01885C2E2004D8147 /* CPKeywordRecogniser.h in Headers */,
+				EA457DFF1885C4AF004D8147 /* CPShiftReduceAction.h in Headers */,
+				EA457DE11885C2E4004D8147 /* CPNumberRecogniser.h in Headers */,
+				EA457E031885C4BD004D8147 /* CPItem.h in Headers */,
+				EA457DE21885C2EA004D8147 /* CPWhiteSpaceRecogniser.h in Headers */,
+				EA457DE31885C2ED004D8147 /* CPIdentifierRecogniser.h in Headers */,
+				EA457E021885C4B9004D8147 /* CPShiftReduceGotoTable.h in Headers */,
+				EA457DE41885C2EF004D8147 /* CPQuotedRecogniser.h in Headers */,
+				EA457DE51885C2F3004D8147 /* CPToken.h in Headers */,
+				EA457DE61885C2F5004D8147 /* CPEOFToken.h in Headers */,
+				EA457DE71885C2F7004D8147 /* CPErrorToken.h in Headers */,
+				EA457DE81885C2F9004D8147 /* CPKeywordToken.h in Headers */,
+				EA457DE91885C2FC004D8147 /* CPNumberToken.h in Headers */,
+				EA457DEA1885C300004D8147 /* CPWhiteSpaceToken.h in Headers */,
+				EA457DEB1885C302004D8147 /* CPIdentifierToken.h in Headers */,
+				EA457E011885C4B6004D8147 /* CPShiftReduceActionTable.h in Headers */,
+				EA457DFD1885C4A3004D8147 /* CPRHSItem.h in Headers */,
+				EA457DFB1885C497004D8147 /* CPRule+Internal.h in Headers */,
+				EA457E061885C4DA004D8147 /* NSSetFunctional.h in Headers */,
+				EA457E001885C4B1004D8147 /* CPShiftReduceState.h in Headers */,
+				EA457DEC1885C305004D8147 /* CPQuotedToken.h in Headers */,
+				EA457DED1885C319004D8147 /* CPGrammar.h in Headers */,
+				EA457DEE1885C31E004D8147 /* CPRule.h in Headers */,
+				EA457DEF1885C325004D8147 /* CPSyntaxTree.h in Headers */,
+				EA457DF01885C329004D8147 /* CPParser.h in Headers */,
+				EA457DF11885C33F004D8147 /* CPLALR1Parser.h in Headers */,
+				EA457DF21885C342004D8147 /* CPLR1Parser.h in Headers */,
+				EA457DF31885C351004D8147 /* CPSLRParser.h in Headers */,
+				EA457DF41885C386004D8147 /* CPShiftReduceParser.h in Headers */,
+				EA457DF51885C38E004D8147 /* CPRecoveryAction.h in Headers */,
+				EA457DFE1885C4A7004D8147 /* CPRHSItemResult.h in Headers */,
+				EA457E071885C4DE004D8147 /* NSArray+Functional.h in Headers */,
+				EA457DF61885C3B2004D8147 /* CPGrammarSymbol.h in Headers */,
+				EA457DF71885C3B8004D8147 /* CPJSONParser.h in Headers */,
+				EA457DFC1885C49E004D8147 /* CPRHSItem+Private.h in Headers */,
+				EA457DF91885C48B004D8147 /* CPGrammarPrivate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -918,12 +999,9 @@
 				1F3882021323DB4A000C8876 /* CPSLRParser.m in Sources */,
 				1F38820A1323F760000C8876 /* CPItem.m in Sources */,
 				1F38820E132432B2000C8876 /* NSSetFunctional.m in Sources */,
-				1FB3EB25132BA02C00ACC453 /* CPTestEvaluatorDelegate.m in Sources */,
 				1FB3EB2D132BB2F200ACC453 /* CPLR1Parser.m in Sources */,
 				1FB3EB31132BB31700ACC453 /* CPLR1Item.m in Sources */,
 				1FB3EB3B132D096900ACC453 /* CPGrammarSymbol.m in Sources */,
-				1FB81323132FEDAF0095982D /* CPTestWhiteSpaceIgnoringDelegate.m in Sources */,
-				1FB81327132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.m in Sources */,
 				1F45A2E513422E1300092D78 /* CPJSONParser.m in Sources */,
 				1F6D44911348CC9600E982C7 /* CPLALR1Parser.m in Sources */,
 				1FC1827E139ADC800027F597 /* CPGrammarPrivate.m in Sources */,
@@ -931,9 +1009,7 @@
 				1F9F83AD13B7CABA006E939D /* CPRHSItem.m in Sources */,
 				1FC00D5114544EDC00DC8D35 /* CPRHSItemResult.m in Sources */,
 				1FA68DA114DE98C4005519B9 /* CPErrorToken.m in Sources */,
-				1FA68DA614DE9D3D005519B9 /* CPTestErrorHandlingDelegate.m in Sources */,
 				1F893A2014DEEBFC00316FF7 /* CPRecoveryAction.m in Sources */,
-				1F893A2414DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.m in Sources */,
 				1FA6430815E2C5130004FCD3 /* NSArray+Functional.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1059,8 +1135,9 @@
 		1F0E891B130462F300537D04 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1100,8 +1177,9 @@
 		1F0E891C130462F300537D04 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1140,6 +1218,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1166,6 +1246,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "CoreParse/CoreParse-Info.plist";
 				INSTALL_PATH = "@rpath";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_AFTER_BUILD = YES;
@@ -1177,6 +1258,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1203,6 +1286,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "CoreParse/CoreParse-Info.plist";
 				INSTALL_PATH = "@rpath";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_AFTER_BUILD = YES;
@@ -1214,6 +1298,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1222,11 +1308,13 @@
 				GCC_PREFIX_HEADER = "CoreParseTests/CoreParseTests-Prefix.pch";
 				INFOPLIST_FILE = "CoreParseTests/CoreParseTests-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SenTestingKit,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -1235,6 +1323,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
@@ -1243,11 +1333,13 @@
 				GCC_PREFIX_HEADER = "CoreParseTests/CoreParseTests-Prefix.pch";
 				INFOPLIST_FILE = "CoreParseTests/CoreParseTests-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SenTestingKit,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
@@ -1256,7 +1348,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/iOSCoreParse.dst;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1267,10 +1359,13 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = CoreParse;
 				PRODUCT_NAME = CoreParse;
+				PUBLIC_HEADERS_FOLDER_PATH = CoreParse;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1282,15 +1377,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				DSTROOT = /tmp/iOSCoreParse.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreParse/CoreParse-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = CoreParse;
 				PRODUCT_NAME = CoreParse;
+				PUBLIC_HEADERS_FOLDER_PATH = CoreParse;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1303,7 +1401,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1334,7 +1431,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1360,7 +1456,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -1375,7 +1470,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
