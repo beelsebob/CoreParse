@@ -99,19 +99,11 @@
                                   @"15 boolean  ::= 'true';"
                                   @"16 boolean  ::= 'false';"
                                                        error:NULL];
-        jsonParser = [[CPSLRParser parserWithGrammar:jsonGrammar] retain];
+        jsonParser = [CPSLRParser parserWithGrammar:jsonGrammar];
         [jsonParser setDelegate:self];
     }
     
     return self;
-}
-
-- (void)dealloc
-{
-    [jsonTokeniser release];
-    [jsonParser release];
-    
-    [super dealloc];
 }
 
 - (id<NSObject>)parse:(NSString *)json

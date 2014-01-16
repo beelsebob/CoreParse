@@ -127,7 +127,7 @@ typedef struct
 /**
  * The parser's delegate.
  */
-@property (readwrite,assign, nonatomic) id<CPParserDelegate> delegate;
+@property (readwrite, strong, nonatomic) id<CPParserDelegate> delegate;
 
 ///---------------------------------------------------------------------------------------
 /// @name Finding out about the parsed Grammar 
@@ -136,7 +136,7 @@ typedef struct
 /**
  * The parser's grammar.
  */
-@property (readonly,retain) CPGrammar *grammar;
+@property (readonly,strong) CPGrammar *grammar;
 
 ///---------------------------------------------------------------------------------------
 /// @name Parsing a Token Stream.

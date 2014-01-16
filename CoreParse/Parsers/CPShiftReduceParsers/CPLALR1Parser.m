@@ -35,63 +35,57 @@
     NSArray *allNonTerminalNames = [[self grammar] allNonTerminalNames];
     NSString *startSymbol = [aug start];
     
-    [self setActionTable:[[[CPShiftReduceActionTable alloc] initWithCapacity:itemCount] autorelease]];
-    [self setGotoTable:  [[[CPShiftReduceGotoTable   alloc] initWithCapacity:itemCount] autorelease]];
+    [self setActionTable:[[CPShiftReduceActionTable alloc] initWithCapacity:itemCount]];
+    [self setGotoTable:  [[CPShiftReduceGotoTable   alloc] initWithCapacity:itemCount]];
     
     NSUInteger idx = 0;
     for (NSSet *kernel in kernels)
     {
-        @autoreleasepool
+        NSSet *itemsSet = [aug lr1Closure:kernel];
+        for (CPLR1Item *item in itemsSet)
         {
-            NSSet *itemsSet = [aug lr1Closure:kernel];
-            for (CPLR1Item *item in itemsSet)
+            CPGrammarSymbol *next = [item nextSymbol];
+            if (nil == next)
             {
-                @autoreleasepool
+                if ([[[item rule] name] isEqualToString:startSymbol])
                 {
-                    CPGrammarSymbol *next = [item nextSymbol];
-                    if (nil == next)
+                    BOOL success = [[self actionTable] setAction:[CPShiftReduceAction acceptAction] forState:idx name:@"EOF"];
+                    if (!success)
                     {
-                        if ([[[item rule] name] isEqualToString:startSymbol])
-                        {
-                            BOOL success = [[self actionTable] setAction:[CPShiftReduceAction acceptAction] forState:idx name:@"EOF"];
-                            if (!success)
-                            {
-                                NSLog(@"Could not insert shift in action table for state %lu, token %@", (unsigned long)idx, @"EOF");
-                                return NO;
-                            }
-                        }
-                        else
-                        {
-                            BOOL success = [[self actionTable] setAction:[CPShiftReduceAction reduceAction:[item rule]] forState:idx name:[[item terminal] name]];
-                            if (!success)
-                            {
-                                NSLog(@"Could not insert reduce in action table for state %lu, token %@", (unsigned long)idx, [[item terminal] name]);
-                                return NO;
-                            }
-                        }
+                        NSLog(@"Could not insert shift in action table for state %lu, token %@", (unsigned long)idx, @"EOF");
+                        return NO;
                     }
-                    else if ([next isTerminal])
+                }
+                else
+                {
+                    BOOL success = [[self actionTable] setAction:[CPShiftReduceAction reduceAction:[item rule]] forState:idx name:[[item terminal] name]];
+                    if (!success)
                     {
-                        NSSet *g = [aug lr0GotoKernelWithItems:itemsSet symbol:next];
-                        NSSet *lr0G = [g map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }];
-                        NSUInteger indx = 0;
-                        NSUInteger ix = NSNotFound;
-                        for (NSSet *lr0Kernel in lr0Kernels)
-                        {
-                            if ([lr0Kernel isEqualToSet:lr0G])
-                            {
-                                ix = indx;
-                                break;
-                            }
-                            indx++;
-                        }
-                        BOOL success = [[self actionTable] setAction:[CPShiftReduceAction shiftAction:ix] forState:idx name:[next name]];
-                        if (!success)
-                        {
-                            NSLog(@"Could not insert shift in action table for state %lu, token %@", (unsigned long)idx, [next name]);
-                            return NO;
-                        }
+                        NSLog(@"Could not insert reduce in action table for state %lu, token %@", (unsigned long)idx, [[item terminal] name]);
+                        return NO;
                     }
+                }
+            }
+            else if ([next isTerminal])
+            {
+                NSSet *g = [aug lr0GotoKernelWithItems:itemsSet symbol:next];
+                NSSet *lr0G = [g map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }];
+                NSUInteger indx = 0;
+                NSUInteger ix = NSNotFound;
+                for (NSSet *lr0Kernel in lr0Kernels)
+                {
+                    if ([lr0Kernel isEqualToSet:lr0G])
+                    {
+                        ix = indx;
+                        break;
+                    }
+                    indx++;
+                }
+                BOOL success = [[self actionTable] setAction:[CPShiftReduceAction shiftAction:ix] forState:idx name:[next name]];
+                if (!success)
+                {
+                    NSLog(@"Could not insert shift in action table for state %lu, token %@", (unsigned long)idx, [next name]);
+                    return NO;
                 }
             }
             

@@ -116,7 +116,7 @@
 /**
  * Specifies the name of the non-terminal this rule describes.
  */
-@property (readwrite, retain) NSString *name;
+@property (readwrite, strong) NSString *name;
 
 /**
  * Specifies the right hand side of the rule.

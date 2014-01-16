@@ -52,14 +52,6 @@
     return other;
 }
 
-- (void)dealloc
-{
-    [_alternatives release];
-    [_tags release];
-    
-    [super dealloc];
-}
-
 - (NSString *)description
 {
     NSMutableString *desc = [NSMutableString string];
@@ -101,14 +93,13 @@
 
 - (NSSet *)tags
 {
-    return [[_tags retain] autorelease];
+    return _tags;
 }
 
 - (void)setTags:(NSSet *)tags
 {
     if (tags != _tags)
     {
-        [_tags release];
         _tags = [tags mutableCopy];
     }
 }
@@ -162,7 +153,7 @@
                 {
                     return nil;
                 }
-                NSMutableSet *duplicateTags = [[tagNamesInAlternative mutableCopy] autorelease];
+                NSMutableSet *duplicateTags = [tagNamesInAlternative mutableCopy];
                 [duplicateTags intersectSet:newTagNames];
                 if ([duplicateTags count] > 0)
                 {
@@ -184,7 +175,7 @@
                     {
                         if (NULL != err)
                         {
-                            NSMutableSet *intersection = [[tagNamesInAlternative mutableCopy] autorelease];
+                            NSMutableSet *intersection = [tagNamesInAlternative mutableCopy];
                             [intersection intersectSet:tns];
                             *err = [NSError errorWithDomain:CPEBNFParserErrorDomain
                                                        code:CPErrorCodeDuplicateTag

@@ -14,7 +14,7 @@
 
 + (id)errorWithMessage:(NSString *)errorMessage
 {
-    return [[[self alloc] initWithMesage:errorMessage] autorelease];
+    return [[self alloc] initWithMesage:errorMessage];
 }
 
 - (id)initWithMesage:(NSString *)initErrorMessage
@@ -27,13 +27,6 @@
     }
     
     return self;
-}
-
-- (void)dealloc
-{
-    [errorMessage release];
-    
-    [super dealloc];
 }
 
 - (NSString *)name

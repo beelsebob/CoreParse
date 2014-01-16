@@ -25,7 +25,7 @@ typedef struct
 @property (readwrite, retain) NSMutableArray *tokenRecognisers;
 
 - (void)addToken:(CPToken *)tok toStream:(CPTokenStream *)stream;
-- (void)advanceLineNumber:(NSUInteger *)ln columnNumber:(NSUInteger *)cn withInput:(NSString *)input range:(CFRange)range;
+- (void)advanceLineNumber:(NSUInteger *)ln columnNumber:(NSUInteger *)cn withInput:(NSString *)input range:(NSRange)range;
 
 @end
 
@@ -68,13 +68,6 @@ typedef struct
     [aCoder encodeObject:[self tokenRecognisers] forKey:CPTokeniserTokenRecognisersKey];
 }
 
-- (void)dealloc
-{
-    [tokenRecognisers release];
-    
-    [super dealloc];
-}
-
 - (void)addTokenRecogniser:(id<CPTokenRecogniser>)recogniser
 {
     [[self tokenRecognisers] addObject:recogniser];
@@ -102,7 +95,7 @@ typedef struct
 
 - (CPTokenStream *)tokenise:(NSString *)input
 {
-    CPTokenStream *stream = [[[CPTokenStream alloc] init] autorelease];
+    CPTokenStream *stream = [[CPTokenStream alloc] init];
     
     [self tokenise:input into:stream];
     
@@ -138,7 +131,7 @@ typedef struct
                         if ([delegate tokeniser:self shouldConsumeToken:tok])
                         {
                             [self addToken:tok toStream:stream];
-                            [self advanceLineNumber:&currentLineNumber columnNumber:&currentColumnNumber withInput:input range:CFRangeMake(lastTokenOffset, currentTokenOffset - lastTokenOffset)];
+                            [self advanceLineNumber:&currentLineNumber columnNumber:&currentColumnNumber withInput:input range:NSMakeRange(lastTokenOffset, currentTokenOffset - lastTokenOffset)];
                             recognised = YES;
                             break;
                         }
@@ -150,7 +143,7 @@ typedef struct
                     else
                     {
                         [self addToken:tok toStream:stream];
-                        [self advanceLineNumber:&currentLineNumber columnNumber:&currentColumnNumber withInput:input range:CFRangeMake(lastTokenOffset, currentTokenOffset - lastTokenOffset)];
+                        [self advanceLineNumber:&currentLineNumber columnNumber:&currentColumnNumber withInput:input range:NSMakeRange(lastTokenOffset, currentTokenOffset - lastTokenOffset)];
                         recognised = YES;
                         break;
                     }
@@ -209,27 +202,29 @@ typedef struct
     }
 }
 
-static CFCharacterSetRef newlineCharset = nil;
+static NSCharacterSet *newlineCharset = nil;
 
-- (void)advanceLineNumber:(NSUInteger *)ln columnNumber:(NSUInteger *)cn withInput:(NSString *)input range:(CFRange)range
+- (void)advanceLineNumber:(NSUInteger *)ln columnNumber:(NSUInteger *)cn withInput:(NSString *)input range:(NSRange)range
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^
     {
-        newlineCharset = (CFCharacterSetRef)[[NSCharacterSet characterSetWithCharactersInString:@"\n\r"] retain];
+        newlineCharset = [NSCharacterSet characterSetWithCharactersInString:@"\n\r"];
     });
     
-    CFRange searchRange = range;
-    NSUInteger rangeEnd = range.location + range.length;
-    CFRange foundRange;
-    BOOL found = CFStringFindCharacterFromSet((CFStringRef)input, newlineCharset, searchRange, 0L, &foundRange);
+    NSRange searchRange = range;
+    NSUInteger rangeEnd = NSMaxRange(searchRange);
+    NSRange foundRange;
+    foundRange = [input rangeOfCharacterFromSet:newlineCharset options:0 range:searchRange];
+    
     NSUInteger lastNewLineLocation = NSNotFound;
-    while (found)
+    
+    while (foundRange.location != NSNotFound)
     {
-        *ln += foundRange.length;
-        lastNewLineLocation = foundRange.location + foundRange.length;
-        searchRange = CFRangeMake(lastNewLineLocation, rangeEnd - lastNewLineLocation);
-        found = CFStringFindCharacterFromSet((CFStringRef)input, newlineCharset, searchRange, 0L, &foundRange);
+        *ln += 1;
+        lastNewLineLocation = foundRange.location + 1;
+        searchRange = NSMakeRange(lastNewLineLocation, rangeEnd - lastNewLineLocation);
+        foundRange = [input rangeOfCharacterFromSet:newlineCharset options:0 range:searchRange];
     }
     if (lastNewLineLocation != NSNotFound)
     {

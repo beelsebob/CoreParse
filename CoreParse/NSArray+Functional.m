@@ -12,23 +12,18 @@
 
 - (NSArray *)map:(id(^)(id obj))block
 {
-    NSUInteger c = [self count];
-    id *resultingObjects = malloc(c * sizeof(id));
+    NSMutableArray *resultingObjects = [NSMutableArray arrayWithCapacity:[self count]];
     
-    NSUInteger nonNilCount = 0;
     for (id obj in self)
     {
         id r = block(obj);
         if (nil != r)
         {
-            resultingObjects[nonNilCount] = r;
-            nonNilCount++;
+            [resultingObjects addObject:r];
         }
     }
     
-    NSArray *a = [NSArray arrayWithObjects:resultingObjects count:nonNilCount];
-    free(resultingObjects);
-    return a;
+    return resultingObjects;
 }
 
 @end

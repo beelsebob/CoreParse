@@ -82,11 +82,11 @@
 /**
  * The keyword that the recogniser should attempt to recognise.
  */
-@property (readwrite,retain,nonatomic) NSString *keyword;
+@property (readwrite,strong,nonatomic) NSString *keyword;
 
 /**
  * A set of characters that may not follow the keyword.
  */
-@property (readwrite,retain,nonatomic) NSCharacterSet *invalidFollowingCharacters;
+@property (readwrite,strong,nonatomic) NSCharacterSet *invalidFollowingCharacters;
 
 @end

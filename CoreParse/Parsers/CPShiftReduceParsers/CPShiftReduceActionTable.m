@@ -14,7 +14,7 @@
 
 @implementation CPShiftReduceActionTable
 {
-    NSMutableDictionary **table;
+    NSMutableArray *table;
     NSUInteger capacity;
 }
 
@@ -25,10 +25,11 @@
     if (nil != self)
     {
         capacity = initCapacity;
-        table = malloc(capacity * sizeof(NSMutableDictionary *));
+        table = [NSMutableArray arrayWithCapacity:capacity];
+        
         for (NSUInteger buildingState = 0; buildingState < capacity; buildingState++)
         {
-            table[buildingState] = [[NSMutableDictionary alloc] init];
+            [table addObject:[[NSMutableDictionary alloc] init]];
         }
     }
     
@@ -43,14 +44,7 @@
     
     if (nil != self)
     {
-        NSArray *rows = [aDecoder decodeObjectForKey:CPShiftReduceActionTableTableKey];
-        capacity = [rows count];
-        table = malloc(capacity * sizeof(NSMutableDictionary *));
-        [rows getObjects:table range:NSMakeRange(0, capacity)];
-        for (NSUInteger i = 0; i < capacity; i++)
-        {
-            [table[i] retain];
-        }
+        table = [aDecoder decodeObjectForKey:CPShiftReduceActionTableTableKey];
     }
     
     return self;
@@ -58,18 +52,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-    [aCoder encodeObject:[NSArray arrayWithObjects:table count:capacity] forKey:CPShiftReduceActionTableTableKey];
-}
-
-- (void)dealloc
-{
-    for (NSUInteger state = 0; state < capacity; state++)
-    {
-        [table[state] release];
-    }
-    free(table);
-    
-    [super dealloc];
+    [aCoder encodeObject:table forKey:CPShiftReduceActionTableTableKey];
 }
 
 - (BOOL)setAction:(CPShiftReduceAction *)action forState:(NSUInteger)state name:(NSString *)token
@@ -85,20 +68,23 @@
 
 - (CPShiftReduceAction *)actionForState:(NSUInteger)state token:(CPToken *)token
 {
-    return [table[state] objectForKey:token.name];
+    NSMutableDictionary *row = table[state];
+    return [row objectForKey:token.name];
 }
 
 - (NSSet *)acceptableTokenNamesForState:(NSUInteger)state
 {
     NSMutableSet *toks = [NSMutableSet set];
-    for (NSString *tok in table[state])
+    NSMutableDictionary *row = table[state];
+    
+    for (NSString *tok in row)
     {
-        if (nil != [table[state] objectForKey:tok])
+        if (nil != [row objectForKey:tok])
         {
             [toks addObject:tok];
         }
     }
-    return [[toks copy] autorelease];
+    return [toks copy];
 }
 
 - (NSString *)description
