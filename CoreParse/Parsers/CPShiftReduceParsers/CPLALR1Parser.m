@@ -30,7 +30,7 @@
 {
     CPGrammar *aug = [[self grammar] augmentedGrammar];
     NSArray *kernels = [self kernelsForGrammar:aug];
-    NSArray *lr0Kernels = [kernels map:^ NSSet * (NSSet *s) { return [s map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }]; }];
+    NSArray *lr0Kernels = [kernels cp_map:^ NSSet * (NSSet *s) { return [s cp_map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }]; }];
     NSUInteger itemCount = [kernels count];
     NSArray *allNonTerminalNames = [[self grammar] allNonTerminalNames];
     NSString *startSymbol = [aug start];
@@ -73,7 +73,7 @@
                     else if ([next isTerminal])
                     {
                         NSSet *g = [aug lr0GotoKernelWithItems:itemsSet symbol:next];
-                        NSSet *lr0G = [g map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }];
+                        NSSet *lr0G = [g cp_map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }];
                         NSUInteger indx = 0;
                         NSUInteger ix = NSNotFound;
                         for (NSSet *lr0Kernel in lr0Kernels)
@@ -98,7 +98,7 @@
             for (NSString *nonTerminalName in allNonTerminalNames)
             {
                 NSSet *g = [aug lr0GotoKernelWithItems:itemsSet symbol:[CPGrammarSymbol nonTerminalWithName:nonTerminalName]];
-                NSSet *lr0G = [g map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }];
+                NSSet *lr0G = [g cp_map:^ id (CPLR1Item *i) { return [CPItem itemWithRule:[i rule] position:[i position]]; }];
                 NSUInteger indx = 0;
                 NSUInteger gotoIndex = NSNotFound;
                 for (NSSet *lr0Kernel in lr0Kernels)
