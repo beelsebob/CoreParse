@@ -69,7 +69,7 @@
     long inputLength = [tokenString length];
     NSRange searchRange = NSMakeRange(*tokenPosition, inputLength - *tokenPosition);
     NSTextCheckingResult* result = [[self regexp] firstMatchInString:tokenString options:0 range:searchRange];
-    if (nil != result && nil != matchHandler && result.range.location == *tokenPosition)
+    if (nil != result && nil != matchHandler && result.range.location == *tokenPosition && result.range.length > 0)
     {
         CPToken* token = matchHandler(tokenString, result);
         if (token)
