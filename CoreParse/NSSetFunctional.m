@@ -11,7 +11,7 @@
 
 @implementation NSSet(Functional)
 
-- (NSSet *)map:(id(^)(id obj))block
+- (NSSet *)cp_map:(id(^)(id obj))block
 {
     NSUInteger c = [self count];
     id *resultingObjects = malloc(c * sizeof(id));

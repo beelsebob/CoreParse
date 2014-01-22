@@ -84,7 +84,7 @@
              {
                  return [symbol isEqualToGrammarSymbol:[item nextSymbol]];
              }]
-            map:^ id (CPItem *item)
+            cp_map:^ id (CPItem *item)
             {
                 return [item itemByMovingDotRight];
             }];
@@ -101,7 +101,7 @@
     {
         NSSet *kernel = [processingQueue objectAtIndex:0];
         NSSet *itemSet = [self lr0Closure:kernel];
-        NSSet *validNexts = [itemSet map:^ id (CPItem *item) { return [item nextSymbol]; }];
+        NSSet *validNexts = [itemSet cp_map:^ id (CPItem *item) { return [item nextSymbol]; }];
         
         for (CPGrammarSymbol *s in validNexts)
         {
@@ -163,7 +163,7 @@
              {
                  return [symbol isEqualToGrammarSymbol:[item nextSymbol]];
              }]
-            map:^ id (CPItem *item)
+            cp_map:^ id (CPItem *item)
             {
                 return [item itemByMovingDotRight];
             }];

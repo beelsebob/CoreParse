@@ -10,7 +10,7 @@
 
 @implementation NSArray (Functional)
 
-- (NSArray *)map:(id(^)(id obj))block
+- (NSArray *)cp_map:(id(^)(id obj))block
 {
     NSUInteger c = [self count];
     id *resultingObjects = malloc(c * sizeof(id));

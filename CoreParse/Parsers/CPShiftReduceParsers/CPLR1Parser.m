@@ -104,7 +104,7 @@
     {
         NSSet *kernels = [processingQueue objectAtIndex:0];
         NSSet *itemSet = [aug lr1Closure:kernels];
-        NSSet *validNexts = [itemSet map:^ id (CPItem *item)
+        NSSet *validNexts = [itemSet cp_map:^ id (CPItem *item)
                              {
                                  return [item nextSymbol];
                              }];
