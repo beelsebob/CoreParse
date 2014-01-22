@@ -31,7 +31,7 @@
 
 + (id)recogniserForRegexp:(NSRegularExpression *)regexp matchHandler:(CPRegexpKeywordRecogniserMatchHandler)initMatchHandler
 {
-    return [[self alloc] initWithRegexp:regexp matchHandler:initMatchHandler];
+    return [[[self alloc] initWithRegexp:regexp matchHandler:initMatchHandler] autorelease];
 }
 
 - (void)dealloc
