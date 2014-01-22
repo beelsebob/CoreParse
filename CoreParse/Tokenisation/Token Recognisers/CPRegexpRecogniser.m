@@ -10,29 +10,33 @@
 #import "CPToken.h"
 #import "CPKeywordToken.h"
 
+@interface CPRegexpRecogniser()
+@property (nonatomic, copy) CPRegexpKeywordRecogniserMatchHandler matchHandler;
+@end
+
 @implementation CPRegexpRecogniser
 
 @synthesize regexp;
-@synthesize callback;
+@synthesize matchHandler;
 
-- (id)initWithRegexp:(NSRegularExpression *)initRegexp callback:(CPRegexpKeywordRecogniserCallbackBlock)initCallback
+- (id)initWithRegexp:(NSRegularExpression *)initRegexp matchHandler:(CPRegexpKeywordRecogniserMatchHandler)initMatchHandler
 {
     self = [super init];
     if (self) {
         regexp = initRegexp;
-        callback = initCallback;
+        matchHandler = initMatchHandler;
     }
     return self;
 }
 
-+ (id)recogniserForRegexp:(NSRegularExpression *)regexp callback:(CPRegexpKeywordRecogniserCallbackBlock)callback
++ (id)recogniserForRegexp:(NSRegularExpression *)regexp matchHandler:(CPRegexpKeywordRecogniserMatchHandler)initMatchHandler
 {
-    return [[self alloc] initWithRegexp:regexp callback:callback];
+    return [[self alloc] initWithRegexp:regexp matchHandler:initMatchHandler];
 }
 
 - (void)dealloc
 {
-    [callback release];
+    [matchHandler release];
     [regexp release];
     [super dealloc];
 }
@@ -65,10 +69,14 @@
     long inputLength = [tokenString length];
     NSRange searchRange = NSMakeRange(*tokenPosition, inputLength - *tokenPosition);
     NSTextCheckingResult* result = [[self regexp] firstMatchInString:tokenString options:0 range:searchRange];
-    if (nil != result && nil != callback && result.range.location == *tokenPosition)
+    if (nil != result && nil != matchHandler && result.range.location == *tokenPosition)
     {
-        *tokenPosition = result.range.location + result.range.length;
-        return callback(tokenString, result);
+        CPToken* token = matchHandler(tokenString, result);
+        if (token)
+        {
+             *tokenPosition = result.range.location + result.range.length;
+            return token;
+        }
     }
     return nil;
 }

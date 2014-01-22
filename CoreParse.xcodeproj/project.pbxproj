@@ -173,6 +173,7 @@
 		5419720C188F7D49004240B4 /* CPRegexpRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 54197208188F7D49004240B4 /* CPRegexpRecogniser.m */; };
 		5419720D188F7D49004240B4 /* CPRegexpRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 54197208188F7D49004240B4 /* CPRegexpRecogniser.m */; };
 		5419720E188F7D49004240B4 /* CPRegexpRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 54197208188F7D49004240B4 /* CPRegexpRecogniser.m */; };
+		5419721D188F9A54004240B4 /* CPRegexpRecogniserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5419721C188F9A54004240B4 /* CPRegexpRecogniserTest.m */; };
 		DA2B1DF81566B704002FDBD7 /* CPSTAssertionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2B1DF71566B704002FDBD7 /* CPSTAssertionsTests.m */; };
 		DA2B1DF91566B704002FDBD7 /* CPSTAssertionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2B1DF71566B704002FDBD7 /* CPSTAssertionsTests.m */; };
 		EA5FF42E1884CC6600BEEF03 /* CPTestErrorEvaluatorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F893A2214DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.m */; };
@@ -324,6 +325,7 @@
 		1FE77D821375EA8F00879A41 /* CoreParse Documentation */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "CoreParse Documentation"; sourceTree = BUILT_PRODUCTS_DIR; };
 		54197207188F7D49004240B4 /* CPRegexpRecogniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRegexpRecogniser.h; sourceTree = "<group>"; };
 		54197208188F7D49004240B4 /* CPRegexpRecogniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRegexpRecogniser.m; sourceTree = "<group>"; };
+		5419721C188F9A54004240B4 /* CPRegexpRecogniserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRegexpRecogniserTest.m; sourceTree = "<group>"; };
 		DA2B1DF41566B311002FDBD7 /* CPSenTestKitAssertions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPSenTestKitAssertions.h; sourceTree = "<group>"; };
 		DA2B1DF61566B704002FDBD7 /* CPSTAssertionsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSTAssertionsTests.h; sourceTree = "<group>"; };
 		DA2B1DF71566B704002FDBD7 /* CPSTAssertionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSTAssertionsTests.m; sourceTree = "<group>"; };
@@ -461,6 +463,7 @@
 				1FB81325132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.m */,
 				1FA68DA314DE9D3D005519B9 /* CPTestErrorHandlingDelegate.h */,
 				1FA68DA414DE9D3D005519B9 /* CPTestErrorHandlingDelegate.m */,
+				5419721C188F9A54004240B4 /* CPRegexpRecogniserTest.m */,
 				1F9F839F13B731F3006E939D /* Expression.h */,
 				1F9F83A013B731F3006E939D /* Expression.m */,
 				1F9F83A413B732AC006E939D /* Term.h */,
@@ -965,6 +968,7 @@
 				1FA798261567DC58003AC8AE /* CPTestMapCSSTokenisingDelegate.m in Sources */,
 				1FA798271567DC5C003AC8AE /* CPTestErrorHandlingDelegate.m in Sources */,
 				1FA43871162F515C00B92704 /* Expression2.m in Sources */,
+				5419721D188F9A54004240B4 /* CPRegexpRecogniserTest.m in Sources */,
 				1FA43872162F515C00B92704 /* RuleBase.m in Sources */,
 				5419720C188F7D49004240B4 /* CPRegexpRecogniser.m in Sources */,
 				1FA43873162F515C00B92704 /* Term2.m in Sources */,
