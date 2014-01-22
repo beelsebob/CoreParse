@@ -30,6 +30,7 @@ typedef CPToken* (^CPRegexpKeywordRecogniserMatchHandler)(NSString* tokenString,
  * Initialises a Regexp Recogniser to recognise a specific regexp.
  *
  * @param regexp The NSRegularExpression to recognise.
+ * @param matchHandler A block that process first match result of the regular expression, and return a CPToken.
  *
  * @return Returns the regexp recogniser initialised to recognise the passed regexp.
  *
@@ -41,6 +42,7 @@ typedef CPToken* (^CPRegexpKeywordRecogniserMatchHandler)(NSString* tokenString,
  * Initialises a Regexp Recogniser to recognise a specific regexp.
  *
  * @param regexp The NSRegularExpression to recognise.
+ * @param matchHandler A block that process first match result of the regular expression, and return a CPToken.
  *
  * @return Returns the regexp recogniser initialised to recognise the passed regexp.
  *
