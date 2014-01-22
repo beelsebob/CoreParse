@@ -10,15 +10,19 @@
 #import "CPTokenRecogniser.h"
 
 /**
- * The CPRegexpKeywordRecogniser class attempts to recognise a specific keyword in a token stream using a NSRegularExpression.
+ * The CPRegexpRecogniser class attempts to recognise a specific NSRegularExpression.
  *
- * A regexp keyword recogniser attempts to recognise a regexp.
+ * A regexp recogniser attempts to recognise a regexp.
  *
- * This recogniser produces CPKeywordTokens.
+ * This recogniser produces a token via CPRegexpKeywordRecogniserCallbackBlock.
  */
-@interface CPRegexpKeywordRecogniser : NSObject <CPTokenRecogniser>
+@interface CPRegexpRecogniser : NSObject <CPTokenRecogniser>
+
+typedef CPToken* (^CPRegexpKeywordRecogniserCallbackBlock)(NSString* tokenString, NSTextCheckingResult* match);
 
 @property (nonatomic, retain) NSRegularExpression* regexp;
+
+@property (nonatomic, copy) CPRegexpKeywordRecogniserCallbackBlock callback;
 
 ///---------------------------------------------------------------------------------------
 /// @name Creating and Initialising a Regexp Keyword Recogniser
@@ -33,7 +37,7 @@
  *
  * @see recogniserForRegexp:
  */
-- (id)initWithRegexp:(NSRegularExpression *)regexp;
+- (id)initWithRegexp:(NSRegularExpression *)regexp callback:(CPRegexpKeywordRecogniserCallbackBlock)callback;
 
 /**
  * Initialises a Regexp Recogniser to recognise a specific regexp.
@@ -44,6 +48,6 @@
  *
  * @see initWithRegexp:
  */
-+ (id)recogniserForRegexp:(NSRegularExpression *)regexp;
++ (id)recogniserForRegexp:(NSRegularExpression *)regexp callback:(CPRegexpKeywordRecogniserCallbackBlock)callback;
 
 @end

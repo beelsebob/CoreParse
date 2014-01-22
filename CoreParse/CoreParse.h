@@ -16,7 +16,7 @@
 #import "CPWhitespaceRecogniser.h"
 #import "CPIdentifierRecogniser.h"
 #import "CPQuotedRecogniser.h"
-#import "CPRegexpKeywordRecogniser.h"
+#import "CPRegexpRecogniser.h"
 
 #import "CPToken.h"
 #import "CPErrorToken.h"

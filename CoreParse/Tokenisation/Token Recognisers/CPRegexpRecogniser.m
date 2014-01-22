@@ -6,29 +6,34 @@
 //  Copyright (c) 2014 Ignition Soft. All rights reserved.
 //
 
-#import "CPRegexpKeywordRecogniser.h"
+#import "CPRegexpRecogniser.h"
 #import "CPToken.h"
 #import "CPKeywordToken.h"
 
-@implementation CPRegexpKeywordRecogniser
+@implementation CPRegexpRecogniser
 
-- (id)initWithRegexp:(NSRegularExpression *)regexp
+@synthesize regexp;
+@synthesize callback;
+
+- (id)initWithRegexp:(NSRegularExpression *)initRegexp callback:(CPRegexpKeywordRecogniserCallbackBlock)initCallback
 {
     self = [super init];
     if (self) {
-        _regexp = regexp;
+        regexp = initRegexp;
+        callback = initCallback;
     }
     return self;
 }
 
-+ (id)recogniserForRegexp:(NSRegularExpression *)regexp
++ (id)recogniserForRegexp:(NSRegularExpression *)regexp callback:(CPRegexpKeywordRecogniserCallbackBlock)callback
 {
-    return [[self alloc] initWithRegexp:regexp];
+    return [[self alloc] initWithRegexp:regexp callback:callback];
 }
 
 - (void)dealloc
 {
-    [_regexp release];
+    [callback release];
+    [regexp release];
     [super dealloc];
 }
 
@@ -59,11 +64,11 @@
 {
     long inputLength = [tokenString length];
     NSRange searchRange = NSMakeRange(*tokenPosition, inputLength - *tokenPosition);
-    NSTextCheckingResult* result = [self.regexp firstMatchInString:tokenString options:0 range:searchRange];
-    if (result) {
-        NSString* matched = [tokenString substringWithRange:result.range];
+    NSTextCheckingResult* result = [[self regexp] firstMatchInString:tokenString options:0 range:searchRange];
+    if (nil != result && nil != callback && result.range.location == *tokenPosition)
+    {
         *tokenPosition = result.range.location + result.range.length;
-        return [CPKeywordToken tokenWithKeyword:matched];
+        return callback(tokenString, result);
     }
     return nil;
 }
