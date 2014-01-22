@@ -39,6 +39,10 @@
     CPKeywordToken* token = (CPKeywordToken*) [recognizer recogniseTokenInString:@"hello world" currentTokenPosition:&position];
     STAssertEqualObjects([token class], [CPKeywordToken class], @"should be keyword token");
     STAssertEqualObjects(@"hello", [token keyword], @"should match the string hello");
+    
+    position = 5;
+    token = (CPKeywordToken*) [recognizer recogniseTokenInString:@"hello world" currentTokenPosition:&position];
+    STAssertNil(token, @"should not match space");
 
     position = 6;
     token = (CPKeywordToken*) [recognizer recogniseTokenInString:@"hello world" currentTokenPosition:&position];
