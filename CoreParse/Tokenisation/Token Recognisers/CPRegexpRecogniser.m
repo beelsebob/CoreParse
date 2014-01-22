@@ -23,8 +23,8 @@
 {
     self = [super init];
     if (self) {
-        regexp = initRegexp;
-        matchHandler = initMatchHandler;
+        self.regexp = initRegexp;
+        self.matchHandler = initMatchHandler;
     }
     return self;
 }
