@@ -1,6 +1,6 @@
 //
 //  CPRegexpRecogniser.h
-//  CSSSelectorConverter
+//  CoreParse
 //
 //  Created by Francis Chong on 1/22/14.
 //  Copyright (c) 2014 Ignition Soft. All rights reserved.
