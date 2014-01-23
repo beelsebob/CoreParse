@@ -170,9 +170,7 @@
 		54197209188F7D49004240B4 /* CPRegexpRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 54197207188F7D49004240B4 /* CPRegexpRecogniser.h */; };
 		5419720A188F7D49004240B4 /* CPRegexpRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 54197207188F7D49004240B4 /* CPRegexpRecogniser.h */; };
 		5419720B188F7D49004240B4 /* CPRegexpRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 54197208188F7D49004240B4 /* CPRegexpRecogniser.m */; };
-		5419720C188F7D49004240B4 /* CPRegexpRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 54197208188F7D49004240B4 /* CPRegexpRecogniser.m */; };
 		5419720D188F7D49004240B4 /* CPRegexpRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 54197208188F7D49004240B4 /* CPRegexpRecogniser.m */; };
-		5419720E188F7D49004240B4 /* CPRegexpRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 54197208188F7D49004240B4 /* CPRegexpRecogniser.m */; };
 		5419721D188F9A54004240B4 /* CPRegexpRecogniserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5419721C188F9A54004240B4 /* CPRegexpRecogniserTest.m */; };
 		DA2B1DF81566B704002FDBD7 /* CPSTAssertionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2B1DF71566B704002FDBD7 /* CPSTAssertionsTests.m */; };
 		DA2B1DF91566B704002FDBD7 /* CPSTAssertionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2B1DF71566B704002FDBD7 /* CPSTAssertionsTests.m */; };
@@ -970,7 +968,6 @@
 				1FA43871162F515C00B92704 /* Expression2.m in Sources */,
 				5419721D188F9A54004240B4 /* CPRegexpRecogniserTest.m in Sources */,
 				1FA43872162F515C00B92704 /* RuleBase.m in Sources */,
-				5419720C188F7D49004240B4 /* CPRegexpRecogniser.m in Sources */,
 				1FA43873162F515C00B92704 /* Term2.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1036,7 +1033,6 @@
 				1F9281CD145C18220033BC34 /* Term.m in Sources */,
 				1F9281C8145C17580033BC34 /* CoreParseTests.m in Sources */,
 				DA2B1DF91566B704002FDBD7 /* CPSTAssertionsTests.m in Sources */,
-				5419720E188F7D49004240B4 /* CPRegexpRecogniser.m in Sources */,
 				EA5FF4311884FFE200BEEF03 /* RuleBase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
