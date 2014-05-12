@@ -17,6 +17,7 @@ typedef struct
     unsigned int requestsPush:1;
     unsigned int willProduceToken:1;
     unsigned int didNotFindTokenOnInputPositionError:1;
+    unsigned int willFinish:1;
     
 } CPTokeniserDelegateResponseCache;
 
@@ -183,6 +184,11 @@ typedef struct
     }
     if (inputLength <= currentTokenOffset)
     {
+        if (delegateRespondsTo.willFinish)
+        {
+            [delegate tokeniserWillFinish:self stream:stream];
+        }
+
         CPEOFToken *token = [CPEOFToken eof];
         [token setLineNumber:currentLineNumber];
         [token setColumnNumber:currentColumnNumber];
@@ -251,6 +257,7 @@ static CFCharacterSetRef newlineCharset = nil;
         delegateRespondsTo.requestsPush = [delegate respondsToSelector:@selector(tokeniser:requestsToken:pushedOntoStream:)];
         delegateRespondsTo.willProduceToken = [delegate respondsToSelector:@selector(tokeniser:willProduceToken:)];
         delegateRespondsTo.didNotFindTokenOnInputPositionError = [delegate respondsToSelector:@selector(tokeniser:didNotFindTokenOnInput:position:error:)];
+        delegateRespondsTo.willFinish = [delegate respondsToSelector:@selector(tokeniserWillFinish:stream:)];
     }
 }
 
