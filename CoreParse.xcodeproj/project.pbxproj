@@ -174,6 +174,7 @@
 		5419721D188F9A54004240B4 /* CPRegexpRecogniserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5419721C188F9A54004240B4 /* CPRegexpRecogniserTest.m */; };
 		DA2B1DF81566B704002FDBD7 /* CPSTAssertionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2B1DF71566B704002FDBD7 /* CPSTAssertionsTests.m */; };
 		DA2B1DF91566B704002FDBD7 /* CPSTAssertionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2B1DF71566B704002FDBD7 /* CPSTAssertionsTests.m */; };
+		DC3E9BEF191DBAC800F6023C /* CPWillFinishDelegateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3E9BEE191DBAC800F6023C /* CPWillFinishDelegateTest.m */; };
 		EA5FF42E1884CC6600BEEF03 /* CPTestErrorEvaluatorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F893A2214DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.m */; };
 		EA5FF42F1884CC7100BEEF03 /* CPTestErrorHandlingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA68DA414DE9D3D005519B9 /* CPTestErrorHandlingDelegate.m */; };
 		EA5FF4301884FFDC00BEEF03 /* Expression2.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA4386C162F515C00B92704 /* Expression2.m */; };
@@ -327,6 +328,7 @@
 		DA2B1DF41566B311002FDBD7 /* CPSenTestKitAssertions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPSenTestKitAssertions.h; sourceTree = "<group>"; };
 		DA2B1DF61566B704002FDBD7 /* CPSTAssertionsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSTAssertionsTests.h; sourceTree = "<group>"; };
 		DA2B1DF71566B704002FDBD7 /* CPSTAssertionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSTAssertionsTests.m; sourceTree = "<group>"; };
+		DC3E9BEE191DBAC800F6023C /* CPWillFinishDelegateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPWillFinishDelegateTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -462,6 +464,7 @@
 				1FA68DA314DE9D3D005519B9 /* CPTestErrorHandlingDelegate.h */,
 				1FA68DA414DE9D3D005519B9 /* CPTestErrorHandlingDelegate.m */,
 				5419721C188F9A54004240B4 /* CPRegexpRecogniserTest.m */,
+				DC3E9BEE191DBAC800F6023C /* CPWillFinishDelegateTest.m */,
 				1F9F839F13B731F3006E939D /* Expression.h */,
 				1F9F83A013B731F3006E939D /* Expression.m */,
 				1F9F83A413B732AC006E939D /* Term.h */,
@@ -966,6 +969,7 @@
 				1FA798261567DC58003AC8AE /* CPTestMapCSSTokenisingDelegate.m in Sources */,
 				1FA798271567DC5C003AC8AE /* CPTestErrorHandlingDelegate.m in Sources */,
 				1FA43871162F515C00B92704 /* Expression2.m in Sources */,
+				DC3E9BEF191DBAC800F6023C /* CPWillFinishDelegateTest.m in Sources */,
 				5419721D188F9A54004240B4 /* CPRegexpRecogniserTest.m in Sources */,
 				1FA43872162F515C00B92704 /* RuleBase.m in Sources */,
 				1FA43873162F515C00B92704 /* Term2.m in Sources */,
