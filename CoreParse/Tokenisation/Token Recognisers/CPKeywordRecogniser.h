@@ -35,7 +35,7 @@
  * @see initWithKeyword:
  * @see recogniserForKeyword:invalidFollowingCharacters:
  */
-+ (id)recogniserForKeyword:(NSString *)keyword;
++ (instancetype)recogniserForKeyword:(NSString *)keyword;
 
 /**
  * Creates a Keyword Recogniser for a specific keyword.
@@ -48,7 +48,7 @@
  * @see recogniserForKeyword:
  * @see initWithKeyword:invalidFollowingCharacters:
  */
-+ (id)recogniserForKeyword:(NSString *)keyword invalidFollowingCharacters:(NSCharacterSet *)invalidFollowingCharacters;
++ (instancetype)recogniserForKeyword:(NSString *)keyword invalidFollowingCharacters:(NSCharacterSet *)invalidFollowingCharacters;
 
 /**
  * Initialises a Keyword Recogniser to recognise a specific keyword.
@@ -60,7 +60,7 @@
  * @see recogniserForKeyword:
  * @see initWithKeyword:invalidFollowingCharacters:
  */
-- (id)initWithKeyword:(NSString *)keyword;
+- (instancetype)initWithKeyword:(NSString *)keyword;
 
 /**
  * Initialises a Keyword Recogniser to recognise a specific keyword.
@@ -73,7 +73,7 @@
  * @see initWithKeyword:
  * @see recogniserForKeyword:invalidFollowingCharacters:
  */
-- (id)initWithKeyword:(NSString *)keyword invalidFollowingCharacters:(NSCharacterSet *)invalidFollowingCharacters;
+- (instancetype)initWithKeyword:(NSString *)keyword invalidFollowingCharacters:(NSCharacterSet *)invalidFollowingCharacters;
 
 ///---------------------------------------------------------------------------------------
 /// @name Configuring a Keyword Recogniser

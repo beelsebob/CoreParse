@@ -40,7 +40,7 @@
     CPTokeniser * russianRoulette = [[CPTokeniser alloc] init];
     [qTokenizer addTokenRecogniser:[CPNumberRecogniser integerRecogniser]];
     [dTokenizer addTokenRecogniser:[CPNumberRecogniser floatRecogniser]];
-    [russianRoulette addTokenRecogniser:[CPNumberRecogniser numberRecogniser]];
+    [russianRoulette addTokenRecogniser:[CPNumberRecogniser newNumberRecogniser]];
     
     // test basic ideas about how to recognize numbers
     NSString * qs = @"1337", * ds_us = @"13.37", * ds_uk = @"13,37";

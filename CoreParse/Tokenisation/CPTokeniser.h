@@ -119,6 +119,15 @@
 - (void)addTokenRecogniser:(id<CPTokenRecogniser>)recogniser;
 
 /**
+ * Shorthand method to automatically create and add a `CPKeywordRecogniser` for the given keyword.
+ *
+ * @param tokenKeyword The keyword to be used for the `CPKeywordToken` to be created and added to the tokeniser. This value must not be `nil`.
+ * @exception Raises an `NSInvalidArgumentException` if `tokenKeyword` is `nil`.
+
+ */
+- (void)addTokenRecogniserForKeyword:(NSString *)tokenKeyword;
+
+/**
  * Inserts a given token recogniser at a given priority level in the tokeniser.
  *
  * The recogniser currently at that priority and all those below it move downwards.

@@ -76,7 +76,7 @@
     [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"="]];
     [mapCssTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@":"]];
     [mapCssTokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
-    [mapCssTokeniser addTokenRecogniser:[CPNumberRecogniser numberRecogniser]];
+    [mapCssTokeniser addTokenRecogniser:[CPNumberRecogniser newNumberRecogniser]];
     [mapCssTokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" name:@"Comment"]];
     [mapCssTokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"//" endQuote:@"\n" name:@"Comment"]];
     [mapCssTokeniser addTokenRecogniser:[CPQuotedRecogniser quotedRecogniserWithStartQuote:@"/"  endQuote:@"/"  escapeSequence:@"\\" name:@"Regex"]];
@@ -167,7 +167,7 @@
 - (void)testNumberTokeniser
 {
     CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
-    [tokeniser addTokenRecogniser:[CPNumberRecogniser numberRecogniser]];
+    [tokeniser addTokenRecogniser:[CPNumberRecogniser newNumberRecogniser]];
 
     CPTokenStream *tokenStream = [tokeniser tokenise:@"1234.5678"];
     CPTokenStream *expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPNumberToken tokenWithNumber:[NSNumber numberWithDouble:1234.5678]], [CPEOFToken eof], nil]];
@@ -181,7 +181,7 @@
 - (void)testWhiteSpaceTokeniser
 {
     CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
-    [tokeniser addTokenRecogniser:[CPNumberRecogniser numberRecogniser]];
+    [tokeniser addTokenRecogniser:[CPNumberRecogniser newNumberRecogniser]];
     [tokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
     CPTokenStream *tokenStream = [tokeniser tokenise:@"12.34 56.78\t90"];
     CPTokenStream *expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:

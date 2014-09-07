@@ -74,7 +74,7 @@
         [jsonTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"true"]];
         [jsonTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"false"]];
         [jsonTokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"null"]];
-        [jsonTokeniser addTokenRecogniser:[CPNumberRecogniser numberRecogniser]];
+        [jsonTokeniser addTokenRecogniser:[CPNumberRecogniser newNumberRecogniser]];
         [jsonTokeniser addTokenRecogniser:stringRecogniser];
         [jsonTokeniser addTokenRecogniser:[CPWhiteSpaceRecogniser whiteSpaceRecogniser]];
         [jsonTokeniser setDelegate:self];

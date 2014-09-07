@@ -37,6 +37,14 @@
     [aCoder encodeBool:[self recognisesFloats] forKey:CPNumberRecogniserRecognisesFloatsKey];
 }
 
+- (instancetype)initNumberRecogniser
+{
+	self = [super init];
+	[self setRecognisesInts:YES];
+	[self setRecognisesFloats:YES];
+	return self;
+}
+
 + (id)integerRecogniser
 {
     CPNumberRecogniser *rec = [[[CPNumberRecogniser alloc] init] autorelease];
@@ -53,7 +61,7 @@
     return rec;
 }
 
-+ (id)numberRecogniser
++ (instancetype)newNumberRecogniser
 {
     CPNumberRecogniser *rec = [[[CPNumberRecogniser alloc] init] autorelease];
     [rec setRecognisesInts:YES];
