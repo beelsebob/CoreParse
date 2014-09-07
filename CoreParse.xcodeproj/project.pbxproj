@@ -167,7 +167,7 @@
 		1FC18282139AE3810027F597 /* CPGrammarInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC18280139AE3800027F597 /* CPGrammarInternal.h */; };
 		1FC18283139AE3810027F597 /* CPGrammarInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC18281139AE3810027F597 /* CPGrammarInternal.m */; };
 		1FC18287139BA47D0027F597 /* CoreParse-template.md in Resources */ = {isa = PBXBuildFile; fileRef = 1FC18286139BA47D0027F597 /* CoreParse-template.md */; };
-		54197209188F7D49004240B4 /* CPRegexpRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 54197207188F7D49004240B4 /* CPRegexpRecogniser.h */; };
+		54197209188F7D49004240B4 /* CPRegexpRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 54197207188F7D49004240B4 /* CPRegexpRecogniser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5419720A188F7D49004240B4 /* CPRegexpRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 54197207188F7D49004240B4 /* CPRegexpRecogniser.h */; };
 		5419720B188F7D49004240B4 /* CPRegexpRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 54197208188F7D49004240B4 /* CPRegexpRecogniser.m */; };
 		5419720D188F7D49004240B4 /* CPRegexpRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 54197208188F7D49004240B4 /* CPRegexpRecogniser.m */; };
@@ -651,7 +651,6 @@
 			files = (
 				1F0E8935130463D000537D04 /* CoreParse.h in Headers */,
 				1F0E8939130463E900537D04 /* CPTokeniser.h in Headers */,
-				54197209188F7D49004240B4 /* CPRegexpRecogniser.h in Headers */,
 				1F0E8943130466D000537D04 /* CPTokenStream.h in Headers */,
 				1F0E894C1306795800537D04 /* CPToken.h in Headers */,
 				1F4683891306AA8500407491 /* CPKeywordRecogniser.h in Headers */,
@@ -677,6 +676,7 @@
 				1F45A2E413422E1300092D78 /* CPJSONParser.h in Headers */,
 				1F3881DC1322ACE7000C8876 /* CPShiftReduceParser.h in Headers */,
 				1FA68DA014DE98C4005519B9 /* CPErrorToken.h in Headers */,
+				54197209188F7D49004240B4 /* CPRegexpRecogniser.h in Headers */,
 				1F893A1F14DEEBFC00316FF7 /* CPRecoveryAction.h in Headers */,
 				1F3881E11322ADC9000C8876 /* CPShiftReduceAction.h in Headers */,
 				1F3881E51322AEE8000C8876 /* CPShiftReduceState.h in Headers */,
@@ -749,7 +749,7 @@
 			name = CoreParseTests;
 			productName = CoreParseTests;
 			productReference = 1F0E890B130462F300537D04 /* CoreParseTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 		1F92817E145C11050033BC34 /* iOSCoreParse */ = {
 			isa = PBXNativeTarget;
@@ -785,7 +785,7 @@
 			name = iOSCoreParseTests;
 			productName = iOSCoreParseTests;
 			productReference = 1F92818C145C11050033BC34 /* CoreParseTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 		1FE77D811375EA8F00879A41 /* CoreParse Documentation */ = {
 			isa = PBXNativeTarget;
@@ -808,7 +808,7 @@
 		1F0E88EC130462F300537D04 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "In The Beginning...";
 			};
 			buildConfigurationList = 1F0E88EF130462F300537D04 /* Build configuration list for PBXProject "CoreParse" */;
@@ -1079,11 +1079,14 @@
 		1F0E891B130462F300537D04 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -1109,7 +1112,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = "";
 				SUPPORTED_PLATFORMS = macosx;
@@ -1120,11 +1123,14 @@
 		1F0E891C130462F300537D04 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -1148,7 +1154,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = "";
 				SUPPORTED_PLATFORMS = macosx;
@@ -1160,7 +1166,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
@@ -1174,6 +1183,10 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreParse/CoreParse-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"SENTEST_IGNORE_DEPRECATION_WARNING=1",
+					DEBUG,
+				);
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
@@ -1197,8 +1210,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
@@ -1211,6 +1227,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreParse/CoreParse-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "SENTEST_IGNORE_DEPRECATION_WARNING=1";
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
@@ -1234,12 +1251,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreParseTests/CoreParseTests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					DEBUG,
+					SENTEST_IGNORE_DEPRECATION_WARNING,
+				);
 				INFOPLIST_FILE = "CoreParseTests/CoreParseTests-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
 				OTHER_LDFLAGS = (
@@ -1255,12 +1277,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreParseTests/CoreParseTests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = SENTEST_IGNORE_DEPRECATION_WARNING;
 				INFOPLIST_FILE = "CoreParseTests/CoreParseTests-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
 				OTHER_LDFLAGS = (
@@ -1276,7 +1300,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/iOSCoreParse.dst;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1302,7 +1325,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DSTROOT = /tmp/iOSCoreParse.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1323,7 +1345,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1354,7 +1375,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1380,7 +1400,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -1395,7 +1414,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
