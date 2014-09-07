@@ -31,7 +31,7 @@
  * @see floatRecogniser
  * @see numberRecogniser
  */
-+ (id)integerRecogniser;
++ (instancetype)integerRecogniser;
 
 /**
  * Creates a number recogniser that recognises only floating point numbers.
@@ -41,7 +41,7 @@
  * @see integerRecogniser
  * @see numberRecogniser
  */
-+ (id)floatRecogniser;
++ (instancetype)floatRecogniser;
 
 /**
  * Creates a number recogniser that recognises both integers and floating point numbers.
@@ -51,7 +51,9 @@
  * @see integerRecogniser
  * @see floatRecogniser
  */
-+ (id)numberRecogniser;
++ (instancetype)newNumberRecogniser;
+
+- (instancetype)initNumberRecogniser;
 
 ///---------------------------------------------------------------------------------------
 /// @name Configuring a Number Recogniser
