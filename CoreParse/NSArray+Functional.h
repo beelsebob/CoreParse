@@ -10,6 +10,6 @@
 
 @interface NSArray (Functional)
 
-- (NSArray *)map:(id(^)(id obj))block;
+- (NSArray *)cp_map:(id(^)(id obj))block;
 
 @end

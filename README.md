@@ -26,6 +26,7 @@ Where is CoreParse Already Used?
 
 CoreParse is already used in a major way in at least two projects:
 
+* Francis Chong uses it in his [CSS selector convertor](https://github.com/siuying/CSSSelectorConverter) to parse CSS3
 * Matt Mower uses it in his [statec](https://github.com/mmower/statec) project to parse his state machine specifications.
 * I use it in [OpenStreetPad](https://github.com/beelsebob/OpenStreetPad/) to parse MapCSS.
 

@@ -167,8 +167,19 @@
 		1FC18282139AE3810027F597 /* CPGrammarInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC18280139AE3800027F597 /* CPGrammarInternal.h */; };
 		1FC18283139AE3810027F597 /* CPGrammarInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC18281139AE3810027F597 /* CPGrammarInternal.m */; };
 		1FC18287139BA47D0027F597 /* CoreParse-template.md in Resources */ = {isa = PBXBuildFile; fileRef = 1FC18286139BA47D0027F597 /* CoreParse-template.md */; };
+		54197209188F7D49004240B4 /* CPRegexpRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 54197207188F7D49004240B4 /* CPRegexpRecogniser.h */; };
+		5419720A188F7D49004240B4 /* CPRegexpRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 54197207188F7D49004240B4 /* CPRegexpRecogniser.h */; };
+		5419720B188F7D49004240B4 /* CPRegexpRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 54197208188F7D49004240B4 /* CPRegexpRecogniser.m */; };
+		5419720D188F7D49004240B4 /* CPRegexpRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 54197208188F7D49004240B4 /* CPRegexpRecogniser.m */; };
+		5419721D188F9A54004240B4 /* CPRegexpRecogniserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5419721C188F9A54004240B4 /* CPRegexpRecogniserTest.m */; };
 		DA2B1DF81566B704002FDBD7 /* CPSTAssertionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2B1DF71566B704002FDBD7 /* CPSTAssertionsTests.m */; };
 		DA2B1DF91566B704002FDBD7 /* CPSTAssertionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2B1DF71566B704002FDBD7 /* CPSTAssertionsTests.m */; };
+		DC3E9BEF191DBAC800F6023C /* CPWillFinishDelegateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3E9BEE191DBAC800F6023C /* CPWillFinishDelegateTest.m */; };
+		EA5FF42E1884CC6600BEEF03 /* CPTestErrorEvaluatorDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F893A2214DEF40D00316FF7 /* CPTestErrorEvaluatorDelegate.m */; };
+		EA5FF42F1884CC7100BEEF03 /* CPTestErrorHandlingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA68DA414DE9D3D005519B9 /* CPTestErrorHandlingDelegate.m */; };
+		EA5FF4301884FFDC00BEEF03 /* Expression2.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA4386C162F515C00B92704 /* Expression2.m */; };
+		EA5FF4311884FFE200BEEF03 /* RuleBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA4386E162F515C00B92704 /* RuleBase.m */; };
+		EA5FF4321884FFE500BEEF03 /* Term2.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA43870162F515C00B92704 /* Term2.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -311,9 +322,13 @@
 		1FC18286139BA47D0027F597 /* CoreParse-template.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "CoreParse-template.md"; sourceTree = "<group>"; };
 		1FE77D551375AE6F00879A41 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1FE77D821375EA8F00879A41 /* CoreParse Documentation */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "CoreParse Documentation"; sourceTree = BUILT_PRODUCTS_DIR; };
+		54197207188F7D49004240B4 /* CPRegexpRecogniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRegexpRecogniser.h; sourceTree = "<group>"; };
+		54197208188F7D49004240B4 /* CPRegexpRecogniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRegexpRecogniser.m; sourceTree = "<group>"; };
+		5419721C188F9A54004240B4 /* CPRegexpRecogniserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRegexpRecogniserTest.m; sourceTree = "<group>"; };
 		DA2B1DF41566B311002FDBD7 /* CPSenTestKitAssertions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPSenTestKitAssertions.h; sourceTree = "<group>"; };
 		DA2B1DF61566B704002FDBD7 /* CPSTAssertionsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSTAssertionsTests.h; sourceTree = "<group>"; };
 		DA2B1DF71566B704002FDBD7 /* CPSTAssertionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSTAssertionsTests.m; sourceTree = "<group>"; };
+		DC3E9BEE191DBAC800F6023C /* CPWillFinishDelegateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPWillFinishDelegateTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -448,6 +463,8 @@
 				1FB81325132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.m */,
 				1FA68DA314DE9D3D005519B9 /* CPTestErrorHandlingDelegate.h */,
 				1FA68DA414DE9D3D005519B9 /* CPTestErrorHandlingDelegate.m */,
+				5419721C188F9A54004240B4 /* CPRegexpRecogniserTest.m */,
+				DC3E9BEE191DBAC800F6023C /* CPWillFinishDelegateTest.m */,
 				1F9F839F13B731F3006E939D /* Expression.h */,
 				1F9F83A013B731F3006E939D /* Expression.m */,
 				1F9F83A413B732AC006E939D /* Term.h */,
@@ -559,6 +576,8 @@
 				1F1DFCE01306E3C300B22855 /* CPIdentifierRecogniser.m */,
 				1F1DFCF11307D2C500B22855 /* CPQuotedRecogniser.h */,
 				1F1DFCF21307D2C500B22855 /* CPQuotedRecogniser.m */,
+				54197207188F7D49004240B4 /* CPRegexpRecogniser.h */,
+				54197208188F7D49004240B4 /* CPRegexpRecogniser.m */,
 			);
 			path = "Token Recognisers";
 			sourceTree = "<group>";
@@ -632,6 +651,7 @@
 			files = (
 				1F0E8935130463D000537D04 /* CoreParse.h in Headers */,
 				1F0E8939130463E900537D04 /* CPTokeniser.h in Headers */,
+				54197209188F7D49004240B4 /* CPRegexpRecogniser.h in Headers */,
 				1F0E8943130466D000537D04 /* CPTokenStream.h in Headers */,
 				1F0E894C1306795800537D04 /* CPToken.h in Headers */,
 				1F4683891306AA8500407491 /* CPKeywordRecogniser.h in Headers */,
@@ -687,6 +707,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5419720A188F7D49004240B4 /* CPRegexpRecogniser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -921,6 +942,7 @@
 				1FB81327132FF16E0095982D /* CPTestMapCSSTokenisingDelegate.m in Sources */,
 				1F45A2E513422E1300092D78 /* CPJSONParser.m in Sources */,
 				1F6D44911348CC9600E982C7 /* CPLALR1Parser.m in Sources */,
+				5419720B188F7D49004240B4 /* CPRegexpRecogniser.m in Sources */,
 				1FC1827E139ADC800027F597 /* CPGrammarPrivate.m in Sources */,
 				1FC18283139AE3810027F597 /* CPGrammarInternal.m in Sources */,
 				1F9F83AD13B7CABA006E939D /* CPRHSItem.m in Sources */,
@@ -947,6 +969,8 @@
 				1FA798261567DC58003AC8AE /* CPTestMapCSSTokenisingDelegate.m in Sources */,
 				1FA798271567DC5C003AC8AE /* CPTestErrorHandlingDelegate.m in Sources */,
 				1FA43871162F515C00B92704 /* Expression2.m in Sources */,
+				DC3E9BEF191DBAC800F6023C /* CPWillFinishDelegateTest.m in Sources */,
+				5419721D188F9A54004240B4 /* CPRegexpRecogniserTest.m in Sources */,
 				1FA43872162F515C00B92704 /* RuleBase.m in Sources */,
 				1FA43873162F515C00B92704 /* Term2.m in Sources */,
 			);
@@ -980,6 +1004,7 @@
 				1F9281B7145C11A60033BC34 /* CPGrammarSymbol.m in Sources */,
 				1F9281B8145C11A60033BC34 /* CPRHSItem.m in Sources */,
 				1F9281B9145C11A60033BC34 /* CPRHSItemResult.m in Sources */,
+				5419720D188F7D49004240B4 /* CPRegexpRecogniser.m in Sources */,
 				1F9281BA145C11A60033BC34 /* CPSyntaxTree.m in Sources */,
 				1F9281BB145C11A60033BC34 /* CPParser.m in Sources */,
 				1F9281BC145C11A60033BC34 /* CPShiftReduceAction.m in Sources */,
@@ -1001,13 +1026,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA5FF4321884FFE500BEEF03 /* Term2.m in Sources */,
+				EA5FF42F1884CC7100BEEF03 /* CPTestErrorHandlingDelegate.m in Sources */,
 				1F9281C9145C18220033BC34 /* CPTestEvaluatorDelegate.m in Sources */,
 				1F9281CA145C18220033BC34 /* CPTestWhiteSpaceIgnoringDelegate.m in Sources */,
 				1F9281CB145C18220033BC34 /* CPTestMapCSSTokenisingDelegate.m in Sources */,
+				EA5FF4301884FFDC00BEEF03 /* Expression2.m in Sources */,
 				1F9281CC145C18220033BC34 /* Expression.m in Sources */,
+				EA5FF42E1884CC6600BEEF03 /* CPTestErrorEvaluatorDelegate.m in Sources */,
 				1F9281CD145C18220033BC34 /* Term.m in Sources */,
 				1F9281C8145C17580033BC34 /* CoreParseTests.m in Sources */,
 				DA2B1DF91566B704002FDBD7 /* CPSTAssertionsTests.m in Sources */,
+				EA5FF4311884FFE200BEEF03 /* RuleBase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

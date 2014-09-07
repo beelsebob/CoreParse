@@ -70,6 +70,17 @@
  */
 - (NSUInteger)tokeniser:(CPTokeniser *)tokeniser didNotFindTokenOnInput:(NSString *)input position:(NSUInteger)position error:(NSString **)errorMessage;
 
+/**
+ * This method is called when the tokeniser has finished tokenising and is about to push the
+ * <EOF> token onto the token stream. This gives the delegate a chance to push additional tokens
+ * (such as scope closing tokens in a python tokeniser) onto the token stream before the <EOF>
+ * token is pushed onto the stream.
+ *
+ * @param tokeniser The CPTokeniser that is finishing
+ * @param stream the CPTokenStream any tokens should be pushed onto (if required).
+ */
+- (void)tokeniserWillFinish:(CPTokeniser *)tokeniser stream:(CPTokenStream *)stream;
+
 @end
 
 /**
