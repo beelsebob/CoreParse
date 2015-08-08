@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 In The Beginning... All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "CPTokeniser.h"
 #import "CPKeywordRecogniser.h"
 #import "CPKeywordToken.h"
 #import "CPEOFToken.h"
 
-@interface CPWillFinishDelegateTest : SenTestCase <CPTokeniserDelegate>
+@interface CPWillFinishDelegateTest : XCTestCase <CPTokeniserDelegate>
 
 @end
 
@@ -32,13 +32,13 @@
 
 - (void)testWillFinishCalled
 {
-	CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
+	CPTokeniser *tokeniser = [[CPTokeniser alloc] init];
 	tokeniser.delegate = self;
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"{"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"}"]];
     CPTokenStream *tokenStream = [tokeniser tokenise:@"{}"];
     CPTokenStream *expectedTokenStream = [CPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[CPKeywordToken tokenWithKeyword:@"{"], [CPKeywordToken tokenWithKeyword:@"}"], [CPKeywordToken tokenWithKeyword:@"done"], [CPEOFToken eof], nil]];
-    STAssertEqualObjects(tokenStream, expectedTokenStream, @"tokeniser:WillFinish:stream not called", nil);
+    XCTAssertEqualObjects(tokenStream, expectedTokenStream, @"tokeniser:WillFinish:stream not called", nil);
 }
 
 - (BOOL)tokeniser:(CPTokeniser *)tokeniser shouldConsumeToken:(CPToken *)token
