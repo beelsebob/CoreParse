@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 #pragma mark General Assertions
 
@@ -17,9 +17,9 @@
 #define CPSTAssertKindOfClass(obj, cls) \
     do { \
         id _obj = obj; \
-        STAssertTrue([_obj isKindOfClass:[cls class]], @"Expecting a kind of class %@; got class %@ from object %@.", NSStringFromClass([_obj class]), NSStringFromClass([cls class]), _obj); \
+        XCTAssertTrue([_obj isKindOfClass:[cls class]], @"Expecting a kind of class %@; got class %@ from object %@.", NSStringFromClass([_obj class]), NSStringFromClass([cls class]), _obj); \
     } while (0)
-#define _CPSTAssertKindOfClass_Unsafe(obj, cls) STAssertTrue([obj isKindOfClass:[cls class]], @"Expecting a kind of class %@; got class %@ from object %@.", NSStringFromClass([obj class]), NSStringFromClass([cls class]), obj);
+#define _CPSTAssertKindOfClass_Unsafe(obj, cls) XCTAssertTrue([obj isKindOfClass:[cls class]], @"Expecting a kind of class %@; got class %@ from object %@.", NSStringFromClass([obj class]), NSStringFromClass([cls class]), obj);
 
 #pragma mark Token Assertions
 
@@ -27,43 +27,43 @@
     do { \
         CPKeywordToken * t = (CPKeywordToken *)token; /* this escapes the potential multiple invocations of popToken */ \
         _CPSTAssertKindOfClass_Unsafe(t, CPKeywordToken); \
-        STAssertEqualObjects([t keyword], expectation, @"Keyword doesn't match expectation."); \
+        XCTAssertEqualObjects([t keyword], expectation, @"Keyword doesn't match expectation."); \
     } while (0)
 #define CPSTAssertIdentifierEquals(token, expectation) \
     do { \
         CPIdentifierToken * _t = (CPIdentifierToken *)token; \
         _CPSTAssertKindOfClass_Unsafe(_t, CPIdentifierToken); \
-        STAssertEqualObjects([_t identifier], expectation, @"Identifier doesn't match expectation."); \
+        XCTAssertEqualObjects([_t identifier], expectation, @"Identifier doesn't match expectation."); \
     } while (0)
 #define CPSTAssertIntegerNumberEquals(token, expectation) \
     do { \
         CPNumberToken * t = (CPNumberToken *)token; /* this escapes the potential multiple invocations of popToken */ \
         _CPSTAssertKindOfClass_Unsafe(t, CPNumberToken); \
         NSNumber * n = [t number]; \
-        STAssertTrue(0==strcmp([n objCType], @encode(NSInteger)), @"Type expectation failure. Wanted %s, got %s.", @encode(NSInteger), [n objCType]); \
-        STAssertEquals([n integerValue], ((NSInteger)expectation), @"Number fails expectation."); \
+        XCTAssertTrue(0==strcmp([n objCType], @encode(NSInteger)), @"Type expectation failure. Wanted %s, got %s.", @encode(NSInteger), [n objCType]); \
+        XCTAssertEqual([n integerValue], ((NSInteger)expectation), @"Number fails expectation."); \
     } while (0)
 #define CPSTAssertIntegerNumberEqualsWithAccuracy(token, expectation, accuracy) \
     do { \
         CPNumberToken * t = (CPNumberToken *)token; \
         _CPSTAssertKindOfClass_Unsafe(t, CPNumberToken); \
         NSNumber * n = [t number]; \
-        STAssertTrue(0==strcmp([n objCType], @encode(NSInteger)), @"Type expectation failure. Wanted %s, got %s.", @encode(NSInteger), [n objCType]); \
-        STAssertEqualsWithAccuracy([n integerValue], ((NSInteger)expectation), ((NSInteger)accuracy), @"Number fails expectation."); \
+        XCTAssertTrue(0==strcmp([n objCType], @encode(NSInteger)), @"Type expectation failure. Wanted %s, got %s.", @encode(NSInteger), [n objCType]); \
+        XCTAssertEqualWithAccuracy([n integerValue], ((NSInteger)expectation), ((NSInteger)accuracy), @"Number fails expectation."); \
     } while (0)
 #define CPSTAssertFloatingNumberEquals(token, expectation) \
     do { \
         CPNumberToken * t = (CPNumberToken *)token; \
         _CPSTAssertKindOfClass_Unsafe(t, CPNumberToken); \
         NSNumber * n = [t number]; \
-        STAssertTrue(0==strcmp([n objCType], @encode(double)), @"Type expectation failure. Wanted %s, got %s.", @encode(double), [n objCType]); \
-        STAssertEquals([n doubleValue], ((double)expectation), @"Number fails expectation."); \
+        XCTAssertTrue(0==strcmp([n objCType], @encode(double)), @"Type expectation failure. Wanted %s, got %s.", @encode(double), [n objCType]); \
+        XCTAssertEqual([n doubleValue], ((double)expectation), @"Number fails expectation."); \
     } while (0)
 #define CPSTAssertFloatingNumberEqualsWithAccuracy(token, expectation, accuracy) \
     do { \
         CPNumberToken * t = (CPNumberToken *)token; \
         _CPSTAssertKindOfClass_Unsafe(t, CPNumberToken); \
         NSNumber * n = [t number]; \
-        STAssertTrue(0==strcmp([n objCType], @encode(double)), @"Type expectation failure. Wanted %s, got %s.", @encode(double), [n objCType]); \
-        STAssertEqualsWithAccuracy([n doubleValue], ((double)expectation), ((double)accuracy), @"Number fails expectation."); \
+        XCTAssertTrue(0==strcmp([n objCType], @encode(double)), @"Type expectation failure. Wanted %s, got %s.", @encode(double), [n objCType]); \
+        XCTAssertEqualWithAccuracy([n doubleValue], ((double)expectation), ((double)accuracy), @"Number fails expectation."); \
     } while (0)

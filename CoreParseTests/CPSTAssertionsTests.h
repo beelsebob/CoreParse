@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 In The Beginning... All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface CPSTAssertionsTests : SenTestCase
+@interface CPSTAssertionsTests : XCTestCase
 
 @end

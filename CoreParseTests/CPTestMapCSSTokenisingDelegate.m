@@ -22,17 +22,10 @@
     
     if (nil != self)
     {
-        symbolsSet = [[NSCharacterSet characterSetWithCharactersInString:@"*[]{}().,;@|-!=<>:!"] retain];
+        symbolsSet = [NSCharacterSet characterSetWithCharactersInString:@"*[]{}().,;@|-!=<>:!"];
     }
     
     return self;
-}
-
-- (void)dealloc
-{
-    [symbolsSet release];
-    
-    [super dealloc];
 }
 
 - (BOOL)tokeniser:(CPTokeniser *)tokeniser shouldConsumeToken:(CPToken *)token
