@@ -108,6 +108,13 @@
 @property (readwrite,copy) NSString *escapeSequence;
 
 /**
+ * If `YES`, quoted string will contains `escapeSequence`.
+ * If `NO`, quoted string will not contains `escapeSequence`.
+ * Default is `NO`.
+ */
+@property (nonatomic, assign) BOOL shouldQuoteEscapeSequence;
+
+/**
  * Determines how much of the input string to consume when an escaped literal is found, and what to replace it with.
  */
 @property (readwrite,copy) NSString *(^escapeReplacer)(NSString *tokenStream, NSUInteger *quotePosition);

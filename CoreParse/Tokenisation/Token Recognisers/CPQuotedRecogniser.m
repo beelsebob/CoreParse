@@ -142,7 +142,9 @@
             else
             {
                 NSUInteger quotedPosition = escapeRange.location + escapeRange.length;
-                CFStringRef substr = CFStringCreateWithSubstring(kCFAllocatorDefault, (CFStringRef)tokenString, CFRangeMake(searchRange.location, escapeRange.location - searchRange.location));
+                CFRange subStrRange = CFRangeMake(searchRange.location,
+                                                  escapeRange.location + (self.shouldQuoteEscapeSequence ? escapeRange.length : 0) - searchRange.location);
+                CFStringRef substr = CFStringCreateWithSubstring(kCFAllocatorDefault, (CFStringRef)tokenString, subStrRange);
                 CFStringAppend(outputString, substr);
                 CFRelease(substr);
                 BOOL appended = NO;
