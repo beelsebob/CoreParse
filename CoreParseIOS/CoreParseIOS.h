@@ -17,7 +17,7 @@ FOUNDATION_EXPORT const unsigned char CoreParseIOSVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <CoreParseIOS/PublicHeader.h>
 
 
-#import <CoreParseIOS/CoreParse.h>
+//#import <CoreParseIOS/CoreParse.h>
 
 #import <CoreParseIOS/CPTokeniser.h>
 
