@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1B99B1F51D765F6500ED8C1B /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B99B1F41D765F6500ED8C1B /* CoreFoundation.framework */; };
 		1BF63D701D76965900922911 /* CoreParseIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BF63D6E1D76965900922911 /* CoreParseIOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1BF63D741D76967200922911 /* CoreParse.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8934130463D000537D04 /* CoreParse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1BF63D751D76968400922911 /* CPTokeniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8937130463E900537D04 /* CPTokeniser.h */; };
 		1BF63D761D76968400922911 /* CPTokenStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8941130466CF00537D04 /* CPTokenStream.h */; };
 		1BF63D771D7696A300922911 /* CPTokenRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4683881306AA8500407491 /* CPTokenRecogniser.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -774,7 +773,6 @@
 				1BF63D851D7696B600922911 /* CPQuotedToken.h in Headers */,
 				1BF63E151D7698DA00922911 /* CPTestMapCSSTokenisingDelegate.h in Headers */,
 				1BF63D981D76973A00922911 /* CPShiftReduceParser.h in Headers */,
-				1BF63D741D76967200922911 /* CoreParse.h in Headers */,
 				1BF63D771D7696A300922911 /* CPTokenRecogniser.h in Headers */,
 				1BF63E171D7698DA00922911 /* Expression.h in Headers */,
 				1BF63D781D7696A300922911 /* CPKeywordRecogniser.h in Headers */,
@@ -1771,6 +1769,7 @@
 				1BF63D721D76965900922911 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1F0E88EF130462F300537D04 /* Build configuration list for PBXProject "CoreParse" */ = {
 			isa = XCConfigurationList;

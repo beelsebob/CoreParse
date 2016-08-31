@@ -18,3 +18,38 @@ FOUNDATION_EXPORT const unsigned char CoreParseIOSVersionString[];
 
 
 #import <CoreParseIOS/CoreParse.h>
+
+#import <CoreParseIOS/CPTokeniser.h>
+
+#import <CoreParseIOS/CPTokenStream.h>
+
+#import <CoreParseIOS/CPTokenRecogniser.h>
+#import <CoreParseIOS/CPKeywordRecogniser.h>
+#import <CoreParseIOS/CPNumberRecogniser.h>
+#import <CoreParseIOS/CPWhitespaceRecogniser.h>
+#import <CoreParseIOS/CPIdentifierRecogniser.h>
+#import <CoreParseIOS/CPQuotedRecogniser.h>
+#import <CoreParseIOS/CPRegexpRecogniser.h>
+
+#import <CoreParseIOS/CPToken.h>
+#import <CoreParseIOS/CPErrorToken.h>
+#import <CoreParseIOS/CPEOFToken.h>
+#import <CoreParseIOS/CPKeywordToken.h>
+#import <CoreParseIOS/CPNumberToken.h>
+#import <CoreParseIOS/CPWhiteSpaceToken.h>
+#import <CoreParseIOS/CPQuotedToken.h>
+#import <CoreParseIOS/CPIdentifierToken.h>
+
+#import <CoreParseIOS/CPGrammarSymbol.h>
+#import <CoreParseIOS/CPGrammarSymbol.h>
+#import <CoreParseIOS/CPRule.h>
+#import <CoreParseIOS/CPGrammar.h>
+
+#import <CoreParseIOS/CPRecoveryAction.h>
+
+#import <CoreParseIOS/CPParser.h>
+#import <CoreParseIOS/CPSLRParser.h>
+#import <CoreParseIOS/CPLR1Parser.h>
+#import <CoreParseIOS/CPLALR1Parser.h>
+
+#import <CoreParseIOS/CPJSONParser.h>
