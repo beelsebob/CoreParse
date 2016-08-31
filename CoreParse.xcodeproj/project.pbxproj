@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F0E88FA130462F300537D04 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0E88F9130462F300537D04 /* Cocoa.framework */; };
+		1B99B1F51D765F6500ED8C1B /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B99B1F41D765F6500ED8C1B /* CoreFoundation.framework */; };
 		1F0E8904130462F300537D04 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F0E8902130462F300537D04 /* InfoPlist.strings */; };
 		1F0E8935130463D000537D04 /* CoreParse.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8934130463D000537D04 /* CoreParse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F0E8939130463E900537D04 /* CPTokeniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8937130463E900537D04 /* CPTokeniser.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -167,7 +167,7 @@
 		3A60764D1B75D41900204D16 /* RuleBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA4386E162F515C00B92704 /* RuleBase.m */; };
 		3A60764E1B75D41900204D16 /* Term2.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA43870162F515C00B92704 /* Term2.m */; };
 		3A60764F1B75D62C00204D16 /* CoreParseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0E8919130462F300537D04 /* CoreParseTests.m */; };
-		54197209188F7D49004240B4 /* CPRegexpRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 54197207188F7D49004240B4 /* CPRegexpRecogniser.h */; };
+		54197209188F7D49004240B4 /* CPRegexpRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 54197207188F7D49004240B4 /* CPRegexpRecogniser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5419720A188F7D49004240B4 /* CPRegexpRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 54197207188F7D49004240B4 /* CPRegexpRecogniser.h */; };
 		5419720B188F7D49004240B4 /* CPRegexpRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 54197208188F7D49004240B4 /* CPRegexpRecogniser.m */; };
 		5419720D188F7D49004240B4 /* CPRegexpRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 54197208188F7D49004240B4 /* CPRegexpRecogniser.m */; };
@@ -191,6 +191,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B99B1F41D765F6500ED8C1B /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/CoreFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		1F0E88F6130462F300537D04 /* CoreParse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreParse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F0E88F9130462F300537D04 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		1F0E88FC130462F300537D04 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -326,7 +327,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F0E88FA130462F300537D04 /* Cocoa.framework in Frameworks */,
+				1B99B1F51D765F6500ED8C1B /* CoreFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +384,7 @@
 		1F0E88F8130462F300537D04 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1B99B1F41D765F6500ED8C1B /* CoreFoundation.framework */,
 				1F0E88F9130462F300537D04 /* Cocoa.framework */,
 				1FE77D551375AE6F00879A41 /* Foundation.framework */,
 				1F92818D145C11050033BC34 /* SenTestingKit.framework */,
@@ -1148,7 +1150,10 @@
 				INSTALL_PATH = "@rpath";
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos10.0;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				TEST_AFTER_BUILD = YES;
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -1185,7 +1190,10 @@
 				INSTALL_PATH = "@rpath";
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos10.0;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				TEST_AFTER_BUILD = YES;
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
