@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B32C9CB1D778FFB0049B577 /* CoreParse.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8934130463D000537D04 /* CoreParse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B99B1F51D765F6500ED8C1B /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B99B1F41D765F6500ED8C1B /* CoreFoundation.framework */; };
 		1BF63D701D76965900922911 /* CoreParseIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BF63D6E1D76965900922911 /* CoreParseIOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1BF63D751D76968400922911 /* CPTokeniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0E8937130463E900537D04 /* CPTokeniser.h */; };
@@ -793,6 +794,7 @@
 				1BF63D7E1D7696B600922911 /* CPToken.h in Headers */,
 				1BF63D961D76973100922911 /* CPLR1Item.h in Headers */,
 				1BF63D8D1D7696FA00922911 /* CPRHSItem.h in Headers */,
+				1B32C9CB1D778FFB0049B577 /* CoreParse.h in Headers */,
 				1BF63D831D7696B600922911 /* CPWhiteSpaceToken.h in Headers */,
 				1BF63E121D7698DA00922911 /* CPTestEvaluatorDelegate.h in Headers */,
 				1BF63D801D7696B600922911 /* CPErrorToken.h in Headers */,
