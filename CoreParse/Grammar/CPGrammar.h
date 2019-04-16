@@ -220,6 +220,6 @@ typedef enum
 /**
  * The starting symbol for the grammar.
  */
-@property (readwrite,retain) NSString *start;
+@property (readwrite,strong) NSString *start;
 
 @end

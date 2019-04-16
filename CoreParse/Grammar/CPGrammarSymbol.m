@@ -15,12 +15,12 @@
 
 + (id)nonTerminalWithName:(NSString *)name
 {
-    return [[[self alloc] initWithName:name isTerminal:NO] autorelease];
+    return [[self alloc] initWithName:name isTerminal:NO];
 }
 
 + (id)terminalWithName:(NSString *)name
 {
-    return [[[self alloc] initWithName:name isTerminal:YES] autorelease];
+    return [[self alloc] initWithName:name isTerminal:YES];
 }
 
 - (id)initWithName:(NSString *)initName isTerminal:(BOOL)isTerminal;
@@ -95,13 +95,6 @@
     {
         return [NSString stringWithFormat:@"<%@>", [self name]];
     }
-}
-
-- (void)dealloc
-{
-    [name release];
-    
-    [super dealloc];
 }
 
 @end

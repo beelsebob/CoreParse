@@ -15,17 +15,17 @@
 
 + (id)recoveryActionWithAdditionalToken:(CPToken *)token
 {
-    return [[[self alloc] initWithAdditionalToken:token] autorelease];
+    return [[self alloc] initWithAdditionalToken:token];
 }
 
 + (id)recoveryActionDeletingCurrentToken
 {
-    return [[[self alloc] initWithDeleteAction] autorelease];
+    return [[self alloc] initWithDeleteAction];
 }
 
 + (id)recoveryActionStop
 {
-    return [[[self alloc] initWithStopAction] autorelease];
+    return [[self alloc] initWithStopAction];
 }
 
 - (id)initWithAdditionalToken:(CPToken *)token
@@ -63,13 +63,6 @@
     }
     
     return self;
-}
-
-- (void)dealloc
-{
-    [additionalToken release];
-    
-    [super dealloc];
 }
 
 @end

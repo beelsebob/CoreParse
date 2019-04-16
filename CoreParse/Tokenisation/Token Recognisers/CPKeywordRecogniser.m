@@ -15,7 +15,7 @@
 
 + (id)recogniserForKeyword:(NSString *)keyword
 {
-    return [[[self alloc] initWithKeyword:keyword] autorelease];
+    return [[self alloc] initWithKeyword:keyword];
 }
 
 - (id)initWithKeyword:(NSString *)initKeyword
@@ -25,7 +25,7 @@
 
 + (id)recogniserForKeyword:(NSString *)keyword invalidFollowingCharacters:(NSCharacterSet *)invalidFollowingCharacters
 {
-    return [[[self alloc] initWithKeyword:keyword invalidFollowingCharacters:invalidFollowingCharacters] autorelease];
+    return [[self alloc] initWithKeyword:keyword invalidFollowingCharacters:invalidFollowingCharacters];
 }
 
 - (id)initWithKeyword:(NSString *)initKeyword invalidFollowingCharacters:(NSCharacterSet *)initInvalidFollowingCharacters
@@ -66,14 +66,6 @@
 {
     [aCoder encodeObject:[self keyword] forKey:CPKeywordRecogniserKeywordKey];
     [aCoder encodeObject:[self invalidFollowingCharacters] forKey:CPKeywordRecogniserInvalidFollowingCharactersKey];
-}
-
-- (void)dealloc
-{
-   [keyword release];
-   [invalidFollowingCharacters release];
-    
-    [super dealloc];
 }
 
 - (CPToken *)recogniseTokenInString:(NSString *)tokenString currentTokenPosition:(NSUInteger *)tokenPosition

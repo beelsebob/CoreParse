@@ -12,7 +12,7 @@
 
 + (id)eof
 {
-    return [[[CPEOFToken alloc] init] autorelease];
+    return [[CPEOFToken alloc] init];
 }
 
 - (NSString *)name

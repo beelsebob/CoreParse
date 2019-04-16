@@ -12,7 +12,7 @@
 
 @interface CPRHSItemResult : NSObject <CPParseResult>
 
-@property (readwrite, retain) NSMutableArray *contents;
+@property (readwrite, strong) NSMutableArray *contents;
 @property (readwrite, assign) BOOL shouldCollapse;
 @property (readwrite, copy  ) NSSet *tagNames;
 @property (readwrite, copy  ) NSDictionary *tagValues;

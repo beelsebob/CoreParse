@@ -10,7 +10,7 @@
 
 @interface CPItem ()
 
-@property (readwrite,retain) CPRule *rule;
+@property (readwrite,strong) CPRule *rule;
 @property (readwrite,assign) NSUInteger position;
 
 @end
@@ -22,7 +22,7 @@
 
 + (id)itemWithRule:(CPRule *)rule position:(NSUInteger)position
 {
-    return [[[self alloc] initWithRule:rule position:position] autorelease];
+    return [[self alloc] initWithRule:rule position:position];
 }
 
 - (id)initWithRule:(CPRule *)initRule position:(NSUInteger)initPosition
@@ -31,7 +31,7 @@
     
     if (nil != self)
     {
-        rule = [initRule retain];
+        rule = initRule;
         position = initPosition;
     }
     
@@ -43,12 +43,6 @@
     return [[CPItem allocWithZone:zone] initWithRule:rule position:position];
 }
 
-- (void)dealloc
-{
-    [rule release];
-    
-    [super dealloc];
-}
 
 - (CPGrammarSymbol *)nextSymbol
 {
@@ -73,7 +67,7 @@
 {
     CPItem *c = [self copy];
     [c setPosition:[self position] + 1];
-    return [c autorelease];
+    return c;
 }
 
 - (BOOL)isItem

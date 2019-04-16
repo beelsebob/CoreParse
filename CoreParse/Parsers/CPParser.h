@@ -127,7 +127,7 @@ typedef struct
 /**
  * The parser's delegate.
  */
-@property (readwrite,assign, nonatomic) id<CPParserDelegate> delegate;
+@property (readwrite,weak, nonatomic) id<CPParserDelegate> delegate;
 
 ///---------------------------------------------------------------------------------------
 /// @name Finding out about the parsed Grammar 

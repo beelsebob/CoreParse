@@ -35,8 +35,8 @@
     NSArray *allNonTerminalNames = [[self grammar] allNonTerminalNames];
     NSString *startSymbol = [aug start];
     
-    [self setActionTable:[[[CPShiftReduceActionTable alloc] initWithCapacity:itemCount] autorelease]];
-    [self setGotoTable:  [[[CPShiftReduceGotoTable   alloc] initWithCapacity:itemCount] autorelease]];
+    [self setActionTable:[[CPShiftReduceActionTable alloc] initWithCapacity:itemCount]];
+    [self setGotoTable:  [[CPShiftReduceGotoTable   alloc] initWithCapacity:itemCount]];
     
     NSUInteger idx = 0;
     for (NSSet *kernel in kernels)

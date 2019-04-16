@@ -20,7 +20,7 @@
 
 + (id)lr1ItemWithRule:(CPRule *)rule position:(NSUInteger)position terminal:(CPGrammarSymbol *)terminal
 {
-    return [[[self alloc] initWithRule:rule position:position terminal:terminal] autorelease];
+    return [[self alloc] initWithRule:rule position:position terminal:terminal];
 }
 
 - (id)initWithRule:(CPRule *)rule position:(NSUInteger)position terminal:(CPGrammarSymbol *)initTerminal
@@ -43,13 +43,6 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     return [[CPLR1Item allocWithZone:zone] initWithRule:[self rule] position:[self position] terminal:[self terminal]];
-}
-
-- (void)dealloc
-{
-    [terminal release];
-    
-    [super dealloc];
 }
 
 - (BOOL)isLR1Item

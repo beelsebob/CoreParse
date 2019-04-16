@@ -10,7 +10,7 @@
 
 @interface CPShiftReduceState ()
 
-@property (readwrite,retain) NSObject *object;
+@property (readwrite,strong) NSObject *object;
 @property (readwrite,assign) NSUInteger state;
 
 @end
@@ -22,7 +22,7 @@
 
 + (id)shiftReduceStateWithObject:(NSObject *)object state:(NSUInteger)state
 {
-    return [[[self alloc] initWithObject:object state:state] autorelease];
+    return [[self alloc] initWithObject:object state:state];
 }
 
 - (id)initWithObject:(NSObject *)initObject state:(NSUInteger)initState
@@ -38,12 +38,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [object release];
-    
-    [super dealloc];
-}
 
 - (NSString *)description
 {

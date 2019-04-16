@@ -17,7 +17,7 @@
 
 + (id)tokenWithIdentifier:(NSString *)identifier
 {
-    return [[(CPIdentifierToken *)[CPIdentifierToken alloc] initWithIdentifier:identifier] autorelease];
+    return [(CPIdentifierToken *)[CPIdentifierToken alloc] initWithIdentifier:identifier];
 }
 
 - (id)initWithIdentifier:(NSString *)initIdentifier
@@ -37,12 +37,6 @@
     return [self initWithIdentifier:@""];
 }
 
-- (void)dealloc
-{
-    [identifier release];
-    
-    [super dealloc];
-}
 
 - (NSString *)description
 {

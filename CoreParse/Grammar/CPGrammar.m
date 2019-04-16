@@ -35,7 +35,7 @@
 
 @interface CPBNFParserDelegate : NSObject <CPTokeniserDelegate,CPParserDelegate>
 
-@property (readwrite, retain, nonatomic) NSError *err;
+@property (readwrite, strong, nonatomic) NSError *err;
 
 @end
 
@@ -114,7 +114,7 @@
             }
             else
             {
-                CPRHSItem *newI = [[[CPRHSItem alloc] init] autorelease];
+                CPRHSItem *newI = [[CPRHSItem alloc] init];
                 [newI setAlternatives:[NSArray arrayWithObject:[NSArray arrayWithObject:i]]];
                 [newI setRepeats:NO];
                 [newI setMayNotExist:NO];
@@ -127,7 +127,7 @@
             return [children objectAtIndex:0];
         case 13:
         {
-            CPRHSItem *i = [[[CPRHSItem alloc] init] autorelease];
+            CPRHSItem *i = [[CPRHSItem alloc] init];
             [i setAlternatives:[NSArray arrayWithObject:[NSArray arrayWithObject:[children objectAtIndex:0]]]];
             NSString *symbol = [(CPKeywordToken *)[children objectAtIndex:1] keyword];
             if ([symbol isEqualToString:@"*"])
@@ -151,7 +151,7 @@
             return [children objectAtIndex:0];
         case 15:
         {
-            CPRHSItem *i = [[[CPRHSItem alloc] init] autorelease];
+            CPRHSItem *i = [[CPRHSItem alloc] init];
             [i setAlternatives:[children objectAtIndex:1]];
             [i setRepeats:NO];
             [i setMayNotExist:NO];
@@ -206,7 +206,7 @@
 
 + (id)grammarWithStart:(NSString *)start rules:(NSArray *)rules
 {
-    return [[[self alloc] initWithStart:start rules:rules] autorelease];
+    return [[self alloc] initWithStart:start rules:rules];
 }
 
 - (id)initWithStart:(NSString *)initStart rules:(NSArray *)initRules;
@@ -225,12 +225,12 @@
 
 + (id)grammarWithStart:(NSString *)start backusNaurForm:(NSString *)bnf
 {
-    return [[[self alloc] initWithStart:start backusNaurForm:bnf] autorelease];
+    return [[self alloc] initWithStart:start backusNaurForm:bnf];
 }
 
 + (id)grammarWithStart:(NSString *)start backusNaurForm:(NSString *)bnf error:(NSError **)error
 {
-    return [[[self alloc] initWithStart:start backusNaurForm:bnf error:error] autorelease];
+    return [[self alloc] initWithStart:start backusNaurForm:bnf error:error];
 }
 
 - (id)initWithStart:(NSString *)initStart backusNaurForm:(NSString *)bnf
@@ -247,8 +247,8 @@
 
 - (id)initWithStart:(NSString *)initStart backusNaurForm:(NSString *)bnf error:(NSError **)error
 {
-    CPBNFParserDelegate *del = [[[CPBNFParserDelegate alloc] init] autorelease];
-    CPTokeniser *tokeniser = [[[CPTokeniser alloc] init] autorelease];
+    CPBNFParserDelegate *del = [[CPBNFParserDelegate alloc] init];
+    CPTokeniser *tokeniser = [[CPTokeniser alloc] init];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"::="]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"@"]];
     [tokeniser addTokenRecogniser:[CPKeywordRecogniser recogniserForKeyword:@"<"]];
@@ -313,9 +313,8 @@
     {
         if (NULL != error)
         {
-            *error = [[[del err] copy] autorelease];
+            *error = [[del err] copy];
         }
-        [self release];
         return nil;
     }
     
@@ -326,14 +325,12 @@
         {
             *error = e;
         }
-        [self release];
         return nil;
     }
     
     NSArray *newRules = [self tidyRightHandSides:initRules error:error];
     if (nil == newRules)
     {
-        [self release];
         return nil;
     }
     
@@ -369,10 +366,7 @@
 
 - (void)dealloc
 {
-    [start release];
     [self setRules:nil];
-    
-    [super dealloc];
 }
 
 - (NSSet *)allRules
@@ -405,7 +399,7 @@
                 NSSet *usedNonTerminals = [(CPRHSItem *)item nonTerminalsUsed];
                 if (![usedNonTerminals isSubsetOfSet:definedNonTerminals])
                 {
-                    NSMutableSet *mutableUsedNonTerminals = [[usedNonTerminals mutableCopy] autorelease];
+                    NSMutableSet *mutableUsedNonTerminals = [usedNonTerminals mutableCopy];
                     [mutableUsedNonTerminals minusSet:definedNonTerminals];
                     return [NSError errorWithDomain:CPEBNFParserErrorDomain
                                                code:CPErrorCodeUndefinedNonTerminal

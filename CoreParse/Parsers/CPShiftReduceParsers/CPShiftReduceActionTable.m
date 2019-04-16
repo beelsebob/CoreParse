@@ -12,11 +12,14 @@
 #import "CPGrammarSymbol.h"
 #import "CPShiftReduceAction.h"
 
+@interface CPShiftReduceActionTable()
+
+@property (nonatomic, strong) NSMutableArray <NSMutableDictionary *> *table;
+@property (nonatomic, assign) NSUInteger capacity;
+
+@end
+
 @implementation CPShiftReduceActionTable
-{
-    NSMutableDictionary **table;
-    NSUInteger capacity;
-}
 
 - (id)initWithCapacity:(NSUInteger)initCapacity
 {
@@ -24,11 +27,11 @@
     
     if (nil != self)
     {
-        capacity = initCapacity;
-        table = malloc(capacity * sizeof(NSMutableDictionary *));
-        for (NSUInteger buildingState = 0; buildingState < capacity; buildingState++)
+        _capacity = initCapacity;
+        _table = [NSMutableArray arrayWithCapacity:initCapacity];
+        for (NSUInteger buildingState = 0; buildingState < _capacity; buildingState++)
         {
-            table[buildingState] = [[NSMutableDictionary alloc] init];
+            _table[buildingState] = [[NSMutableDictionary alloc] init];
         }
     }
     
@@ -44,13 +47,8 @@
     if (nil != self)
     {
         NSArray *rows = [aDecoder decodeObjectForKey:CPShiftReduceActionTableTableKey];
-        capacity = [rows count];
-        table = malloc(capacity * sizeof(NSMutableDictionary *));
-        [rows getObjects:table range:NSMakeRange(0, capacity)];
-        for (NSUInteger i = 0; i < capacity; i++)
-        {
-            [table[i] retain];
-        }
+        _capacity = [rows count];
+        _table = [rows mutableCopy];
     }
     
     return self;
@@ -58,23 +56,12 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-    [aCoder encodeObject:[NSArray arrayWithObjects:table count:capacity] forKey:CPShiftReduceActionTableTableKey];
-}
-
-- (void)dealloc
-{
-    for (NSUInteger state = 0; state < capacity; state++)
-    {
-        [table[state] release];
-    }
-    free(table);
-    
-    [super dealloc];
+    [aCoder encodeObject:_table forKey:CPShiftReduceActionTableTableKey];
 }
 
 - (BOOL)setAction:(CPShiftReduceAction *)action forState:(NSUInteger)state name:(NSString *)token
 {
-    NSMutableDictionary *row = table[state];
+    NSMutableDictionary *row = _table[state];
     if (nil != [row objectForKey:token] && ![[row objectForKey:token] isEqualToShiftReduceAction:action])
     {
         return NO;
@@ -85,32 +72,32 @@
 
 - (CPShiftReduceAction *)actionForState:(NSUInteger)state token:(CPToken *)token
 {
-    return [table[state] objectForKey:token.name];
+    return [_table[state] objectForKey:token.name];
 }
 
 - (NSSet *)acceptableTokenNamesForState:(NSUInteger)state
 {
     NSMutableSet *toks = [NSMutableSet set];
-    for (NSString *tok in table[state])
+    for (NSString *tok in _table[state])
     {
-        if (nil != [table[state] objectForKey:tok])
+        if (nil != [_table[state] objectForKey:tok])
         {
             [toks addObject:tok];
         }
     }
-    return [[toks copy] autorelease];
+    return [toks copy];
 }
 
 - (NSString *)description
 {
-    if (capacity > 0)
+    if (_capacity > 0)
     {
         NSMutableString *s = [NSMutableString string];
         NSMutableSet *keys = [NSMutableSet set];
         NSUInteger width = 3;
-        for (NSUInteger state = 0; state < capacity; state++)
+        for (NSUInteger state = 0; state < _capacity; state++)
         {
-            [keys addObjectsFromArray:[table[state] allKeys]];
+            [keys addObjectsFromArray:[_table[state] allKeys]];
         }
         for (NSString *key in keys)
         {
@@ -130,9 +117,9 @@
         [s appendString:@"\n"];
         
         NSUInteger idx = 0;
-        for (NSUInteger state = 0; state < capacity; state++)
+        for (NSUInteger state = 0; state < _capacity; state++)
         {
-            NSDictionary *row = table[state];
+            NSDictionary *row = _table[state];
             [s appendFormat:@"%5ld | ", (long)idx];
             for (NSString *key in orderedKeys)
             {
@@ -164,14 +151,14 @@
 
 - (NSString *)descriptionWithGrammar:(CPGrammar *)g
 {
-    if (capacity > 0)
+    if (_capacity > 0)
     {
         NSMutableString *s = [NSMutableString string];
         NSMutableSet *keys = [NSMutableSet set];
         NSUInteger width = 3;
-        for (NSUInteger state = 0; state < capacity; state++)
+        for (NSUInteger state = 0; state < _capacity; state++)
         {
-            [keys addObjectsFromArray:[table[state] allKeys]];
+            [keys addObjectsFromArray:[_table[state] allKeys]];
         }
         for (NSString *key in keys)
         {
@@ -191,9 +178,9 @@
         [s appendString:@"\n"];
         
         NSUInteger idx = 0;
-        for (NSUInteger state = 0; state < capacity; state++)
+        for (NSUInteger state = 0; state < _capacity; state++)
         {
-            NSDictionary *row = table[state];
+            NSDictionary *row = _table[state];
             [s appendFormat:@"%5ld | ", (long)idx];
             for (NSString *key in orderedKeys)
             {

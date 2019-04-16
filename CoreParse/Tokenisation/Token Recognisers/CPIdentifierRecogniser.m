@@ -17,12 +17,12 @@
 
 + (id)identifierRecogniser
 {
-    return [[[CPIdentifierRecogniser alloc] initWithInitialCharacters:nil identifierCharacters:nil] autorelease];
+    return [[CPIdentifierRecogniser alloc] initWithInitialCharacters:nil identifierCharacters:nil];
 }
 
 + (id)identifierRecogniserWithInitialCharacters:(NSCharacterSet *)initialCharacters identifierCharacters:(NSCharacterSet *)identifierCharacters
 {
-    return [[[CPIdentifierRecogniser alloc] initWithInitialCharacters:initialCharacters identifierCharacters:identifierCharacters] autorelease];
+    return [[CPIdentifierRecogniser alloc] initWithInitialCharacters:initialCharacters identifierCharacters:identifierCharacters];
 }
 
 - (id)initWithInitialCharacters:(NSCharacterSet *)initInitialCharacters identifierCharacters:(NSCharacterSet *)initIdentifierCharacters
@@ -60,14 +60,6 @@
     [aCoder encodeObject:[self identifierCharacters] forKey:CPIdentifierRecogniserIdentifierCharactersKey];
 }
 
-- (void)dealloc
-{
-    [initialCharacters release];
-    [identifierCharacters release];
-    
-    [super dealloc];
-}
-
 - (CPToken *)recogniseTokenInString:(NSString *)tokenString currentTokenPosition:(NSUInteger *)tokenPosition
 {
     NSCharacterSet *identifierStartCharacters = nil == [self initialCharacters] ? [NSCharacterSet characterSetWithCharactersInString:
@@ -89,12 +81,12 @@
         BOOL success = [scanner scanCharactersFromSet:idCharacters intoString:&identifierString];
         if (success)
         {
-            identifierString = [[[[NSString alloc] initWithCharacters:&firstChar length:1] autorelease] stringByAppendingString:identifierString];
+            identifierString = [[[NSString alloc] initWithCharacters:&firstChar length:1] stringByAppendingString:identifierString];
             *tokenPosition = [scanner scanLocation];
         }
         else
         {
-            identifierString = [[[NSString alloc] initWithCharacters:&firstChar length:1] autorelease];
+            identifierString = [[NSString alloc] initWithCharacters:&firstChar length:1];
             *tokenPosition += 1;
         }
         return [CPIdentifierToken tokenWithIdentifier:identifierString];
