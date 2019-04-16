@@ -24,7 +24,7 @@
 
 + (id)syntaxTreeWithRule:(CPRule *)rule children:(NSArray *)children
 {
-    return [[[self alloc] initWithRule:rule children:children tagValues:[NSDictionary dictionary]] autorelease];
+    return [[self alloc] initWithRule:rule children:children tagValues:[NSDictionary dictionary]];
 }
 
 - (id)initWithRule:(CPRule *)initRule children:(NSArray *)initChildren;
@@ -34,7 +34,7 @@
 
 + (id)syntaxTreeWithRule:(CPRule *)rule children:(NSArray *)children tagValues:(NSDictionary *)tagValues;
 {
-    return [[[self alloc] initWithRule:rule children:children tagValues:tagValues] autorelease];
+    return [[self alloc] initWithRule:rule children:children tagValues:tagValues];
 }
 
 - (id)initWithRule:(CPRule *)initRule children:(NSArray *)initChildren tagValues:(NSDictionary *)initTagValues
@@ -54,15 +54,6 @@
 - (id)init
 {
     return [self initWithRule:nil children:[NSArray array] tagValues:[NSDictionary dictionary]];
-}
-
-- (void)dealloc
-{
-    [rule release];
-    [children release];
-    [tagValues release];
-    
-    [super dealloc];
 }
 
 - (id)valueForTag:(NSString *)tagName

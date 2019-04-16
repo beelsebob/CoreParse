@@ -32,8 +32,8 @@
     NSUInteger itemCount = [kernels count];
     NSString *startSymbol = [aug start];
     
-    [self setActionTable:[[[CPShiftReduceActionTable alloc] initWithCapacity:itemCount] autorelease]];
-    [self setGotoTable:  [[[CPShiftReduceGotoTable   alloc] initWithCapacity:itemCount] autorelease]];
+    [self setActionTable:[[CPShiftReduceActionTable alloc] initWithCapacity:itemCount]];
+    [self setGotoTable:  [[CPShiftReduceGotoTable   alloc] initWithCapacity:itemCount]];
     
     NSArray *allNonTerminalNames = [[self grammar] allNonTerminalNames];
     NSUInteger idx = 0;

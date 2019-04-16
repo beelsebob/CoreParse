@@ -15,8 +15,8 @@
 
 @interface CPShiftReduceParser ()
 
-@property (readwrite,retain) CPShiftReduceActionTable *actionTable;
-@property (readwrite,retain) CPShiftReduceGotoTable *gotoTable;
+@property (readwrite,strong) CPShiftReduceActionTable *actionTable;
+@property (readwrite,strong) CPShiftReduceGotoTable *gotoTable;
 
 - (BOOL)constructShiftReduceTables;
 

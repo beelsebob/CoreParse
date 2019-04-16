@@ -24,9 +24,8 @@
 
 - (CPGrammar *)augmentedGrammar
 {
-    return [[[CPGrammar alloc] initWithStart:@"s'"
-                                       rules:[[self rules] arrayByAddingObject:[CPRule ruleWithName:@"s'" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol nonTerminalWithName:[self start]]]]]]
-            autorelease];
+    return [[CPGrammar alloc] initWithStart:@"s'"
+                                       rules:[[self rules] arrayByAddingObject:[CPRule ruleWithName:@"s'" rightHandSideElements:[NSArray arrayWithObject:[CPGrammarSymbol nonTerminalWithName:[self start]]]]]];
 }
 
 - (NSUInteger)indexOfRule:(CPRule *)rule
@@ -73,9 +72,8 @@
         [processingQueue removeObjectAtIndex:0];
     }
     
-    [processingQueue release];
     
-    return [j autorelease];
+    return j;
 }
 
 - (NSSet *)lr0GotoKernelWithItems:(NSSet *)i symbol:(CPGrammarSymbol *)symbol
@@ -152,9 +150,8 @@
         [processingQueue removeObjectAtIndex:0];
     }
     
-    [processingQueue release];
     
-    return [j autorelease];
+    return j;
 }
 
 - (NSSet *)lr1GotoKernelWithItems:(NSSet *)i symbol:(CPGrammarSymbol *)symbol
@@ -232,7 +229,7 @@
 
 - (NSString *)symbolNameNotInSet:(NSSet *)symbols basedOnName:(NSString *)name
 {
-    NSString *testName = [[name copy] autorelease];
+    NSString *testName = [name copy];
     while ([symbols containsObject:testName])
     {
         testName = [NSString stringWithFormat:@"_%@", testName];
@@ -280,7 +277,7 @@
                 {
                     return error;
                 }
-                NSMutableSet *duplicateTags = [[tagNames mutableCopy] autorelease];
+                NSMutableSet *duplicateTags = [tagNames mutableCopy];
                 [duplicateTags intersectSet:newTagNames];
                 if ([duplicateTags count] > 0)
                 {
@@ -296,7 +293,7 @@
                 {
                     if ([tagNames intersectsSet:tns])
                     {
-                        NSMutableSet *intersection = [[tagNames mutableCopy] autorelease];
+                        NSMutableSet *intersection = [tagNames mutableCopy];
                         [intersection intersectSet:tns];
                         return [NSError errorWithDomain:CPEBNFParserErrorDomain
                                                    code:CPErrorCodeDuplicateTag
@@ -345,7 +342,7 @@
          
 - (NSArray *)addRHSRules:(NSDictionary *)newRules toRules:(NSArray *)oldRules
 {
-    NSMutableArray *rules = [[[NSMutableArray alloc] initWithArray:oldRules] autorelease];
+    NSMutableArray *rules = [[NSMutableArray alloc] initWithArray:oldRules];
     
     Class rhsItemClass = [CPRHSItemResult class];
     for (CPRHSItem *item in newRules)
@@ -362,12 +359,12 @@
             
             if ([item mayNotExist])
             {
-                rule = [[[CPRule alloc] initWithName:ruleName rightHandSideElements:[NSArray array]] autorelease];
+                rule = [[CPRule alloc] initWithName:ruleName rightHandSideElements:[NSArray array]];
                 [rule setTag:0];
             }
             else
             {
-                rule = [[[CPRule alloc] initWithName:ruleName rightHandSideElements:[[item alternatives] objectAtIndex:0]] autorelease];
+                rule = [[CPRule alloc] initWithName:ruleName rightHandSideElements:[[item alternatives] objectAtIndex:0]];
                 [rule setTag:1];
             }
             [rule setShouldCollapse:[item shouldCollapse]];
@@ -377,12 +374,12 @@
             
             if ([item repeats])
             {
-                rule = [[[CPRule alloc] initWithName:ruleName rightHandSideElements:[[[item alternatives] objectAtIndex:0] arrayByAddingObject:[CPGrammarSymbol nonTerminalWithName:ruleName]]] autorelease];
+                rule = [[CPRule alloc] initWithName:ruleName rightHandSideElements:[[[item alternatives] objectAtIndex:0] arrayByAddingObject:[CPGrammarSymbol nonTerminalWithName:ruleName]]];
                 [rule setTag:2];
             }
             else if ([item mayNotExist])
             {
-                rule = [[[CPRule alloc] initWithName:ruleName rightHandSideElements:[[item alternatives] objectAtIndex:0]] autorelease];
+                rule = [[CPRule alloc] initWithName:ruleName rightHandSideElements:[[item alternatives] objectAtIndex:0]];
                 [rule setTag:1];
             }
             else
@@ -403,7 +400,7 @@
             NSUInteger i = 0;
             for (NSArray *contents in [item alternatives])
             {
-                CPRule *rule = [[[CPRule alloc] initWithName:ruleName rightHandSideElements:contents] autorelease];
+                CPRule *rule = [[CPRule alloc] initWithName:ruleName rightHandSideElements:contents];
                 [rule setTag:3 + i];
                 [rule setRepresentitiveClass:rhsItemClass];
                 [rule setShouldCollapse:[item shouldCollapse]];

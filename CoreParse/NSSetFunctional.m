@@ -14,22 +14,18 @@
 - (NSSet *)cp_map:(id(^)(id obj))block
 {
     NSUInteger c = [self count];
-    id *resultingObjects = malloc(c * sizeof(id));
+    NSMutableSet *s = [NSMutableSet setWithCapacity:c];
     
-    NSUInteger nonNilCount = 0;
     for (id obj in self)
     {
         id r = block(obj);
         if (nil != r)
         {
-            resultingObjects[nonNilCount] = r;
-            nonNilCount++;
+            [s addObject:r];
         }
     }
-    
-    NSSet *s = [NSSet setWithObjects:resultingObjects count:nonNilCount];
-    free(resultingObjects);
-    return s;
+
+    return [s copy];
 }
 
 @end

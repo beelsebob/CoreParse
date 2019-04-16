@@ -23,7 +23,7 @@
 
 + (id)whiteSpaceRecogniser
 {
-    return [[[CPWhiteSpaceRecogniser alloc] init] autorelease];
+    return [[CPWhiteSpaceRecogniser alloc] init];
 }
 
 - (CPToken *)recogniseTokenInString:(NSString *)tokenString currentTokenPosition:(NSUInteger *)tokenPosition

@@ -17,42 +17,49 @@ typedef enum
     kActionTypeAccept
 } ActionType;
 
-typedef union
-{
-    NSUInteger shift;
-    CPRule *reductionRule;
-}
-ActionDetails;
+@interface ActionDetails: NSObject
+
+@property (nonatomic, strong) CPRule *reductionRule;
+@property (nonatomic, assign) NSUInteger shift;
+
+@end
+
+@implementation ActionDetails
+
+@end
+
+@interface CPShiftReduceAction ()
+
+@property (nonatomic, strong) ActionDetails *details;
+@property (nonatomic, assign) ActionType type;
+
+@end
 
 @implementation CPShiftReduceAction
-{
-    ActionType type;
-    ActionDetails details;
-}
 
 + (id)shiftAction:(NSUInteger)shiftLocation
 {
-    return [[[self alloc] initWithShift:shiftLocation] autorelease];
+    return [[self alloc] initWithShift:shiftLocation];
 }
 
 + (id)reduceAction:(CPRule *)reduction
 {
-    return [[[self alloc] initWithReductionRule:reduction] autorelease];
+    return [[self alloc] initWithReductionRule:reduction];
 }
 
 + (id)acceptAction
 {
-    return [[[self alloc] init] autorelease];
+    return [[self alloc] init];
 }
 
 - (id)initWithShift:(NSUInteger)shiftLocation
 {
-    self = [super init];
+    self = [self init];
     
     if (nil != self)
     {
-        type = kActionTypeShift;
-        details.shift = shiftLocation;
+        _type = kActionTypeShift;
+        _details.shift = shiftLocation;
     }
     
     return self;
@@ -60,12 +67,12 @@ ActionDetails;
 
 - (id)initWithReductionRule:(CPRule *)reduction
 {
-    self = [super init];
+    self = [self init];
     
     if (nil != self)
     {
-        type = kActionTypeReduce;
-        details.reductionRule = [reduction retain];
+        _type = kActionTypeReduce;
+        _details.reductionRule = reduction;
     }
     
     return self;
@@ -77,7 +84,8 @@ ActionDetails;
     
     if (nil != self)
     {
-        type = kActionTypeAccept;
+        _details = [[ActionDetails alloc] init];
+        _type = kActionTypeAccept;
     }
     
     return self;
@@ -89,18 +97,18 @@ ActionDetails;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super init];
+    self = [self init];
     
     if (nil != self)
     {
-        type = [aDecoder decodeIntForKey:CPShiftReduceActionTypeKey];
-        switch (type)
+        _type = [aDecoder decodeIntForKey:CPShiftReduceActionTypeKey];
+        switch (_type)
         {
             case kActionTypeShift:
-                details.shift = [aDecoder decodeIntegerForKey:CPShiftReduceActionShiftKey];
+                _details.shift = [aDecoder decodeIntegerForKey:CPShiftReduceActionShiftKey];
                 break;
             case kActionTypeReduce:
-                details.reductionRule = [[aDecoder decodeObjectForKey:CPShiftReduceActionRuleKey] retain];
+                _details.reductionRule = [aDecoder decodeObjectForKey:CPShiftReduceActionRuleKey];
             case kActionTypeAccept:
             default:
                 break;
@@ -112,58 +120,48 @@ ActionDetails;
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-    [aCoder encodeInt:type forKey:CPShiftReduceActionTypeKey];
-    switch (type)
+    [aCoder encodeInt:_type forKey:CPShiftReduceActionTypeKey];
+    switch (_type)
     {
         case kActionTypeShift:
-            [aCoder encodeInteger:details.shift forKey:CPShiftReduceActionShiftKey];
+            [aCoder encodeInteger:_details.shift forKey:CPShiftReduceActionShiftKey];
             break;
         case kActionTypeReduce:
-            [aCoder encodeObject:details.reductionRule forKey:CPShiftReduceActionRuleKey];
+            [aCoder encodeObject:_details.reductionRule forKey:CPShiftReduceActionRuleKey];
         case kActionTypeAccept:
         default:
             break;
     }
 }
 
-- (void)dealloc
-{
-    if (kActionTypeReduce == type)
-    {
-        [details.reductionRule release];
-    }
-    
-    [super dealloc];
-}
-
 - (BOOL)isShiftAction
 {
-    return kActionTypeShift == type;
+    return kActionTypeShift == _type;
 }
 
 - (BOOL)isReduceAction
 {
-    return kActionTypeReduce == type;
+    return kActionTypeReduce == _type;
 }
 
 - (BOOL)isAccept
 {
-    return kActionTypeAccept == type;
+    return kActionTypeAccept == _type;
 }
 
 - (NSUInteger)newState
 {
-    return details.shift;
+    return _details.shift;
 }
 
 - (CPRule *)reductionRule
 {
-    return details.reductionRule;
+    return _details.reductionRule;
 }
 
 - (NSUInteger)hash
 {
-    return type;
+    return _type;
 }
 
 - (BOOL)isShiftReduceAction
@@ -173,15 +171,15 @@ ActionDetails;
 
 - (BOOL)isEqual:(id)object
 {
-    if ([object isShiftReduceAction] && ((CPShiftReduceAction *)object)->type == type)
+    if ([object isShiftReduceAction] && ((CPShiftReduceAction *)object).type == _type)
     {
         CPShiftReduceAction *other = (CPShiftReduceAction *)object;
-        switch (type)
+        switch (_type)
         {
             case kActionTypeShift:
-                return [other newState] == details.shift;
+                return [other newState] == _details.shift;
             case kActionTypeReduce:
-                return [other reductionRule] == details.reductionRule;
+                return [other reductionRule] == _details.reductionRule;
             case kActionTypeAccept:
                 return YES;
         }
@@ -192,14 +190,14 @@ ActionDetails;
 
 - (BOOL)isEqualToShiftReduceAction:(CPShiftReduceAction *)object
 {
-    if (object != nil && object->type == type)
+    if (object != nil && object.type == _type)
     {
-        switch (type)
+        switch (_type)
         {
             case kActionTypeShift:
-                return [object newState] == details.shift;
+                return [object newState] == _details.shift;
             case kActionTypeReduce:
-                return [object reductionRule] == details.reductionRule;
+                return [object reductionRule] == _details.reductionRule;
             case kActionTypeAccept:
                 return YES;
         }
@@ -210,12 +208,12 @@ ActionDetails;
 
 - (NSString *)description
 {
-    switch (type)
+    switch (_type)
     {
         case kActionTypeShift:
-            return [NSString stringWithFormat:@"s%ld", (long)details.shift];
+            return [NSString stringWithFormat:@"s%ld", (long)_details.shift];
         case kActionTypeReduce:
-            return [NSString stringWithFormat:@"r%@", [details.reductionRule name]];
+            return [NSString stringWithFormat:@"r%@", [_details.reductionRule name]];
         case kActionTypeAccept:
             return @"acc";
     }
@@ -223,12 +221,12 @@ ActionDetails;
 
 - (NSString *)descriptionWithGrammar:(CPGrammar *)g
 {
-    switch (type)
+    switch (_type)
     {
         case kActionTypeShift:
-            return [NSString stringWithFormat:@"s%ld", (long)details.shift];
+            return [NSString stringWithFormat:@"s%ld", (long)_details.shift];
         case kActionTypeReduce:
-            return [NSString stringWithFormat:@"r%ld", (long)[g indexOfRule:details.reductionRule]];
+            return [NSString stringWithFormat:@"r%ld", (long)[g indexOfRule:_details.reductionRule]];
         case kActionTypeAccept:
             return @"acc";
     }

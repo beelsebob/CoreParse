@@ -24,7 +24,7 @@
 
 - (NSArray *)rightHandSideElements
 {
-    return [[rightHandSide retain] autorelease];
+    return rightHandSide;
 }
 
 - (void)setRightHandSideElements:(NSArray *)rightHandSideElements
@@ -33,7 +33,6 @@
     {
         if (rightHandSide != rightHandSideElements)
         {
-            [rightHandSide release];
             rightHandSide = [rightHandSideElements mutableCopy];
         }
     }
@@ -41,7 +40,7 @@
 
 + (id)ruleWithName:(NSString *)name rightHandSideElements:(NSArray *)rightHandSideElements representitiveClass:(Class)representitiveClass
 {
-    return [[[self alloc] initWithName:name rightHandSideElements:rightHandSideElements representitiveClass:representitiveClass] autorelease];
+    return [[self alloc] initWithName:name rightHandSideElements:rightHandSideElements representitiveClass:representitiveClass];
 }
 
 - (id)initWithName:(NSString *)initName rightHandSideElements:(NSArray *)rightHandSideElements representitiveClass:(Class)initRepresentitiveClass
@@ -61,7 +60,7 @@
 
 + (id)ruleWithName:(NSString *)name rightHandSideElements:(NSArray *)rightHandSideElements tag:(NSUInteger)tag
 {
-    return [[[self alloc] initWithName:name rightHandSideElements:rightHandSideElements tag:tag] autorelease];
+    return [[self alloc] initWithName:name rightHandSideElements:rightHandSideElements tag:tag];
 }
 
 - (id)initWithName:(NSString *)initName rightHandSideElements:(NSArray *)rightHandSideElements tag:(NSUInteger)initTag
@@ -78,7 +77,7 @@
 
 + (id)ruleWithName:(NSString *)name rightHandSideElements:(NSArray *)rightHandSideElements
 {
-    return [[[CPRule alloc] initWithName:name rightHandSideElements:rightHandSideElements] autorelease];
+    return [[CPRule alloc] initWithName:name rightHandSideElements:rightHandSideElements];
 }
 
 - (id)initWithName:(NSString *)initName rightHandSideElements:(NSArray *)rightHandSideElements
@@ -119,13 +118,6 @@
     [aCoder encodeObject:NSStringFromClass([self representitiveClass]) forKey:CPRuleRepresentitiveClassKey];
 }
 
-- (void)dealloc
-{
-    [name release];
-    [rightHandSide release];
-    
-    [super dealloc];
-}
 
 - (NSString *)description
 {
@@ -167,14 +159,13 @@
 
 - (NSSet *)tagNames
 {
-    return [[_tagNames retain] autorelease];
+    return _tagNames;
 }
 
 - (void)setTagNames:(NSSet *)tagNames
 {
     if (_tagNames != tagNames)
     {
-        [_tagNames release];
         _tagNames = [tagNames copy];
     }
 }

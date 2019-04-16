@@ -23,7 +23,7 @@ typedef struct
 
 @interface CPTokeniser ()
 
-@property (readwrite, retain) NSMutableArray *tokenRecognisers;
+@property (readwrite, strong) NSMutableArray *tokenRecognisers;
 
 - (void)addToken:(CPToken *)tok toStream:(CPTokenStream *)stream;
 - (void)advanceLineNumber:(NSUInteger *)ln columnNumber:(NSUInteger *)cn withInput:(NSString *)input range:(CFRange)range;
@@ -69,12 +69,6 @@ typedef struct
     [aCoder encodeObject:[self tokenRecognisers] forKey:CPTokeniserTokenRecognisersKey];
 }
 
-- (void)dealloc
-{
-    [tokenRecognisers release];
-    
-    [super dealloc];
-}
 
 - (void)addTokenRecogniser:(id<CPTokenRecogniser>)recogniser
 {
@@ -103,7 +97,7 @@ typedef struct
 
 - (CPTokenStream *)tokenise:(NSString *)input
 {
-    CPTokenStream *stream = [[[CPTokenStream alloc] init] autorelease];
+    CPTokenStream *stream = [[CPTokenStream alloc] init];
     
     [self tokenise:input into:stream];
     
@@ -222,7 +216,7 @@ static CFCharacterSetRef newlineCharset = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^
     {
-        newlineCharset = (CFCharacterSetRef)[[NSCharacterSet characterSetWithCharactersInString:@"\n\r"] retain];
+        newlineCharset = (CFCharacterSetRef)CFBridgingRetain([NSCharacterSet characterSetWithCharactersInString:@"\n\r"]);
     });
     
     CFRange searchRange = range;

@@ -20,11 +20,11 @@
 
 @required
 
-/** 
+/**
  * Determines whether a CPTokeniser should produce a token and consume the associated input string.
- * 
+ *
  * If this method returns NO, the CPTokeniser continues to attempt to recognise tokens at the same point in the input string with other token recognisers.
- * 
+ *
  * @param tokeniser The CPTokeniser attempting to produce the token.
  * @param token The CPToken that the tokeniser has recognised.
  * @return Return YES if the tokeniser should consume the token, NO otherwise.
@@ -85,7 +85,7 @@
 
 /**
  * The CPTokeniser class provides tokenisation of NSStrings into CPTokenStreams, and describes what kinds of tokens to produce given particular string inputs.
- *   
+ *
  * Tokenisers are built up by adding a list of CPTokenRecogniser objects to the CPTokeniser.
  * Each one recognises a different token.  Each recogniser is given a chance to match a token in priority order.
  * When a recogniser matches a token, the -tokeniser:shouldConsumeToken: delegate method is called.
@@ -102,7 +102,7 @@
 /**
  * The object that acts as a delegate to the receiving CPTokeniser.
  */
-@property (readwrite, assign, nonatomic) id<CPTokeniserDelegate> delegate;
+@property (readwrite, weak, nonatomic) id<CPTokeniserDelegate> delegate;
 
 ///---------------------------------------------------------------------------------------
 /// @name Managing recognised tokens
@@ -122,7 +122,7 @@
  * Inserts a given token recogniser at a given priority level in the tokeniser.
  *
  * The recogniser currently at that priority and all those below it move downwards.
- * 
+ *
  * @param recogniser The token recogniser to insert.  This value must not be `nil`.
  * @param priority The priority level to insert at.
  * @exception Raises an `NSInvalidArgumentException` if recogniser is `nil`.
@@ -136,7 +136,7 @@
  * Inserts a given token recogniser before another.
  *
  * The recogniser currently at that priority and all those below it move downwards.
- * 
+ *
  * @param recogniser The token recogniser to insert.  This value must not be `nil`.
  * @param other The token recogniser to insert before.
  * @exception Raises an `NSInvalidArgumentException` if recogniser is `nil` or if other is not in the tokeniser's priority queue.
@@ -161,7 +161,7 @@
  * Tokenises an input string by repeatedly using the recognisers in the tokeniser's priority list.
  *
  * If the entire input is tokenised a CPEOFToken is added to the end of the result token stream.  If not, the token stream ends with no EOF token.
- * 
+ *
  * @param input The input string to tokenise.
  * @return Returns a token stream containing all tokens found in the input string.
  */
@@ -172,7 +172,7 @@
  *
  * If the entire input is tokenised a CPEOFToken is added to the end of the result token stream.  If not, the token stream ends with no EOF token.
  * This method can be useful for multithreading parsers, allowing you to create the token stream that the tokeniser writes to and pass it to both tokeniser and parser threads.
- * 
+ *
  * @param input The input string to tokenise.
  * @param tokenStream The token stream to add tokens to from the input string.
  */

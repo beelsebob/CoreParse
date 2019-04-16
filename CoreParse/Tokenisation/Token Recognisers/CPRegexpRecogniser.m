@@ -31,14 +31,7 @@
 
 + (id)recogniserForRegexp:(NSRegularExpression *)regexp matchHandler:(CPRegexpKeywordRecogniserMatchHandler)initMatchHandler
 {
-    return [[[self alloc] initWithRegexp:regexp matchHandler:initMatchHandler] autorelease];
-}
-
-- (void)dealloc
-{
-    [matchHandler release];
-    [regexp release];
-    [super dealloc];
+    return [[self alloc] initWithRegexp:regexp matchHandler:initMatchHandler];
 }
 
 #pragma mark - NSCoder

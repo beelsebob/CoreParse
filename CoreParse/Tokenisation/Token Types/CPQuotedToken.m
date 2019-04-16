@@ -22,7 +22,7 @@
 
 + (id)content:(NSString *)content quotedWith:(NSString *)quoteType name:(NSString *)name
 {
-    return [[[CPQuotedToken alloc] initWithContent:content quoteType:quoteType name:name] autorelease];
+    return [[CPQuotedToken alloc] initWithContent:content quoteType:quoteType name:name];
 }
 
 - (id)initWithContent:(NSString *)initContent quoteType:(NSString *)initQuoteType name:(NSString *)initName
@@ -42,15 +42,6 @@
 - (id)init
 {
     return [self initWithContent:@"" quoteType:@"" name:@""];
-}
-
-- (void)dealloc
-{
-    [content release];
-    [quoteType release];
-    [name release];
-    
-    [super dealloc];
 }
 
 - (NSString *)description

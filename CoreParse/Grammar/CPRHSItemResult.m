@@ -32,7 +32,7 @@
                 [self setContents:[NSMutableArray array]];
                 break;
             case 1:
-                [self setContents:[[children mutableCopy] autorelease]];
+                [self setContents:[children mutableCopy]];
                 break;
             case 2:
             {
@@ -47,7 +47,7 @@
                 break;
             }
             default:
-                [self setContents:[[children mutableCopy] autorelease]];
+                [self setContents:[children mutableCopy]];
                 break;
         }
         
@@ -59,14 +59,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [_contents release];
-    [_tagNames release];
-    [_tagValues release];
-    
-    [super dealloc];
-}
 
 - (BOOL)isRHSItemResult
 {

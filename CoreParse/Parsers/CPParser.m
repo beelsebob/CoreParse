@@ -21,7 +21,7 @@
 
 + (id)parserWithGrammar:(CPGrammar *)grammar
 {
-    return [[[self alloc] initWithGrammar:grammar] autorelease];
+    return [[self alloc] initWithGrammar:grammar];
 }
 
 - (id)initWithGrammar:(CPGrammar *)initGrammar
@@ -39,13 +39,6 @@
 - (id)init
 {
     return [self initWithGrammar:nil];
-}
-
-- (void)dealloc
-{
-    [grammar release];
-    
-    [super dealloc];
 }
 
 - (id)parse:(CPTokenStream *)tokenStream

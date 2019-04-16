@@ -7,13 +7,16 @@
 //
 
 #import "CPShiftReduceGotoTable.h"
+#import "CPRule.h"
 
+@interface CPShiftReduceGotoTable()
+
+@property (nonatomic, strong) NSMutableArray <NSMutableDictionary *> *table;
+@property (nonatomic, assign) NSUInteger capacity;
+
+@end
 
 @implementation CPShiftReduceGotoTable
-{
-    NSMutableDictionary **table;
-    NSUInteger capacity;
-}
 
 - (id)initWithCapacity:(NSUInteger)initCapacity
 {
@@ -21,11 +24,11 @@
     
     if (nil != self)
     {
-        capacity = initCapacity;
-        table = malloc(capacity * sizeof(NSMutableDictionary *));
-        for (NSUInteger buildingState = 0; buildingState < capacity; buildingState++)
+        _capacity = initCapacity;
+        _table = [NSMutableArray arrayWithCapacity:initCapacity];
+        for (NSUInteger buildingState = 0; buildingState < _capacity; buildingState++)
         {
-            table[buildingState] = [[NSMutableDictionary alloc] init];
+            _table[buildingState] = [[NSMutableDictionary alloc] init];
         }
     }
     
@@ -41,13 +44,8 @@
     if (nil != self)
     {
         NSArray *rows = [aDecoder decodeObjectForKey:CPShiftReduceGotoTableTableKey];
-        capacity = [rows count];
-        table = malloc(capacity * sizeof(NSMutableDictionary *));
-        [rows getObjects:table range:NSMakeRange(0, capacity)];
-        for (NSUInteger i = 0; i < capacity; i++)
-        {
-            [table[i] retain];
-        }
+        _capacity = [rows count];
+        _table = [rows mutableCopy];
     }
     
     return self;
@@ -55,23 +53,12 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-    [aCoder encodeObject:[NSArray arrayWithObjects:table count:capacity] forKey:CPShiftReduceGotoTableTableKey];
-}
-
-- (void)dealloc
-{
-    for (NSUInteger state = 0; state < capacity; state++)
-    {
-        [table[state] release];
-    }
-    free(table);
-    
-    [super dealloc];
+    [aCoder encodeObject:_table forKey:CPShiftReduceGotoTableTableKey];
 }
 
 - (BOOL)setGoto:(NSUInteger)gotoIndex forState:(NSUInteger)state nonTerminalNamed:(NSString *)nonTerminalName
 {
-    NSMutableDictionary *row = table[state];
+    NSMutableDictionary *row = _table[state];
     if (nil != [row objectForKey:nonTerminalName] && [[row objectForKey:nonTerminalName] unsignedIntegerValue] != gotoIndex)
     {
         return NO;
@@ -82,7 +69,7 @@
 
 - (NSUInteger)gotoForState:(NSUInteger)state rule:(CPRule *)rule
 {
-    return [(NSNumber *)[table[state] objectForKey:[rule name]] unsignedIntegerValue];
+    return [(NSNumber *)[_table[state] objectForKey:[rule name]] unsignedIntegerValue];
 }
 
 @end
