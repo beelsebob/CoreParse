@@ -142,7 +142,7 @@
         case 0:
             return [(CPQuotedToken *)[children objectAtIndex:0] content];
         case 1:
-            return [(CPNumberToken *)[children objectAtIndex:0] number];
+            return [(CPNumberToken *)[children objectAtIndex:0] numberValue];
         case 2:
         case 3:
         case 4:

@@ -33,7 +33,7 @@
             return [NSNumber numberWithInt:v1 * v2];
         }
         case 4:
-            return [(CPNumberToken *)[c objectAtIndex:0] number];
+            return [(CPNumberToken *)[c objectAtIndex:0] numberValue];
         case 5:
             return [c objectAtIndex:1];
         default:

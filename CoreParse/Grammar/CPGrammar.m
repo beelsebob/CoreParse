@@ -61,7 +61,7 @@
             NSArray *rules = [children objectAtIndex:1];
             for (CPRule *r in rules)
             {
-                [r setTag:[[(CPNumberToken *)[children objectAtIndex:0] number] intValue]];
+                [r setTag:[[(CPNumberToken *)[children objectAtIndex:0] numberValue] intValue]];
             }
             return rules;
         }
