@@ -10,7 +10,7 @@
 
 @implementation CPNumberToken
 
-@synthesize number;
+@synthesize numberValue;
 
 + (id)tokenWithNumber:(NSNumber *)number
 {
@@ -23,7 +23,7 @@
     
     if (nil != self)
     {
-        [self setNumber:initNumber];
+        [self setNumberValue:initNumber];
     }
     
     return self;    
@@ -36,13 +36,13 @@
 
 - (void)dealloc
 {
-    [number release];
+    [numberValue release];
     [super dealloc];
 }
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<Number: %@>", [self number]];
+    return [NSString stringWithFormat:@"<Number: %@>", [self numberValue]];
 }
 
 - (NSString *)name
@@ -52,7 +52,7 @@
 
 - (NSUInteger)hash
 {
-    return [[self number] hash];
+    return [[self numberValue] hash];
 }
 
 - (BOOL)isNumberToken
@@ -63,7 +63,7 @@
 - (BOOL)isEqual:(id)object
 {
     return ([object isNumberToken] &&
-            [((CPNumberToken *)object)->number isEqualToNumber:number]);
+            [((CPNumberToken *)object)->numberValue isEqualToNumber:numberValue]);
 }
 
 @end

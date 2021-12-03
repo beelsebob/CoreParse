@@ -27,7 +27,7 @@
         case 3:
             return [NSNumber numberWithInt:[[c objectAtIndex:0] intValue] * [[c objectAtIndex:2] intValue]];
         case 4:
-            return [(CPNumberToken *)[c objectAtIndex:0] number];
+            return [(CPNumberToken *)[c objectAtIndex:0] numberValue];
         case 5:
             return [c objectAtIndex:1];
         default:

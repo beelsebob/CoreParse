@@ -18,7 +18,7 @@
     
     if (nil != self)
     {
-        [self setValue:[[(CPNumberToken *)[[syntaxTree children] objectAtIndex:0] number] floatValue]];
+        [self setValue:[[(CPNumberToken *)[[syntaxTree children] objectAtIndex:0] numberValue] floatValue]];
     }
     
     return self;
